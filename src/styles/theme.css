@@ -20,8 +20,24 @@
   /* page dimensions */
   --min-width: 25rem;
   --max-width: 52rem;
+	--header-height: 60px;
 
   /* fonts */
-  --font-family: "Lora", Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+	--code-font: "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
+	--serif-font: "Lora", Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+	--sans-font: "Roboto", system-ui, sans-serif;
+
+  --font-family: var(--serif-font);
   --font-weight: normal;
+
+	--font-title-size: 1.3em;
+}
+
+/* theme colors */
+:root {
+	--theme-1: #051c43; /* oxford blue */
+	--theme-2: #073559; /* prussian blue */
+	--theme-3: #54c085; /* cambridge blue */
+	--theme-4: #e8b678; /* tan */
+	--theme-5: #e58061; /* burnt sienna */
 }

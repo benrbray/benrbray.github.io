@@ -1,0 +1,97 @@
+---
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header id="header-box">
+	<nav id="header">
+		<ul id="header-nav">
+			<li><a id="header-name" href="/">Benjamin R. Bray</a></li>
+			<li class="header-button"><HeaderLink href="/blog.html">WRITING</a></li>
+			<li class="header-button"><HeaderLink href="/projects.html">PROJECTS</a></li>
+			<li class="header-button"><HeaderLink href="/pages/resources.html">RESOURCES</a></li>
+			<li class="header-button"><HeaderLink href="/resume.html">RESUME</a></li>
+		</ul>
+	</nav>
+</header>
+
+<style>
+@media (max-width: 40rem) {
+	#header-nav {
+		grid-template-columns: 1fr 1fr;
+		grid-auto-flow: row dense;
+		grid-auto-rows: var(--header-height);
+	}
+	#header-nav li:first-child {
+		grid-column: 1 / span 2;
+		width: 100%;
+		text-align: center;
+	}
+}
+
+@media (min-width: 40rem) {
+	#header-nav {
+		grid-auto-flow: column;
+	}
+}
+
+#header-box {
+	border-bottom: 0.4rem solid var(--theme-3);
+	background-color: var(--theme-2);
+	color: white;
+}
+
+#header {
+	margin: 0 auto;
+	padding: 0 10px;
+	max-width: var(--max-width);
+}
+
+#header-nav {
+	display: grid;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-family: var(--sans-font);
+	font-size: 1.125em;
+}
+
+#header-nav li {
+	margin: unset;
+}
+
+#header-name {
+	margin-right: 20px;
+	height: var(--header-height);
+	line-height: var(--header-height);
+	vertical-align: middle;
+	user-select: none;
+	cursor: pointer;
+	color: inherit;
+	font-family: var(--serif-font);
+	font-size: 1.4em;
+	text-decoration: none;
+}
+
+#header-nav .header-button {
+	display: inline-block;
+	color: #97ceb2;
+}
+
+#header-nav .header-button a {
+	display: block;
+	width: auto;
+	height: var(--header-height);
+	line-height: var(--header-height);
+	color: inherit;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+}
+
+#header-nav .header-button:hover {
+	color: #000;
+	background-color: #eee;
+	cursor: pointer;
+}
+</style>
