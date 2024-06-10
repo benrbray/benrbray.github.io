@@ -1,0 +1,133 @@
+---
+---
+
+<div id="about" class="column-normal">
+	<!-- photo -->
+	<div class="about-portrait">
+		<img alt="Photo of me in Wakayama, Japan in May 2024" src="/images/profile/ben-wakayama-2024.png" />
+	</div>
+	<!-- ontro -->
+	<div class="about-description">
+		<div class="about-title">Benjamin R. Bray</div>
+		<p>
+			I work as a <b>research software engineer</b> for Prof. <a href="https://group-mmm.org/~ichiro/">Ichiro Hasuo</a> at the <a
+				href="https://www.nii.ac.jp/en/">National Institute of Informatics</a> in Tokyo, Japan, where I use <b>Haskell</b> to create domain-specific programming languages for formal verification of cyberphysical systems.
+		</p>
+		<p>
+			My ambition is to design software which makes <b>formal verification</b> more accessible to developers.  I'm particularly interested in improving the user experience of <b>dependently-typed</b> programming. 
+		</p>
+		<p>
+			I work most comfortably at the edge of where <b>theory meets practice</b>, and enjoy building tools for domain experts with a tight feedback loop.
+		</p>
+		<p>
+			In my free time, I enjoy cycling, <a href="/images/ben-goat.jpg">goats</a>, dodgeball, <a href="/images/tokyo-walking-map.jpg">long walks</a>, and <a
+			href="/images/sourdough.jpg">bread</a>. Maybe one day I'll make more <a
+			href="http://www.newgrounds.com/portal/view/512482">games</a>. If you'd like to chat, feel free to
+		write me at <a href="mailto:benrbray@gmail.com">benrbray@gmail.com</a>.
+		</p>
+
+		<!-- <p>In my free time, I work on <a href="https://noteworthy.ink/">Noteworthy</a>, an open-source Markdown
+			editor with bidirectional links and excellent math support!
+		</p> -->
+
+		<!-- <p>I hold a Masters in Computer Science from <b>Georgia Tech</b>, where my research advisor was <a
+				href="https://www.cc.gatech.edu/~jabernethy9/">Jacob Abernethy</a>. Previously, I studied math at
+			the University of Michigan, where I also helped with a machine learning <a
+				href="https://eecs445-f16.github.io/">class</a> and <a href="http://msail.github.io/">reading
+				group</a>. -->
+	</div>
+</div>
+
+<style>
+#about {
+	display: grid;
+
+  margin-top: 1.5rem;
+
+	gap: 2em;
+}
+
+#about .about-portrait {
+	min-width: 16rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+#about .about-portrait img {
+	display: block;
+}
+
+#about .about-description {
+	grid-area: intro;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#about .about-description p { margin: 0.6rem 0; }
+#about .about-title         { margin: 0.6rem 0; }
+
+#about .about-title {
+	font-size: 2em;
+	font-weight: var(--font-bold-weight);
+}
+
+#about .about-subtitle {
+	color: var(--color-text-fainter);
+}
+
+@media (min-width: 52rem) {
+	#about {
+		grid-template-columns: 1fr 2fr;
+		grid-template-areas: "photo intro";
+	}
+
+	#about .about-portrait {
+		justify-self: stretch;
+		min-height: 100%;
+	}
+
+	#about .about-portrait img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+}
+
+@media (max-width: 52rem) {
+
+	h2 { text-align: center; }
+	#about .about-title { text-align: center; }
+	#about .about-subtitle { text-align: center; }
+
+	#about {
+		grid-template-areas:
+			"photo"
+			"intro";
+	}
+
+
+	#about .about-portrait {
+		position: relative;
+		max-height: min(50vh, 30em);
+		justify-self: center;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+
+	#about .about-portrait::after {
+		content: "";
+		display: block;
+		padding-bottom: 100%;
+	}
+
+	#about .about-portrait img {
+		position: absolute;
+		width: 100%;
+		object-fit: cover;
+		top: -2em;
+	}
+}
+</style>

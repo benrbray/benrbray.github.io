@@ -14,6 +14,33 @@ body {
   tab-size: 4;
 
   /* fonts */
-  font-family: var(--font-family);
-  font-weight: var(--font-weight);
+  font-family: var(--font-normal-family);
+  font-weight: var(--font-normal-weight);
+	font-size: var(--font-normal-size);
+
+  /* color */
+  color: var(--font-normal-color);
+}
+
+/* ---- basic html elements ------------------------------------------------- */
+
+b {
+  font-weight: var(--font-bold-weight);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+p {
+  line-height: var(--line-height);
+}
+
+/* ---- column widths ------------------------------------------------------- */
+
+.column-normal {
+  margin: 0 auto;
+  max-width: var(--column-normal-max-width);
+  min-width: var(--column-normal-min-width);
 }

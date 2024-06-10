@@ -18,19 +18,38 @@
 
 :root {
   /* page dimensions */
-  --min-width: 25rem;
-  --max-width: 52rem;
+  --column-normal-max-width: 52rem;
+  --column-normal-min-width: 25rem;
+  --column-large-max-width: 64rem;
+  --column-large-min-width: 30rem;
+
+  --min-width: var(--column-normal-min-width);
+  --max-width: var(--column-normal-max-width);
+
 	--header-height: 60px;
+	--line-height: 1.4em;
 
   /* fonts */
 	--code-font: "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
 	--serif-font: "Lora", Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
 	--sans-font: "Roboto", system-ui, sans-serif;
 
-  --font-family: var(--serif-font);
-  --font-weight: normal;
+  /* font: normal */
+  --font-normal-family: var(--serif-font);
+  --font-normal-color: #303030;
+  --font-normal-size: 0.95rem;
+  --font-normal-weight: normal;
 
+  /* font: title */
 	--font-title-size: 1.3em;
+
+  /* font: bold */
+  --font-bold-weight: 600;
+}
+
+/* colors */
+:root {
+	--color-link: #2a7ae2;
 }
 
 /* theme colors */
