@@ -48,3 +48,9 @@ p {
   max-width: var(--column-normal-max-width);
   min-width: var(--column-normal-min-width);
 }
+
+.column-large {
+  margin: 0 auto;
+  max-width: var(--column-large-max-width);
+  min-width: var(--column-large-min-width);
+}

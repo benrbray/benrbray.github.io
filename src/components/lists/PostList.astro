@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostSummary from '../content/PostSummary.astro';
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+// `post` will match your 'blog' collection schema type
+const { posts } = Astro.props;
+---
+
+<div class="post-list">
+{
+  posts.map((post) => (
+    <PostSummary post={post}/>
+  ))
+}
+</div>

@@ -1,9 +1,16 @@
 ---
-import About from '../components/home/About.astro';
-import BaseHead from '../components/structure/BaseHead.astro';
-import Footer from '../components/structure/Footer.astro';
-import Header from '../components/structure/Header.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import About from '@components/home/About.astro';
+import BaseHead from '@components/structure/BaseHead.astro';
+import Footer from '@components/structure/Footer.astro';
+import Header from '@components/structure/Header.astro';
+import PostList from '@root/components/lists/PostList.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '@root/consts';
+
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
 ---
 
 <!doctype html>
@@ -15,6 +22,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<Header />
 		<main>
 			<About />
+
+			<div class="column-normal">
+				<PostList posts={posts} />
+			</div>
 		</main>
 		<Footer />
 	</body>
