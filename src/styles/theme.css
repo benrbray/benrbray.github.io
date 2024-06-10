@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "Lora";
+  src: url("/fonts/lora/Lora-VariableFont_wght.ttf") format(truetype) tech(variations);
+  font-weight: 125 950;
+  font-stretch: 75% 125%;
+  font-style: oblique 0deg 20deg;
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url("/fonts/lora/Lora-VariableFont_wght.ttf") format(truetype) tech(variations);
+  font-weight: 125 950;
+  font-stretch: 75% 125%;
+  font-style: italic;
+}
+
+/* ------------------------------------------------------ */
+
+:root {
+  /* page dimensions */
+  --min-width: 25rem;
+  --max-width: 52rem;
+
+  /* fonts */
+  --font-family: "Lora", Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+  --font-weight: normal;
+}
