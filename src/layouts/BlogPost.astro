@@ -3,11 +3,11 @@ import type { CollectionEntry } from 'astro:content';
 import BaseHead from '@components/structure/BaseHead.astro';
 import Header from '@components/structure/Header.astro';
 import Footer from '@components/structure/Footer.astro';
-import FormattedDate from '@components/sample/FormattedDate.astro';
+import FormattedDate from '@root/components/dates/FormattedDate.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, datePublished, dateUpdated, heroImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -64,11 +64,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				<div class="prose">
 					<div class="title">
 						<div class="date">
-							<FormattedDate date={pubDate} />
+							<FormattedDate date={datePublished} />
 							{
-								updatedDate && (
+								dateUpdated && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
+										Last updated on <FormattedDate date={dateUpdated} />
 									</div>
 								)
 							}

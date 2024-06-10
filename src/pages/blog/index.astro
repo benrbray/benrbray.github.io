@@ -3,12 +3,12 @@ import BaseHead from '@components/structure/BaseHead.astro';
 import Header from '@components/structure/Header.astro';
 import Footer from '@components/structure/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@root/consts';
-import FormattedDate from '@components/sample/FormattedDate.astro';
+import FormattedDate from '@root/components/dates/FormattedDate.astro';
 
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+	(a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf()
 );
 ---
 
@@ -98,7 +98,7 @@ const posts = (await getCollection('blog')).sort(
 									<img width={720} height={360} src={post.data.heroImage} alt="" />
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
+										<FormattedDate date={post.data.datePublished} />
 									</p>
 								</a>
 							</li>
