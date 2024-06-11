@@ -1,6 +1,6 @@
 ---
 title: Modeling and Solving Constraints
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '29 May 2024'
 
 series:

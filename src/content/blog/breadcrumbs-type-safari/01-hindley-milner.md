@@ -1,6 +1,6 @@
 ---
 title: Hindley-Milner Type Inference
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '4 May 2024'
 
 series:

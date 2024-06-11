@@ -1,6 +1,6 @@
 ---
 title: System F
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '11 May 2024'
 
 series:

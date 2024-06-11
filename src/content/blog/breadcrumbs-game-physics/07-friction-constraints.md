@@ -1,6 +1,6 @@
 ---
 title: Friction Constraints
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '2 July 2024'
 
 series:

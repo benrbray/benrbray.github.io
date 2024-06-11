@@ -1,6 +1,6 @@
 ---
 title: Game Physics Overview
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '4 May 2024'
 
 series:

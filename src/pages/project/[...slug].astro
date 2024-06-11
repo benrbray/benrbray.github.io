@@ -1,0 +1,47 @@
+---
+import { type CollectionEntry } from 'astro:content';
+
+import FormattedDate from '@root/components/dates/FormattedDate.astro';
+import Page from '@layouts/Page.astro';
+import ColumnNormal from '@layouts/ColumnNormal.astro';
+import { getProjects, shortenProjectSlug } from '@root/util/query';
+
+
+export async function getStaticPaths() {
+	const projects = await getProjects();
+  
+	return projects.map((project) => ({
+		params: { slug: shortenProjectSlug(project.slug) },
+		props: { project },
+	}));
+}
+
+type Props = { project : CollectionEntry<'blog'> };
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<Page pageTitle={project.data.title}>
+	<ColumnNormal>
+	<article>
+		<div class="prose">
+			<div class="title">
+				<div class="date">
+					<FormattedDate date={project.data.datePublished} />
+					{
+						project.data.dateUpdated && (
+							<div class="last-updated-on">
+								Last updated on <FormattedDate date={project.data.dateUpdated} />
+							</div>
+						)
+					}
+				</div>
+				<h1>{project.data.title}</h1>
+				<hr />
+			</div>
+			<Content />
+		</div>
+	</article>
+	</ColumnNormal>
+</Page>

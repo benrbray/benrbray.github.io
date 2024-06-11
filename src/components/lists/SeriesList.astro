@@ -9,7 +9,6 @@ interface Props {
 const { series } = Astro.props;
 ---
 
-<h1>Series</h1>
 <div class="series-list">
 {series.map(s => (
   <SeriesSummary series={s} />

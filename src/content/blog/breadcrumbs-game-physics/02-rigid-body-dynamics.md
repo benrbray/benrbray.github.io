@@ -1,6 +1,6 @@
 ---
 title: Impulses, Rotation, and Numerical Integration
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '23 May 2024'
 
 series:

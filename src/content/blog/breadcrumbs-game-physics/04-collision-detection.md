@@ -1,6 +1,6 @@
 ---
 title: "Collision Detection: SAT & GJK"
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '7 June 2024'
 
 series:

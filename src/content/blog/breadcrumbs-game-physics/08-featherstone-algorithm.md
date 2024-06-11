@@ -1,6 +1,6 @@
 ---
 title: Featherstone Algorithm
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '13 July 2024'
 
 series:

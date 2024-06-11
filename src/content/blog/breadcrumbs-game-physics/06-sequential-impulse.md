@@ -1,6 +1,6 @@
 ---
 title: Sequential Impulse Algorithm
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '31 June 2024'
 
 series:

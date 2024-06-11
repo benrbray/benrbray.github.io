@@ -1,12 +1,132 @@
 ---
+import { getPostUrl } from '@root/util/query';
 import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '../dates/FormattedDate.astro';
 interface Props {
   post: CollectionEntry<'blog'>;
 }
 
 const { post } = Astro.props;
+
+const postUrl = getPostUrl(post);
 ---
 
-<div>
-<a href={`/blog/${post.slug}`}>{post.data.title}</a>
+
+<div class={`post-summary-box ${post.data.kind === "project" ? "kind-project" : ""}`}>
+  <!-- summary -->
+  <div class="post-desc">
+    <!-- title -->
+    <div class="post-title">
+      <a href={postUrl} set:html={post.data.title}></a>
+    </div>
+    <div class="post-subtitle">
+      <span class="post-year"><FormattedDate date={post.data.datePublished} /></span>
+      <span class="post-tags">
+        <!-- $if(tags)$$tags$$endif$
+        $if(tools)$$tools$$endif$ -->
+      </span>
+    </div>
+    <div class="post-summary" set:html={post.data.summary}>
+    </div>
+  </div>
+  <!-- thumbnail -->
+  {
+		post.data.imageThumbnail &&
+		(<div class="post-thumb">
+			<img alt="" src={post.data.imageThumbnail} />
+		</div>)
+	}
 </div>
+
+<style>
+
+/* .post-summary-box {
+	margin: 2rem 0;
+} */
+
+.post-summary-box {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 1.0rem;
+
+	width: 100%;
+	margin: 1.0rem 0;
+}
+
+.post-summary-box.kind-project {
+	border: 1px solid black;
+}
+
+.post-summary-box .post-desc {
+	flex: 1;
+}
+
+.post-summary-box .post-thumb {
+	flex-basis: 40%;
+	max-height: 8em;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.post-summary-box .post-thumb img {
+	display: block;
+	min-width: 100%;
+}
+
+.post-summary-box .post-tags {
+
+}
+
+.post-summary-box .tag, .post-summary-box .tool,
+.post-summary-box .tag, .post-summary-box .tool {
+	display: inline-block;
+	margin: 0 0.1em;
+	padding: 0.1em 0.3em;
+	white-space: nowrap;
+}
+
+.post-summary-box .tag,
+.post-summary-box .tag {
+	background-color: #e3e9ef;
+	color: #254298;
+}
+
+.post-summary-box .tool,
+.post-summary-box .tool {
+	background-color: #e3efe4;
+	color: darkgreen;
+}
+
+.post-summary-box .post-title {
+	display: flex;
+	justify-content: space-between;
+
+	margin-bottom: 0.6rem;
+	font-size: var(--font-size-post-title);
+	font-weight: var(--font-title-weight);
+}
+
+.post-summary-box .post-subtitle,
+.post-summary-box .post-subtitle {
+	margin: 0.5rem 0;
+	text-overflow: hidden;
+	overflow: hidden;
+}
+
+.post-summary-box .post-summary p:first-child,
+.post-summary-box .post-summary p:first-child {
+	margin-top: 0;
+}
+
+.post-summary-box .post-year,
+.post-summary-box .post-year {
+	color: gray;
+	white-space: nowrap;
+}
+
+.post-summary-box .post-title a { color: unset; }
+</style>

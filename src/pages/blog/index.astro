@@ -2,7 +2,7 @@
 import BaseHead from '@components/structure/BaseHead.astro';
 import Header from '@components/structure/Header.astro';
 import Footer from '@components/structure/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '@root/consts';
+import { SITE_TITLE } from '@root/consts';
 import FormattedDate from '@root/components/dates/FormattedDate.astro';
 
 import { getCollection } from 'astro:content';
@@ -15,7 +15,7 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} />
 		<style>
 			main {
 				width: 960px;
@@ -95,7 +95,6 @@ const posts = (await getCollection('blog')).sort(
 						posts.map((post) => (
 							<li>
 								<a href={`/blog/${post.slug}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
 										<FormattedDate date={post.data.datePublished} />

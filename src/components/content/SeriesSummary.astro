@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../dates/FormattedDate.astro';
-import { getSeriesPosts } from '@root/util/query';
+import { getPostUrl, getSeriesPosts } from '@root/util/query';
 interface Props {
   series: CollectionEntry<'series'>,
 	activeSlug?: CollectionEntry<'blog'>["slug"]
@@ -13,7 +13,6 @@ const { series, activeSlug } = Astro.props;
 const posts = await getSeriesPosts(series);
 ---
 
-{activeSlug}
 <div class="series" style={`--series-bg-image: url(${series.data.imageSummary})`}>
 	<div class="series-header">
 		<div class="series-title"><a href={`/series/${series.slug}/`}>{series.data.title}</a></div>
@@ -26,7 +25,7 @@ const posts = await getSeriesPosts(series);
     {posts.map(p => {
       return <div class={`post ${p.slug == activeSlug ? "active" : ""}`}>
         <span class="post-date"><FormattedDate date={p.data.datePublished} /></span>
-        Part {p.data.series!.seriesNumber}, <a class="post-title" href={`/blog/${p.slug}`}>{p.data.title}</a>
+        Part {p.data.series!.seriesNumber}, <a class="post-title" href={getPostUrl(p)}>{p.data.title}</a>
       </div>
     })}
 		</ul>

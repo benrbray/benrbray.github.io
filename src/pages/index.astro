@@ -5,12 +5,17 @@ import Footer from '@components/structure/Footer.astro';
 import Header from '@components/structure/Header.astro';
 import PostList from '@root/components/lists/PostList.astro';
 import SeriesList from '@root/components/lists/SeriesList.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '@root/consts';
+import { SITE_TITLE } from '@root/consts';
+import ColumnNormal from '@root/layouts/ColumnNormal.astro';
+import { getPosts, getProjects } from '@root/util/query';
 
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf()
+const posts = (await getPosts({ includeSeries: false }));
+const projects = (await getProjects());
+
+const entries = [...posts, ...projects].sort(
+	(a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf()
 );
 
 const series = await getCollection("series");
@@ -19,17 +24,19 @@ const series = await getCollection("series");
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE}/>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<About />
 
-			<div class="column-normal">
+			<ColumnNormal>
+				<h1>Tutorial Series</h1>
 				<SeriesList series={series} />
-				<PostList posts={posts} />
-			</div>
+				<h1>Selected Posts</h1>
+				<PostList posts={entries} />
+			</ColumnNormal>
 		</main>
 		<Footer />
 	</body>

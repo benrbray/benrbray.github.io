@@ -1,6 +1,6 @@
 ---
 title: Contact Generation
-description: 'DESCRIPTION'
+summary: 'DESCRIPTION'
 datePublished: '15 June 2024'
 
 series:
