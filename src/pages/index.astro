@@ -6,7 +6,6 @@ import Header from '@components/structure/Header.astro';
 import PostList from '@root/components/lists/PostList.astro';
 import SeriesList from '@root/components/lists/SeriesList.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@root/consts';
-import { asyncMap } from '@root/util/async';
 
 import { getCollection } from 'astro:content';
 
@@ -14,25 +13,7 @@ const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf()
 );
 
-const getSeriesPosts = async () => {
-	const series = await getCollection("series");
-
-	const seriesWithPosts = asyncMap(series, async s => {
-		const seriesPosts = await getCollection("blog", ({ data }) => {
-			if(!data.series) { return false; }
-			return data.series.seriesName.slug == s.slug;
-		});
-
-		return {
-			series: s,
-			posts: seriesPosts
-		}
-	});
-
-	return seriesWithPosts;
-}
-
-const seriesWithPosts = await getSeriesPosts();
+const series = await getCollection("series");
 ---
 
 <!doctype html>
@@ -46,7 +27,7 @@ const seriesWithPosts = await getSeriesPosts();
 			<About />
 
 			<div class="column-normal">
-				<SeriesList series={seriesWithPosts} />
+				<SeriesList series={series} />
 				<PostList posts={posts} />
 			</div>
 		</main>

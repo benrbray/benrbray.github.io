@@ -55,6 +55,8 @@
 
   /* font: title */
 	--font-title-size: 1.3em;
+  --font-title-weight: 600;
+
   --font-size-post-title: var(--font-size-larger);
   --font-size-post-subtitle: var(--font-size-large);
 

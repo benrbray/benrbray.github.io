@@ -1,0 +1,25 @@
+---
+import ColumnNormal from '@root/layouts/ColumnNormal.astro';
+import Page from '@root/layouts/Page.astro';
+import { type CollectionEntry, getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('series');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'series'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Page>
+  <ColumnNormal>
+    <h1>{post.data.title}</h1>
+
+    <Content />
+  </ColumnNormal>
+</Page>

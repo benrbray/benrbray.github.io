@@ -1,17 +1,22 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../dates/FormattedDate.astro';
+import { getSeriesPosts } from '@root/util/query';
 interface Props {
   series: CollectionEntry<'series'>,
-  posts: CollectionEntry<'blog'>[]
+	activeSlug?: CollectionEntry<'blog'>["slug"]
 }
 
-const { series, posts } = Astro.props;
+
+const { series, activeSlug } = Astro.props;
+
+const posts = await getSeriesPosts(series);
 ---
 
+{activeSlug}
 <div class="series" style={`--series-bg-image: url(${series.data.imageSummary})`}>
 	<div class="series-header">
-		<div class="series-title">{series.data.title}</div>
+		<div class="series-title"><a href={`/series/${series.slug}/`}>{series.data.title}</a></div>
 	</div>
 	<div class="series-image"></div>
 	<div class="series-summary">
@@ -19,25 +24,19 @@ const { series, posts } = Astro.props;
 	</div>
 	<div class="series-posts">
     {posts.map(p => {
-      return <div>
+      return <div class={`post ${p.slug == activeSlug ? "active" : ""}`}>
         <span class="post-date"><FormattedDate date={p.data.datePublished} /></span>
-        Part {p.data.series!.seriesNumber}, <a class="post-title" href="#">{p.data.title}</a>
+        Part {p.data.series!.seriesNumber}, <a class="post-title" href={`/blog/${p.slug}`}>{p.data.title}</a>
       </div>
     })}
-			<!-- <div><span class="post-date">4 May 2024</span><a class="post-title" href="#">Part 1, Game Physics Overview</a></div>
-			<div><span class="post-date">23 May 2024</span><a class="post-title" href="#">Part 2, Impulses, Rotation, and Numerical Integration</a></div>
-			<div><span class="post-date">23 May 2024</span><a class="post-title" href="#">Part 3, Modeling and Solving Constraints</a></div>
-			<div><span class="post-date">7 June 2024</span><a class="post-title" href="#">Part 4, Collision Detection: SAT & GJK</a></div>
-			<div><span class="post-date">15 June 2024</span><a class="post-title" href="#">Part 5, Contact Generation</a></div>
-			<div><span class="post-date">31 June 2024</span><a class="post-title" href="#">Part 6, Sequential Impulse Algorithm</a></div>
-			<div><span class="post-date">2 July 2024</span><a class="post-title" href="#">Part 7, Friction Constraints</a></div>
-			<div><span class="post-date">2 July 2024</span><a class="post-title" href="#">Part 8, Featherstone Algorithm</a></div> -->
 		</ul>
 	</div>
 </div>
 <style>
 .series {
-	background-color: #e7fff2;
+	/* background-color: #e7fff2; */
+	/* background-color: #ecffd5; */
+	background-color: #f3ffe4;
 	border-radius: var(--gap-1);
 	padding: var(--gap-1);
 	margin: var(--gap-1);
@@ -46,6 +45,15 @@ const { series, posts } = Astro.props;
 .series {
 	position: relative;
 	z-index: 0;
+}
+
+.series .post.active {
+	font-weight: var(--font-bold-weight);
+	background-color: #ccfd8e;
+}
+
+.series .post.active .post-title {
+	font-weight: var(--font-bold-weight);
 }
 
 .series-posts .post-title {
@@ -87,8 +95,12 @@ const { series, posts } = Astro.props;
 
 .series .series-title {
 	font-size: var(--font-size-post-title);
-	font-weight: bold;
+	font-weight: var(--font-title-weight);
 	position: relative;
 	z-index: 2;
+}
+
+.series .series-title a {
+	color: var(--font-normal-color);
 }
 </style>

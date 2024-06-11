@@ -8,5 +8,5 @@ const { post } = Astro.props;
 ---
 
 <div>
-{post.data.title}
+<a href={`/blog/${post.slug}`}>{post.data.title}</a>
 </div>

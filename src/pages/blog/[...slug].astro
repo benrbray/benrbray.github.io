@@ -1,6 +1,11 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '@layouts/BlogPost.astro';
+import { type CollectionEntry, getCollection, getEntry } from 'astro:content';
+
+import FormattedDate from '@root/components/dates/FormattedDate.astro';
+import Page from '@layouts/Page.astro';
+import ColumnNormal from '@layouts/ColumnNormal.astro';
+import SeriesSummary from '@root/components/content/SeriesSummary.astro';
+
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -15,6 +20,42 @@ const post = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<Page>
+	<ColumnNormal>
+	<article>
+		<div class="hero-image">
+			{post.data.heroImage && <img width={1020} height={510} src={post.data.heroImage} alt="" />}
+		</div>
+		<div class="prose">
+			<div class="title">
+				<div class="date">
+					<FormattedDate date={post.data.datePublished} />
+					{
+						post.data.dateUpdated && (
+							<div class="last-updated-on">
+								Last updated on <FormattedDate date={post.data.dateUpdated} />
+							</div>
+						)
+					}
+				</div>
+				<h1>{post.data.title}</h1>
+				<hr />
+			</div>
+			<div>
+			{
+				(async () => {
+					if(post.data.series) {
+						const s = await getEntry("series", post.data.series.seriesName.slug);
+						return <div>
+							Part of a Series: <b>{s.data.title}</b>
+							<SeriesSummary series={s} activeSlug={post.slug}/>
+							</div>
+					}
+				})()
+			}
+			</div>
+			<Content />
+		</div>
+	</article>
+	</ColumnNormal>
+</Page>

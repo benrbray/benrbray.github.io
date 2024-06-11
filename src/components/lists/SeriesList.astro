@@ -2,13 +2,8 @@
 import type { CollectionEntry } from 'astro:content';
 import SeriesSummary from '../content/SeriesSummary.astro';
 
-interface SeriesWithPosts {
-  series: CollectionEntry<'series'>;
-  posts: CollectionEntry<'blog'>[];
-}
-
 interface Props {
-  series: SeriesWithPosts[];
+  series: CollectionEntry<'series'>[];
 }
 
 const { series } = Astro.props;
@@ -17,6 +12,6 @@ const { series } = Astro.props;
 <h1>Series</h1>
 <div class="series-list">
 {series.map(s => (
-  <SeriesSummary series={s.series} posts={s.posts} />
+  <SeriesSummary series={s} />
 ))}
 </div>
