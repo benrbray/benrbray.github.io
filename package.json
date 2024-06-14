@@ -16,6 +16,10 @@
     "@astrojs/sitemap": "^3.1.5",
     "@astrojs/solid-js": "^4.3.0",
     "astro": "^4.10.1",
+    "katex": "^0.16.10",
+    "rehype-citation": "^2.0.0",
+    "rehype-katex": "^7.0.0",
+    "remark-math": "^6.0.0",
     "solid-js": "^1.8.17",
     "typescript": "^5.4.5"
   }

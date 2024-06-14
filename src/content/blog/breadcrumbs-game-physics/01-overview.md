@@ -7,3 +7,11 @@ series:
   seriesName: breadcrumbs-game-physics
   seriesNumber: 1
 ---
+
+this is $math$ and
+
+$$
+\int_a^b f(x) dx
+$$
+
+from [@riehl2017:category] we know that
