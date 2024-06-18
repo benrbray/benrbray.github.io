@@ -4,8 +4,8 @@ title:  AdamBots Automated&nbsp;Scouting&nbsp;Kit
 
 datePublished: June 1, 2013
 
-tags:  math, ui
-tools:  javascript
+tags:  [math, frontend]
+tools:  [javascript]
 imageThumbnail: images/thumbnails/aask_thumb.png
 banner_url: images/thumbnails/aask_long.png
 demo_url: /static/aask/aask.html

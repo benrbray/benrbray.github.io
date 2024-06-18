@@ -5,8 +5,8 @@ title-display: <code>prosemirror-math</code>
 datePublished: June 14, 2020
 
 
-tags:  math, ui
-tools: typescript
+tags:  [math, frontend]
+tools: [typescript]
 url: https://benrbray.com/prosemirror-math/
 imageThumbnail: images/thumbnails/prosemirror-math-2.png
 # imageThumbnail: images/thumbnails/prosemirror-math.png

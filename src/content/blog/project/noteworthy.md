@@ -4,8 +4,8 @@ title:  Noteworthy
 datePublished: September 16, 2020
 
 
-tags: ui
-tools: typescript
+tags: [frontend]
+tools: [typescript, electron]
 imageThumbnail: images/thumbnails/noteworthy-screenshot.png
 github_url: https://github.com/benrbray/noteworthy
 demo_url: https://noteworthy.ink/

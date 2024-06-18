@@ -4,8 +4,8 @@ title:  Digital Humanities &amp; German&nbsp;Periodicals
 datePublished: December 1, 2016
 
 
-tags:  nlp, machine-learning
-tools: python, js
+tags:  [machine-learning, frontend]
+tools: [python, javascript]
 imageThumbnail: images/thumbnails/deutsche-rundschau_thumb.png
 banner_url: images/thumbnails/deutsche-rundschau_long.png
 banner_comment: "Image <a href='https://twitter.com/FontaneArchiv/status/999271012591177728'>@FontaneArchiv</a>"

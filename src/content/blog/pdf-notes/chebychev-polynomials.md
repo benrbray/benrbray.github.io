@@ -1,5 +1,5 @@
 ---
-tags: math
+tags: [math]
 title: Chebychev Polynomials (PDF)
 datePublished: 2016-12-08
 url: /notes/chebychev-polynomials_dec16.pdf

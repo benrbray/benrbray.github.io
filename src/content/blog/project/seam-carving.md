@@ -4,8 +4,8 @@ title:  Seam Carving
 datePublished: December 28, 2014
 
 
-tags:  image-processing, algorithms
-tools: javascript
+tags:  [graphics]
+tools: [javascript]
 imageThumbnail: images/thumbnails/seam-carve_thumb.png
 demo_url: /static/seam-carving/index.html
 github_url: https://github.com/benrbray/benrbray.github.io-source/tree/master/content/static/seam-carving

@@ -1,5 +1,5 @@
 ---
-tags: math
+tags: [math]
 title: Minimax Approximation Theory (PDF)
 datePublished: 2016-11-27
 url: /notes/minimax-approx_nov16.pdf

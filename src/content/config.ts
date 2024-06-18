@@ -8,6 +8,8 @@ const postSchema = z.object({
 	datePublished: z.coerce.date(),
 	dateUpdated: z.coerce.date().optional(),
 	imageThumbnail: z.string().optional(),
+	tags: z.array(z.string()).optional(),
+	tools: z.array(z.string()).optional(),
 	series: z.object({
 		seriesName: reference("series"),
 		seriesNumber: z.number().int().gte(1)

@@ -2,6 +2,7 @@
 import { getPostUrl } from '@root/util/query';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../dates/FormattedDate.astro';
+import PostTags from './PostTags.astro';
 interface Props {
   post: CollectionEntry<'blog'>;
 }
@@ -12,7 +13,7 @@ const postUrl = getPostUrl(post);
 ---
 
 
-<div class={`post-summary-box ${post.data.kind === "project" ? "kind-project" : ""}`}>
+<div class={`post-summary-box ${post.data.kind === "project" ? "kind-project" : "kind-post"}`}>
   <!-- summary -->
   <div class="post-desc">
     <!-- title -->
@@ -21,10 +22,7 @@ const postUrl = getPostUrl(post);
     </div>
     <div class="post-subtitle">
       <span class="post-year"><FormattedDate date={post.data.datePublished} /></span>
-      <span class="post-tags">
-        <!-- $if(tags)$$tags$$endif$
-        $if(tools)$$tools$$endif$ -->
-      </span>
+      <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
     </div>
     <div class="post-summary" set:html={post.data.summary}>
     </div>
@@ -55,7 +53,12 @@ const postUrl = getPostUrl(post);
 }
 
 .post-summary-box.kind-project {
-	border: 1px solid black;
+	background-color: #00aaff0f;
+	padding: var(--gap-1);
+}
+
+.post-summary-box.kind-post {
+	padding: 0 var(--gap-1);
 }
 
 .post-summary-box .post-desc {
@@ -75,30 +78,6 @@ const postUrl = getPostUrl(post);
 .post-summary-box .post-thumb img {
 	display: block;
 	min-width: 100%;
-}
-
-.post-summary-box .post-tags {
-
-}
-
-.post-summary-box .tag, .post-summary-box .tool,
-.post-summary-box .tag, .post-summary-box .tool {
-	display: inline-block;
-	margin: 0 0.1em;
-	padding: 0.1em 0.3em;
-	white-space: nowrap;
-}
-
-.post-summary-box .tag,
-.post-summary-box .tag {
-	background-color: #e3e9ef;
-	color: #254298;
-}
-
-.post-summary-box .tool,
-.post-summary-box .tool {
-	background-color: #e3efe4;
-	color: darkgreen;
 }
 
 .post-summary-box .post-title {

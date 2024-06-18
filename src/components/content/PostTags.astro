@@ -1,0 +1,42 @@
+---
+interface Props {
+  tags: string[]
+  tools: string[]
+}
+
+const { tags, tools } = Astro.props;
+
+---
+
+<span class="post-tags">
+  {tags.map(tag => {
+    return <><span class="tag">{tag}</span> </>
+  })}
+  {tools.map(tool => {
+    return <><span class="tool">{tool}</span> </>;
+  })}
+</span>
+
+<style>
+.post-tags {
+
+}
+
+.post-tags .tag,
+.post-tags .tool {
+	display: inline-block;
+	margin: 0 0.1em;
+	padding: 0.1em 0.3em;
+	white-space: nowrap;
+}
+
+.post-tags .tag {
+	background-color: #e3e9ef;
+	color: #254298;
+}
+
+.post-tags .tool {
+	background-color: #e3efe4;
+	color: darkgreen;
+}
+</style>

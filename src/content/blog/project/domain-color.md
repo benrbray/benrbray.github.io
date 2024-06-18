@@ -3,8 +3,8 @@ kind: project
 title:  Complex Domain Coloring
 datePublished: February 15, 2014
 
-tags:  math, image-processing
-tools: javascript
+tags:  [math]
+tools: [javascript]
 priority: 1
 imageThumbnail: images/thumbnails/complex-domain-coloring_thumb.png
 demo_url: /static/complex_domain_coloring/
