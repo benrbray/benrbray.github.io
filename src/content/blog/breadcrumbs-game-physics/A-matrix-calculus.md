@@ -1,0 +1,169 @@
+---
+title: Matrix Calculus
+summary: 'DESCRIPTION'
+datePublished: '29 May 2024'
+
+series:
+  seriesName: breadcrumbs-game-physics
+  seriesNumber: 1
+  isAppendix: true
+---
+
+$$
+\providecommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\providecommand{\d}{\mathrm{d}}
+$$
+
+Linear algebra is *not* about number crunching on matrices, even though some introductory courses make it seem that way.  In this section, we'll review the basics of linear algebra and matrix calculus, focusing on just a handful general principles that can be used to derive useful facts as needed, avoiding unnecessary memorization.
+
+# Linear Algebra
+
+## Matrix Multiplication, Graphically
+
+### Matrix-Vector Product
+
+The presentation here is inspired by [@trefethen2022:numerical-linear-algebra].  Let $x \in \R^n$ be an $n$-dimensional column vector and $A \in \R^{m \times n}$ be a matrix.  The matrix-vector product $b = Ax \in \R^m$ is the $m$-dimensional column vector defined entrywise as a sum over columns,
+
+$$
+\begin{equation*}
+b_i = \sum_{j=1}^n a_{ij} x_j \qquad \text{(} i=1,\dots,m \text{)}
+\end{equation*}
+$$
+
+This entry-wise definition is rather opaque.  If instead we let $a_j \in \R^m$ denote the $j$th column of $A$, the matrix-vector product can be written as a linear combination of the columns!
+
+$$
+\begin{equation*}
+b = Ax = \sum_{j=1}^n x_j a_j
+\end{equation*}
+$$
+
+Graphically, the matrix-vector product is
+
+$$
+% Schematic:  Matrix-Vector Product
+\begin{equation*}
+\begin{bmatrix} 
+\rule{0pt}{1.5em} \\
+b \\
+\rule{0pt}{1.5em}
+\end{bmatrix}
+= 
+\begin{array}{cc}
+    \left\lbrack
+    \begin{array}{c|c|c|c}
+    \\[0.5em]
+    a_1 & a_2 & \cdots & a_n \\[2.0em]
+    \end{array}
+    \right\rbrack
+    \hspace*{-1.3em}
+    &
+    \left\lbrack
+    \begin{array}{c}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{array}
+    \right\rbrack
+\end{array}
+= \hspace*{0.5em}
+x_1 \begin{bmatrix}
+    \rule{0pt}{2.5em} \\
+    a_1 \\
+    \rule{0pt}{2.5em}
+    \end{bmatrix}
++
+x_2 \begin{bmatrix}
+    \rule{0pt}{2.5em} \\
+    a_2 \\
+    \rule{0pt}{2.5em}
+    \end{bmatrix}
++ \cdots +
+x_n \begin{bmatrix}
+    \rule{0pt}{2.5em} \\
+    a_n \\
+    \rule{0pt}{2.5em}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+The most important rule to remember is:
+
+> The matrix-vector product $Ax$ is a linear combination of the columns of $A$ with coefficients taken from the vector $x$.
+
+### Vector-Matrix Product
+
+> The vector-matrix product $y^T A$ is a linear combination of the rows of $A$ with coefficients taken from the vector $y$.
+
+### Matrix-Matrix Product
+
+> Every column of the matrix-matrix product $AB$ is a linear combination of the columns of $A$, with coefficients taken from a column of $B$.
+
+> Every row of the matrix-matrix product $AB$ is a linear combination of the rows of $B$, with coefficients taken from a row of $A$.
+
+### Matrix Inverse Times a Vector
+
+> $A^{-1} b$ is the vector of coefficients in the basis expansion of $b$ in the coordinate system defined by the columns of $A$.
+
+# Linear Transformations
+
+# Differential Calculus
+
+Our goal in this section is to understand what it measn to take the derivative of a matrix-valued function of a matrix-valued input, $f : \R^m \rightarrow \R^n$.  We roughly follow [@rudin1976:principles, Chapter 9].
+
+In this section, we briefly review single-variable calculus before introducing derivatives for functions of multiple variables.
+
+## Real-Valued Functions of a Single Variable
+
+## Real-Valued Functions of a Vector Variable
+
+## Vector-Valued Functions of a Single Variable
+
+## Vector-Valued Functions of a Vector Variable
+
+Our intuition for single-variable functions about derivatives measuring "slope" is suitable for understanding the concept of [partial derivatives](https://en.wikipedia.org/wiki/Partial_derivative), but we need to develop new tools to allow us to take derivatives in _all directions simultaneously_.  Here is the key fact to remember:
+
+> The **derivative** is a linear transformation with the same domain and codomain as the original function.
+
+**Definition:** Let $f : \R^n \rightarrow \R^n$ and suppose $x \in \R^n$.  A **(total) derivative** of the function $f : \R^n \rightarrow \R^m$ at the point $x \in \R^n$ is a linear transformation $A \in L(\R^n, \R^m)$ such that
+
+$$
+\lim_{h \rightarrow 0} \frac{\norm{f(x _ h) - f(x) - Ah}}{\norm{h}} = 0
+$$
+
+**Property:** The derivative, when it exists, is unique.
+
+When $A$ is the derivative of $f$ at $x$, we may use any of the following equivalent notations:
+
+$$
+\begin{gather*}
+\d_x f = A &&
+f'(x) = A &&
+\textstyle\frac{\d f}{\d x}\big\rvert_{x} = A
+\end{gather*}
+$$
+
+In one dimension, the derivative was defined to be exactly equal to a certain limit, giving a nice formula for computing derivatives directly.  Unfortunately, our definition for multivariate functions isn't so nice for direct computation, since the differential appears inside the limit.  Once we have a guess for the linear transformation $A \in L(\R^n, \R^m)$, though, we can use the definition above to check whether it's the differential.
+
+For simple functions, we can make guesses based on our intuition from single-variable calculus.  For example, it shouldn't be surprising that a linear function is its own derivative; that is, the linear approximation to linear function is the function itself!
+
+**Example:** Every linear transformation $T \in L(\R^n, \R^m)$ is its own differential, since
+
+$$
+\begin{aligned}
+\lim_{h \rightarrow 0} \frac{\norm{T(x+h)-(Tx +Th)}}{\norm{h}}
+&= \lim_{h \rightarrow 0} \frac{\norm{T(x+h)-T(x+h)}}{\norm{h}} = 0
+\end{aligned}
+$$
+
+### Chain Rule for Total Derivatives
+
+The most powerful tool for computing derivatives is the multivariable **chain rule**, which allows us to compute complicated derivatives from simpler building blocks.
+
+**Theorem,** (Chain Rule).  Let $f : \R^n \rightarrow \R^k$ be differentiable at $x_0 \in \R^n$ and $g : \R^k \rightarrow \R^m$ be differentiable at $f(x_0) \in \R^k$.  Then the composite $h = g \circ f : \R^n \rightarrow \R^m$ given by $h(x) = g(f(x))$ is differentiable at $x_0$, with derivative
+
+$$
+h'(x_0) = g'(f(x_0)) \circ f'(x_0)
+$$
+
+that is, $h'(x_0)$ is the linear map obtained by composing the two linear maps $g'(f(x_0))$ and $f'(x_0)$ (or by multiplying the corresponding matrices!).
+
+# References

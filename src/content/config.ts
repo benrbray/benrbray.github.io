@@ -12,7 +12,8 @@ const postSchema = z.object({
 	tools: z.array(z.string()).optional(),
 	series: z.object({
 		seriesName: reference("series"),
-		seriesNumber: z.number().int().gte(1)
+		seriesNumber: z.number().int().gte(1),
+		isAppendix: z.boolean().optional()
 	}).optional()
 });
 

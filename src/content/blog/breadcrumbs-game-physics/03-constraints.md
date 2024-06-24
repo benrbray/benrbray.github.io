@@ -7,3 +7,89 @@ series:
   seriesName: breadcrumbs-game-physics
   seriesNumber: 3
 ---
+
+$$
+\providecommand{\line}{\text{---}}
+\providecommand{\rowvec}[1]{\;\line\; #1 \;\line\;}
+
+\providecommand{\defeq}{\stackrel{\text{dfn}}{=}}
+\providecommand{\then}{\mathop{\mathbb{;}}}
+\providecommand{\of}{\circ}
+
+\providecommand{\annotunder}[2]{\underset{\color{gray}#2}{\underline{#1}}}
+\providecommand{\annot}[1]{\footnotesize\color{gray}#1}
+$$
+
+# Introduction
+
+The information in this post is largely adapted from [@catto2009:modeling-solving], [@catto2014:understanding-constraints], and [@catto2005:temporal-coherence].
+
+# Equality Constraints
+
+Consider two physics objects $A$ and $B$ parameterized by the **generalized positions** $x_A, x_B \in \R^d$.  We may sometimes use $x \in \R^{2d}$ to refer to the collection $x = \begin{bmatrix} x_A \; x_B \end{bmatrix}$ of all positions.
+
+A single **pairwise constraint** is a scalar function $\phi : \R^{2d} \rightarrow \R$.  A **constraint vector** $\Phi : \R^{2d} \rightarrow \R^c$ is formed by stacking $c > 0$ constraints $\phi_1, \dots, \phi_c \in \R^{2d}$ together as a column vector:
+
+$$
+\Phi(x_A, x_B) =
+\begin{bmatrix}
+\phi_1(x_A, x_B) \\
+\vdots           \\
+\phi_c(x_A, x_B)
+\end{bmatrix}
+\in \R^c
+$$
+
+
+
+## Position Constraints
+
+## Velocity Constraints
+
+# Solving Constraints
+
+At every time step, the solver attempts to correct any constraint violations caused by position and velocity updates.
+
+## The Jacobian
+
+To enforce the constraint $\Phi(x) = 0$, we must consider how the constraint vector varies over time.  If we view the generalized positions as a time-varying function $x : \R \rightarrow \R^{2d}$, we can express the time-varying constraint function, $C = (x \then \Phi) : \R \rightarrow \R^c$ as follows
+
+$$
+C(t) \defeq \Phi(x(t)) \quad\forall\, t \in \R
+$$
+
+Applying the chain rule yields an expression for the time derivative $d_t C \in \R^{c \times 1}$ at time $t$,
+
+$$
+\begin{array}{ccc}
+{d_t C} & = & {d_{x(t)} \Phi} &\of& {d_t x} \\
+\annot{(c \times 1)} && \annot{(c \times 2d)} &\;& \annot{(2d \times 1)}
+\end{array}
+$$
+
+The derivative of the constraint vector $\Phi : \R^{2d} \rightarrow \R^c$ is the a matrix $d_x C \in \R^{c \times 2d}$ given by
+
+$$
+d_x C(x) =
+\begin{bmatrix}
+\rowvec{d\phi_1(x)} \\
+\vdots \\
+\rowvec{d\phi_c(x)}
+\end{bmatrix}
+\in \R^{c \times 2d}
+$$
+
+Next, we consider 
+Viewing the pos $x_A,
+
+By the chain rule, the time derivative of the constraint vector $C : \R^{2d} \rightarrow \R^c$ is a 
+
+Starting from a time $t$ where the constraints are satisfied, $C(t) = 0$, we wish to maintain satisfaction by
+
+## Constraint Forces
+
+## Calculating the Jacobian
+
+# Inequality Constraints
+
+# Constraint Resolution

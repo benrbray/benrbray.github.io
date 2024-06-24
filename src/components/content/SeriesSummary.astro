@@ -1,12 +1,11 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import FormattedDate from '../dates/FormattedDate.astro';
-import { getPostUrl, getSeriesPosts } from '@root/util/query';
+import { getSeriesPosts } from '@root/util/query';
+import SeriesSummaryEntry from './SeriesSummaryEntry.astro';
 interface Props {
   series: CollectionEntry<'series'>,
 	activeSlug?: CollectionEntry<'blog'>["slug"]
 }
-
 
 const { series, activeSlug } = Astro.props;
 
@@ -23,18 +22,18 @@ const posts = await getSeriesPosts(series);
 	</div>
 	<div class="series-posts">
     {posts.map(p => {
-      return <div class={`post ${p.slug == activeSlug ? "active" : ""}`}>
-        <span class="post-date"><FormattedDate date={p.data.datePublished} /></span>
-        Part {p.data.series!.seriesNumber}, <a class="post-title" href={getPostUrl(p)}>{p.data.title}</a>
-      </div>
+      const isActivePost = p.slug === activeSlug;
+      return <SeriesSummaryEntry
+				showHeadings={isActivePost}
+				isActivePost={isActivePost}
+				post={p}
+			/>
     })}
 		</ul>
 	</div>
 </div>
 <style>
 .series {
-	/* background-color: #e7fff2; */
-	/* background-color: #ecffd5; */
 	background-color: #f3ffe4;
 	border-radius: var(--gap-1);
 	padding: var(--gap-1);
@@ -44,28 +43,6 @@ const posts = await getSeriesPosts(series);
 .series {
 	position: relative;
 	z-index: 0;
-}
-
-.series .post.active {
-	font-weight: var(--font-bold-weight);
-	background-color: #ccfd8e;
-}
-
-.series .post.active .post-title {
-	font-weight: var(--font-bold-weight);
-}
-
-.series-posts .post-title {
-	display: inline-block;
-	font-size: var(--font-size-normal);
-	margin-bottom: 0.2em;
-}
-
-.series-posts .post-date {
-	color: gray;
-	display: inline-block;
-	width: 8.0em;
-	margin-left: 1.0em;
 }
 
 .series-image {
@@ -101,5 +78,10 @@ const posts = await getSeriesPosts(series);
 
 .series .series-title a {
 	color: var(--font-normal-color);
+}
+
+.series-posts {
+	display: grid;
+	grid-template-columns: 8em 1fr;
 }
 </style>
