@@ -56,6 +56,12 @@ p {
   min-width: var(--column-large-min-width);
 }
 
+.column-thin {
+  margin: 0 auto;
+  max-width: var(--column-thin-max-width);
+  min-width: var(--column-thin-min-width);
+}
+
 /* ---- header icons -------------------------------------------------------- */
 
 .heading {
@@ -99,7 +105,7 @@ article blockquote {
   border: 1px solid black;
   padding: var(--gap-1);
   margin: 0 auto;
-  max-width: 30rem;
+  max-width: 32rem;
   text-align: center;
 }
 

@@ -5,4 +5,318 @@ tags: [category-theory]
 summary: SUMMARY
 ---
 
-TODO
+$$
+\providecommand{\C}{\mathcal{C}}
+\providecommand{\Hom}{\mathrm{Hom}}
+\providecommand{\fcmp}{\mathbin{\textbf{;}}}
+\providecommand{\Set}{\texttt{Set}}
+\providecommand{\Grp}{\texttt{Grp}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\unique}{\exists!\,}
+\providecommand{\Forget}{\mathcal{U}}
+\providecommand{\el}{\smallint{\hspace{-0.3em}}}
+$$
+
+Following [@riehl2017:category], a **universal property** for an object $c \in C$ is expressed by either a 
+
+
+* contravariant functor $F : C^{op} \rightarrow \Set$ together with a representation $\Hom_C(-,c) \cong F$
+* or a covariant functor $F : C \rightarrow \Set$ together with a representation $\Hom_C(c,-) \cong F$
+
+These representations naturally characterize the maps into or out of $c$, and moreover, the [[yoneda-lemma]] implies that a universal property characterizes the object $c \in C$ up to isomorphism.  More precisely, there is a unique isomorphism between $c \in C$ and any other object representing the same functor $F$, which commutes with the representation.
+
+The phrase "$c$ is the universal object in category $C$ with an $x$" asserts that $x \in Fc$ a **universal element** in the sense that $x$ is the element of $Fc$ which classifies the natural isomorphism between $F$ and either the co- or contravariant [[hom-functor]] represented by $c$, according to the [[yoneda-lemma]], where $F : C \rightarrow \Set$ is the functor that carries $c$ to the set $Fc$ of associated $x$'s.
+
+> [[todo]] this section, quoted from Riehl Sec 2.4, needs cleaning up
+
+The term **universal** is precise in the sense that every **unviersal element** is an initial or terminal object in the [[category-of-elements]] for a representable functor.  Accordingly, every universal property can be understood as defining an initial or terminal object, as variance dictates.
+
+> \[...] the adjective [[free]] is reserved for universal properties expressed by covariant represented functors.  The dual [[cofree]] is used for universal properties expressed by contravariant represented functors.
+
+#### Prerequisites
+
+See [[coproducts]], which contains an illustrative example of a universal property that characterizes products and coproducts of objects, following @[milewski-ct4p].
+
+## Universal Elements and the Yoneda Lemma
+
+The [[yoneda-lemma]] relates [[representable-functors]] to [[universal-properties]].
+
+#### Universal Elements
+
+Often, textbooks throw around the phrase *universal property* without explanation, leading [some Math.SE users](https://math.stackexchange.com/questions/63150/what-is-a-universal-property) to believe that no definition is even possible!  However, every universal property describes a *universal element* of some [[represented-functor]].  The following general statement describes all universal properties:
+
+:::definition
+(@[yildirim2011_notes-category-theory], §4) Let $F : C \rightarrow \Set$ be a covariant functor.  For an object $a \in C$ and an element $x \in Fa$, the pair $(a,x)$ is a **universal element** of $F$ when the following **universal property** holds:
+
+$$
+\forall\, b \in C, \forall\, y \in Fb, \unique f : a \rightarrow b, \qquad (Ff)x = y
+$$
+:::
+
+Equivalently, $(a,x)$ is an [[initial-object]] in the [[category-of-elements]] $\smallint{\hspace{-0.2em}} F$ of $F$.
+
+:::definition{.directive.directive pmSlice="0 0 []"}
+Let $F : C^{op} \rightarrow \Set$ be a contravariant functor.  For an object $a \in C$ and an element $x \in Fa$, the pair $(a,x)$ is a **universal element** of $F$ when the following **universal property** holds:
+
+$$
+\forall\, b \in C, \forall\, y \in Fb, \unique f : b \rightarrow a, \qquad (Ff)x = y
+$$
+:::
+
+As a consequence of uniqueness, all universal elements of $F$ have isomorphic objects:
+
+::::proposition
+If $F$ has two universal elements $(c_1, x_1)$ and $(c_2, x_2)$, then $c_1 \cong c_2$.
+
+:::proof
+The uniqueness condition on each pair yields two halves of an isomorphism:
+
+$$
+\begin{aligned}
+c_2 \in C , x_2 \in F c_2 &\implies \unique f : c_1 \rightarrow c_2, (Ff)x_1 = x_2 \\
+c_1 \in C , x_1 \in F c_1 &\implies \unique g : c_2 \rightarrow c_1, (Fg)x_2 = x_1
+\end{aligned}
+$$
+
+The composite $(f \fcmp g) : c_1 \rightarrow c_1$ has  $F(f \fcmp g) x_1 = (Ff \fcmp Fg) x_1 = Fg (x_2) = x_1$.  However,
+
+$$
+c_1 \in C , x_1 \in F c_1
+\implies
+\unique h : c_1 \rightarrow c_1, (Fh)x_1 = x_1 \implies h = \id_{c_1}
+$$
+
+Therefore, $(f \fcmp g) = \id_{c_1}$, by uniqueness.  Likewise, $(g \fcmp f)_{c_2} = \id_{c_2}$, proving $c_1 \cong c_2$.
+:::
+::::
+
+Universal elements and represented functors are the same concept, stated differently.
+
+::::lemma
+$F : C \rightarrow \Set$ is a [[representable-functor]] $\iff$ $F$ has a universal element.
+
+:::proof
+Recall that a covariant functor $F : C \rightarrow \Set$ is [[representable]] if $F$ is naturally isomorphic to the [[hom-functor]] $\Hom_C(a,-)$ represented by some object $a \in C$.
+
+($\implies$) Suppose $a \in C$ represents $F$ via the natural isomorphism $\eta : \Hom_C(a,-) \Rightarrow F$.
+
+* Choose $\theta = \eta_a(\id_a) \in Fa$.  We will show that $(a, \theta)$ is a universal element for $F$.
+* The naturality square for $\eta$ and all morphisms $f : a \rightarrow b$, for any $b \in C$, is:
+
+![](data:image/png;base64,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)
+
+* Tracing the morphism $\id_a$ through the diagram, we find that
+  $$
+  \begin{aligned}
+  (\eta_a ; Ff) \id_a &= ((-;f)_a ; \eta_b) \id_a \\
+           (Ff)\theta &= \eta_b f 
+  \end{aligned}
+  $$
+* Since $\eta$ is a natural isomorphism, the morphism $\eta_b : \Hom_C(a,b) \rightarrow Fb$ is both injective and surjective.  Hence for every $b \in C$ and $y \in Fb$, there is a unique $f : a \rightarrow b$ such that $y = \eta_b f = (Ff)\theta$, as desired.
+
+($\impliedby$) Suppose $(a, \theta)$ is a universal element for $F$, with $a \in C$ and $\theta \in Fa$.
+
+* We use the inverse bijection used for proving the [[yoneda-lemma]] as a guide for constructing a natural isomorphism $\eta : \Hom_C(a,-) \Leftrightarrow F$.  Define components
+  $$
+  \begin{aligned}
+  \eta_b : \Hom_C(a,b) &\rightarrow Fb \\
+          \eta_b f &= (Ff) \theta
+  \end{aligned}
+  $$
+* It suffices to show that each component morphism $\eta_b$ has an inverse.  Define a function $\varphi_b : Fb \rightarrow \Hom_C(a,b)$ sending each $y \in Fb$ to the unique morphism $\varphi_b(y) : a \rightarrow b$ with $(F \varphi_b(y)) \theta = y$, guaranteed by the univeral property.  Then,
+  $$
+  \begin{aligned}
+  \eta_b(\varphi_b(y)) &= (F \varphi_b(y)) \theta = y\\
+  \varphi_b(\eta_b(f)) &= \varphi_b( (Ff)\theta ) = f
+  \end{aligned}
+  $$
+:::
+::::
+
+When we see a universal property stated in isolation (as we often do), the functor may not be immediately obvious from context.  However, every universal property describes a [[represented-functor]], so it should always be possible to find one.
+
+:::remark
+Technically, the universal property is a statement about the pair $(c,x)$. The object $c \in C$ determines the [[hom-functor]], while $x \in Fc$ identifies a natural isomorphism.  Confusingly, many sources (like @[riehl2016_category-theory-in-context]) refer to $x$ alone as the *universal element*.   In these situations, it may be helpful to call $c$ the *universal object*.
+:::
+
+#### Examples of Universal Elements
+
+:::example
+(Tensor Product) The following universal property of the [[tensor-product]] is encoded by the universal element $(V \otimes W, \varphi)$ of the functor $\mathrm{Bilin}(V,W;-)$, where
+
+* The vector space $V \otimes W$ represents the functor $\mathrm{Bilin}(V,W;-)$
+* The map $\varphi : V \times W \rightarrow V \otimes W$ is bilinear
+
+![](data:image/png;base64,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)
+:::
+
+:::example
+(@[riehl2016-category-theory-in-context], Ex 2.3.iii) The functor $\Set(- \times A, B) : \Set^{op} \rightarrow \Set$ sends each $C \in \Set$ to the set of functions $C \times A \rightarrow B$, and each $f : C \rightarrow D$ to the function
+
+$$
+( (f \times \id_A) \fcmp -)_B : \Set(D \times A, B) \rightarrow \Set(C \times A, B)
+$$
+
+The contravariant functor $\Set(- \times A, B) : \Set^{op} \rightarrow \Set$ is represented by the set $B^A$, with a natural isomorphism $\eta : \Set(-,B^A) \Rightarrow \Set(- \times A, B)$ which acts by [[currying]]:
+
+$$
+\begin{aligned}
+\eta_C(g)      &= \lambda (x,y). \; g(x)(y) && \forall\, g : C \rightarrow B^A \\
+\eta_C^{-1}(h) &= \lambda x.\; (\lambda y.\; h(x,y)) && \forall\, h : C \times A \rightarrow B
+\end{aligned}
+$$
+
+The universal element $\mathrm{ev} = \eta_{B^A}(\id_{B^A}) : B^A \times A \rightarrow B$ is called the **evaluation map,** since
+
+$$
+\mathrm{ev}(g,a)
+= [\eta_{B^A}(\id_{B^A})](g,a)
+= [\lambda x. \lambda y. \, x(y)](g,a)
+= g(a)
+$$
+
+The pair $(B^A, \mathrm{ev})$ has the universal property that for all $C \in \Set$ and $g : C \times A \rightarrow B$, there is a unique function $\overline{g} : C \rightarrow B^A$ such that $g = (\overline{g} \times \id_A) \fcmp \mathrm{ev}$, as pictured:
+
+![](data:image/png;base64,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)
+:::
+
+#### Example:  Universal Property of Free Groups
+
+The [[free-group]] $G_S$ over a set $S$ of *symbols* consists of all *words* formed by concatenating symbols from $S$ (and their formal inverses).  The group axioms encode a set of [[rewrite-rules]] which determine equality on words.  Textbooks normally include the following universal property of free groups, without reference to category theory:
+
+:::proposition
+(Universal Property of Free Groups) Let $G_S$ be the free group over $S$, with inclusion map $\varphi : S \rightarrow G_S$.  For every group $H$ and set function $\psi : S \rightarrow H$, there exists a unique group homomorphism $f : G_S \rightarrow H$ such that $(\varphi \fcmp f) = \psi$.  That is,
+
+![](data:image/png;base64,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)
+:::
+
+The diagram above is informal (non-categorical).  As a diagram in the category $\Set$, it would not be possible to further constrain $f$ to be a group homomorphism.  In the category $\Grp$, the set functions $\varphi$ and $\psi$ are not valid morphisms.  As with all universal properties, there is an underlying representable functor--we just need to find it!
+
+The statement above is equivalent to saying that $(G_S, \varphi)$ is a [[universal-element]] of the covariant functor $F : \Grp \rightarrow \Set$ sending each group $H$ to the set $F(H) = \{ \psi : S \rightarrow H \}$ of set functions $S \rightarrow H$, and each group homomorphism $f : H_1 \rightarrow H_2$ to the postcompositor $(-;f)_S$.  The corresponding universal property reads:
+
+:::proposition
+(Universal Property of Free Groups, Version 2) Let $G_S$ be the free group over $S$, with inclusion map $\varphi : S \rightarrow G_S$.  For every group $H$ and function $\psi : S \rightarrow H$, there exists a unique group homomorphism $f : G_S \rightarrow H$ such that $(Ff) \varphi = \psi$, that is,
+
+$$
+\forall H \in \Grp, \forall \psi : S \rightarrow H, \exists !\, f : G_S \rightarrow H, \quad (\varphi \fcmp f) = \psi
+$$
+:::
+
+This is an improvement--we are beginning to see how the universal property of free groups aligns with our definition--but there is something fishy about the functor $F$.
+
+The spirit of category theory is to abstract away all the details about how objects in a category, such as $\Grp$, are constructed, and focus only on the web of relationships between them.  But given an object $H \in \Grp$ in the [[abstract-category]] of groups, specifying a set function $\psi : S \rightarrow H$ in $F(H)$ would require knowledge about some underlying set for $H$!
+
+The existence of such a set is extra data not specified by the category $\Grp$.  The "right way" to make a [[concrete-category]] out of $\Grp$, is to specify a [[faithful-functor]] $\Forget : \Grp \rightarrow \Set$, sending each group to its underlying set, and each group homormorphism to its underlying set function.  This is the [[forgetful-functor]] on $\Grp$.
+
+The inclusion map is now a set function $\varphi : S \rightarrow \Forget(G_S)$.  More precisely now, the pair $(G_S, \varphi)$ is a universal element of the functor $F : \Grp \rightarrow \Set$ sending each group $H$ to the set $F(H) = \{ \psi : S \rightarrow \Forget(H) \}$ of set functions $S \rightarrow \Forget(H)$, and each group homomorphism $f : H_1 \rightarrow H_2$ to the postcompositor $(-; \Forget f)_S$.  The corresponding universal property is:
+
+:::proposition{.directive pmSlice="0 0 []"}
+(Universal Property of Free Groups, Version 3) Let $G_S$ be the free group over $S$, with inclusion map $\varphi : S \rightarrow \Forget(G_S)$.  For every group $H$ and function $\psi : S \rightarrow H$, there exists a unique group homomorphism $f : G_S \rightarrow H$ such that $(Ff) \varphi = \psi$, that is,
+
+$$
+\forall H \in \Grp, \forall \psi : S \rightarrow \Forget(H), \exists !\, f : G_S \rightarrow H, \quad (\varphi \fcmp \Forget f) = \psi
+$$
+:::
+
+Since $(G_S, \varphi)$ is a universal element for $F$, we know that $G_S$ is a representation for $F$, meaning that there is a natural isomorphism
+
+$$
+F \cong \Hom_\Grp(G_S, -)
+$$
+
+For a moment, let's make the dependence of $F$ on $S$ explicit by writing $F_S : \Grp \rightarrow \Set$.  By definition, $F_S(-) = \Hom_\Set(S,\Forget(-))$, and we really have set bijections
+
+$$
+\Hom_\Set(S, \Forget(H)) \cong \Hom_\Grp(G_S, H) \quad \forall H \in \Grp, S \in \Set
+$$
+
+The mapping $\mathcal{G} : S \mapsto G_S$ defines the  [[free-functor]] for groups.  It can further be shown that the bijections above are natural in $S$ and $H$, establishing an [[adjunction]] between the free and forgetful functors, $\mathcal{G} \dashv \Forget$.  Adjunctions are a convenient way to wrap up many universal properties into a single statement!
+
+#### Making use of Universal Properties
+
+:::todo
+Explain this general pattern:
+
+* explicitly construct an object like the tensor product,
+* characterize the constructed object by a universal property
+* completely forget how it was constructed, and use the universal property in proofs instead (usually, easier than dealing with quotient spaces etc)
+:::
+
+Examples
+
+* see [[tensor-product]] for a worked example due to Riehl
+* universal property of exponential map
+
+#### Category of Elements
+
+> see [[category-of-elements]]
+
+Universal elements are the intial and terminal objects in the [[category-of-elements]].
+
+### Resources
+
+Math.SE, ["Understanding Universal Property and Universal Elements..."](https://math.stackexchange.com/questions/3688510/understanding-universal-property-and-universal-element-from-category-theory-in)
+
+* clarifies the rather opaque definition of universal element given by Riehl
+
+## Other Universal Properties
+
+Unsatisfyingly, some universal properties do not fit into the framework above.
+
+* free group over a set
+* free vector space over a set
+* free module over a set
+
+These universal properties are better understood as [[adjoint-functors]].
+
+## Universal Properties and Adjoints
+
+[[adjoint]]
+
+## April 11, 2020 (TODO: filter this down)
+
+* StackExchange, [Why are there so many universal properties in math?](https://math.stackexchange.com/questions/970696/why-are-there-so-many-universal-properties-in-math)
+  * Mentions [[Yoneda lemma]] , [[adjoints]] as approximations
+
+  * [[Colimits]] generalize quotients?
+
+  * [[Kan Extensions]] (chapter in ["Categories for the Working Mathematician"](https://www.maths.ed.ac.uk/\~v1ranick/papers/maclanecat.pdf))
+
+* StackExchange, ["Unique Isomorphisms and Universal Properties"](https://math.stackexchange.com/questions/1329722/unique-isomorphisms-and-universal-properties)
+
+* StackExchange, ["What is a universal property?"](https://math.stackexchange.com/questions/63150/what-is-a-universal-property)
+  * This q/a is exactly what is wrong with the math community (or maybe just the stackexchange community).  Most of the questions instruct the poster to read an entire book and don't even attempt to answer the simple question of WHAT is the meaning of "universal" and why is the phrase "universal property" so frequently used in algebra?
+
+* Meta StackExchange, [" 'I know it when I see it' -- Potter-Stewart Concepts in Mathematics"](http://web.archive.org/web/20111214011455/https://mathoverflow.net/questions/75046/i-know-it-when-i-see-it-potter-stewart-concepts-in-mathematics)
+
+* StackExchange, ["In Category Theory, why do we define the product by its universal property the way that we do?"](https://math.stackexchange.com/questions/3401919/in-category-theory-why-do-we-define-the-product-by-its-universal-property-the-w)
+  * "Generalized Elements" of an object
+
+* StackExchange, ["How are Universal Properties 'Solutions to Optimization Problems'?"](https://math.stackexchange.com/questions/3239188/how-are-universal-properties-solutions-to-optimization-problems)
+
+* StackExchange, [How to define Tetration Operator in Category Theory?](https://math.stackexchange.com/questions/1028056/how-to-define-a-uparrow-b-with-a-universal-property-as-well-as-a-oplus-b-a)
+  * Apparently the [CEO of Epic Games](https://en.wikipedia.org/wiki/Tim_Sweeney\_%28game_developer%29) asked this question in 2000 on a [forum post](https://marc.info/?l=haskell\&m=66622039827907\&w=2)
+
+* [Styles of Category Theory](https://www.hedonisticlearning.com/posts/styles-of-category-theory.html)
+
+:::example
+Let $\{ A_k \mid k \in I \}$ be a family of vector spaces.  Their direct sum $A = \bigoplus_k A_k$ is the vector space with the **(co-?)universal property** that
+
+* for any other vector space $V$ and morphisms $v_i : A_i \rightarrow V$ ,
+* there is a unique morphism $F : A \rightarrow V$ such that $v_i = F \circ \rho_i$
+* where $\rho_i : A_i \rightarrow A$  are injections.
+:::
+
+##### From Wikipedia
+
+Motivation
+
+* The concrete details of a given construction may be messy, but if the construction satisfies a [[universal property]], one can forget all those details:  all there is to know about the construction is contained in the universal property.
+
+* Universal properties define objects uniquely up to *unique isomorphism*.
+
+* Universal constructions are **functorial**.  If one can carry out the construction for every object in a category C, then one obtains a functor on C.  This functor is a right or left adjoint to the functor U used in the definition of the universal property.
+
+Formal Construction.  Let $F : C \rightarrow D$ be a functor between categories $C$ and $D$.  Let $X \in \mathrm{Obj}(D)$ and $A \in \mathrm{Obj}(C)$.
+
+A **universal morphism** from $X$ to $F$ is a unique pair \$(A,
