@@ -48,52 +48,53 @@ const label = series.isAppendix ?
 </div>
 
 <style is:inline>
-.post {
+.series .post {
   display: grid;
   grid-template-columns: subgrid;
   grid-column: span 2;
 }
 
-.post-title {
+.series .post-title {
 	display: inline-block;
 	font-size: var(--font-size-normal);
 	margin-bottom: 0.2em;
 }
 
-.post.active .post-label, .post.active .post-date-label {
+.series  .post.active .post-label,
+.series  .post.active .post-date-label {
 	font-weight: var(--font-bold-weight);
 	background-color: #ccfd8e;
 }
 
-.post.active .post-title {
+.series .post.active .post-title {
 	font-weight: var(--font-bold-weight);
 }
 
-.post-date {
+.series .post-date {
 	color: gray;
 	display: inline-block;
 	width: 8.0em;
 }
 
-.post-date-label {
+.series .post-date-label {
 	padding-left: 1.0em;
 }
 
-.post-heading {
+.series .post-heading {
   padding-left: calc(var(--heading-depth)*1.4em);
 
   color: var(--font-normal-color);
 }
 
-.post-heading:hover {
+.series .post-heading:hover {
   background-color: rgb(208, 231, 184);
 }
 
-.post-heading:hover a {
+.series .post-heading:hover a {
   text-decoration: underline;
 }
 
-.post-heading a {
+.series .post-heading a {
   color: inherit;
 }
 </style>

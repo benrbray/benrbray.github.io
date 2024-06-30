@@ -60,6 +60,9 @@
 	--font-title-size: var(--font-size-larger);
   --font-title-weight: 600;
 
+  /* font: subtitle */
+  --font-subtitle-color: #808080;
+
   --font-size-post-title: var(--font-title-size);
   --font-size-post-subtitle: var(--font-size-large);
 

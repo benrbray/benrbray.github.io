@@ -2,6 +2,7 @@ import { defineCollection, reference, z } from 'astro:content';
 
 const postSchema = z.object({
 	title: z.string(),
+	titleDisplay: z.string().optional(),
 	summary: z.string(),
 	kind: z.enum(["post", "project"]).default("post"),
 	// Transform string to Date object

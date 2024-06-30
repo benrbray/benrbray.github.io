@@ -26,35 +26,72 @@ const series = await (async () => {
 	const s = await getEntry("series", post.data.series.seriesId.slug);
 	return s;
 })();
+
+const appendixLabels = "ABCDEFGHIJKLMNOPQRSTUV".split("");
+
+const titleDisplay = post.data.titleDisplay ? post.data.titleDisplay : post.data.title;
+const titleIsHtml = !!post.data.titleDisplay;
+
+const seriesData = post.data.series;
+const label = seriesData ? (seriesData.isAppendix ?
+  `Appendix ${appendixLabels[seriesData.seriesNumber-1]}` :
+  `Part ${seriesData.seriesNumber}`) : null;
 ---
 
 <Page pageTitle={post.data.title}>
 	<ColumnThin>
 	<article>
-		<div class="prose">
-			<div class="title">
-				<div class="date">
-					<FormattedDate date={post.data.datePublished} />
+		<div class="article">
+			<div class="article-header">
+				{
+					titleIsHtml ?
+						<h1 class="article-title" set:html={titleDisplay} /> :
+						<h1 class="article-title">{titleDisplay}</h1>
+				}
+				<!-- subtitle -->
+				<div class="article-subtitle">
+					{series && `${series.data.title}, ${label}`}
+				</div>
+				<!-- date -->
+				<div class="article-date">
+					Published <FormattedDate date={post.data.datePublished} />
 					{
 						post.data.dateUpdated && (
 							<div class="last-updated-on">
-								Last updated on <FormattedDate date={post.data.dateUpdated} />
+								Updated <FormattedDate date={post.data.dateUpdated} />
 							</div>
 						)
 					}
 				</div>
-				<div class="post-supertitle">
-					{
-						series && `${series.data.title}, Part ${post.data.series!.seriesNumber}`
-					}
-				</div>
-				<h1>{post.data.title}</h1>
-				<hr />
 			</div>
-			{ series && <SeriesContent series={series} activeSlug={post.slug} > }
-			{/* { series && <SeriesSummary series={series} activeSlug={post.slug}/> } */}
+			{ series && <SeriesContent series={series} activeSlug={post.slug} /> }
 			<PostContent post={post} />
 		</div>
 	</article>
 </ColumnThin>
 </Page>
+
+<style>
+.article .article-header {
+	margin: 4em 0;
+}
+.article h1.article-title {
+	font-size: 2.2em;
+	text-align: center;
+	font-weight: 500;
+	margin: 0 var(--gap-1);
+}
+
+.article .article-subtitle {
+	color: var(--font-subtitle-color);
+	text-align: center;
+	margin: var(--gap-1);
+}
+
+.article .article-date {
+	color: var(--font-subtitle-color);
+	text-align: center;
+	margin: var(--gap-1) 0;
+	font-style: italic;
+}
+</style>
