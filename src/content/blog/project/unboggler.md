@@ -7,7 +7,7 @@ datePublished: January 18, 2020
 tags: [algorithms]
 tools: [javascript]
 imageThumbnail: images/thumbnails/unboggler.png
-priority: 1
+priority: low
 summary: Generate a boggle board containing your custom list of words!
 ---
 

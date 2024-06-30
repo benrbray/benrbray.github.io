@@ -5,7 +5,7 @@ datePublished: February 15, 2014
 
 tags:  [math]
 tools: [javascript]
-priority: 1
+priority: low
 imageThumbnail: images/thumbnails/complex-domain-coloring_thumb.png
 demo_url: /static/complex_domain_coloring/
 summary: "Domain coloring is a way of visualizing complex-input complex-output functions by assigning a color to each point of the complex domain.  Sampling these colors from an image produces amusing results!"

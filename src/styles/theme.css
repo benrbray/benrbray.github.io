@@ -22,7 +22,7 @@
   --column-thin-min-width: 25rem;
   --column-normal-max-width: 52rem;
   --column-normal-min-width: 25rem;
-  --column-large-max-width: 64rem;
+  --column-large-max-width: 60rem;
   --column-large-min-width: 30rem;
 
   --min-width: var(--column-normal-min-width);

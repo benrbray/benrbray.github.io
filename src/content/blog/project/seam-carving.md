@@ -2,6 +2,7 @@
 kind: project
 title:  Seam Carving
 datePublished: December 28, 2014
+priority: low
 
 
 tags:  [graphics]

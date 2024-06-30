@@ -15,7 +15,8 @@ const postSchema = z.object({
 		seriesId: reference("series"),
 		seriesNumber: z.number().int().gte(1),
 		isAppendix: z.boolean().optional()
-	}).optional()
+	}).optional(),
+	priority: z.enum(["normal", "low"]).default("normal")
 });
 
 const blog = defineCollection({

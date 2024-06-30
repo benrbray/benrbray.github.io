@@ -10,10 +10,11 @@ interface Props {
 const { post } = Astro.props;
 
 const postUrl = getPostUrl(post);
+const isLowPriority = post.data.priority === "low";
 ---
 
 
-<div class={`post-summary-box ${post.data.kind === "project" ? "kind-project" : "kind-post"}`}>
+<div class={`post-summary-box ${post.data.kind === "project" ? "kind-project" : "kind-post"} priority-${post.data.priority}`}>
   <!-- summary -->
   <div class="post-desc">
     <!-- title -->
@@ -24,12 +25,11 @@ const postUrl = getPostUrl(post);
       <span class="post-year"><FormattedDate date={post.data.datePublished} /></span>
       <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
     </div>
-    <div class="post-summary" set:html={post.data.summary}>
-    </div>
+    {!isLowPriority && <div class="post-summary" set:html={post.data.summary} />}
   </div>
   <!-- thumbnail -->
   {
-		post.data.imageThumbnail &&
+		!isLowPriority && post.data.imageThumbnail &&
 		(<div class="post-thumb">
 			<img alt="" src={post.data.imageThumbnail} />
 		</div>)
@@ -84,14 +84,14 @@ const postUrl = getPostUrl(post);
 	display: flex;
 	justify-content: space-between;
 
-	margin-bottom: 0.6rem;
+	margin-bottom: 0.1rem;
 	font-size: var(--font-size-large);
 	font-weight: var(--font-title-weight);
 }
 
 .post-summary-box .post-subtitle,
 .post-summary-box .post-subtitle {
-	margin: 0.5rem 0;
+	margin: 0.1rem 0;
 	text-overflow: hidden;
 	overflow: hidden;
 }

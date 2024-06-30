@@ -1,0 +1,77 @@
+---
+import { type CollectionEntry, getEntry } from 'astro:content';
+import FormattedDate from '@components/dates/FormattedDate.astro';
+
+type Props = { post : CollectionEntry<'blog'> }
+
+const { post } = Astro.props;
+
+const series = await (async () => {
+	if(!post.data.series) { return undefined; }
+	const s = await getEntry("series", post.data.series.seriesId.slug);
+	return s;
+})();
+
+const appendixLabels = "ABCDEFGHIJKLMNOPQRSTUV".split("");
+
+const titleDisplay = post.data.titleDisplay ? post.data.titleDisplay : post.data.title;
+const titleIsHtml = !!post.data.titleDisplay;
+
+const seriesData = post.data.series;
+const label = seriesData ? (seriesData.isAppendix ?
+  `Appendix ${appendixLabels[seriesData.seriesNumber-1]}` :
+  `Part ${seriesData.seriesNumber}`) : null;
+---
+
+<div class="article-header">
+  {
+    titleIsHtml ?
+      <h1 class="article-title" set:html={titleDisplay} /> :
+      <h1 class="article-title">{titleDisplay}</h1>
+  }
+  <!-- subtitle -->
+  <div class="article-subtitle">
+    {series && <><a href={`/series/${series.slug}`}>{series.data.title}</a>{`, ${label}`}</>}
+  </div>
+  <!-- date -->
+  <div class="article-date">
+    Published <FormattedDate date={post.data.datePublished} />
+    {
+      post.data.dateUpdated && (
+        <div class="last-updated-on">
+          Updated <FormattedDate date={post.data.dateUpdated} />
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style>
+.article-header {
+	margin: 4em 0;
+}
+
+.article-header h1.article-title {
+	font-size: 2.2em;
+	text-align: center;
+	font-weight: 500;
+	margin: 0 var(--gap-1);
+}
+
+.article-header .article-subtitle {
+	color: var(--font-subtitle-color);
+	text-align: center;
+	margin: var(--gap-1);
+}
+
+.article-header .article-subtitle a {
+	color: unset;
+}
+
+.article-header .article-date {
+	color: var(--font-subtitle-color);
+	text-align: center;
+	margin: var(--gap-1) 0;
+	font-style: italic;
+}
+</style>
