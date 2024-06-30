@@ -7,6 +7,7 @@ import PostList from '@root/components/lists/PostList.astro';
 import SeriesList from '@root/components/lists/SeriesList.astro';
 import { SITE_TITLE } from '@root/consts';
 import ColumnNormal from '@root/layouts/ColumnNormal.astro';
+import ColumnLarge from '@root/layouts/ColumnLarge.astro';
 import { getPosts, getProjects } from '@root/util/query';
 
 import { getCollection } from 'astro:content';
@@ -35,8 +36,10 @@ const series = await getCollection("series");
 				<h2>Tutorial Series</h2>
 				<SeriesList series={series} />
 				<h2>Selected Posts</h2>
-				<PostList posts={entries} />
 			</ColumnNormal>
+			<ColumnLarge>
+				<PostList posts={entries} />
+			</ColumnLarge>
 		</main>
 		<Footer />
 	</body>

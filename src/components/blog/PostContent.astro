@@ -1,0 +1,14 @@
+---
+import type {CollectionEntry} from 'astro:content';
+
+export type Props = {
+  post?: CollectionEntry<"blog">,
+};
+
+const { post } = Astro.props;
+Astro.locals.currentEntry ??= post || null;
+const { Content } = (await post?.render()) || {};
+---
+
+{!!post && Content && <Content />}
+{!post && !!Astro.locals.currentEntry && <slot />}

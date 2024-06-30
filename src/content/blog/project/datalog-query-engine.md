@@ -19,3 +19,9 @@ summary: A datalog parser and query engine, built with Haskell and compiled to W
 * example
 
 ## References
+
+* Paris Koutris, [CS 838 Spring 2016:  Foundations of Data Management](https://pages.cs.wisc.edu/~paris/cs838-s16/) Lecture Notes
+* [@starup2023:breaking-negative-cycle]
+* [@abiteboul1995:foundations-databases]
+* [@abeysinghe2024:flan-datalog]
+* [@rompf2010:lightweight-modular-staging] (with [lecture slides](https://web.stanford.edu/class/cs442/lectures_unrestricted/cs442-lms.pdf))

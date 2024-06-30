@@ -27,6 +27,7 @@ export default defineConfig({
       [rehypeCitation, { bibliography: [
         "./public/references/category-theory.bib",
         "./public/references/game-physics.bib",
+        "./public/references/datalog.bib",
       ], linkCitations: true }],
       [rehypeSlug, { }],
       [rehypeAutolinkHeadings, { 

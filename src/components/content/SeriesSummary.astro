@@ -1,13 +1,28 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { getSeriesPosts } from '@root/util/query';
 import SeriesSummaryEntry from './SeriesSummaryEntry.astro';
-interface Props {
-  series: CollectionEntry<'series'>,
-	activeSlug?: CollectionEntry<'blog'>["slug"]
+import type { SeriesData } from '@root/model';
+
+type Props = SeriesData | undefined;
+
+const props = Astro.props
+
+let seriesData: SeriesData;
+
+if(props && Object.keys(props).length !== 0) {
+	console.log("aaa");
+	seriesData = props;
+} else if(Astro.locals.currentSeries) {
+	console.log('bbb');
+	seriesData = Astro.locals.currentSeries;
+} else {
+	throw new Error("\n\ninvalid series data\n\n");
 }
 
-const { series, activeSlug } = Astro.props;
+console.log("hello!");
+console.log(seriesData);
+
+const series = seriesData.series;
 
 const posts = await getSeriesPosts(series);
 ---
@@ -22,7 +37,7 @@ const posts = await getSeriesPosts(series);
 	</div>
 	<div class="series-posts">
     {posts.map(p => {
-      const isActivePost = p.slug === activeSlug;
+      const isActivePost = p.slug === seriesData.activeSlug;
       return <SeriesSummaryEntry
 				showHeadings={isActivePost}
 				isActivePost={isActivePost}
@@ -32,7 +47,7 @@ const posts = await getSeriesPosts(series);
 		</ul>
 	</div>
 </div>
-<style>
+<style is:inline>
 .series {
 	background-color: #f3ffe4;
 	border-radius: var(--gap-1);

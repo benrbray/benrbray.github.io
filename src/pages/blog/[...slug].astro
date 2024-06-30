@@ -1,11 +1,13 @@
 ---
 import { type CollectionEntry, getEntry } from 'astro:content';
 
-import FormattedDate from '@root/components/dates/FormattedDate.astro';
+import FormattedDate from '@components/dates/FormattedDate.astro';
 import Page from '@layouts/Page.astro';
-import SeriesSummary from '@root/components/content/SeriesSummary.astro';
+// import SeriesSummary from '@components/content/SeriesSummary.astro';
 import { getPosts } from '@root/util/query';
-import ColumnThin from '@root/layouts/ColumnThin.astro';
+import ColumnThin from '@layouts/ColumnThin.astro';
+import PostContent from '@root/components/blog/PostContent.astro';
+import SeriesContent from '@root/components/blog/SeriesContent.astro';
 
 
 export async function getStaticPaths() {
@@ -19,11 +21,9 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 
-const { Content } = await post.render();
-
 const series = await (async () => {
 	if(!post.data.series) { return undefined; }
-	const s = await getEntry("series", post.data.series.seriesName.slug);
+	const s = await getEntry("series", post.data.series.seriesId.slug);
 	return s;
 })();
 ---
@@ -51,12 +51,9 @@ const series = await (async () => {
 				<h1>{post.data.title}</h1>
 				<hr />
 			</div>
-			<div>
-			{
-				series && <SeriesSummary series={series} activeSlug={post.slug}/>
-			}
-			</div>
-			<Content />
+			{ series && <SeriesContent series={series} activeSlug={post.slug} > }
+			{/* { series && <SeriesSummary series={series} activeSlug={post.slug}/> } */}
+			<PostContent post={post} />
 		</div>
 	</article>
 </ColumnThin>

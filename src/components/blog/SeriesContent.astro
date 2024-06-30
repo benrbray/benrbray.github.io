@@ -1,0 +1,15 @@
+---
+import type { SeriesData } from '@root/model';
+
+export type Props = SeriesData
+
+const data = Astro.props;
+
+Astro.locals.currentSeries ??= data;
+---
+
+<!-- content to render when this component is included in a page template -->
+<!-- (nothing) -->
+
+<!-- content to render when this component is included in an MDX file -->
+{!data && !!Astro.locals.currentSeries && <slot />}

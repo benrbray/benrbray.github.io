@@ -18,7 +18,7 @@
 
 :root {
   /* page dimensions */
-  --column-thin-max-width: 42rem;
+  --column-thin-max-width: 46rem;
   --column-thin-min-width: 25rem;
   --column-normal-max-width: 52rem;
   --column-normal-min-width: 25rem;

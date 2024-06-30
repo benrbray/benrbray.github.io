@@ -33,7 +33,7 @@ export const getProjects = async () => {
 export const getSeriesPosts = async (series: CollectionEntry<"series">) => {
   const posts = await getCollection("blog", ({ data }) => {
     if(!data.series) { return false; }
-    return data.series.seriesName.slug == series.slug;
+    return data.series.seriesId.slug == series.slug;
   });
 
 	return posts;

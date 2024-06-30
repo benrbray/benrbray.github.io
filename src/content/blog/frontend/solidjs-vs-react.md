@@ -7,4 +7,5 @@ tools: [typescript]
 summary: SUMMARY
 ---
 
-This is $math$ 
+Hacker News, [SolidJS Feels Like What I Always Wanted React to Be](https://news.ycombinator.com/item?id=30508524)
+Ryan Carniato, [Building a Reactive Framework from Scratch](https://dev.to/ryansolid/building-a-reactive-library-from-scratch-1i0p)

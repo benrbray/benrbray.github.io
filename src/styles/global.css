@@ -116,3 +116,9 @@ article blockquote p:first-child {
 article blockquote p:last-child {
   margin-bottom: 0;
 }
+
+/* ------------------------------------------------------ */
+
+.references .csl-entry {
+  margin: var(--gap-1) 0;
+}

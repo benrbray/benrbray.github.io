@@ -4,6 +4,6 @@ summary: 'DESCRIPTION'
 datePublished: '4 May 2024'
 
 series:
-  seriesName: breadcrumbs-type-safari
+  seriesId: breadcrumbs-type-safari
   seriesNumber: 1
 ---

@@ -11,7 +11,7 @@ const postSchema = z.object({
 	tags: z.array(z.string()).optional(),
 	tools: z.array(z.string()).optional(),
 	series: z.object({
-		seriesName: reference("series"),
+		seriesId: reference("series"),
 		seriesNumber: z.number().int().gte(1),
 		isAppendix: z.boolean().optional()
 	}).optional()

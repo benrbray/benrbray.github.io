@@ -12,5 +12,15 @@
       "@styles/*" : ["src/styles/*"],
       "@layouts/*" : ["src/layouts/*"],
     }
+  },
+  "mdx" : {
+    "plugins": [
+      // [
+      //   "remark-frontmatter",
+      //   ["toml", "yaml"]
+      // ],
+      // "remark-gfm",
+      "remark-math",
+    ]
   }
 }
