@@ -25,3 +25,4 @@ summary: A datalog parser and query engine, built with Haskell and compiled to W
 * [@abiteboul1995:foundations-databases]
 * [@abeysinghe2024:flan-datalog]
 * [@rompf2010:lightweight-modular-staging] (with [lecture slides](https://web.stanford.edu/class/cs442/lectures_unrestricted/cs442-lms.pdf))
+* [@contrastin2018:reordering-dataflow-safety]

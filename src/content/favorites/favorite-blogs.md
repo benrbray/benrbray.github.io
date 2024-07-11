@@ -1,6 +1,6 @@
 # Favorite Blogs
 
-### Programming Language Theory
+### Functional Programming & Programming Language Theory
 
 * [Joachim Breitner's Blog](https://www.joachim-breitner.de/blog)
 * [cgrad.ski](https://cgad.ski/) by Christopher Gadzinski
@@ -16,6 +16,10 @@
   * ["Bergamot:  Exploring Programming Language Inference Rules"](https://danilafe.com/blog/bergamot/)
 * [Chapel Language Blog](https://chapel-lang.org/blog/)
   * ["Generic Linear Multistep Method Evaluator using Chapel"](https://chapel-lang.org/blog/posts/linear-multistep/)
+* [Iago Leal's Blog](https://iagoleal.com)
+  * [Recursion Schemes for Mathematicians](https://iagoleal.com/posts/recursion-schemes/)
+  * [Playing with Value Iteration in Haskell](https://iagoleal.com/posts/value-iteration-haskell/)
+  * [Algebraic Path Finding](https://iagoleal.com/posts/algebraic-path/)
 
 ### Programming & Software Engineering
 
@@ -42,6 +46,8 @@
 * byMuno, [Rollback Netcode](https://bymuno.com/post/rollback)
 * [Erik Onarheim's Blog](https://erikonarheim.com/posts/)
 * Elias Daler, [How I Learned Vulkan and wrote a small game engine in it](https://edw.is/learning-vulkan/)
+* Carmen Cincotti, [Carmen's Graphics Blog](https://carmencincotti.com/2022-07-11/position-based-dynamics/)
+  * [Position-Based Dynamics](https://carmencincotti.com/2022-07-11/position-based-dynamics/)
 
 ### Frontend Development
 

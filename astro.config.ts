@@ -4,12 +4,23 @@ import sitemap from '@astrojs/sitemap';
 
 import solid from "@astrojs/solid-js";
 
+import fs from "node:fs";
+
 // markdown extensions
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import remarkCite from "@benrbray/remark-cite";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeCitation from "rehype-citation";
+import rehypeCite from "@benrbray/rehype-cite";
+
+// bibliography file
+const bibFiles = [
+  fs.readFileSync("./public/references/category-theory.bib").toString(),
+  fs.readFileSync("./public/references/game-physics.bib").toString(),
+  fs.readFileSync("./public/references/datalog.bib").toString(),
+  fs.readFileSync("./public/references/dhgp.bib").toString()
+];
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,18 +28,15 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), solid({ include: ["**/solid/*"]})],
   markdown: {
     remarkPlugins: [
-      remarkMath
+      remarkMath,
+      remarkCite
     ],
     rehypePlugins: [
+      [rehypeCite, { bibFiles }],
       [rehypeKatex, {
         macros: {"\\R": "\\mathbb{R}"},
         globalGroup: true
       }],
-      [rehypeCitation, { bibliography: [
-        "./public/references/category-theory.bib",
-        "./public/references/game-physics.bib",
-        "./public/references/datalog.bib",
-      ], linkCitations: true }],
       [rehypeSlug, { }],
       [rehypeAutolinkHeadings, { 
         behavior: "wrap",

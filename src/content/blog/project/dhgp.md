@@ -1,6 +1,7 @@
 ---
 kind: project
-title:  Digital Humanities &amp; German&nbsp;Periodicals
+title:  Digital Humanities & German Periodicals
+title-display:  Digital Humanities & German&nbsp;Periodicals
 datePublished: December 1, 2016
 
 
@@ -13,12 +14,12 @@ summary: "<p>As an undergraduate research assistant, I ran statistical topic mod
 
 ---
 
-As an undergraduate research assistant, I spent three years as the primary developer for an NLP-driven web application built to assist a humanities professor with his research on 19th-century German literature.  The application allowed him to run statistical topic models (LDA, HDP, dynamic topic models, etc.) on a large corpus of text, and displayed helpful visualizations of the results.  The application was built using Python / Flask / Bootstrap and also supported toponym detection and full-text search.  
+As an undergraduate research assistant, I spent three years as the primary developer for an NLP-driven web application built to assist a humanities professor with research on 19th-century German literature.  The application allowed him to run statistical topic models (LDA, HDP, dynamic topic models, etc.) on a large corpus of text, and displayed helpful visualizations of the results.  The application was built using Python / Flask / Bootstrap and also supported toponym detection and full-text search.  
 # Overview
 
-As an undergraduate research assistant, I spent three years as the primary developer for an NLP-driven web application built to assist a humanities professor ([Dr. Peter McIsaac](https://lsa.umich.edu/german/people/faculty/pmcisaac.html), University of Michigan) with his research on 19th-century German literature.  The application allowed him to run statistical topic models ([LDA](http://jmlr.org/papers/volume3/blei03a/blei03a.pdf), [HDP](http://proceedings.mlr.press/v15/wang11a/wang11a.pdf), [DTM](https://mimno.infosci.cornell.edu/info6150/readings/dynamic_topic_models.pdf), etc.) on a large corpus of text and displayed helpful visualizations of the results.  The application was built using **Python** / **Flask** / **Bootstrap** and also supported toponym detection and full-text search.  We used [`gensim`](https://radimrehurek.com/gensim/) for topic modeling.
+As an undergraduate research assistant, I spent three years as the primary developer for an NLP-driven web application built to assist a humanities professor ([Dr. Peter McIsaac](https://lsa.umich.edu/museums-minor/people/affiliated-faculty/pmcisaac.html), University of Michigan) with his research on 19th-century German literature.  The application allowed him to run statistical topic models ([LDA](http://jmlr.org/papers/volume3/blei03a/blei03a.pdf), [HDP](http://proceedings.mlr.press/v15/wang11a/wang11a.pdf), [DTM](https://mimno.infosci.cornell.edu/info6150/readings/dynamic_topic_models.pdf), etc.) on a large corpus of text and displayed helpful visualizations of the results.  The application was built using **Python** / **Flask** / **Bootstrap** and also supported toponym detection and full-text search.  We used [`gensim`](https://radimrehurek.com/gensim/) for topic modeling.
 
-Using the web application I built, my supervisor was able to effectively detect cultural and historical trends in a large corpus of previously unstudied documents<span class="aside">This is a cheeky remark!</span>.  Our efforts led to a number of publications in humanities journals and conferences, including [[McIsaac 2014]](http://www.jstor.org/stable/10.7722/j.ctt5vj848.11):
+Using the web application I built, my supervisor was able study cultural and historical trends in a large corpus of previously unstudied documents.  The results of this work were published in humanities journals and conferences, including [@mcisaac2014:rethinking] and [@mcisaac2016:geospatial].
 
 <blockquote class="citation">
 McIsaac, Peter M. <a href="http://www.jstor.org/stable/10.7722/j.ctt5vj848.11">“Rethinking Nonfiction: Distant Reading the Nineteenth-Century Science-Literature Divide.”</a> <i>Distant Readings: Topologies of German Culture in the Long Nineteenth Century</i>, edited by Matt Erlin and Lynne Tatlock, ed., Boydell and Brewer, 2014, pp. 185–208.
@@ -32,7 +33,7 @@ Our analysis focused on a corpus of widely-circulated periodicals, published in 
 * *Westermann's Illustrirte Monatshefte* (1856-1987)
 * *Die Gartenlaube* (1853-1944)
 
-These periodicals, published weekly or monthly, were among Germany's most widely-read print material in the latter half of the nineteenth century, and served as precursors <span class="aside">This is a longer remark that provides more detail about something in the main article.</span>to the modern magazine.  Scholars have long recognized the cultural significance of these publications (c.f. [[Belgum 2002]](https://books.google.com/books?hl=en&lr=&id=yGHo-Alkp84C&oi=fnd&pg=PR9&dq=belgum+2002+popularizing+the+nation+Audience,+Representation,+and+the+Production+of+Identity+in+Die+Gartenlaube&ots=VFwEvxdUUS&sig=kF6W0ktdb6BOcD1TY7Rdwtf_tsc#v=onepage&q&f=false)), but their enormous volume had so far precluded comprehensive study.
+These periodicals, published weekly or monthly, were among Germany's most widely-read print material in the latter half of the nineteenth century, and served as precursors <span class="aside">This is a longer remark that provides more detail about something in the main article.</span>to the modern magazine.  Scholars have long recognized the cultural significance of these publications [@belgum1998:popularizing], but their enormous volume had so far precluded comprehensive study.
 
 <figure>
 <div class="img-gallery horizontal">
@@ -93,7 +94,7 @@ In natural language processing, <b>topic modeling</b> is a form of statistical a
   * (Topic 3) <i>train, bus, passenger, traffic, bicycle, pedestrian...</i>
 * A <b>topic probability vector</b> for each document, representing the importance of each topic to this document.  For example, a document about the Olympics may be 70% sports, 20% government, and 10% transportation.
 
-The most popular topic model is [Latent Dirichlet Allocation (LDA)](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation), which is succinctly described by the following probabilistic graphical model.  There are $T$ topics, $M$ documents, $N$ words per document, and $V$ words in the vocabulary.
+The most popular topic model is [Latent Dirichlet Allocation (LDA)](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation), which is succinctly described by the following probabilistic graphical model [@blei2003:latent].  There are $T$ topics, $M$ documents, $N$ words per document, and $V$ words in the vocabulary.
 
 <figure>
 <div class="img-gallery horizontal" style="align-items: center">
@@ -127,9 +128,9 @@ Of course, this is not how humans actually write.  LDA represents documents as <
 Using **Python / Flask / Bootstrap**, I built a web application enabling humanities researchers to train, visualize, and save topic models.  Features:
 
 * Support for several popular topic models:
-  * Online Latent Dirichlet Allocation (via `gensim`)
-  * Online Hierarchical Dirichlet Process (via `gensim`)
-  * Dynamic Topic Models (custom implementation based [[Blei 2006]](https://mimno.infosci.cornell.edu/info6150/readings/dynamic_topic_models.pdf))
+  * Online Latent Dirichlet Allocation ([@hoffman2010:online-lda], via `gensim`)
+  * Online Hierarchical Dirichlet Process ([@wang2011:online-hdp], via `gensim`)
+  * Dynamic Topic Models (custom implementation based on [@blei2006:dynamic])
 * [Toponym Resolution](https://en.wikipedia.org/wiki/Toponym_resolution) for identifying and mapping place names mentioned in our texts 
 * Full-text / metadata search using [ElasticSearch](www.elastic.co)
 * Support for any corpus with metadata saved in JSON format.
@@ -166,8 +167,3 @@ The poster below summarizes the progress made during my first year on the projec
 <a href="/static/dhgp/dhgp_urop-poster_benrbray.pdf">
 <img src="/images/dhgp/dhgp-poster.png"></img>
 </a>
-
-# References
-
-* **[McIsaac 2014]** McIsaac, Peter M. [“Rethinking Nonfiction: Distant Reading the Nineteenth-Century Science-Literature Divide.”](https://www.degruyter.com/document/doi/10.1515/9781571138903-009/html?lang=en) *Distant Readings: Topologies of German Culture in the Long Nineteenth Century*, edited by Matt Erlin and Lynne Tatlock, ed., Boydell and Brewer, 2014, pp. 185–208.
-* **[Belgum 2002]** Belgum, Kirsten. [Popularizing the Nation: Audience, Representation, and the Production of Identity in Die Gartenlaube](https://books.google.com/books?hl=en&lr=&id=yGHo-Alkp84C&oi=fnd&pg=PR9&dq=belgum+2002+popularizing+the+nation+Audience,+Representation,+and+the+Production+of+Identity+in+Die+Gartenlaube&ots=VFwEvxdUUS&sig=kF6W0ktdb6BOcD1TY7Rdwtf_tsc#v=onepage&q&f=false), 1853-1900. U of Nebraska Press, 1998.
