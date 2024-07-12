@@ -19,7 +19,8 @@ const bibFiles = [
   fs.readFileSync("./public/references/category-theory.bib").toString(),
   fs.readFileSync("./public/references/game-physics.bib").toString(),
   fs.readFileSync("./public/references/datalog.bib").toString(),
-  fs.readFileSync("./public/references/dhgp.bib").toString()
+  fs.readFileSync("./public/references/dhgp.bib").toString(),
+  fs.readFileSync("./public/references/publications.bib").toString()
 ];
 
 // https://astro.build/config
