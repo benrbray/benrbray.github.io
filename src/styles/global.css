@@ -73,7 +73,7 @@ p {
   text-decoration: none;
 }
 
-.anchor-link:hover:before {
+.heading .anchor-link:hover:before {
   content: "";
   display: inline-block;
   position: absolute;

@@ -32,7 +32,9 @@ $$
 
 # Introduction
 
-These notes provide a theoretical treatment of **Expectation Maximization**, an iterative parameter estimation algorithm used to find local maxima of the likelihood function in the presence of hidden variables.  Introductory textbooks [murphy:mlapp, bishop:prml] typically state the algorithm without explanation and expect students to work blindly through derivations.  We find this approach to be unsatisfying, and instead choose to tackle the theory head-on, followed by plenty of examples.  Following [neal1998:em], we view expectation-maximization as coordinate ascent on the **Evidence Lower Bound**.  This perspective takes much of the mystery out of the algorithm and allows us to easily derive variants like **Hard EM** and **Variational EM**.
+These notes provide a theoretical treatment of **Expectation Maximization**, an iterative parameter estimation algorithm used to find local maxima of the likelihood function in the presence of hidden variables.  Introductory textbooks [@murphy2012:mlapp; @bishop2006:prml] typically state the algorithm without explanation and expect students to work blindly through derivations.  We find this approach to be unsatisfying, and instead choose to tackle the theory head-on, followed by plenty of examples.
+
+Following [@neal1998:expectation-maximization], we view expectation-maximization as coordinate ascent on the **Evidence Lower Bound**.  This perspective takes much of the mystery out of the algorithm and allows us to easily derive variants like **Hard EM** and **Variational EM**.
 
 # Problem Setting
 
@@ -54,7 +56,7 @@ $$
 = \log \sum_z p(\X, z | \theta)
 $$
 
-In general, this likelihood is non-convex with many local maxima.  In contrast, [murphy:mlapp] shows that when $p(x_n, z_n | \theta)$ are exponential family distributions, the likelihood is convex, so learning is much easier.  Expectation maximization exploits the fact that learning is easy when we observe all variables.  We will alternate between inferring the values of the latent variables and re-estimating the parameters, assuming we have complete data.
+In general, this likelihood is non-convex with many local maxima.  In contrast, [@murphy2012:mlapp] shows that when $p(x_n, z_n | \theta)$ are exponential family distributions, the likelihood is convex, so learning is much easier.  Expectation maximization exploits the fact that learning is easy when we observe all variables.  We will alternate between inferring the values of the latent variables and re-estimating the parameters, assuming we have complete data.
 
 # Evidence Lower Bound
 
@@ -98,7 +100,7 @@ $$
 
 ## Relationship to Relative Entropy
 
-The first term in the last line above closely resembles the cross entropy between $q(Z)$ and the joint distribution $p(X, Z)$ of the observed and hidden variables.  However, the variables $X$ are fixed to our observations $X=\X$ and so $p(\X,Z)$ is an *unnormalized* [ref]In this case, $\int p(\X, z)\, dz \neq 1$.[/ref] distribution over $Z$.  It is easy to see that this does not set us back too far; in fact, the lower bound $\mathcal{L}(q,\theta)$ differs from a Kullback-Liebler divergence only by a constant with respect to $Z$:
+The first term in the last line above closely resembles the cross entropy between $q(Z)$ and the joint distribution $p(X, Z)$ of the observed and hidden variables.  However, the variables $X$ are fixed to our observations $X=\X$ and so $p(\X,Z)$ is an *unnormalized* (In this case, $\int p(\X, z)\, dz \neq 1$) distribution over $Z$.  It is easy to see that this does not set us back too far; in fact, the lower bound $\mathcal{L}(q,\theta)$ differs from a Kullback-Liebler divergence only by a constant with respect to $Z$:
 
 $$
 \begin{aligned}
@@ -111,7 +113,7 @@ D_{KL}(q || p(Z|\X,\theta))
 \end{aligned}
 $$
 
-This yields a second proof of the evidence lower bound, following from the nonnegativity of relative entropy.  In fact, this is the proof given in [tzikas2008:variational] and [murphy:mlapp].
+This yields a second proof of the evidence lower bound, following from the nonnegativity of relative entropy.  In fact, this is the proof given in [@tzikas2008:variational] and [@murphy2012:mlapp].
 
 $$
 \log p(\X | \theta)
@@ -153,7 +155,7 @@ on the data likelihood.  Consider only proxy distributions of the form $q_\varth
 
 ## Iterative Procedure
 
-Suppose at time $t$ we have an estimate $\theta_t$ of the parameters.  To improve our estimate, we perform two steps of coordinate ascent on $\L(\vartheta, \theta) \equiv \L(q_\vartheta, \theta)$, as described in [neal1998:em],
+Suppose at time $t$ we have an estimate $\theta_t$ of the parameters.  To improve our estimate, we perform two steps of coordinate ascent on $\L(\vartheta, \theta) \equiv \L(q_\vartheta, \theta)$, as described in [@neal1998:expectation-maximization],
 
 <div class="post-framed">
 <h3>E-Step</h3>
@@ -376,7 +378,7 @@ $$
 
 ## Expectation Maximization
 
-Our derivation will follow that of [murphy:mlapp], adapted to our notation.
+Our derivation will follow that of [@murphy2012:mlapp], adapted to our notation.
 
 ### E-Step
 

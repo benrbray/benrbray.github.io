@@ -10,6 +10,7 @@ interface Props {
 const { post } = Astro.props;
 
 const postUrl = getPostUrl(post);
+const postDisplayTitle = post.data.titleDisplay || post.data.title;
 const isLowPriority = post.data.priority === "low";
 ---
 
@@ -19,7 +20,7 @@ const isLowPriority = post.data.priority === "low";
   <div class="post-desc">
     <!-- title -->
     <div class="post-title">
-      <a href={postUrl} set:html={post.data.title}></a>
+      <a href={postUrl} set:html={postDisplayTitle}></a>
     </div>
     <div class="post-subtitle">
       <span class="post-year"><FormattedDate date={post.data.datePublished} /></span>
