@@ -21,9 +21,9 @@ As an undergraduate research assistant, I spent three years as the primary devel
 
 Using the web application I built, my supervisor was able study cultural and historical trends in a large corpus of previously unstudied documents.  The results of this work were published in humanities journals and conferences, including [@mcisaac2014:rethinking] and [@mcisaac2016:geospatial].
 
-<blockquote class="citation">
-McIsaac, Peter M. <a href="http://www.jstor.org/stable/10.7722/j.ctt5vj848.11">“Rethinking Nonfiction: Distant Reading the Nineteenth-Century Science-Literature Divide.”</a> <i>Distant Readings: Topologies of German Culture in the Long Nineteenth Century</i>, edited by Matt Erlin and Lynne Tatlock, ed., Boydell and Brewer, 2014, pp. 185–208.
-</blockquote>
+> [@mcisaac2014:rethinking]
+> 
+> [@mcisaac2016:geospatial]
 
 ## Motivation
 

@@ -26,3 +26,15 @@ summary: A datalog parser and query engine, built with Haskell and compiled to W
 * [@abeysinghe2024:flan-datalog]
 * [@rompf2010:lightweight-modular-staging] (with [lecture slides](https://web.stanford.edu/class/cs442/lectures_unrestricted/cs442-lms.pdf))
 * [@contrastin2018:reordering-dataflow-safety]
+* [datalogui](https://github.com/datalogui/datalog)
+
+tag systems
+
+* https://www.nayuki.io/page/designing-better-file-organization-around-tags-not-hierarchies#hierarchical-organization-is-clumsy
+* https://relfs.sourceforge.net/
+* https://www.heppnetz.de/files/vandammeheppsiorpaes-folksontology-semnet2007-crc.pdf
+* https://dl.acm.org/doi/10.1145/2024288.2024310
+* https://web.archive.org/web/20060115210212/http://shirky.com/writings/ontology_overrated.html
+* https://garrit.xyz/posts/2024-04-02-fuck-trees-use-tags
+* https://www.tagsistant.net/
+* https://lobste.rs/s/a3zlgq/what_software_do_you_dream_about_do_not#c_4u78k1

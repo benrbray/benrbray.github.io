@@ -56,6 +56,9 @@
   --font-normal-size: var(--font-size-normal);
   --font-normal-weight: normal;
 
+  /* font: heading */
+  --font-heading-color: var(--font-normal-color);
+
   /* font: title */
 	--font-title-size: var(--font-size-larger);
   --font-title-weight: 600;

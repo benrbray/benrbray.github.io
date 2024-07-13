@@ -40,6 +40,8 @@
 * [Game Art Tricks](http://simonschreibt.de/game-art-tricks/) by Simon Schreibt
 * [Alex Harri's Blog](https://alexharri.com/blog/planes)
 * Jasmcole, ["Helmhurts"](https://jasmcole.com/2014/08/25/helmhurts/)
+* Daniel Sieger's Blog
+  * [Generating Meshes of a Sphere](https://danielsieger.com/blog/2021/03/27/generating-spheres.html)
 
 ### Game Development
 

@@ -1,0 +1,95 @@
+---
+title: Annotated Bibliography
+summary: 'DESCRIPTION'
+datePublished: '29 May 2024'
+
+series:
+  seriesId: breadcrumbs-game-physics
+  seriesNumber: 2
+  isAppendix: true
+---
+
+import PostContent from "../../../components/blog/PostContent.astro";
+import SeriesSummary from "../../../components/content/SeriesSummary.astro";
+
+<PostContent>
+  <SeriesSummary />
+</PostContent>
+
+## General
+
+[@erleben2005:physics-based-animation]
+
+* Chapter 6, "Impulse-Based Multibody Animation"
+  - contains a thorough explanation of multibody physics & the contact model
+  - provides justification for simplifying assumptions needed for realtime simulation 
+* Chapter 7, "Constraint-Based Multibody Animation"
+
+[@tonge2013:iterative-rigid-body]
+
+* an extended version of [@tonge2012:solving-rigid-body-contacts], the same author's presentation from the previous year
+
+## Sequential Impulse Algorithm
+
+[@catto2005:temporal-coherence]
+
+* velocity-based scheme with an approximate friction model
+* constraint-based approach enables support for wide variety of joint types:  revolute, prismatic, breakable joints, triggers, etc.
+* joints and contacts are both handled in the same way
+
+> Fortunately, the performance and space requirements can be balanced by low accuracy requirements. As long as the motion is visually plausible, the physics programmer is free to modify the equations of motion and to approximate the contact
+geometry. Furthermore, the chosen model does not need to be solved to high
+precision. As long as stability is maintained, numerical accuracy has secondary
+importance. -- [@catto2005:temporal-coherence]
+
+[@catto2009:modeling-solving]
+
+* foo
+* bar
+
+[@catto2014:understanding-constraints]
+
+* baz
+* qux
+
+[@catto2011:soft-constraints]
+
+## Contact Generation
+
+[@andrews2022:siggraph-contact-friction]
+
+* equations of motion
+* gap function
+* ridid body simulation
+* soft body simulation
+* numerical methods
+* friction modeling
+
+[@gregorious2015:robust-contact]
+
+## Collision Detection
+
+## Extensions & Optimization
+
+[@bergen2010:game-physics-pearls]
+
+[@coumans2014:mlcp-featherstone]
+
+## Continuous Collision Detection
+
+[@catto2013:continuous-collision]
+
+## Linear Complementarity Problems
+
+[@erleben2013:numerical-lcp]
+
+## Numerical Methods
+
+[@catto2015:numerical-methods]
+
+## Reference Implementations
+
+[Cirobb](https://github.com/jonpena/Cirobb) Rigid Body Physics Engine
+
+> Cirobb is a 2D Rigid Body Physics Engine inspired by Box2D Lite that was created with the purpose of helping people who are starting in this wonderful world of physics for Videogames. The Engine uses the Erin Catto's Contact Persistence Algorithm and it's implementation of the PGS (Projected Gauss Seidel) solver to solve the MLCP very well known as a SI (Sequential Impulse).
+

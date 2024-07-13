@@ -69,7 +69,7 @@ p {
 }
 
 .heading .anchor-link {
-  color: var(--font-normal-color);
+  color: var(--font-heading-color);
   text-decoration: none;
 }
 
@@ -102,11 +102,12 @@ p {
 /* -------------------------------------------------------------------------- */
 
 article blockquote {
-  border: 1px solid black;
-  padding: var(--gap-1);
-  margin: 0 auto;
-  max-width: 32rem;
-  text-align: center;
+  /* padding: var(--gap-1); */
+  /* margin: 0 auto; */
+  border-left: 0.2em solid rgb(169, 215, 89);
+  margin-left: 0em;
+  margin-right: 2em;
+  padding-left: 1em;
 }
 
 article blockquote p:first-child {
@@ -119,6 +120,6 @@ article blockquote p:last-child {
 
 /* ------------------------------------------------------ */
 
-.references .csl-entry {
+.cite-block {
   margin: var(--gap-1) 0;
 }
