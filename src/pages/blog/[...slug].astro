@@ -9,7 +9,6 @@ import PostContent from '@root/components/blog/PostContent.astro';
 import SeriesContent from '@root/components/blog/SeriesContent.astro';
 import ArticleHeader from '@root/components/blog/ArticleHeader.astro';
 
-
 export async function getStaticPaths() {
 	const posts = await getPosts({ includeSeries: true });
 	return posts.map((post) => ({

@@ -37,6 +37,9 @@
   --gap-2: 1.5rem;
   --gap-3: 2.0rem;
 
+  /* colors */
+  --color-text: #303030;
+
   /* font sizes */
   --font-size-small:  0.8rem;
   --font-size-normal: 0.95rem;
@@ -58,6 +61,19 @@
 
   /* font: heading */
   --font-heading-color: var(--font-normal-color);
+  --font-heading-color-lighter: #606060;
+
+  --font-heading-1-size: var(--font-size-largest);
+  --font-heading-2-size: var(--font-size-larger);
+  --font-heading-3-size: var(--font-size-large);
+  --font-heading-4-size: var(--font-size-large);
+  --font-heading-5-size: var(--font-size-normal);
+
+  --font-heading-1-color: var(--font-heading-color);
+  --font-heading-2-color: var(--font-heading-color);
+  --font-heading-3-color: var(--font-heading-color-lighter);
+  --font-heading-4-color: var(--font-heading-color);
+  --font-heading-5-color: var(--font-heading-color);
 
   /* font: title */
 	--font-title-size: var(--font-size-larger);

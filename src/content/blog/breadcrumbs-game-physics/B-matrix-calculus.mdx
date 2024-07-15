@@ -5,7 +5,7 @@ datePublished: '29 May 2024'
 
 series:
   seriesId: breadcrumbs-game-physics
-  seriesNumber: 1
+  seriesNumber: 2
   isAppendix: true
 ---
 
@@ -15,6 +15,8 @@ import SeriesSummary from "../../../components/content/SeriesSummary.astro";
 $$
 \providecommand{\norm}[1]{\left\lVert #1 \right\rVert}
 \providecommand{\d}{\mathrm{d}}
+\providecommand{\diffd}[2]{\frac{\d #1}{\d #2}}
+\providecommand{\diffp}[2]{\frac{\partial #1}{\partial #2}}
 $$
 
 Linear algebra is *not* about number crunching on matrices, even though some introductory courses make it seem that way.  In this section, we'll review the basics of linear algebra and matrix calculus, focusing on just a handful general principles that can be used to derive useful facts as needed, avoiding unnecessary memorization.
@@ -23,96 +25,7 @@ Linear algebra is *not* about number crunching on matrices, even though some int
   <SeriesSummary />
 </PostContent>
 
-# Linear Algebra
-
-## Matrix Multiplication, Graphically
-
-### Matrix-Vector Product
-
-The presentation here is inspired by [@trefethen2022:numerical-linear-algebra].  Let $x \in \R^n$ be an $n$-dimensional column vector and $A \in \R^{m \times n}$ be a matrix.  The matrix-vector product $b = Ax \in \R^m$ is the $m$-dimensional column vector defined entrywise as a sum over columns,
-
-$$
-\begin{equation*}
-b_i = \sum_{j=1}^n a_{ij} x_j \qquad \text{(} i=1,\dots,m \text{)}
-\end{equation*}
-$$
-
-This entry-wise definition is rather opaque.  If instead we let $a_j \in \R^m$ denote the $j$th column of $A$, the matrix-vector product can be written as a linear combination of the columns!
-
-$$
-\begin{equation*}
-b = Ax = \sum_{j=1}^n x_j a_j
-\end{equation*}
-$$
-
-Graphically, the matrix-vector product is
-
-$$
-% Schematic:  Matrix-Vector Product
-\begin{equation*}
-\begin{bmatrix} 
-\rule{0pt}{1.5em} \\
-b \\
-\rule{0pt}{1.5em}
-\end{bmatrix}
-= 
-\begin{array}{cc}
-    \left\lbrack
-    \begin{array}{c|c|c|c}
-    \\[0.5em]
-    a_1 & a_2 & \cdots & a_n \\[2.0em]
-    \end{array}
-    \right\rbrack
-    \hspace*{-1.3em}
-    &
-    \left\lbrack
-    \begin{array}{c}
-    x_1 \\ x_2 \\ \vdots \\ x_n
-    \end{array}
-    \right\rbrack
-\end{array}
-= \hspace*{0.5em}
-x_1 \begin{bmatrix}
-    \rule{0pt}{2.5em} \\
-    a_1 \\
-    \rule{0pt}{2.5em}
-    \end{bmatrix}
-+
-x_2 \begin{bmatrix}
-    \rule{0pt}{2.5em} \\
-    a_2 \\
-    \rule{0pt}{2.5em}
-    \end{bmatrix}
-+ \cdots +
-x_n \begin{bmatrix}
-    \rule{0pt}{2.5em} \\
-    a_n \\
-    \rule{0pt}{2.5em}
-    \end{bmatrix}
-\end{equation*}
-$$
-
-The most important rule to remember is:
-
-> The matrix-vector product $Ax$ is a linear combination of the columns of $A$ with coefficients taken from the vector $x$.
-
-### Vector-Matrix Product
-
-> The vector-matrix product $y^T A$ is a linear combination of the rows of $A$ with coefficients taken from the vector $y$.
-
-### Matrix-Matrix Product
-
-> Every column of the matrix-matrix product $AB$ is a linear combination of the columns of $A$, with coefficients taken from a column of $B$.
-
-> Every row of the matrix-matrix product $AB$ is a linear combination of the rows of $B$, with coefficients taken from a row of $A$.
-
-### Matrix Inverse Times a Vector
-
-> $A^{-1} b$ is the vector of coefficients in the basis expansion of $b$ in the coordinate system defined by the columns of $A$.
-
-# Linear Transformations
-
-# Differential Calculus
+# Derivatives
 
 Our goal in this section is to understand what it measn to take the derivative of a matrix-valued function of a matrix-valued input, $f : \R^m \rightarrow \R^n$.  We roughly follow [@rudin1976:principles, Chapter 9].
 
@@ -161,7 +74,21 @@ $$
 \end{aligned}
 $$
 
-### Chain Rule for Total Derivatives
+## Matrix-Valued Functions of a Scalar Variable
+
+Let $A = [a_{ij}]$ be an $m \times n$ matrix whose elements are functions of the scalar parameter $\alpha$.  Then the derivative of $A$ with respect to $\alpha$ is the $m \times n$ matrix of element-by-element derivatives,
+
+$$
+d_\alpha A = 
+\begin{bmatrix}
+\diffd{a_{11}}{\alpha} & \diffd{a_{12}}{\alpha} & \cdots & \diffd{a_{1n}}{\alpha} \\
+\diffd{a_{21}}{\alpha} & \diffd{a_{22}}{\alpha} & \cdots & \diffd{a_{2n}}{\alpha} \\
+\vdots & \vdots && \vdots \\
+\diffd{a_{m1}}{\alpha} & \diffd{a_{m2}}{\alpha} & \cdots & \diffd{a_{mn}}{\alpha} \\
+\end{bmatrix}
+$$
+
+## Chain Rule for Total Derivatives
 
 The most powerful tool for computing derivatives is the multivariable **chain rule**, which allows us to compute complicated derivatives from simpler building blocks.
 
@@ -173,4 +100,7 @@ $$
 
 that is, $h'(x_0)$ is the linear map obtained by composing the two linear maps $g'(f(x_0))$ and $f'(x_0)$ (or by multiplying the corresponding matrices!).
 
-# References
+# Additional Reading
+
+* [@barnes2006:matrix-differentiation] contains a list of helpful matrix calculus results
+* [@golub2013:matrix-computations] contains many helpful linear algebra tricks

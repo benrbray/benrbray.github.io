@@ -5,7 +5,7 @@ datePublished: '29 May 2024'
 
 series:
   seriesId: breadcrumbs-game-physics
-  seriesNumber: 2
+  seriesNumber: 3
   isAppendix: true
 ---
 
@@ -28,6 +28,8 @@ import SeriesSummary from "../../../components/content/SeriesSummary.astro";
 [@tonge2013:iterative-rigid-body]
 
 * an extended version of [@tonge2012:solving-rigid-body-contacts], the same author's presentation from the previous year
+* intuitive schematic depiction of the **sequential impulse** method
+* explains velocity-impulse model
 
 ## Sequential Impulse Algorithm
 
@@ -41,6 +43,8 @@ import SeriesSummary from "../../../components/content/SeriesSummary.astro";
 geometry. Furthermore, the chosen model does not need to be solved to high
 precision. As long as stability is maintained, numerical accuracy has secondary
 importance. -- [@catto2005:temporal-coherence]
+
+![](./images/tonge2013_velocity-update.png)
 
 [@catto2009:modeling-solving]
 

@@ -1,0 +1,131 @@
+---
+title: Linear Algebra
+summary: 'DESCRIPTION'
+datePublished: '29 May 2024'
+
+series:
+  seriesId: breadcrumbs-game-physics
+  seriesNumber: 1
+  isAppendix: true
+---
+
+import PostContent from "../../../components/blog/PostContent.astro";
+import SeriesSummary from "../../../components/content/SeriesSummary.astro";
+
+$$
+\providecommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\providecommand{\d}{\mathrm{d}}
+\providecommand{\diffd}[2]{\frac{\d #1}{\d #2}}
+\providecommand{\diffp}[2]{\frac{\partial #1}{\partial #2}}
+$$
+
+Linear algebra is *not* about number crunching on matrices, even though some introductory courses make it seem that way.  In this section, we'll review the basics of linear algebra and matrix calculus, focusing on just a handful general principles that can be used to derive useful facts as needed, avoiding unnecessary memorization.
+
+<PostContent>
+  <SeriesSummary />
+</PostContent>
+
+# Matrix Multiplication, Graphically
+
+## Matrix-Vector Product
+
+The presentation here is inspired by [@trefethen2022:numerical-linear-algebra].  Let $x \in \R^n$ be an $n$-dimensional column vector and $A \in \R^{m \times n}$ be a matrix.  The matrix-vector product $b = Ax \in \R^m$ is the $m$-dimensional column vector defined entrywise as a sum over columns,
+
+$$
+\begin{equation*}
+b_i = \sum_{j=1}^n a_{ij} x_j \qquad \text{(} i=1,\dots,m \text{)}
+\end{equation*}
+$$
+
+This entry-wise definition is rather opaque.  If instead we let $a_j \in \R^m$ denote the $j$th column of $A$, the matrix-vector product can be written as a linear combination of the columns!
+
+$$
+\begin{equation*}
+b = Ax = \sum_{j=1}^n x_j a_j
+\end{equation*}
+$$
+
+Graphically, the matrix-vector product is
+
+$$
+% Schematic:  Matrix-Vector Product
+\begin{equation*}
+\begin{bmatrix} 
+\rule{0pt}{1.5em} \\
+b \\
+\rule{0pt}{1.5em}
+\end{bmatrix}
+= 
+\begin{array}{cc}
+    \left\lbrack
+    \begin{array}{c|c|c|c}
+    \\[0.5em]
+    a_1 & a_2 & \cdots & a_n \\[2.0em]
+    \end{array}
+    \right\rbrack
+    \hspace*{-1.3em}
+    &
+    \left\lbrack
+    \begin{array}{c}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{array}
+    \right\rbrack
+\end{array}
+= \hspace*{0.5em}
+x_1 \begin{bmatrix}
+    \rule{0pt}{2.5em} \\
+    a_1 \\
+    \rule{0pt}{2.5em}
+    \end{bmatrix}
++
+x_2 \begin{bmatrix}
+    \rule{0pt}{2.5em} \\
+    a_2 \\
+    \rule{0pt}{2.5em}
+    \end{bmatrix}
++ \cdots +
+x_n \begin{bmatrix}
+    \rule{0pt}{2.5em} \\
+    a_n \\
+    \rule{0pt}{2.5em}
+    \end{bmatrix}
+\end{equation*}
+$$
+
+The most important rule to remember is:
+
+> The matrix-vector product $Ax$ is a linear combination of the columns of $A$ with coefficients taken from the vector $x$.
+
+## Vector-Matrix Product
+
+> The vector-matrix product $y^T A$ is a linear combination of the rows of $A$ with coefficients taken from the vector $y$.
+
+## Matrix-Matrix Product
+
+> Every column of the matrix-matrix product $AB$ is a linear combination of the columns of $A$, with coefficients taken from a column of $B$.
+
+> Every row of the matrix-matrix product $AB$ is a linear combination of the rows of $B$, with coefficients taken from a row of $A$.
+
+## Matrix Inverse Times a Vector
+
+> $A^{-1} b$ is the vector of coefficients in the basis expansion of $b$ in the coordinate system defined by the columns of $A$.
+
+# Linear Transformations
+
+# Vectors and Pseudovectors
+
+> angular momentum is not actually a vector even though we're usually taught that it's one. It turns out that -- as a happy accident in 3 dimensions -- it happens to have three independent components that transform under rotations like a vector should.
+> 
+> his is because these "pseudovectors" aren't actually vectors: they are rather associated with planes. It's a fun exercise in combinatorics to show that in $n$
+ dimensions, you have $n(n-1)/2$
+ planes. Immediately, we see why 3 dimensions is special: we have 3 different axes $(x,y,z)$ and 3 different planes $(xy, yz, zx)$. Angular momentum is associated with rotations, and in general, rotations occur in planes, not about axes, and this explains why we can have angular momentum in 2D because even though there is no "axis" about which to rotate, there is still a plane to rotate in.
+>
+> Thus in $n$ dimensions, quantities like angular momentum have $n(n-1)/2$ components, and it turns out (though what I've said is hardly a proof) that they are the components of an antisymmetric $n \times n$ quantity called a "tensor" -- which are objects that transform in a specific way, but this is not very important at this level.
+>
+> So yes, you can define angular momentum in 2D, but it will be a scalar not a vector, just like you can define the magnetic field in 2D which will also be a scalar. The same applies for the magnetic field.
+> -- [Philip @ Physics.SE](https://physics.stackexchange.com/a/556330/294610)
+
+> The cross product defined as vector (or more precisely pseudovector) with magnitude equal to the area of the parallelogram formed by the two multiplied vectors and with direction perpendicular to both of them is applicable only in 3 dimensions.
+>
+> In 2 dimensions, you can still compute area of the parallelogram, but here assigning some direction makes no sense and resulting value will be scalar (or more precisely pseudoscalar).
+> -- [Umaxo @ Physics.SE](https://physics.stackexchange.com/a/556324/294610)

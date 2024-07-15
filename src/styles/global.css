@@ -69,7 +69,7 @@ p {
 }
 
 .heading .anchor-link {
-  color: var(--font-heading-color);
+  color: inherit;
   text-decoration: none;
 }
 
@@ -118,8 +118,56 @@ article blockquote p:last-child {
   margin-bottom: 0;
 }
 
+article h1 {
+  font-size: var(--font-heading-1-size);
+  color: var(--font-heading-1-color);
+}
+
+article h2 {
+  font-size: var(--font-heading-2-size);
+  color: var(--font-heading-2-color);
+}
+
+article h3 {
+  font-size: var(--font-heading-3-size);
+  color: var(--font-heading-3-color);
+}
+
+article h4 {
+  font-size: var(--font-heading-4-size);
+  color: var(--font-heading-4-color);
+}
+
+article h5 {
+  font-size: var(--font-heading-5-size);
+  color: var(--font-heading-5-color);
+}
+
 /* ------------------------------------------------------ */
 
 .cite-block {
   margin: var(--gap-1) 0;
+  padding: var(--gap-0);
+  /* background-color: rgb(233, 208, 238); */
+  /* background-color: rgb(229, 189, 238); */
+  /* background-color: #fbecff; */
+  /* background-color: #fbf0ff; */
+  /* background-color: rgba(230, 183, 255, 0.20); */
+  /* background-color: rgba(197, 105, 241, 0.11); */
+  background-color: #ede4ff;
+}
+
+/* ------------------------------------------------------ */
+
+.todo {
+  padding: 1em;
+  background-color: #ede4ff;
+}
+
+.exactquote {
+  text-decoration: underline #ddd 2px;
+}
+
+.exactquote:hover {
+  text-decoration: underline #4c4 2px;
 }
