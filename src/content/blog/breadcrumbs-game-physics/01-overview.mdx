@@ -11,26 +11,31 @@ series:
 import PostContent from "../../../components/blog/PostContent.astro";
 import SeriesSummary from "../../../components/content/SeriesSummary.astro";
 
-this is $math$ and
-
-$$
-\int_a^b f(x) dx
-$$
-
-from [@riehl2017:category] we know that
-
 <PostContent>
   <SeriesSummary />
 </PostContent>
 
-## Intended Audience
+## Series Overview
+
+### Audience
 
 * you took a calculus or linear algebra course long ago, but may have forgotten most of the details
 
-## Outline
+### Goals
+
+* explain game physics in a modular way, making a clear distinction between *physical models* and *computational models*
+
+## Design Constraints
 
 * physics solvers are expected to run in realtime
 * thankfully, the results only need to be **physically plausable**
 * stable
+
+# Constraints
+
+## Position-Based vs. Velocity-Based
+
+* Rigid body simulation has traditionally used **velocity-based dynamics**, where constraint solvers can only modify object velocities. 
+* Under **position-based dynamics** [@bender2017:pbd-survey], constraints are enforced by directly projecting the positions of objects, rather than indirectly through a velocity update.
 
 ## Basic Physics Loop

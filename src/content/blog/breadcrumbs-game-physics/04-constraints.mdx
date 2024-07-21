@@ -10,6 +10,7 @@ series:
 
 import PostContent from "../../../components/blog/PostContent.astro";
 import SeriesSummary from "../../../components/content/SeriesSummary.astro";
+import Todo from "@components/writing/Todo.astro";
 
 $$
 \providecommand{\line}{\text{---}}
@@ -35,7 +36,7 @@ The information in this post is largely adapted from [@catto2009:modeling-solvin
 
 Consider two physics objects $A$ and $B$ parameterized by the **generalized positions** $x_A, x_B \in \R^d$.  We may sometimes use $x \in \R^{2d}$ to refer to the collection $x = \begin{bmatrix} x_A \; x_B \end{bmatrix}$ of all positions.
 
-A single **pairwise constraint** is a scalar function $\phi : \R^{2d} \rightarrow \R$.  A **constraint vector** $\Phi : \R^{2d} \rightarrow \R^c$ is formed by stacking $c > 0$ constraints $\phi_1, \dots, \phi_c \in \R^{2d}$ together as a column vector:
+A single **pairwise constraint** is a scalar function $\phi : \R^{2d} \rightarrow \R$.  The **constraint vector** $\Phi : \R^{2d} \rightarrow \R^c$ is formed by stacking $c > 0$ constraints $\phi_1, \dots, \phi_c \in \R^{2d}$ together as a column vector:
 
 $$
 \Phi(x_A, x_B) =
@@ -47,19 +48,23 @@ $$
 \in \R^c
 $$
 
+The derivative $d_x \Phi \in \R^{c \times 2d}$ of the constraint vector is called the **Jacobian matrix**, which we will refer to simply as $J$.  Its rows are deriviatives of the individual constraint functions:
 
-
-## Position Constraints
-
-## Velocity Constraints
+$$
+J \defeq d_x \Phi =
+\begin{bmatrix}
+\rowvec{d_x \phi_1} \\
+\vdots \\
+\rowvec{d_x \phi_c}
+\end{bmatrix}
+\in \R^{c \times 2d}
+$$
 
 # Solving Constraints
 
-At every time step, the solver attempts to correct any constraint violations caused by position and velocity updates.
+At every time step, the solver attempts to correct any constraint violations caused by position and velocity updates.  
 
-## The Jacobian
-
-To enforce the constraint $\Phi(x) = 0$, we must consider how the constraint vector varies over time.  If we view the generalized positions as a time-varying function $x : \R \rightarrow \R^{2d}$, we can express the time-varying constraint function, $C = (x \then \Phi) : \R \rightarrow \R^c$ as follows
+To enforce $\Phi(x) = 0$ at every time step, we define a time-varying constraint function $C : \R \rightarrow \R^c$,
 
 $$
 C(t) \defeq \Phi(x(t)) \quad\forall\, t \in \R
@@ -74,26 +79,37 @@ $$
 \end{array}
 $$
 
-The derivative of the constraint vector $\Phi : \R^{2d} \rightarrow \R^c$ is the a matrix $d_x C \in \R^{c \times 2d}$ given by
+In matrix form, $\dot{C} = J V$.  If we assume the constraints are satisfied at the current time, the goal of the constraint solver is to return a velocity $\v_{out}$ such that $\dot{C} = 0$
 
 $$
-d_x C(x) =
-\begin{bmatrix}
-\rowvec{d\phi_1(x)} \\
-\vdots \\
-\rowvec{d\phi_c(x)}
-\end{bmatrix}
-\in \R^{c \times 2d}
+\boxed{\text{choose } \v_{out} \text{ such that } \dot{C} = J \v_{out} = 0}
 $$
 
-Next, we consider 
-Viewing the pos $x_A,
-
-By the chain rule, the time derivative of the constraint vector $C : \R^{2d} \rightarrow \R^c$ is a 
-
-Starting from a time $t$ where the constraints are satisfied, $C(t) = 0$, we wish to maintain satisfaction by
+<Todo>(is this implicit integration?)</Todo>
 
 ## Constraint Forces
+
+As described by [@catto2005:temporal-coherence; @catto2009:modeling-solving], each constraint $c$ will generate an **internal reaction force** $f_c$ acting in the direction of the constraint gradient:
+
+$$
+(\forall\, i=1,\dots,c)
+\qquad
+f_i = \lambda_i (d_x \phi_i) \quad \text{ for some } \lambda_i \in \R
+$$
+
+Assembling into a vector, the sum $\f = \sum_{i=1}^c \f_i$ of constraint forces is
+
+$$
+\f = J^T \lambda
+$$
+
+The final velocity output by the solver will be:
+
+$$
+\v_{out} = \v_{in} + \frac{\delta}{m} \f
+$$
+
+
 
 ## Calculating the Jacobian
 

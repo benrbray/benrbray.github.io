@@ -1,5 +1,5 @@
 ---
-title: Features I Enjoy in Programming Languages
+title: Good Ideas in Programming Languages
 datePublished: 2024-07-12
 summary: TODO
 priority: low
@@ -15,6 +15,7 @@ priority: low
 ## TypeScript's Import/Export
 
 * export renaming
+* export forwarding
 * **wart:** default exports
 
 ## TypeScript Declaration Merging
@@ -44,5 +45,7 @@ priority: low
 * Scala / Coq / Rust allow for _named_ typeclass implementations
 
 ## Scala's Implicits
+
+## Pattern Matching
 
 # Curses
