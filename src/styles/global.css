@@ -43,6 +43,12 @@ p {
 
 code {
   background-color: #e0e0e0;
+  font-size: var(--font-code-size);
+}
+
+pre {
+  border: 1px dashed #ccc;
+  padding: var(--gap-0);
 }
 
 pre code {
@@ -150,6 +156,12 @@ article h4 {
 article h5 {
   font-size: var(--font-heading-5-size);
   color: var(--font-heading-5-color);
+}
+
+article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 /* ------------------------------------------------------ */

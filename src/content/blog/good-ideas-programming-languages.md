@@ -48,4 +48,8 @@ priority: low
 
 ## Pattern Matching
 
+## Factor Out Recursion
+
+* recursion schemes
+
 # Curses
