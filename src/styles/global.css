@@ -41,6 +41,14 @@ p {
   line-height: var(--line-height);
 }
 
+code {
+  background-color: #e0e0e0;
+}
+
+pre code {
+  background-color: unset;
+}
+
 /* ---- column widths ------------------------------------------------------- */
 
 .column-normal {
@@ -66,6 +74,7 @@ p {
 
 .heading {
   position: relative;
+  font-weight: var(--font-heading-weight);
 }
 
 .heading .anchor-link {

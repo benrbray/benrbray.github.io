@@ -1,6 +1,6 @@
 ---
-title: Implementing a CodeMirror component in both SolidJS and React
-title-display: Implementing a <code>codemirror</code> component in both <code>solid-js</code> and <code>react</code>
+title: Implementing a CodeMirror Component in both SolidJS and React
+title-display: Implementing a <code>codemirror</code> Component in both <code>solid-js</code> and <code>react</code>
 datePublished: 2024-06-02
 tags: [frontend]
 tools: [typescript]

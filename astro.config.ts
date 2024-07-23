@@ -28,21 +28,24 @@ export default defineConfig({
   }), solidJs()],
   markdown: {
     remarkPlugins: [remarkMath, remarkCite, remarkDirective],
-    rehypePlugins: [[rehypeCite, {
-      bibFiles
-    }], [rehypeKatex, {
-      macros: {
-        "\\R": "\\mathbb{R}"
-      },
-      globalGroup: true
-    }], [rehypeSlug, {}], [rehypeAutolinkHeadings, {
-      behavior: "wrap",
-      headingProperties: {
-        className: ["heading anchor"]
-      },
-      properties: {
-        className: ["anchor-link"]
+    rehypePlugins: [
+      [rehypeCite, { bibFiles }],
+      [rehypeKatex, { macros: { "\\R": "\\mathbb{R}" }, globalGroup: true}],
+      [rehypeSlug, {}], [rehypeAutolinkHeadings, {
+        behavior: "wrap",
+        headingProperties: {
+          className: ["heading anchor"]
+        },
+        properties: {
+          className: ["anchor-link"]
+        }
+      }]
+    ],
+    shikiConfig: {
+      themes: {
+        light: "one-light",
+        dark: "one-dark-pro"
       }
-    }]]
+    }
   }
 });

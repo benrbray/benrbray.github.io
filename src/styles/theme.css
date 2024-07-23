@@ -18,9 +18,10 @@
 
 :root {
   /* page dimensions */
-  --column-thin-max-width: 46rem;
+  --column-thin-max-width: 40rem;
+
   --column-thin-min-width: 25rem;
-  --column-normal-max-width: 52rem;
+  --column-normal-max-width: 46rem;
   --column-normal-min-width: 25rem;
   --column-large-max-width: 60rem;
   --column-large-min-width: 30rem;
@@ -60,6 +61,7 @@
   --font-normal-weight: normal;
 
   /* font: heading */
+  --font-heading-weight: 600;
   --font-heading-color: var(--font-normal-color);
   --font-heading-color-lighter: #606060;
 
