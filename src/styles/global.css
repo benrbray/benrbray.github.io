@@ -41,9 +41,11 @@ p {
   line-height: var(--line-height);
 }
 
+p:first-child { margin-top: 0;    }
+p:last-child  { margin-bottom: 0; }
+
 code {
   background-color: #e0e0e0;
-  font-size: var(--font-code-size);
 }
 
 pre {
@@ -53,6 +55,7 @@ pre {
 
 pre code {
   background-color: unset;
+  font-size: var(--font-code-size);
 }
 
 /* ---- column widths ------------------------------------------------------- */
@@ -164,6 +167,10 @@ article img {
   height: auto;
 }
 
+article li {
+  margin: 0.4em 0;
+}
+
 /* ------------------------------------------------------ */
 
 .cite-block {
@@ -191,4 +198,12 @@ article img {
 
 .exactquote:hover {
   text-decoration: underline #4c4 2px;
+}
+
+.fancy-box {
+  margin: var(--gap-1) 0;
+  padding: var(--gap-0);
+
+  background-color: lightblue;
+  border-radius: var(--gap-0);
 }

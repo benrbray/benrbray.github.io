@@ -1,6 +1,6 @@
 ---
 title: User-Defined Plugins with TypeScript Declaration Merging
-title-display: User-Defined Plugins with&nbsp;TypeScript Declaration Merging
+titleDisplay: User-Defined Plugins with&nbsp;TypeScript Declaration Merging
 tags: [design-patterns]
 tools: [typescript]
 datePublished: 2024-7-12

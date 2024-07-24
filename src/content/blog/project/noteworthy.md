@@ -1,6 +1,6 @@
 ---
 kind: project
-title:  Noteworthy
+title:  Noteworthy Markdown Editor
 datePublished: September 16, 2020
 
 

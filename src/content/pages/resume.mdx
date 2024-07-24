@@ -1,8 +1,21 @@
+import { FancyBox } from "@components/writing";
+import PostPreview from "@components/content/PostPreview.astro";
+
+<div style="border:2px solid purple; padding: var(--gap-1);">
+<span style="color: purple; font-weight: 600">Welcome!</span>
+This web version of my resume **organizes experiences by skill**, rather than by employer.  You can view a more traditional resume by following the link below:
+
+<div style="margin: 0 auto; text-align: center; color: purple; font-weight: 600; font-size: 2em;">
+Download PDF Resume
+</div>
+</div>
+
 ## Education
 
-* Master of Science (M.S.) in Computer Science from the Georgia Institute of Technology in 2019
-* Bachelor of Science (B.S.) in Mathematics from the University of Michigan in 2017.
+* Master of Science (M.S.) in Computer Science from Georgia Institute of Technology, 2019
+* Bachelor of Science (B.S.) in Mathematics from University of Michigan, 2017
 * See the second page of my resume for a list of notable coursework.
+
 
 ## Publications
 
@@ -12,57 +25,83 @@
 
 ## Skills
 
-**Functional Programming:**  I currently use Haskell in my work as a research
-engineer at Hasuo Lab @ NII.  I enjoy the expressiveness and safety that
-comes with pure, statically-typed functional programming.  Learning Haskell has had a big positive impact on how I solve problems
+**Functional Programming, Compilers, and Formal Methods:**
+I enjoy the expressiveness and safety that comes with pure, statically-typed functional programming.  Learning Haskell has had a big positive impact on how I solve problems
 in other languages, as well.
 
-* I used Haskell professionally for 2 years in my role as a research engineer for Hasuo Lab at NII.
-* At Smartpay, I worked as a backend engineer writing functional Scala using the [typelevel/cats](https://typelevel.org/cats/) ecosystem.
-* Here are a few projects I've written in Haskell:
-  * [yagi-lang]() is a toy language for understanding dependent type theory
-  * [borscht-hs]() is a command-line tool for managing my personal music library
-  * datalog tagging system
-  * coalgebraic product construction
-
-**Compilers & Programming Languages Theory:** I enjoy reading papers about programming language theory, type systems, formal verification, and category theory in my free time.
-
-* I have basic familiarity with the **Coq Proof Assistant**, after working through all the exercises in the Logical
-Foundations (Pierce et al.) book, as well as portions of Certified Programming
-with Dependent Types (Chlipala).
+* As a research engineer for Hasuo Lab at NII, I used **Haskell** to develop domain-specific programming languages for formal verification of cyberphysical systems, in collaboration with researchers from Japanese car manufacturers.
+  * Worked on `tempo-lang`, a language which compiles to **signal temporal logic** expressions.  I extended the parser and typechecker to support record types, enums, and user-defined functions.
+  * I also worked on an **exemplifier** which generates examples of signals which either satisfy or violate the temporal property described by a `tempo-lang` specification.  We achieved this by converting `tempo-lang` expressions into [satisfiability problems](https://en.wikipedia.org/wiki/Satisfiability_modulo_theories), and reconstructing a signal from satisfying assignments found by the [`z3` SMT solver](https://www.microsoft.com/en-us/research/project/z3-3/).
+* As a backend engineer at Smartpay, I wrote purely-functional **Scala** in tagless-final style using the [`cats-effect`](https://typelevel.org/cats-effect/) ecosystem.  A [functional core, imperative shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell/) architecture enabled us to work quickly, with confidence.
+* I have basic familiarity with the **`coq` proof assistant**, having worked through all the exercises in Volumes 1-3 of the [Software Foundations](https://softwarefoundations.cis.upenn.edu/) book, as well as portions of [CPDT](http://adam.chlipala.net/cpdt/).
+* In my free time, I enjoy working with **dependently-typed** languages like Idris and Lean.  I created the toy language [`yagi-lang`](https://github.com/benrbray/yagi-lang) to learn more about dependent type theory.
+* **TODO:** datalog tagging system
+* **TODO:** coalgebraic product construction
 {/* * I’ve also read through the first 5 chapters of the Homotopy Type Theory:  Univalent Foundations of Mathematics book, to better understand the formal systems that powers proof assistants like Coq. */}
-* TODO
+{/* I enjoy reading papers about programming language theory, type systems, formal verification, and category theory in my free time. */}
 
-**Graphics & Numerical Simulation:**
+<PostPreview postSlug="why-functional-programming" />
+
+**Computer Graphics & Numerical Simulation:**
 
 * I wrote a C++/CUDA simulation of 2D incompressible fluid flow, based on the “Stable Fluids” paper by Jos Stam.  I compared a few different numerical methods, including parallel Jacobi on the GPU and preconditioned conjugate gradient on the CPU.
 * I completed graduate courses on computer architecture, compilers, and parallel computing.  My course projects were all written in C++.  Projects for the compilers course involved writing LLVM analysis / transformation passes on LLVM IR.
+* In my role as a **computer vision engineer** at EmbodyMe, I trained deep learning models to transfer facial expressions from one video to another.  I also contributed to graphics the post-processing pipeline; for example, by applying spherical harmonics lighting to the meshes output by our model.
+  - I maintained our Python/PyTorch codebase (which includes training and visualization code for face-reenactment and inpainting models).
+  - I led a biweekly deep learning & graphics reading group to follow recent developments (GANs / attention / transformers / distillation / NeRF) and distribute knowledge among the team.
+* As an undergraduate student, I spent three years as a research assistant using natural language processing to analyze a large corpus of 19th-century German periodicals.
+  -  I implemented algorithms for topic modeling (LDA/HDP) from scratch in Python.
+  - I designed a custom OCR error correction scheme for German blackletter fonts.
+  - I trained a logistic regression classifier for place-name detection.
+  - I built a web-app allowing humanities researchers to browse our dataset and visualize the results of our topic modeling analysis.
 
-**Frontend Development:** I have 6 years of experience writing TypeScript.
+Early in my career, I also worked as a freelance **game developer**.  Read more by following the link:
 
-* I created [Noteworthy](https://github.com/benrbray/noteworthy), a desktop Markdown editor with bidirectional links and interactive math editing.
-* I maintain the following `npm` packages, written in **TypeScript**:
-  * @benrbray/prosemirror-math is a plugin to the ProseMirror editor that adds support for interactive LaTeX equation editing.
-  * @benrbray/remark-cite adds support for Pandoc-style citation syntax to the Remark markdown parser.
+<PostPreview postSlug="project/flash-games" />
+
+**Frontend Engineering:** I have 6 years of experience writing TypeScript.
+
+I have a particular interest in the design of rich document editors for note-taking, documentation, and academic writing. 
+
+* **TODO:** TypeScript & React for DriveSGL and Tempo-Forms for Hasuo Lab @ NII
+* I created [Noteworthy](https://github.com/benrbray/noteworthy), an offline Markdown editor with bidirectional links and interactive math editing.
+  * `noteworthy-vscode` allows the Noteworthy editor to be used to edit Markdown files within Visual Studio Code
+* My `prosemirror-math` package adds support for interactive LaTeX equation editing to the `prosemirror` editor framework.
+* My `remark-cite` package adds support for `pandoc`-style citation syntax to the `remark` markdown parser, as well as for formatting bibliographies using data from `*.bib` files.
+* I have a deep working knowledge of the `codemirror` and `prosemirror` editors, and have authored dozens of custom plugins for each.
+* I've worked professionally with both the `react` and `solid-js` frameworks.
+
+<PostPreview postSlug="project/noteworthy" />
+<PostPreview postSlug="frontend/solidjs-vs-react" />
+
+**User Experience:** 
+
+* TODO
 
 **Backend Engineering:**
 
-* TODO
-
+* I worked for one year as a **backend engineer** at Smartpay KK writing **Scala**.
+  * Led the design, implementation, testing, and release of a "programmatic disbursements" backend service which integrates with bank APIs to automatically issue merchant payouts and consumer refunds on a fixed schedule.
+  * Collaborated with our frontend team to design a **GraphQL** API to power our mobile app.
+  * Contributed to the backend API powering the mobile & web apps for a pay-later service.
+  * Worked with **Google Cloud Platform**, Postgres, and Terraform Cloud.
+* I have experience with [`node.js`](https://nodejs.org/en), Scala's [`http4s`](https://http4s.org/), Haskell's [`servant`](https://hackage.haskell.org/package/servant), and Python's [`flask`](https://flask.palletsprojects.com/en/3.0.x/).
 
 **Technical Writing:** Here are a few samples of my writing:
 
-* TODO
+<PostPreview postSlug="category-theory/universal-properties" />
+<PostPreview postSlug="abstract-algebra-modules" />
+<PostPreview postSlug="pdf-notes/chebychev-polynomials" />
 
 **Systems Programming:** In 2024, I started using Rust for hobby projects.
 
 * TODO
 
-**Teaching**:  The following words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan Lee Mulligan really resonate with me:
+**Teaching**:  These words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan Lee Mulligan capture my feelings well:
 
-> The truth is this:  When I am with someone who is looking for something that I have,
-> and I can give it to them -- the look on someone's face when they *get* it, and it becomes
-> *theirs* as well...  
+> When I am with someone who is looking for something that I have, and I can
+> give it to them -- the look on someone's face when they *get* it, and it
+> becomes *theirs* as well...  
 >
 > The lighting of a second candle does not diminish the first.  Watching someone
 > learn is one of life's greatest joys.  When you're a teacher you have a front
@@ -78,32 +117,26 @@ I had the pleasure of serving as a teaching assistant for the following courses.
 * (Instructional Aide) EECS 545, [Graduate Machine Learning](https://github.com/thejakeyboy/umich-eecs545-lectures) (Winter 2016, University of Michigan)
 * (Math Lab Tutor) MATH 425, Introduction to Probability, (Fall 2015 - Winter 2016, University of Michigan)
 
-I also have a habit of starting reading groups wherever I work!
+{/* I also have a habit of starting reading groups wherever I work!
 
 * At NII, I formed a weekly category theory reading group with each batch of summer interns.
 * At EmbodyMe, I led a biweekly deep learning & computer graphics reading group.
-* At the University of Michigan, I co-founded [MSAIL](https://msail.github.io/), a student organization aimed at getting undergraduates involved with machine learning research.
-
-**Machine Learning / Optimization**:  Much of my coursework focused on machine learning and numerical methods.  Topics included probabilistic graphical models, Bayesian inference, numerical linear algebra, convex optimization, deep learning, and scientific computing.
-
-> **TODO:** combine with the "numerical methods" above, and frame the ML experience as "optimization+numerical methods" experience
-
-* In my role as a Machine Learning & Graphics Engineer at EmbodyMe, 
-  - I maintained our Python/PyTorch codebase (which includes training and visualization code for face-reenactment and inpainting models).
-  - I led a biweekly deep learning & graphics reading group to follow recent developments (GANs / attention / transformers / distillation / NeRF) and distribute knowledge among the team.
-* As an undergraduate student, I spent three years as a research assistant using natural language processing to analyze a large corpus of 19th-century German periodicals.
-  -  I implemented algorithms for topic modeling (LDA/HDP) from scratch in Python.
-  - I designed a custom OCR error correction scheme for German blackletter fonts.
-  - I trained a logistic regression classifier for place-name detection.
-  - I built a web-app allowing humanities researchers to browse our dataset and visualize the results of our topic modeling analysis.
+* At the University of Michigan, I co-founded [MSAIL](https://msail.github.io/), a student organization aimed at getting undergraduates involved with machine learning research. */}
 
 ## Work History
 
 **Research Software Engineer**, National Institute of Informatics
 
 * Used **Haskell** to develop domain-specific programming languages for formal verification of cyberphysical systems.
+* My group focused on translating formal methods research into 
+* Our work aimed at finding ways to improve the workflow 
+* In collaboration with research teams at major Japanese auto manufacturers, Delivered proof-of-concept software too
+
+In collaboration with research teams at 
 * Developed `tempo-lang`, a language that compiles to **signal temporal logic** expressions.
   * implemented the parser and typechecker
+  * 
+* Developed a [model checker](https://en.wikipedia.org/wiki/Model_checking) for a simple imperative probabilistic programming language.
   * 
 
 **Backend Software Engineer**, Smartpay K.K.
@@ -120,13 +153,39 @@ I also have a habit of starting reading groups wherever I work!
 
 I maintain the following `npm` packages:
 
-* https://github.com/benrbray/prosemirror-math
-* http://github.com/benrbray/remark-cite
+<PostPreview postSlug="project/remark-cite" />
+
+<PostPreview postSlug="project/prosemirror-math" />
 
 I have also made a few contributions to open-source projects:
 
-* https://github.com/jgm/citeproc/pull/88
-* https://github.com/jgm/citeproc/pull/113
-* https://github.com/pjones/byline/pull/20
-* https://github.com/benrbray/tikzjax
-* https://github.com/beetbox/beets/pull/3682
+<FancyBox>
+(jgm/citeproc#88) [Support hyperlinked titles according to draft of CSL v1.0.2 spec](https://github.com/jgm/citeproc/pull/88)
+</FancyBox>
+
+<FancyBox>
+(jgm/citeproc#113) [
+Address unexpected interaction between CSL `second-field-align` setting and whole-citation links](https://github.com/jgm/citeproc/pull/113)
+</FancyBox>
+
+<FancyBox>
+(pjones/byline#20) [Support ANSI Vivid Color Intensity](https://github.com/pjones/byline/pull/20)
+</FancyBox>
+
+<FancyBox>
+(benrbray/tikzjax) my [fork of `aristicat1/tikzjax`](https://github.com/benrbray/tikzjax) adds a `Dockerfile` and fixes build issues
+</FancyBox>
+
+<FancyBox>
+(beetbox/beets#3692) [Allow Discogs Plugin to respond during Singleton Import Mode](https://github.com/beetbox/beets/pull/3682)
+</FancyBox>
+
+## Relevant Coursework
+
+Below is a list of notable coursework from my undergraduate & graduate programs.
+
+**CS 2641 @ GT, Advanced Compiler Optimization (Spring 2019)**
+
+* For projects, wrote LLVM transform passes to perform optimizations discussed in class.
+* Reaching definitions; available expressions; partial redundancy elimination; infeasible paths
+* Data/loop/control dependencies; loop parallelism, reordering, unrolling, and vectorization

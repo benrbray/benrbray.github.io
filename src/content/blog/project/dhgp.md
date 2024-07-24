@@ -1,7 +1,7 @@
 ---
 kind: project
 title:  Digital Humanities & German Periodicals
-title-display:  Digital Humanities & German&nbsp;Periodicals
+titleDisplay:  Digital Humanities & German&nbsp;Periodicals
 datePublished: December 1, 2016
 
 
@@ -21,9 +21,9 @@ As an undergraduate research assistant, I spent three years as the primary devel
 
 Using the web application I built, my supervisor was able study cultural and historical trends in a large corpus of previously unstudied documents.  The results of this work were published in humanities journals and conferences, including [@mcisaac2014:rethinking] and [@mcisaac2016:geospatial].
 
-> [@mcisaac2014:rethinking]
-> 
-> [@mcisaac2016:geospatial]
+[@mcisaac2014:rethinking]
+
+[@mcisaac2016:geospatial]
 
 ## Motivation
 

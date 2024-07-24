@@ -1,7 +1,7 @@
 ---
 kind: project
 title:  prosemirror-math
-title-display: <code>prosemirror-math</code>
+titleDisplay: <code>prosemirror-math</code>
 datePublished: June 14, 2020
 
 
@@ -13,3 +13,7 @@ imageThumbnail: images/thumbnails/prosemirror-math-2.png
 github_url: https://github.com/benrbray/prosemirror-math
 summary: This project provides schema and plugins for writing mathematics using <a href="https://prosemirror.net/">prosemirror</a>. Written in TypeScript, with math rendering handled by <a href="https://katex.org/">KaTeX</a>).
 ---
+
+# In the Wild
+
+* The [Zotero](https://www.zotero.org/) reference manager uses `prosemirror-math` to support KaTeX equations in notes.

@@ -1,0 +1,63 @@
+---
+import FormattedDate from '../dates/FormattedDate.astro';
+
+interface Props {
+  url: string,
+  titleHtml: string,
+  summaryHtml: string
+  date?: Date
+}
+
+const props = Astro.props;
+---
+
+<div class={`preview-box`}>
+    <div class="preview-title">
+      <a href={props.url} set:html={props.titleHtml}/>
+      {props.date &&
+        <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)">
+          <FormattedDate date={props.date} />
+        </span>
+      }
+    </div>
+    <div class="preview-summary" set:html={props.summaryHtml} />
+</div>
+
+<!-- consider this method for block links -->
+<!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method -->
+
+<style>
+.preview-link {
+  display: block;
+  color: unset;
+  text-decoration: unset;
+}
+
+.preview-box {
+  margin: var(--gap-1) 0;
+  padding: var(--gap-1);
+
+  border-radius: var(--gap-0);
+  background-color: #f6f6f6;
+  border: 1px dashed #ccc;
+}
+
+.preview-box:hover {
+  background-color: #eee;
+}
+
+.preview-title {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-title-weight);
+
+  text-decoration: 2px limegreen underline;
+}
+
+.preview-title a {
+  color: unset;
+}
+
+.preview-summary {
+  margin-top: var(--gap-0);
+}
+</style>
