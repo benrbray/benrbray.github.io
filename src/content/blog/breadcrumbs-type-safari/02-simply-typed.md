@@ -1,7 +1,7 @@
 ---
-title: System F
+title: Simply-Typed Lambda Calculus
 summary: 'DESCRIPTION'
-datePublished: '11 May 2024'
+datePublished: '4 May 2024'
 
 series:
   seriesId: breadcrumbs-type-safari

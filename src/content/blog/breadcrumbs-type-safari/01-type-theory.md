@@ -1,5 +1,5 @@
 ---
-title: Hindley-Milner Type Inference
+title: Introduction to Type Theory
 summary: 'DESCRIPTION'
 datePublished: '4 May 2024'
 
