@@ -32,7 +32,7 @@ const posts = await getSeriesPosts(series);
 	</div>
 	<div class="series-posts">
     {posts.map(p => {
-      const isActivePost = p.slug === seriesData.activeSlug;
+      const isActivePost = (!!seriesData.activeSlug) && p.slug === seriesData.activeSlug;
       return <SeriesSummaryEntry
 				showHeadings={isActivePost}
 				isActivePost={isActivePost}

@@ -1,7 +1,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 
-const isProd = import.meta.env.PROD;
-const isDev  = import.meta.env.DEV;
+export const IS_PROD = import.meta.env.PROD;
+export const IS_DEV  = import.meta.env.DEV;
 
 /* -------------------------------------------------------------------------- */
 

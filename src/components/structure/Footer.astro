@@ -13,6 +13,7 @@ const today = new Date();
   <!-- Generation Date -->
   <span style="float: right">
     Generated {today.toLocaleDateString(undefined, { dateStyle : "long" })}
+    { !import.meta.env.PROD && `(${import.meta.env.MODE.toUpperCase()})` }
   </span>
 </footer>
 
