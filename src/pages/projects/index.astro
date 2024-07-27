@@ -1,22 +1,22 @@
 ---
-import { getPosts } from '@root/util/query';
+import { getProjects } from '@root/util/query';
 import Page from '@root/layouts/Page.astro';
 import ColumnNormal from '@root/layouts/ColumnNormal.astro';
 import PostPreview from '@root/components/content/PostPreview.astro';
 
-const posts = (await getPosts({ includeSeries: false })).sort(
+const projects = (await getProjects()).sort(
 	(a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf()
 );
 ---
 
-<Page pageTitle={"Blog Posts"}>
+<Page pageTitle={"Projects"}>
 <ColumnNormal>
 <main>
-	<h1>Blog Posts</h1>
+	<h1>Projects</h1>
 	<section>
 			{
-				posts.map((post) => (
-					<PostPreview postSlug={post.slug}/>
+				projects.map((project) => (
+					<PostPreview postSlug={project.slug}/>
 				))
 			}
 	</section>

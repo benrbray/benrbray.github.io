@@ -10,17 +10,12 @@ const props = Astro.props
 let seriesData: SeriesData;
 
 if(props && Object.keys(props).length !== 0) {
-	console.log("aaa");
 	seriesData = props;
 } else if(Astro.locals.currentSeries) {
-	console.log('bbb');
 	seriesData = Astro.locals.currentSeries;
 } else {
 	throw new Error("\n\ninvalid series data\n\n");
 }
-
-console.log("hello!");
-console.log(seriesData);
 
 const series = seriesData.series;
 
