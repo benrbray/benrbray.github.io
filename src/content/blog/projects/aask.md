@@ -1,6 +1,7 @@
 ---
 kind: project
-title:  AdamBots Automated&nbsp;Scouting&nbsp;Kit
+title:  AdamBots Automated Scouting Kit
+titleDisplay:  AdamBots Automated Scouting&nbsp;Kit
 
 published: true
 datePublished: June 1, 2013
@@ -49,7 +50,7 @@ table.frcdata .blue {
 
 # FIRST Robotics Competition
 
-For six weeks each winter, high-school students in more than 25 countries devote their evenings, nights, and weekends to build game-playing robots as part of the **FIRST Robotics Competition (FRC)**.  The robots are designed, built, and programmed by students, with guidance from industry professionals (*aka parents*!) who volunteer their time. 
+For six weeks each winter, high-school students in more than 25 countries devote their evenings, nights, and weekends to build game-playing robots as part of the **FIRST Robotics Competition (FRC)**.  The robots are designed, built, and programmed by students, with guidance from industry professionals (aka *parents*!) who volunteer their time. 
 
 To encourage innovation, the rules of the game change each year.  Starting from January, students are allowed six weeks to design, build, program, and test their robots before competitions begin in March.  During competition season, many teams compete weekly or biweekly in their region for a chance to advance to the world championships in April.
 
@@ -84,7 +85,9 @@ Based on these computations, we also provide:
 
 Originally, AASK scraped competition data from the FIRST website, but unfortunately the old match data is no longer available.  Instead, the [demo hosted here](/static/aask/aask.html) runs with cached match data from the 2013 World Championship.  See below for a screenshot, followed by an explanation of the mathematical details.
 
-<img src="/static/aask/img/aask_ex1.png"></img>
+<a href="/static/aask/aask.html">
+  <img src="/static/aask/img/aask_ex1.png"></img>
+</a>
 
 # Mathematical Details
 

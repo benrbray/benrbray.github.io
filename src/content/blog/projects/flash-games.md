@@ -5,11 +5,10 @@ titleDisplay:  Flash Games @ Newgrounds&nbsp;(2007&#8209;2011)
 
 published: true
 datePublished: December 1, 2012
-
+url: https://archawn.newgrounds.com/
 
 tags:  [games]
 tools:  [flash]
-url: https://archawn.newgrounds.com/
 imageThumbnail: images/thumbnails/flash-games.png
 summary:  In high school, my curiosity about game development led me to <b>Newgrounds</b>, where I made lifelong friends and published a few Flash games along the way!
 ---

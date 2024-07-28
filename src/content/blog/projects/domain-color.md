@@ -2,7 +2,7 @@
 kind: project
 title:  Complex Domain Coloring
 
-published: true
+published: false
 datePublished: February 15, 2014
 
 tags:  [math]

@@ -1,4 +1,5 @@
 ---
+import { Content as AboutContent } from "@root/content/snippets/about-me.mdx";
 ---
 
 <div id="about" class="column-normal">
@@ -9,36 +10,11 @@
 	<!-- ontro -->
 	<div class="about-description">
 		<div class="about-title">Benjamin R. Bray</div>
-		<p>
-			I work as a <b>research software engineer</b> for Prof. <a href="https://group-mmm.org/~ichiro/">Ichiro Hasuo</a> at the <a
-				href="https://www.nii.ac.jp/en/">National Institute of Informatics</a> in Tokyo, Japan, where I use <b>Haskell</b> to create domain-specific programming languages for formal verification of cyberphysical systems.
-		</p>
-		<p>
-			My ambition is to design software which makes <b>formal verification</b> more accessible to developers.  I'm particularly interested in improving the user experience of <b>dependently-typed</b> programming. 
-		</p>
-		<p>
-			I work most comfortably at the edge of where <b>theory meets practice</b>, and enjoy building tools for domain experts with a tight feedback loop.
-		</p>
-		<p>
-			In my free time, I enjoy cycling, <a href="/images/photos/ben-goat.jpg">goats</a>, dodgeball, <a href="/images/photos/tokyo-walking-map.jpg">long walks</a>, and <a
-			href="/images/photos/sourdough.jpg">bread</a>. Maybe one day I'll make more <a
-			href="http://www.newgrounds.com/portal/view/512482">games</a>. If you'd like to chat, feel free to
-		write me at <a href="mailto:benrbray@gmail.com">benrbray@gmail.com</a>.
-		</p>
-
-		<!-- <p>In my free time, I work on <a href="https://noteworthy.ink/">Noteworthy</a>, an open-source Markdown
-			editor with bidirectional links and excellent math support!
-		</p> -->
-
-		<!-- <p>I hold a Masters in Computer Science from <b>Georgia Tech</b>, where my research advisor was <a
-				href="https://www.cc.gatech.edu/~jabernethy9/">Jacob Abernethy</a>. Previously, I studied math at
-			the University of Michigan, where I also helped with a machine learning <a
-				href="https://eecs445-f16.github.io/">class</a> and <a href="http://msail.github.io/">reading
-				group</a>. -->
+		<AboutContent />
 	</div>
 </div>
 
-<style>
+<style is:inline>
 #about {
 	display: grid;
 

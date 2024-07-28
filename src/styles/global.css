@@ -208,6 +208,18 @@ article li {
   border-radius: var(--gap-0);
 }
 
+/* ---- bibliography ------------------------------------ */
+
+.rehype-cite-bib {
+  margin: var(--gap-1) 0;
+}
+
+article .rehype-cite-bib .bib-title {
+  font-size: var(--font-heading-1-size);
+  font-weight: var(--font-heading-weight);
+  color: var(--font-heading-1-color);
+}
+
 /* ---- development mode -------------------------------- */
 
 .unpublished {

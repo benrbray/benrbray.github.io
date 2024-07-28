@@ -1,6 +1,6 @@
 ---
 tags: [math]
-title: Chebychev Polynomials (PDF)
+title: "Notes: Chebychev Polynomials"
 
 published: true
 datePublished: 2016-12-08

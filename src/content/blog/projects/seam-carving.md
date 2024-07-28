@@ -2,7 +2,7 @@
 kind: project
 title:  Seam Carving
 
-published: true
+published: false
 datePublished: December 28, 2014
 
 priority: low

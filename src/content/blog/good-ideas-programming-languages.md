@@ -1,9 +1,15 @@
 ---
-title: Good Ideas in Programming Languages
+title: Features I Miss when Switching Programming Languages
 datePublished: 2024-07-12
 summary: TODO
 priority: low
 ---
+
+https://buttondown.email/hillelwayne/archive/microfeatures-id-like-to-see-in-more-languages/
+
+* multiline strings, balanced string literals
+* date literals
+
 
 # Boons
 
@@ -36,6 +42,12 @@ priority: low
 ## Idiom Syntax
 
 * Idris
+
+## Functions
+
+* named arguments
+* named argument tuples (case classes, args, kwargs)
+* argument types (TypeScript `Params<F>`, `ReturnType<F>`, etc)
 
 ## Typeclasses / Traits
 

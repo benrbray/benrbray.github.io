@@ -4,12 +4,22 @@ title:  "Abstract Algebra:  Modules"
 datePublished: 2020-05-13
 published: true
 
-pdf_url: /notes/abstract-algebra_modules_13may2020.pdf
+urlPDF: /notes/abstract-algebra_modules_13may2020.pdf
 
 katex_macros: abstract-algebra.katex
 tags: [math]
 summary:  Vector spaces over a field are a special case of the more general notion of modules over a ring.  Rather than the long list of axioms normally presented in textbooks, we see how an algebraic view of vector spaces helps to motivate the definition of modules.
 ---
+
+$$
+\providecommand{\FF}{\mathbb{F}}
+\providecommand{\ZZ}{\mathbb{Z}}
+\providecommand{\NN}{\mathbb{N}}
+\providecommand{\End}{\mathrm{End}}
+\providecommand{\Hom}{\mathrm{Hom}}
+\providecommand{\subgroup}{\leqslant}
+\providecommand{\subspace}{\leqslant}
+$$
 
 ## Vector Space over a Field
 

@@ -1,6 +1,6 @@
 ---
 tags: [math]
-title: Minimax Approximation Theory (PDF)
+title: "Notes: Minimax Approximation Theory"
 url: /notes/minimax-approx_nov16.pdf
 
 priority: low

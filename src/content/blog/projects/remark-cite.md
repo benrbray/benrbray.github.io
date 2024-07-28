@@ -6,7 +6,6 @@ titleDisplay: <code>remark-cite</code>
 published: true
 datePublished: May 19, 2021
 
-
 tags:  [frontend]
 tools: [typescript]
 url: https://github.com/benrbray/remark-cite

@@ -7,19 +7,14 @@ import PostList from '@root/components/lists/PostList.astro';
 import SeriesList from '@root/components/lists/SeriesList.astro';
 import { SITE_TITLE } from '@root/consts';
 import ColumnNormal from '@root/layouts/ColumnNormal.astro';
-import ColumnLarge from '@root/layouts/ColumnLarge.astro';
-import { getPosts, getProjects } from '@root/util/query';
+import { getPosts, getProjects, getSeriesList } from '@root/util/query';
+import type { CollectionEntry } from 'astro:content';
 
-import { getCollection } from 'astro:content';
+const byDate = (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">): number => b.data.datePublished.valueOf() - a.data.datePublished.valueOf();
+const posts = (await getPosts({ includeSeries: false })).sort(byDate);
+const projects = (await getProjects()).sort(byDate);
 
-const posts = (await getPosts({ includeSeries: false }));
-const projects = (await getProjects());
-
-const entries = [...posts, ...projects].sort(
-	(a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf()
-);
-
-const series = await getCollection("series");
+const series = await getSeriesList();
 ---
 
 <!doctype html>
@@ -33,13 +28,17 @@ const series = await getCollection("series");
 			<About />
 
 			<ColumnNormal>
-				<h2>Tutorial Series</h2>
-				<SeriesList series={series} />
+				<!-- Series -->
+				{series.length > 0 && (<>
+					<h2>Tutorial Series</h2>
+					<SeriesList series={series} />
+				</>)}
+				<h2>Selected Projects</h2>
+				<PostList posts={projects} />
+				<!-- Posts -->
 				<h2>Selected Posts</h2>
+				<PostList posts={posts} />
 			</ColumnNormal>
-			<ColumnLarge>
-				<PostList posts={entries} />
-			</ColumnLarge>
 		</main>
 		<Footer />
 	</body>

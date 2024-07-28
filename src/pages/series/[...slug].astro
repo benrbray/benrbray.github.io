@@ -1,10 +1,11 @@
 ---
 import ColumnNormal from '@root/layouts/ColumnNormal.astro';
 import Page from '@root/layouts/Page.astro';
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { getSeriesList, seriesIsPublished } from '@root/util/query';
+import { type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('series');
+	const posts = await getSeriesList();
 	return posts.map((post) => ({
 		params: { slug: post.slug },
 		props: post,
@@ -18,7 +19,7 @@ const { Content } = await post.render();
 
 <Page pageTitle={post.data.title}>
   <ColumnNormal>
-    <h1>{post.data.title}</h1>
+    <h1 class:list={[{ unpublished : seriesIsPublished(post) }]}>{post.data.title}</h1>
 
     <Content />
   </ColumnNormal>

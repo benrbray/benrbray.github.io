@@ -12,13 +12,14 @@ const { post } = Astro.props;
 const postUrl = getPostUrl(post);
 const postDisplayTitle = post.data.titleDisplay || post.data.title;
 const isLowPriority = post.data.priority === "low";
+const isProject = post.data.kind === "project";
 ---
 
 
 <div class:list={[
   "post-summary-box",
   `priority-${post.data.priority}`,
-  `kind=${post.data.kind === "project" ? "project" : "post"}`,
+  `kind-${post.data.kind === "project" ? "project" : "post"}`,
 ]}>
   <!-- summary -->
   <div class="post-desc">
@@ -33,7 +34,7 @@ const isLowPriority = post.data.priority === "low";
       <span class="post-year"><FormattedDate date={post.data.datePublished} /></span>
       <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
     </div>
-    {!isLowPriority && <div class="post-summary" set:html={post.data.summary} />}
+    {!isLowPriority && isProject && <div class="post-summary" set:html={post.data.summary} />}
   </div>
   <!-- thumbnail -->
   {
@@ -56,7 +57,7 @@ const isLowPriority = post.data.priority === "low";
 }
 
 .post-summary-box.kind-project {
-  background-color: #00aaff0f;
+  background-color: #ddf7ff;
   padding: var(--gap-1);
 }
 
@@ -87,14 +88,14 @@ const isLowPriority = post.data.priority === "low";
   /* display: flex; */
   justify-content: space-between;
 
-  margin-bottom: 0.1rem;
+  margin-bottom: var(--gap-0);
   font-size: var(--font-size-large);
   font-weight: var(--font-title-weight);
 }
 
 .post-summary-box .post-subtitle,
 .post-summary-box .post-subtitle {
-  margin: 0.1rem 0;
+  margin: var(--gap-0) 0;
   text-overflow: hidden;
   overflow: hidden;
 }

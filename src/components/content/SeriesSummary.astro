@@ -1,5 +1,5 @@
 ---
-import { getSeriesPosts } from '@root/util/query';
+import { getSeriesPosts, seriesIsPublished } from '@root/util/query';
 import SeriesSummaryEntry from './SeriesSummaryEntry.astro';
 import type { SeriesData } from '@root/model';
 
@@ -24,7 +24,13 @@ const posts = await getSeriesPosts(series);
 
 <div class="series" style={`--series-bg-image: url(${series.data.imageSummary})`}>
 	<div class="series-header">
-		<div class="series-title"><a href={`/series/${series.slug}/`}>{series.data.title}</a></div>
+		<div class="series-title">
+			<a href={`/series/${series.slug}/`}
+				 class:list={[{ unpublished : seriesIsPublished(series) }]}
+			>
+				{series.data.title}
+			</a>
+		</div>
 	</div>
 	<div class="series-image"></div>
 	<div class="series-summary">
