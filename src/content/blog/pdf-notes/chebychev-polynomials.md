@@ -1,7 +1,10 @@
 ---
 tags: [math]
 title: Chebychev Polynomials (PDF)
+
+published: true
 datePublished: 2016-12-08
+
 url: /notes/chebychev-polynomials_dec16.pdf
 priority: low
 summary:  "The <b>Chebyshev polynomials</b> appear frequently in numerical analysis and are incredibly useful for

@@ -2,6 +2,8 @@
 kind: project
 title:  Flash Games @ Newgrounds (2007-2011)
 titleDisplay:  Flash Games @ Newgrounds&nbsp;(2007&#8209;2011)
+
+published: true
 datePublished: December 1, 2012
 
 

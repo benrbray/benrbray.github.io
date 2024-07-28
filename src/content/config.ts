@@ -5,6 +5,7 @@ const postSchema = z.object({
 	titleDisplay: z.string().optional(),
 	summary: z.string(),
 	kind: z.enum(["post", "project"]).default("post"),
+	published: z.boolean().default(false),
 	// Transform string to Date object
 	datePublished: z.coerce.date(),
 	dateUpdated: z.coerce.date().optional(),

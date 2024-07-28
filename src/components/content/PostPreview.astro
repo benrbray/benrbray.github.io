@@ -1,5 +1,5 @@
 ---
-import { getPostUrl } from '@root/util/query';
+import { getPostUrl, postIsPublished } from '@root/util/query';
 import type { CollectionEntry } from 'astro:content';
 import { getEntry } from 'astro:content';
 
@@ -22,4 +22,5 @@ const postDisplayTitle = post.data.titleDisplay || post.data.title;
   titleHtml={postDisplayTitle}
   summaryHtml={post.data.summary}
   date={post.data.datePublished}
+  unpublished={!postIsPublished(post)}
 />

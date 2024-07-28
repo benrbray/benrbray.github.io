@@ -207,3 +207,10 @@ article li {
   background-color: lightblue;
   border-radius: var(--gap-0);
 }
+
+/* ---- development mode -------------------------------- */
+
+.unpublished {
+  background-color: rgb(255, 255, 173);
+  text-decoration: 2px solid goldenrod underline;
+}

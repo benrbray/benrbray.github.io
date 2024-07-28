@@ -5,7 +5,8 @@ interface Props {
   url: string,
   titleHtml: string,
   summaryHtml: string
-  date?: Date
+  date?: Date,
+  unpublished?: boolean
 }
 
 const props = Astro.props;
@@ -13,7 +14,10 @@ const props = Astro.props;
 
 <div class={`preview-box`}>
     <div class="preview-title">
-      <a href={props.url} set:html={props.titleHtml}/>
+      <a href={props.url}
+         class:list={[{ unpublished: props.unpublished }]}
+         set:html={props.titleHtml}
+      />
       {props.date &&
         <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)">
           <FormattedDate date={props.date} />

@@ -30,6 +30,14 @@ export const getPostUrl = (post: CollectionEntry<"blog">) => {
   }
 }
 
+export const postIsPublished = (post: CollectionEntry<"blog">) => {
+  return post.data.published;
+}
+
+export const postDisplayTitle = (post: CollectionEntry<"blog">) => {
+  return post.data.titleDisplay || post.data.title;
+}
+
 /* -------------------------------------------------------------------------- */
 
 /**

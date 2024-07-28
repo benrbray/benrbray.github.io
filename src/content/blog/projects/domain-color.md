@@ -1,6 +1,8 @@
 ---
 kind: project
 title:  Complex Domain Coloring
+
+published: true
 datePublished: February 15, 2014
 
 tags:  [math]

@@ -2,8 +2,9 @@
 kind: project
 title:  Digital Humanities & German Periodicals
 titleDisplay:  Digital Humanities & German&nbsp;Periodicals
-datePublished: December 1, 2016
 
+published: true
+datePublished: December 1, 2016
 
 tags:  [machine-learning, frontend]
 tools: [python, javascript]

@@ -1,8 +1,9 @@
 ---
 kind: project
 title:  Unboggler
-datePublished: January 18, 2020
 
+published: true
+datePublished: January 18, 2020
 
 tags: [algorithms]
 tools: [javascript]
@@ -12,7 +13,6 @@ summary: Generate a boggle board containing your custom list of words!
 ---
 
 <style>
-
 /* ==== BOGGLE ============================================================== */
 
 #boggle-game {
@@ -26,7 +26,6 @@ summary: Generate a boggle board containing your custom list of words!
 		  "solve words" auto
 		  / auto 1fr;
 }
-
 
 @media (max-width: 35rem) {
 	#boggle-game {

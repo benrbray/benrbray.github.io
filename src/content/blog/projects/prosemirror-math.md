@@ -2,6 +2,8 @@
 kind: project
 title:  prosemirror-math
 titleDisplay: <code>prosemirror-math</code>
+
+published: true
 datePublished: June 14, 2020
 
 

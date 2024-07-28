@@ -1,5 +1,5 @@
 ---
-import { getPostUrl } from '@root/util/query';
+import { getPostUrl, postDisplayTitle, postIsPublished } from '@root/util/query';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../dates/FormattedDate.astro';
 
@@ -33,7 +33,12 @@ const label = series.isAppendix ?
   </div>
   <div>
     <div class="post-label">
-      {label}, <a class="post-title" href={getPostUrl(post)}>{post.data.title}</a>
+      {label},
+      <a class="post-title"
+         href={getPostUrl(post)}
+         class:list={[{ unpublished: !postIsPublished(post) }]}
+         set:html={postDisplayTitle(post)}
+      />
     </div>
   {
     showHeadings && headings && <div>

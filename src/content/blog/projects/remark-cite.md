@@ -2,6 +2,8 @@
 kind: project
 title:  remark-cite
 titleDisplay: <code>remark-cite</code>
+
+published: true
 datePublished: May 19, 2021
 
 

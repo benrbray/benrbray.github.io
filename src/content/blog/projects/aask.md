@@ -2,6 +2,7 @@
 kind: project
 title:  AdamBots Automated&nbsp;Scouting&nbsp;Kit
 
+published: true
 datePublished: June 1, 2013
 
 tags:  [math, frontend]

@@ -1,5 +1,5 @@
 ---
-import { getPostUrl } from '@root/util/query';
+import { getPostUrl, postIsPublished } from '@root/util/query';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../dates/FormattedDate.astro';
 import PostTags from './PostTags.astro';
@@ -15,12 +15,19 @@ const isLowPriority = post.data.priority === "low";
 ---
 
 
-<div class={`post-summary-box ${post.data.kind === "project" ? "kind-project" : "kind-post"} priority-${post.data.priority}`}>
+<div class:list={[
+  "post-summary-box",
+  `priority-${post.data.priority}`,
+  `kind=${post.data.kind === "project" ? "project" : "post"}`,
+]}>
   <!-- summary -->
   <div class="post-desc">
     <!-- title -->
     <div class="post-title">
-      <a href={postUrl} set:html={postDisplayTitle}></a>
+      <a href={postUrl}
+         class:list={[{ unpublished: !postIsPublished(post) }]}
+         set:html={postDisplayTitle}
+      />
     </div>
     <div class="post-subtitle">
       <span class="post-year"><FormattedDate date={post.data.datePublished} /></span>
@@ -30,82 +37,77 @@ const isLowPriority = post.data.priority === "low";
   </div>
   <!-- thumbnail -->
   {
-		!isLowPriority && post.data.imageThumbnail &&
-		(<div class="post-thumb">
-			<img alt="" src={post.data.imageThumbnail} />
-		</div>)
-	}
+    !isLowPriority && post.data.imageThumbnail &&
+    (<div class="post-thumb">
+      <img alt="" src={post.data.imageThumbnail} />
+    </div>)
+  }
 </div>
 
 <style>
-
-/* .post-summary-box {
-	margin: 2rem 0;
-} */
-
 .post-summary-box {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	gap: 1.0rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1.0rem;
 
-	width: 100%;
-	margin: 1.0rem 0;
+  width: 100%;
+  margin: 1.0rem 0;
 }
 
 .post-summary-box.kind-project {
-	background-color: #00aaff0f;
-	padding: var(--gap-1);
+  background-color: #00aaff0f;
+  padding: var(--gap-1);
 }
 
 .post-summary-box.kind-post {
-	padding: 0 var(--gap-1);
+  padding: 0 var(--gap-1);
 }
 
 .post-summary-box .post-desc {
-	flex: 1;
+  flex: 1;
 }
 
 .post-summary-box .post-thumb {
-	flex-basis: 40%;
-	max-height: 8em;
+  flex-basis: 40%;
+  max-height: 8em;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .post-summary-box .post-thumb img {
-	display: block;
-	min-width: 100%;
+  display: block;
+  min-width: 100%;
 }
 
 .post-summary-box .post-title {
-	display: flex;
-	justify-content: space-between;
+  /* display: flex; */
+  justify-content: space-between;
 
-	margin-bottom: 0.1rem;
-	font-size: var(--font-size-large);
-	font-weight: var(--font-title-weight);
+  margin-bottom: 0.1rem;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-title-weight);
 }
 
 .post-summary-box .post-subtitle,
 .post-summary-box .post-subtitle {
-	margin: 0.1rem 0;
-	text-overflow: hidden;
-	overflow: hidden;
+  margin: 0.1rem 0;
+  text-overflow: hidden;
+  overflow: hidden;
 }
 
 .post-summary-box .post-summary p:first-child,
 .post-summary-box .post-summary p:first-child {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .post-summary-box .post-year,
 .post-summary-box .post-year {
-	color: gray;
-	white-space: nowrap;
+  color: gray;
+  white-space: nowrap;
 }
 
 .post-summary-box .post-title a { color: unset; }

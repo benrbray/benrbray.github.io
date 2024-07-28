@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getEntry } from 'astro:content';
 import FormattedDate from '@components/dates/FormattedDate.astro';
+import { postIsPublished } from "@root/util/query";
 
 type Props = { post : CollectionEntry<'blog'> }
 
@@ -23,10 +24,18 @@ const label = seriesData ? (seriesData.isAppendix ?
   `Part ${seriesData.seriesNumber}`) : null;
 ---
 
+<!-- draft -->
+{
+  !postIsPublished(post) && <div class="unpublished" style="padding: 1em; margin: 1em 0;">
+    This post is an unpublished draft!
+  </div>
+}
 <div class="article-header">
+  <!-- title -->
   {
     titleIsHtml ?
-      <h1 class="article-title" set:html={titleDisplay} /> :
+      <h1 class="article-title"
+          set:html={titleDisplay} /> :
       <h1 class="article-title">{titleDisplay}</h1>
   }
   <!-- subtitle -->
