@@ -10,5 +10,5 @@ dev:
 
 publish:
   pnpm run build
-  rm -rf docs
-  cp -r dist docs
+  rm -rf _published
+  cp -r dist _published
