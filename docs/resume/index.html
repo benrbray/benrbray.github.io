@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.ico"><!-- Font preloads --><link rel="preload" href="/fonts/lora/Lora-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="/fonts/lora/Lora-Italic-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://benrbray.com/resume/"><!-- Primary Meta Tags --><title>Resume / Benjamin R. Bray</title><meta name="title" content="Resume / Benjamin R. Bray"><link rel="stylesheet" href="/_astro/_slug_.DBM4hSBW.css">
+<style>.preview-link[data-astro-cid-gaprsfch]{display:block;color:unset;text-decoration:unset}.preview-box[data-astro-cid-gaprsfch]{margin:var(--gap-1) 0;padding:var(--gap-1);border-radius:var(--gap-0);background-color:#f6f6f6;border:1px dashed #ccc}.preview-box[data-astro-cid-gaprsfch]:hover{background-color:#eee}.preview-title[data-astro-cid-gaprsfch]{font-size:var(--font-size-large);font-weight:var(--font-title-weight);text-decoration:2px limegreen underline}.preview-title[data-astro-cid-gaprsfch] a[data-astro-cid-gaprsfch]{color:unset}.preview-summary[data-astro-cid-gaprsfch]{margin-top:var(--gap-0)}
+</style></head> <body> <header id="header-box" data-astro-cid-3uvkrtzm> <nav id="header" data-astro-cid-3uvkrtzm> <ul id="header-nav" data-astro-cid-3uvkrtzm> <li data-astro-cid-3uvkrtzm><a id="header-name" href="/" data-astro-cid-3uvkrtzm>Benjamin R. Bray</a></li> <li class="header-button" data-astro-cid-3uvkrtzm><a href="/blog" data-astro-cid-3uvkrtzm data-astro-cid-oujquvsc> Blog </a> </li> <li class="header-button" data-astro-cid-3uvkrtzm><a href="/projects" data-astro-cid-3uvkrtzm data-astro-cid-oujquvsc> Projects </a> </li> <!-- <li class="header-button"><HeaderLink href="/series">Series</a></li> --> <!-- <li class="header-button"><HeaderLink href="/favorites">Favorites</a></li> --> <li class="header-button" data-astro-cid-3uvkrtzm><a href="https://github.com/benrbray" data-astro-cid-3uvkrtzm data-astro-cid-oujquvsc> GitHub </a> </li> <li class="header-button" data-astro-cid-3uvkrtzm><a href="/resume-pdf" data-astro-cid-3uvkrtzm data-astro-cid-oujquvsc> Resume </a> </li> <!-- <li class="header-button"><HeaderLink href="/sitemap">Sitemap</a></li> --> </ul> </nav> </header>  <main>  <div class="column-normal">  <main> <article> <div id="about" class="column-normal"> <!-- photo --> <div class="about-portrait"> <img alt="Photo of me in Wakayama, Japan in May 2024" src="/images/profile/ben-wakayama-2024.png"> </div> <!-- ontro --> <div class="about-description"> <div class="about-title">Benjamin R. Bray</div> <p>I work as a <strong>research software engineer</strong> for <a href="https://group-mmm.org/~ichiro/">Hasuo Lab</a> at the <a href="https://www.nii.ac.jp/en/">National Institute of Informatics</a> in Tokyo, Japan, where I use <strong>Haskell</strong> to design domain-specific programming languages for formal verification of cyberphysical systems.</p>
+<p>My ambition is to design software which makes <strong>formal verification</strong> more accessible to developers. I’m particularly interested in improving the user experience of <strong>dependently-typed programming</strong>.</p>
+
+<p>In my free time, I enjoy cycling, <a href="/images/photos/ben-goat.jpg">goats</a>, dodgeball, <a href="/images/photos/tokyo-walking-map.jpg">long walks</a>, and <a href="/images/photos/sourdough.jpg">baking</a>.  Maybe one day I’ll make more <a href="http://www.newgrounds.com/portal/view/512482">games</a>! If you’d like to chat, feel free to write me at <a href="mailto:benrbray@gmail.com"><a href="mailto:benrbray@gmail.com">benrbray@gmail.com</a></a>.</p>
+ </div> </div> <style>
+#about {
+	display: grid;
+
+  margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+
+	gap: 2em;
+}
+
+#about .about-portrait {
+	min-width: 16rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+#about .about-portrait img {
+	display: block;
+}
+
+#about .about-description {
+	grid-area: intro;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#about .about-description p { margin: 0.6rem 0; }
+#about .about-title         { margin: 0.6rem 0; }
+
+#about .about-title {
+	font-size: 2em;
+	font-weight: var(--font-bold-weight);
+}
+
+#about .about-subtitle {
+	color: var(--color-text-fainter);
+}
+
+@media (min-width: 52rem) {
+	#about {
+		grid-template-columns: 1fr 2fr;
+		grid-template-areas: "photo intro";
+	}
+
+	#about .about-portrait {
+		justify-self: stretch;
+		min-height: 100%;
+	}
+
+	#about .about-portrait img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+}
+
+@media (max-width: 52rem) {
+
+	h2 { text-align: center; }
+	#about .about-title { text-align: center; }
+	#about .about-subtitle { text-align: center; }
+
+	#about {
+		grid-template-areas:
+			"photo"
+			"intro";
+	}
+
+
+	#about .about-portrait {
+		position: relative;
+		max-height: min(50vh, 30em);
+		justify-self: center;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+
+	#about .about-portrait::after {
+		content: "";
+		display: block;
+		padding-bottom: 100%;
+	}
+
+	#about .about-portrait img {
+		position: absolute;
+		width: 100%;
+		object-fit: cover;
+		top: -2em;
+	}
+}
+</style> <div style="border:2px solid purple; padding: var(--gap-1);"><p><span style="color: purple; font-weight: 600">Welcome!</span>
+This web version of my resume <strong>organizes experiences by skill</strong>, rather than by employer.  You can view a more traditional resume by following the link below:</p><div style="margin: 0 auto; text-align: center; color: purple; font-weight: 600; font-size: 2em;"><p>Download PDF Resume</p></div></div>
+<h2 id="education" class="heading anchor"><a class="anchor-link" href="#education">Education</a></h2>
+<ul>
+<li>Master of Science (M.S.) in Computer Science from Georgia Institute of Technology, 2019</li>
+<li>Bachelor of Science (B.S.) in Mathematics from University of Michigan, 2017</li>
+<li>See the second page of my resume for a list of notable coursework.</li>
+</ul>
+<h2 id="publications" class="heading anchor"><a class="anchor-link" href="#publications">Publications</a></h2>
+<div class="cite-block"><div class="cite-bib"><span class="field-author">Reimann, Jesse; Mansion, Nico; Haydon, James; Bray, Benjamin; Chattopadhyay, Agnishom; Sato, Sota; Waga, Masaki; André, Étienne; Hasuo, Ichiro; Ueda, Naoki; and Yokoyama, Yosuke</span>. <a class="link" href="https://doi.org/10.48550/arXiv.2403.18764"><span class="field-title">Temporal Logic Formalisation of ISO 34502 Critical Scenarios: Modular Construction with the RSS Safety Distance</span></a>. In <span class="field-journaltitle">CoRR</span>. <span class="field-date">2024</span></div></div>
+<div class="cite-block"><div class="cite-bib"><span class="field-author">McIsaac, Peter; Jamin, Sugih; Ibanez, Ines; Singer, Oskar; and Bray, Benjamin</span>. <a class="link" href="https://doi.org/10.5281/zenodo.4645284"><span class="field-title">Die Geowissenschaftliche Analyse von großen Mengen historischer Texte: Die Visualisierung geographischer Verhältnisse in deutschen Familienzeitschriften</span></a>. In <span class="field-booktitle">3. Tagung des Verbands Digital Humanities im deutschsprachigen Raum, DHd 2016, Leipzig, Germany, March 7 - 12, 2016</span>. Edited by <span class="field-editor">Burr, Elisabeth; and Helling, Patrick</span>. <span class="field-date">2016</span></div></div>
+<h2 id="skills" class="heading anchor"><a class="anchor-link" href="#skills">Skills</a></h2>
+<p><strong>Functional Programming, Compilers, and Formal Methods:</strong>
+I enjoy the expressiveness and safety that comes with pure, statically-typed functional programming.  I’m especially interested in type systems and language server implementation.</p>
+<ul>
+<li>As a research engineer for Hasuo Lab at NII, I used <strong>Haskell</strong> to develop domain-specific programming languages for formal verification of cyberphysical systems, in collaboration with researchers from Japanese car manufacturers.
+<ul>
+<li>Worked on <code>tempo-lang</code>, a language which compiles to <strong>signal temporal logic</strong> expressions.  I extended the parser and typechecker to support record types, enums, and user-defined functions.</li>
+<li>I also worked on an <strong>exemplifier</strong> which generates examples of signals which either satisfy or violate the temporal property described by a <code>tempo-lang</code> specification.  We achieved this by converting <code>tempo-lang</code> expressions into <a href="https://en.wikipedia.org/wiki/Satisfiability_modulo_theories">satisfiability problems</a>, and reconstructing a signal from satisfying assignments found by the <a href="https://www.microsoft.com/en-us/research/project/z3-3/"><code>z3</code> SMT solver</a>.</li>
+</ul>
+</li>
+<li>As a backend engineer at Smartpay, I wrote purely-functional <strong>Scala</strong> in tagless-final style using the <a href="https://typelevel.org/cats-effect/"><code>cats-effect</code></a> ecosystem.  A <a href="https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell/">functional core, imperative shell</a> architecture enabled us to work quickly, with confidence.</li>
+<li>I have basic familiarity with the <strong><code>coq</code> proof assistant</strong>, having worked through all the exercises in Volumes 1-3 of the <a href="https://softwarefoundations.cis.upenn.edu/">Software Foundations</a> book, as well as portions of <a href="http://adam.chlipala.net/cpdt/">CPDT</a>.</li>
+<li>In my free time, I enjoy working with <strong>dependently-typed</strong> languages like Idris and Lean.  I created the toy language <a href="https://github.com/benrbray/yagi-lang"><code>yagi-lang</code></a> to learn more about dependent type theory.</li>
+<li><strong>TODO:</strong> datalog tagging system</li>
+<li><strong>TODO:</strong> coalgebraic product construction</li>
+<li><strong>TODO:</strong> type safari</li>
+</ul>
+
+
+<div class="preview-box" data-astro-cid-gaprsfch> <div class="preview-title" data-astro-cid-gaprsfch> <a href="/blog/why-functional-programming" class="unpublished" data-astro-cid-gaprsfch>Why Learn Functional Programming?</a> <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)" data-astro-cid-gaprsfch> <time datetime="2024-07-23T00:00:00.000Z"> Jul 23, 2024 </time> </span> </div> <div class="preview-summary" data-astro-cid-gaprsfch>In this post, I reflect on how learning Haskell has influenced the way I solve problems, even when programming with traditional imperative languages.</div> </div> <!-- consider this method for block links --> <!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method --> 
+<p><strong>Computer Graphics &amp; Numerical Simulation:</strong></p>
+<ul>
+<li>I wrote a C++/CUDA simulation of 2D incompressible fluid flow, based on the “Stable Fluids” paper by Jos Stam.  I compared a few different numerical methods, including parallel Jacobi on the GPU and preconditioned conjugate gradient on the CPU.</li>
+<li>I completed graduate courses on computer architecture, compilers, and parallel computing.  My course projects were all written in C++.  Projects for the compilers course involved writing LLVM analysis / transformation passes on LLVM IR.</li>
+<li>In my role as a <strong>computer vision engineer</strong> at EmbodyMe, I trained deep learning models to transfer facial expressions from one video to another.  I also contributed to graphics the post-processing pipeline; for example, by applying spherical harmonics lighting to the meshes output by our model.
+<ul>
+<li>I maintained our Python/PyTorch codebase (which includes training and visualization code for face-reenactment and inpainting models).</li>
+<li>I led a biweekly deep learning &amp; graphics reading group to follow recent developments (GANs / attention / transformers / distillation / NeRF) and distribute knowledge among the team.</li>
+</ul>
+</li>
+<li>As an undergraduate student, I spent three years as a research assistant using natural language processing to analyze a large corpus of 19th-century German periodicals.
+<ul>
+<li>I implemented algorithms for topic modeling (LDA/HDP) from scratch in Python.</li>
+<li>I designed a custom OCR error correction scheme for German blackletter fonts.</li>
+<li>I trained a logistic regression classifier for place-name detection.</li>
+<li>I built a web-app allowing humanities researchers to browse our dataset and visualize the results of our topic modeling analysis.</li>
+</ul>
+</li>
+</ul>
+<p>Early in my career, I also worked as a freelance <strong>game developer</strong>.  Read more by following the link:</p>
+<div class="preview-box" data-astro-cid-gaprsfch> <div class="preview-title" data-astro-cid-gaprsfch> <a href="https://archawn.newgrounds.com/" data-astro-cid-gaprsfch>Flash Games @ Newgrounds&nbsp;(2007&#8209;2011)</a> <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)" data-astro-cid-gaprsfch> <time datetime="2012-11-30T15:00:00.000Z"> Dec 1, 2012 </time> </span> </div> <div class="preview-summary" data-astro-cid-gaprsfch>In high school, my curiosity about game development led me to <b>Newgrounds</b>, where I made lifelong friends and published a few Flash games along the way!</div> </div> <!-- consider this method for block links --> <!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method --> 
+<p><strong>Frontend Engineering:</strong> I have 6 years of experience writing TypeScript.</p>
+<p>I have a particular interest in the design of rich document editors for note-taking, documentation, and academic writing.</p>
+<ul>
+<li><strong>TODO:</strong> TypeScript &amp; React for DriveSGL and Tempo-Forms for Hasuo Lab @ NII</li>
+<li>I created <a href="https://github.com/benrbray/noteworthy">Noteworthy</a>, an offline Markdown editor with bidirectional links and interactive math editing.
+<ul>
+<li><code>noteworthy-vscode</code> allows the Noteworthy editor to be used to edit Markdown files within Visual Studio Code</li>
+</ul>
+<div class="preview-box" data-astro-cid-gaprsfch> <div class="preview-title" data-astro-cid-gaprsfch> <a href="https://github.com/benrbray/noteworthy" data-astro-cid-gaprsfch>Noteworthy Markdown Editor</a> <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)" data-astro-cid-gaprsfch> <time datetime="2020-09-15T15:00:00.000Z"> Sep 16, 2020 </time> </span> </div> <div class="preview-summary" data-astro-cid-gaprsfch>An open-source Markdown editor with bidirectional links and excellent math support!</div> </div> <!-- consider this method for block links --> <!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method --> 
+</li>
+<li>My <code>prosemirror-math</code> package adds support for interactive LaTeX equation editing to the <code>prosemirror</code> editor framework.</li>
+<li>My <code>remark-cite</code> package adds support for <code>pandoc</code>-style citation syntax to the <code>remark</code> markdown parser, as well as for formatting bibliographies using data from <code>*.bib</code> files.</li>
+<li>I have a deep working knowledge of the <code>codemirror</code> and <code>prosemirror</code> editors, and have authored dozens of custom plugins for each.</li>
+<li>I’m proficient with both the <code>react</code> and <code>solid-js</code> reactive frameworks. <div class="preview-box" data-astro-cid-gaprsfch> <div class="preview-title" data-astro-cid-gaprsfch> <a href="/blog/frontend/solidjs-vs-react" class="unpublished" data-astro-cid-gaprsfch>Implementing a <code>codemirror</code> Component in both <code>solid-js</code> and <code>react</code></a> <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)" data-astro-cid-gaprsfch> <time datetime="2024-06-02T00:00:00.000Z"> Jun 2, 2024 </time> </span> </div> <div class="preview-summary" data-astro-cid-gaprsfch>While I mostly use `react` at work, I tend to prefer `solid-js` for my personal projects because I find that the `solid-js` approach to reactive programming makes it much easier to interact with the outside world.  In this post, I demonstrate this difference by implementing a `codemirror` component in both frameworks.</div> </div> <!-- consider this method for block links --> <!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method --> </li>
+</ul>
+<p><strong>User Experience:</strong></p>
+<ul>
+<li>TODO</li>
+</ul>
+<p><strong>Backend Engineering:</strong></p>
+<ul>
+<li>I worked for one year as a <strong>backend engineer</strong> at Smartpay KK writing <strong>Scala</strong>.
+<ul>
+<li>Led the design, implementation, testing, and release of a “programmatic disbursements” backend service which integrates with bank APIs to automatically issue merchant payouts and consumer refunds on a fixed schedule.</li>
+<li>Collaborated with our frontend team to design a <strong>GraphQL</strong> API to power our mobile app.</li>
+<li>Contributed to the backend API powering the mobile &amp; web apps for a pay-later service.</li>
+<li>Worked with <strong>Google Cloud Platform</strong>, Postgres, and Terraform Cloud.</li>
+</ul>
+</li>
+<li>I have experience with <a href="https://nodejs.org/en"><code>node.js</code></a>, Scala’s <a href="https://http4s.org/"><code>http4s</code></a>, Haskell’s <a href="https://hackage.haskell.org/package/servant"><code>servant</code></a>, and Python’s <a href="https://flask.palletsprojects.com/en/3.0.x/"><code>flask</code></a>.</li>
+</ul>
+<p><strong>Technical Writing:</strong> Here are a few samples of my writing:</p>
+<div class="preview-box" data-astro-cid-gaprsfch> <div class="preview-title" data-astro-cid-gaprsfch> <a href="/blog/category-theory/universal-properties" class="unpublished" data-astro-cid-gaprsfch>Universal Properties and Universal Elements</a> <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)" data-astro-cid-gaprsfch> <time datetime="2024-04-21T00:00:00.000Z"> Apr 21, 2024 </time> </span> </div> <div class="preview-summary" data-astro-cid-gaprsfch>SUMMARY</div> </div> <!-- consider this method for block links --> <!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method --> 
+<div class="preview-box" data-astro-cid-gaprsfch> <div class="preview-title" data-astro-cid-gaprsfch> <a href="/blog/abstract-algebra-modules" data-astro-cid-gaprsfch>Abstract Algebra:  Modules</a> <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)" data-astro-cid-gaprsfch> <time datetime="2020-05-13T00:00:00.000Z"> May 13, 2020 </time> </span> </div> <div class="preview-summary" data-astro-cid-gaprsfch>Vector spaces over a field are a special case of the more general notion of modules over a ring.  Rather than the long list of axioms normally presented in textbooks, we see how an algebraic view of vector spaces helps to motivate the definition of modules.</div> </div> <!-- consider this method for block links --> <!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method --> 
+<div class="preview-box" data-astro-cid-gaprsfch> <div class="preview-title" data-astro-cid-gaprsfch> <a href="/notes/chebychev-polynomials_dec16.pdf" data-astro-cid-gaprsfch>Notes: Chebychev Polynomials</a> <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)" data-astro-cid-gaprsfch> <time datetime="2016-12-08T00:00:00.000Z"> Dec 8, 2016 </time> </span> </div> <div class="preview-summary" data-astro-cid-gaprsfch>The <b>Chebyshev polynomials</b> appear frequently in numerical analysis and are incredibly useful for analyzing and accelerating the convergence of iterative methods. One might even say that Chebyshev polynomials are the best polynomials, a fact which can be made precise in a variety of different ways. In these notes, we define Chebyshev polynomials and their basic properties, before discussing their utility in minimax approximation theory, which was the subject of a previous set of notes.</div> </div> <!-- consider this method for block links --> <!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method --> 
+<p><strong>Systems Programming:</strong> In 2024, I started using Rust for hobby projects.</p>
+<ul>
+<li>TODO</li>
+</ul>
+<p><strong>Teaching</strong>:  These words <a href="https://youtu.be/F572OcpTcKY?t=582">from an interview</a> with Brennan Lee Mulligan capture my feelings well:</p>
+<blockquote>
+<p>When I am with someone who is looking for something that I have, and I can
+give it to them — the look on someone’s face when they <em>get</em> it, and it
+becomes <em>theirs</em> as well…</p>
+<p>The lighting of a second candle does not diminish the first.  Watching someone
+learn is one of life’s greatest joys.  When you’re a teacher you have a front
+row seat to learning, which is just — the most beautiful thing to watch.</p>
+</blockquote>
+<p>I had the pleasure of serving as a teaching assistant for the following courses.</p>
+<ul>
+<li>(Teaching Assistant) ISYE 6740, Computational Data Analysis, (Spring 2020, Georgia Tech)</li>
+<li>(Lecturer/TA) CS 4540, <a href="https://cs4540-f19.github.io/">Advanced Algorithms for Machine Learning</a> (Fall 2019, Georgia Tech)</li>
+<li>(Lecturer/TA) CS 4540, <a href="https://cs4540-f18.github.io/">Advanced Algorithms for Machine Learning</a> (Fall 2018, Georgia Tech)</li>
+<li>(Instructional Aide) EECS 445, Machine Learning, (Winter 2017, University of Michigan)</li>
+<li>(Instructional Aide) EECS 445, <a href="https://eecs445-f16.github.io/">Machine Learning</a> (Fall 2016, University of Michigan)</li>
+<li>(Instructional Aide) EECS 545, <a href="https://github.com/thejakeyboy/umich-eecs545-lectures">Graduate Machine Learning</a> (Winter 2016, University of Michigan)</li>
+<li>(Math Lab Tutor) MATH 425, Introduction to Probability, (Fall 2015 - Winter 2016, University of Michigan)</li>
+</ul>
+
+<h2 id="work-history" class="heading anchor"><a class="anchor-link" href="#work-history">Work History</a></h2>
+<p><strong>Research Software Engineer</strong>, National Institute of Informatics</p>
+<ul>
+<li>Used <strong>Haskell</strong> to develop domain-specific programming languages for formal verification of cyberphysical systems.</li>
+<li>My group focused on translating formal methods research into</li>
+<li>Our work aimed at finding ways to improve the workflow</li>
+<li>In collaboration with research teams at major Japanese auto manufacturers, Delivered proof-of-concept software too</li>
+</ul>
+<p>In collaboration with research teams at</p>
+<ul>
+<li>Developed <code>tempo-lang</code>, a language that compiles to <strong>signal temporal logic</strong> expressions.
+<ul>
+<li>implemented the parser and typechecker</li>
+<li></li>
+</ul>
+</li>
+<li>Developed a <a href="https://en.wikipedia.org/wiki/Model_checking">model checker</a> for a simple imperative probabilistic programming language.
+*</li>
+</ul>
+<p><strong>Backend Software Engineer</strong>, Smartpay K.K.</p>
+<p><strong>Machine Learning &amp; Graphics Engineer</strong>, EmbodyMe, Inc.</p>
+<p><strong>Research Intern</strong>, RIKEN AIP</p>
+<p><strong>Research Assistant</strong>, University of Michigan</p>
+<p><strong>Software Engineer Intern</strong>, Microsoft Corporation</p>
+<h2 id="open-source" class="heading anchor"><a class="anchor-link" href="#open-source">Open Source</a></h2>
+<p>I maintain the following <code>npm</code> packages:</p>
+<div class="preview-box" data-astro-cid-gaprsfch> <div class="preview-title" data-astro-cid-gaprsfch> <a href="https://github.com/benrbray/remark-cite" data-astro-cid-gaprsfch><code>remark-cite</code></a> <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)" data-astro-cid-gaprsfch> <time datetime="2021-05-18T15:00:00.000Z"> May 19, 2021 </time> </span> </div> <div class="preview-summary" data-astro-cid-gaprsfch>A collection of plugins for the <a href="https://github.com/remarkjs/remark">remark</a> markdown processor adding support <a href="https://pandoc.org/MANUAL.html#extension-citations">pandoc-style</a> inline citation syntax and bibliography formatting.</div> </div> <!-- consider this method for block links --> <!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method --> 
+<div class="preview-box" data-astro-cid-gaprsfch> <div class="preview-title" data-astro-cid-gaprsfch> <a href="https://benrbray.com/prosemirror-math/" data-astro-cid-gaprsfch><code>prosemirror-math</code></a> <span style="float:right; color: gray; font-weight: normal; font-size: var(--font-normal-size)" data-astro-cid-gaprsfch> <time datetime="2020-06-13T15:00:00.000Z"> Jun 14, 2020 </time> </span> </div> <div class="preview-summary" data-astro-cid-gaprsfch>This project provides schema and plugins for writing mathematics using <a href="https://prosemirror.net/">prosemirror</a>. Written in TypeScript, with math rendering handled by <a href="https://katex.org/">KaTeX</a>).</div> </div> <!-- consider this method for block links --> <!-- https://css-tricks.com/block-links-the-search-for-a-perfect-solution/#method-4-sprinkle-javascript-on-the-second-method --> 
+<p>I have also made a few contributions to open-source projects:</p>
+<div class="fancy-box"><p>(jgm/citeproc#88) <a href="https://github.com/jgm/citeproc/pull/88">Support hyperlinked titles according to draft of CSL v1.0.2 spec</a></p></div>
+<div class="fancy-box"><p>(jgm/citeproc#113) <a href="https://github.com/jgm/citeproc/pull/113">
+Address unexpected interaction between CSL <code>second-field-align</code> setting and whole-citation links</a></p></div>
+<div class="fancy-box"><p>(pjones/byline#20) <a href="https://github.com/pjones/byline/pull/20">Support ANSI Vivid Color Intensity</a></p></div>
+<div class="fancy-box"><p>(benrbray/tikzjax) my <a href="https://github.com/benrbray/tikzjax">fork of <code>aristicat1/tikzjax</code></a> adds a <code>Dockerfile</code> and fixes build issues</p></div>
+<div class="fancy-box"><p>(beetbox/beets#3692) <a href="https://github.com/beetbox/beets/pull/3682">Allow Discogs Plugin to respond during Singleton Import Mode</a></p></div>
+<h2 id="relevant-coursework" class="heading anchor"><a class="anchor-link" href="#relevant-coursework">Relevant Coursework</a></h2>
+<p>Below is a list of notable coursework from my undergraduate &amp; graduate programs.</p>
+<p><strong>CS 2641 @ GT, Advanced Compiler Optimization (Spring 2019)</strong></p>
+<ul>
+<li>For projects, wrote LLVM transform passes to perform optimizations discussed in class.</li>
+<li>Reaching definitions; available expressions; partial redundancy elimination; infeasible paths</li>
+<li>Data/loop/control dependencies; loop parallelism, reordering, unrolling, and vectorization</li>
+</ul><div class="rehype-cite-bib"><div class="bib-title">Bibliography</div><div class="bib-entry-list"><div class="bib-entry"><div class="bib-id">[<span class="bib-id" title="Reimann, Jesse; Mansion, Nico; Haydon, James; Bray, Benjamin; Chattopadhyay, Agnishom; Sato, Sota; Waga, Masaki; André, Étienne; Hasuo, Ichiro; Ueda, Naoki; and Yokoyama, Yosuke. Temporal Logic Formalisation of ISO 34502 Critical Scenarios: Modular Construction with the RSS Safety Distance. In CoRR. 2024">0</span>]</div><div class="cite-bib"><span class="field-author">Reimann, Jesse; Mansion, Nico; Haydon, James; Bray, Benjamin; Chattopadhyay, Agnishom; Sato, Sota; Waga, Masaki; André, Étienne; Hasuo, Ichiro; Ueda, Naoki; and Yokoyama, Yosuke</span>. <a class="link" href="https://doi.org/10.48550/arXiv.2403.18764"><span class="field-title">Temporal Logic Formalisation of ISO 34502 Critical Scenarios: Modular Construction with the RSS Safety Distance</span></a>. In <span class="field-journaltitle">CoRR</span>. <span class="field-date">2024</span></div></div><div class="bib-entry"><div class="bib-id">[<span class="bib-id" title="McIsaac, Peter; Jamin, Sugih; Ibanez, Ines; Singer, Oskar; and Bray, Benjamin. Die Geowissenschaftliche Analyse von großen Mengen historischer Texte: Die Visualisierung geographischer Verhältnisse in deutschen Familienzeitschriften. In 3. Tagung des Verbands Digital Humanities im deutschsprachigen Raum, DHd 2016, Leipzig, Germany, March 7 - 12, 2016. Edited by Burr, Elisabeth; and Helling, Patrick. 2016">1</span>]</div><div class="cite-bib"><span class="field-author">McIsaac, Peter; Jamin, Sugih; Ibanez, Ines; Singer, Oskar; and Bray, Benjamin</span>. <a class="link" href="https://doi.org/10.5281/zenodo.4645284"><span class="field-title">Die Geowissenschaftliche Analyse von großen Mengen historischer Texte: Die Visualisierung geographischer Verhältnisse in deutschen Familienzeitschriften</span></a>. In <span class="field-booktitle">3. Tagung des Verbands Digital Humanities im deutschsprachigen Raum, DHd 2016, Leipzig, Germany, March 7 - 12, 2016</span>. Edited by <span class="field-editor">Burr, Elisabeth; and Helling, Patrick</span>. <span class="field-date">2016</span></div></div></div></div> </article> </main>  </div>  </main> <footer class="footer" data-astro-cid-x4grat5q> <span style="float: left; vertical-align: middle" data-astro-cid-x4grat5q> <!-- <a id="visitor-count" href="https://visitorbadge.io/status?path=https%3A%2F%2Fbenrbray.com%2F">
+      <img src="https://api.visitorbadge.io/api/combined?path=https%3A%2F%2Fbenrbray.com%2F&label=Visitors&countColor=%23263759&style=flat-square" />
+    </a> -->
+Powered by <a href="https://astro.build/" data-astro-cid-x4grat5q>Astro</a> and <a href="https://github.com/benrbray/benrbray.github.io" data-astro-cid-x4grat5q>hosted on GitHub</a>.
+</span> <!-- Generation Date --> <span style="float: right" data-astro-cid-x4grat5q>
+Generated July 28, 2024  </span> </footer>  </body></html>
