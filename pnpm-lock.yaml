@@ -63,6 +63,9 @@ importers:
       '@benrbray/remark-cite':
         specifier: link:~/projects/remark-cite/remark-cite
         version: link:../../projects/remark-cite/remark-cite
+      '@benrbray/remark-extract-bibtex':
+        specifier: link:~/projects/remark-cite/remark-extract-bibtex
+        version: link:../../projects/remark-cite/remark-extract-bibtex
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0

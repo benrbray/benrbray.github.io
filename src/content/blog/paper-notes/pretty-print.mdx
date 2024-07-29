@@ -1,0 +1,96 @@
+---
+title: "Paper Review: Wadler's Pretty Printer"
+summary: TODO
+datePublished: 2024-07-28
+tags: [functional]
+tools: [haskell]
+---
+
+import { ExactQuote } from "@components/writing";
+
+<ExactQuote>
+A pretty printer is a tool, often a library of routines, that aids in converting a tree into text.  The text should occupy a minimal number of lines while retaining indendation that reflects the underlying tree.
+</ExactQuote>
+
+Many popular code formatters, including JavaScript's [`prettier`](https://prettier.io/docs/en/technical-details), are based on Wadler's pretty-printing algorithm.
+
+The original paper [@wadler2003:prettier].
+
+## Wadler's Prettier Printer
+
+Prettier is based on the following basic operations:
+
+```haskell
+(<>)   :: Doc -> Doc -> Doc  -- concatenation
+nil    :: Doc                -- empty document
+text   :: String -> Doc      -- literal string
+line   :: Doc                -- line break
+indent :: Int -> Doc -> Doc  -- increase indent level
+```
+
+<ExactQuote>
+Here `<>` is the associative operation that concatenates two documents, which has the empty document `nil` as its left and right unit.
+</ExactQuote>
+
+```haskell
+-- for any document `d :: Doc`,
+doc == (nil <> doc) == (doc <> nil)
+```
+
+A **layout** renders a notation as a string.
+
+```haskell
+layout :: Notation -> String
+```
+
+## Why I Prefer Configurable Formatters
+
+the preferred coding style of a community changes over time, especially when influenced my other languages.  Rust and Haskell have both had a huge impact on other languages.
+
+Most languages are expressive enough to support many vastly-different coding styles.
+
+The example I know best is **Scala**:  Some programmers fully embrace functional programming idioms through frameworks such as `cats` or `zio`, while others who use it as an alternative to Java prefer a more traditional imperative style.
+
+I think this stance misses the point:  Teams should be free to come to a consensus about which coding style best suits their needs.  It's not possible for the authors of a no-config formatter to know in advance which style is best for everyone.
+
+* The preferred coding style may change over time, especially when influenced by other languages, or when new features arrive.  No-config formatters are slow to adapt to these changes.
+
+*Good enough is the enemy of good. 
+* Notation as a tool of thought.
+* code is _read_ more often than it is _written_
+* formatters take away the programmer's ability to emphasize or de-emphasize
+
+### Example:  `prettier` and early returns
+
+The **early-return** style of programming has a number of advantages:
+
+* makes assumptions / preconditions explicit at the very beginning of the function
+* keeps the indentation level in a function to a minimum
+* discard all edge cases as early as possible, so the main body of the function is focused only on the happy path / business logic
+
+It's clear that `prettier` 
+
+## Ideas for Printer Configuration
+
+## See Also
+
+* Justin Pombrio's Rust implementation [@pombrio2024:twist-wadler-printer]
+
+```bibtex
+@article{wadler2003:prettier,
+  title={A prettier printer},
+  author={Wadler, Philip},
+  journal={The Fun of Programming, Cornerstones of Computing},
+  pages={223--243},
+  year={2003},
+  publisher={Citeseer}
+}
+
+@article{pombrio2024:twist-wadler-printer,
+  title={A Twist on Wadler's Printer},
+  author={Justin Pombrio},
+  year={2024},
+  urldate={2024-07-29},
+  url={https://justinpombrio.net/2024/02/23/a-twist-on-Wadlers-printer.html}
+}
+```

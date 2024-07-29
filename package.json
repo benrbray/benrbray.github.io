@@ -30,6 +30,7 @@
     "@benrbray/micromark-extension-cite": "link:~/projects/remark-cite/micromark-extension-cite",
     "@benrbray/rehype-cite": "link:~/projects/remark-cite/rehype-cite",
     "@benrbray/remark-cite": "link:~/projects/remark-cite/remark-cite",
+    "@benrbray/remark-extract-bibtex": "link:~/projects/remark-cite/remark-extract-bibtex",
     "rehype-slug": "^6.0.0",
     "remark-directive": "^3.0.0"
   }

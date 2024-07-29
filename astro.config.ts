@@ -7,6 +7,7 @@ import fs from "node:fs";
 // remark
 import remarkMath from "remark-math";
 import remarkCite from "@benrbray/remark-cite";
+import remarkExtractBibtex from "@benrbray/remark-extract-bibtex";
 import remarkDirective from "remark-directive";
 
 // rehype
@@ -27,7 +28,7 @@ export default defineConfig({
     include: ["**/solid/*"]
   }), solidJs()],
   markdown: {
-    remarkPlugins: [remarkMath, remarkCite, remarkDirective],
+    remarkPlugins: [remarkMath, remarkCite, remarkExtractBibtex, remarkDirective],
     rehypePlugins: [
       [rehypeCite, { bibFiles }],
       [rehypeKatex, { macros: { "\\R": "\\mathbb{R}" }, globalGroup: true}],

@@ -49,4 +49,32 @@ Now, an end user of the library who imports the `foo-plugin` receives detailed t
 
 ## Example: Extensible Markdown Syntax Trees with `mdast`
 
+From `vfile`:
+
+```typescript
+/**
+ * This map registers the type of the `data` key of a `VFile`.
+ *
+ * This type can be augmented to register custom `data` types.
+ *
+ * @example
+ * declare module 'vfile' {
+ *   interface DataMap {
+ *     // `file.data.name` is typed as `string`
+ *     name: string
+ *   }
+ * }
+ */
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions, @typescript-eslint/no-empty-interface
+export interface DataMap {}
+
+/**
+ * Custom information.
+ *
+ * Known attributes can be added to @see {@link DataMap}
+ */
+export type Data = Record<string, unknown> & Partial<DataMap>
+```
+
 ## Example: User-Defined Plugins in `noteworthy`
