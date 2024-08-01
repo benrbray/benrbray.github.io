@@ -1,21 +1,20 @@
 import { FancyBox } from "@components/writing";
 import PostPreview from "@components/content/PostPreview.astro";
+import About from '@components/home/About.astro';
 
-<div style="border:2px solid purple; padding: var(--gap-1);">
-<span style="color: purple; font-weight: 600">Welcome!</span>
-This web version of my resume **organizes experiences by skill**, rather than by employer.  You can view a more traditional resume by following the link below:
+<About />
 
-<div style="margin: 0 auto; text-align: center; color: purple; font-weight: 600; font-size: 2em;">
-Download PDF Resume
-</div>
-</div>
+## Main Interests
+
+* Building new **development tools**, including language servers, type inference, and static code analysis.  I'm excited by modern dependently-typed languages like `lean`, and hope to see interactive theorem proving become more popular in industry.
+* Tools for composing **rich text documents**.  I created the [Noteworthy](/projects/noteworthy) markdown editor, as well as the [`prosemirror-math`](/projects/prosemirror-math) and [`remark-cite`](/projects/remark-cite) packages.
+* Simulation and computer graphics.  I learned to code by [making games](/projects/flash-games), and enjoy the unique confluence of art, math, and code it takes to ship a game.
 
 ## Education
 
 * Master of Science (M.S.) in Computer Science from Georgia Institute of Technology, 2019
 * Bachelor of Science (B.S.) in Mathematics from University of Michigan, 2017
 * See the second page of my resume for a list of notable coursework.
-
 
 ## Publications
 
@@ -26,14 +25,14 @@ Download PDF Resume
 ## Skills
 
 **Functional Programming, Compilers, and Formal Methods:**
-I enjoy the expressiveness and safety that comes with pure, statically-typed functional programming.  I'm especially interested in type systems and language server implementation. 
+I value the expressiveness and safety that comes with pure, statically-typed functional programming.  I'm especially interested in working on type systems and language servers. 
 
 * As a research engineer for Hasuo Lab at NII, I used **Haskell** to develop domain-specific programming languages for formal verification of cyberphysical systems, in collaboration with researchers from Japanese car manufacturers.
   * Worked on `tempo-lang`, a language which compiles to **signal temporal logic** expressions.  I extended the parser and typechecker to support record types, enums, and user-defined functions.
   * I also worked on an **exemplifier** which generates examples of signals which either satisfy or violate the temporal property described by a `tempo-lang` specification.  We achieved this by converting `tempo-lang` expressions into [satisfiability problems](https://en.wikipedia.org/wiki/Satisfiability_modulo_theories), and reconstructing a signal from satisfying assignments found by the [`z3` SMT solver](https://www.microsoft.com/en-us/research/project/z3-3/).
 * As a backend engineer at Smartpay, I wrote purely-functional **Scala** in tagless-final style using the [`cats-effect`](https://typelevel.org/cats-effect/) ecosystem.  A [functional core, imperative shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell/) architecture enabled us to work quickly, with confidence.
-* I have basic familiarity with the **`coq` proof assistant**, having worked through all the exercises in Volumes 1-3 of the [Software Foundations](https://softwarefoundations.cis.upenn.edu/) book, as well as portions of [CPDT](http://adam.chlipala.net/cpdt/).
-* In my free time, I enjoy working with **dependently-typed** languages like Idris and Lean.  I created the toy language [`yagi-lang`](https://github.com/benrbray/yagi-lang) to learn more about dependent type theory.
+{/* * I have basic familiarity with the **`coq` proof assistant**, having worked through all the exercises in Volumes 1-3 of the [Software Foundations](https://softwarefoundations.cis.upenn.edu/) book, as well as portions of [CPDT](http://adam.chlipala.net/cpdt/). */}
+* In my free time, I enjoy learning about **dependently-typed** languages like Coq, Idris and Lean.  I created the toy language [`yagi-lang`](https://github.com/benrbray/yagi-lang) to learn more about dependent type theory.
 * **TODO:** datalog tagging system
 * **TODO:** coalgebraic product construction
 * **TODO:** type safari
@@ -41,6 +40,28 @@ I enjoy the expressiveness and safety that comes with pure, statically-typed fun
 {/* I enjoy reading papers about programming language theory, type systems, formal verification, and category theory in my free time. */}
 
 <PostPreview postSlug="why-functional-programming" />
+
+**Frontend Engineering:** I have 6 years of experience writing TypeScript.
+
+I have a particular interest in the design of rich document editors for note-taking, documentation, and academic writing. 
+
+* **TODO:** TypeScript & React for DriveSGL and Tempo-Forms for Hasuo Lab @ NII
+* I created [Noteworthy](https://github.com/benrbray/noteworthy), an offline Markdown editor with bidirectional links and interactive math editing.
+  * `noteworthy-vscode` allows the Noteworthy editor to be used to edit Markdown files within Visual Studio Code
+  <PostPreview postSlug="projects/noteworthy" />
+* My `prosemirror-math` package adds support for interactive LaTeX equation editing to the `prosemirror` editor framework.
+* My `remark-cite` package adds support for `pandoc`-style citation syntax to the `remark` markdown parser, as well as for formatting bibliographies using data from `*.bib` files.
+* I have a deep working knowledge of the `codemirror` and `prosemirror` editors, and have authored dozens of custom plugins for each.
+* I'm proficient with both the `react` and `solid-js` reactive frameworks. <PostPreview postSlug="frontend/solidjs-vs-react" />
+
+**Backend Engineering:**
+
+* I worked for one year as a **backend engineer** at Smartpay KK writing **Scala**.
+  * Led the design, implementation, testing, and release of a "programmatic disbursements" backend service which integrates with bank APIs to automatically issue merchant payouts and consumer refunds on a fixed schedule.
+  * Collaborated with our frontend team to design a **GraphQL** API to power our mobile app.
+  * Contributed to the backend API powering the mobile & web apps for a pay-later service.
+  * Worked with **Google Cloud Platform**, Postgres, and Terraform Cloud.
+* I have experience with [`node.js`](https://nodejs.org/en), Scala's [`http4s`](https://http4s.org/), Haskell's [`servant`](https://hackage.haskell.org/package/servant), and Python's [`flask`](https://flask.palletsprojects.com/en/3.0.x/).
 
 **Computer Graphics & Numerical Simulation:**
 
@@ -59,31 +80,9 @@ Early in my career, I also worked as a freelance **game developer**.  Read more 
 
 <PostPreview postSlug="projects/flash-games" />
 
-**Frontend Engineering:** I have 6 years of experience writing TypeScript.
-
-I have a particular interest in the design of rich document editors for note-taking, documentation, and academic writing. 
-
-* **TODO:** TypeScript & React for DriveSGL and Tempo-Forms for Hasuo Lab @ NII
-* I created [Noteworthy](https://github.com/benrbray/noteworthy), an offline Markdown editor with bidirectional links and interactive math editing.
-  * `noteworthy-vscode` allows the Noteworthy editor to be used to edit Markdown files within Visual Studio Code
-  <PostPreview postSlug="projects/noteworthy" />
-* My `prosemirror-math` package adds support for interactive LaTeX equation editing to the `prosemirror` editor framework.
-* My `remark-cite` package adds support for `pandoc`-style citation syntax to the `remark` markdown parser, as well as for formatting bibliographies using data from `*.bib` files.
-* I have a deep working knowledge of the `codemirror` and `prosemirror` editors, and have authored dozens of custom plugins for each.
-* I'm proficient with both the `react` and `solid-js` reactive frameworks. <PostPreview postSlug="frontend/solidjs-vs-react" />
-
 **User Experience:** 
 
 * TODO
-
-**Backend Engineering:**
-
-* I worked for one year as a **backend engineer** at Smartpay KK writing **Scala**.
-  * Led the design, implementation, testing, and release of a "programmatic disbursements" backend service which integrates with bank APIs to automatically issue merchant payouts and consumer refunds on a fixed schedule.
-  * Collaborated with our frontend team to design a **GraphQL** API to power our mobile app.
-  * Contributed to the backend API powering the mobile & web apps for a pay-later service.
-  * Worked with **Google Cloud Platform**, Postgres, and Terraform Cloud.
-* I have experience with [`node.js`](https://nodejs.org/en), Scala's [`http4s`](https://http4s.org/), Haskell's [`servant`](https://hackage.haskell.org/package/servant), and Python's [`flask`](https://flask.palletsprojects.com/en/3.0.x/).
 
 **Technical Writing:** Here are a few samples of my writing:
 

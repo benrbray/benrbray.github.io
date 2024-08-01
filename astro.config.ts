@@ -16,9 +16,17 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCite from "@benrbray/rehype-cite";
 
+// vite
+import vitePluginWasm from "vite-plugin-wasm";
+
 // bibliography file
 import solidJs from "@astrojs/solid-js";
-const bibFiles = [fs.readFileSync("./public/references/category-theory.bib").toString(), fs.readFileSync("./public/references/game-physics.bib").toString(), fs.readFileSync("./public/references/datalog.bib").toString(), fs.readFileSync("./public/references/dhgp.bib").toString(), fs.readFileSync("./public/references/publications.bib").toString(), fs.readFileSync("./public/references/refs.bib").toString()];
+const bibFiles = [
+  fs.readFileSync("./public/references/category-theory.bib").toString(),
+  fs.readFileSync("./public/references/game-physics.bib").toString(), fs.readFileSync("./public/references/datalog.bib").toString(), fs.readFileSync("./public/references/dhgp.bib").toString(), fs.readFileSync("./public/references/publications.bib").toString(),
+  fs.readFileSync("./public/references/refs.bib").toString(),
+  fs.readFileSync("./public/references/type-safari.bib").toString()
+];
 
 
 // https://astro.build/config
@@ -48,5 +56,8 @@ export default defineConfig({
         dark: "one-dark-pro"
       }
     }
+  },
+  vite: {
+    plugins: [vitePluginWasm()]
   }
 });

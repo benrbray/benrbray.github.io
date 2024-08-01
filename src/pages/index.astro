@@ -25,9 +25,8 @@ const series = await getSeriesList();
 	<body>
 		<Header />
 		<main>
-			<About />
-
 			<ColumnNormal>
+				<About />
 				<!-- Series -->
 				{series.length > 0 && (<>
 					<h2>Tutorial Series</h2>

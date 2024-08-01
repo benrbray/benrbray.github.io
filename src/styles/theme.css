@@ -107,3 +107,8 @@
 	--theme-4: #e8b678; /* tan */
 	--theme-5: #e58061; /* burnt sienna */
 }
+
+/* responsive */
+:root {
+  --responsive-width: 52rem;
+}

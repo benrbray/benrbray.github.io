@@ -49,9 +49,8 @@ export const postDisplayTitle = (post: CollectionEntry<"blog">) => {
 
 export const seriesIsPublished = async (series: CollectionEntry<"series">): Promise<boolean> => {
   const entries = await getSeriesPosts(series);
-  const result = entries.findIndex(postIsPublished) >= 0
-  console.log(`seriesIsPublished(${series.slug}) ${entries.length} ${result}`);
-  return result;
+  const result = entries.findIndex(postIsPublished) >= 0;
+  return IS_DEV || result;
 }
 
 /**

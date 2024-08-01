@@ -11,6 +11,8 @@ tags: [functional-programming]
 
 ### Factoring Out Recursion
 
+https://twanvl.nl/blog/haskell/traversing-syntax-trees
+
 ### Parse, Don't Validate
 
 https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/

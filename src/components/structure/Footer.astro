@@ -1,32 +1,46 @@
 ---
+import { IS_PROD } from "@root/util/query";
+
 const today = new Date();
 ---
 
 <footer class="footer">
-  <span style="float: left; vertical-align: middle">
-    <!-- <a id="visitor-count" href="https://visitorbadge.io/status?path=https%3A%2F%2Fbenrbray.com%2F">
-      <img src="https://api.visitorbadge.io/api/combined?path=https%3A%2F%2Fbenrbray.com%2F&label=Visitors&countColor=%23263759&style=flat-square" />
-    </a> -->
+  <div class="footer-website">
     Powered by <a href="https://astro.build/">Astro</a> and <a
       href="https://github.com/benrbray/benrbray.github.io">hosted on GitHub</a>.
-  </span>
+  </div>
+  <div class="footer-visitor">
+  { IS_PROD && (<a href="https://visitorbadge.io/status?path=https%3A%2F%2Fbenrbray.com%2F">
+      <img src="https://api.visitorbadge.io/api/combined?path=https%3A%2F%2Fbenrbray.com%2F&countColor=%23263759&style=flat-square&labelStyle=lower" />
+    </a>) }
+  { !IS_PROD && `(${import.meta.env.MODE.toUpperCase()})` }
+  </div>
   <!-- Generation Date -->
-  <span style="float: right">
+  <div class="footer-generated">
     Generated {today.toLocaleDateString(undefined, { dateStyle : "long" })}
-    { !import.meta.env.PROD && `(${import.meta.env.MODE.toUpperCase()})` }
   </span>
 </footer>
 
 <style>
 .footer {
-	max-width: var(--max-width);
-	margin: 20px auto;
-	padding: 10px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
-	color: #aaa;
-	border-top: 1px solid #aaa;
-	font-size: 0.8em;
+  max-width: var(--max-width);
+  margin: var(--gap-1) auto;
+  padding: var(--gap-1);
+
+  border-top: 1px solid #aaa;
+  color: #aaa;
+  font-size: 0.8em;
 }
+
+.footer-generated { flex: 1; }
+.footer-website   { flex: 1; }
+.footer-visitor   { flex: 1; }
+.footer-visitor a { display: inline-block; }
 
 .footer a, .footer a:visited {
 	color: #aaa;
@@ -38,5 +52,23 @@ const today = new Date();
 
 .footer a:hover {
   color: var(--font-normal-color);
+}
+
+@media (max-width: 40rem) {
+	.footer {
+    flex-direction: column;
+    gap: var(--gap-0);
+    text-align: center;
+  }
+
+  .footer-generated { order: 0; }
+  .footer-website   { order: 1; }
+  .footer-visitor   { order: 2; }
+}
+
+@media (min-width: 40rem) {
+  .footer-website   { text-align: left;   }
+  .footer-visitor   { text-align: center; }
+  .footer-generated { text-align: right;  }
 }
 </style>

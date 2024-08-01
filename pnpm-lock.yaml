@@ -66,12 +66,18 @@ importers:
       '@benrbray/remark-extract-bibtex':
         specifier: link:~/projects/remark-cite/remark-extract-bibtex
         version: link:../../projects/remark-cite/remark-extract-bibtex
+      game-of-life:
+        specifier: link:~/projects/wasm-game-of-life/game-of-life
+        version: link:../../projects/wasm-game-of-life/game-of-life
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0
       remark-directive:
         specifier: ^3.0.0
         version: 3.0.0
+      vite-plugin-wasm:
+        specifier: ^3.3.0
+        version: 3.3.0(vite@5.3.3)
 
 packages:
 
@@ -2180,6 +2186,11 @@ packages:
     peerDependenciesMeta:
       '@testing-library/jest-dom':
         optional: true
+
+  vite-plugin-wasm@3.3.0:
+    resolution: {integrity: sha512-tVhz6w+W9MVsOCHzxo6SSMSswCeIw4HTrXEi6qL3IRzATl83jl09JVO1djBqPSwfjgnpVHNLYcaMbaDX5WB/pg==}
+    peerDependencies:
+      vite: ^2 || ^3 || ^4 || ^5
 
   vite@5.3.3:
     resolution: {integrity: sha512-NPQdeCU0Dv2z5fu+ULotpuq5yfCS1BzKUIPhNbP3YBfAMGJXbt2nS+sbTFu+qchaqWTD+H3JK++nRwr6XIcp6A==}
@@ -5150,6 +5161,10 @@ snapshots:
       vitefu: 0.2.5(vite@5.3.3)
     transitivePeerDependencies:
       - supports-color
+
+  vite-plugin-wasm@3.3.0(vite@5.3.3):
+    dependencies:
+      vite: 5.3.3
 
   vite@5.3.3:
     dependencies:

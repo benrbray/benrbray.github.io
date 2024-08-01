@@ -119,6 +119,10 @@ pre code {
 
 /* -------------------------------------------------------------------------- */
 
+article {
+  padding: 0 var(--gap-1);
+}
+
 article blockquote {
   /* padding: var(--gap-1); */
   /* margin: 0 auto; */

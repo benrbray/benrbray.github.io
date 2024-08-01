@@ -1,18 +1,61 @@
 ---
-import About from "@root/components/home/About.astro";
 import ColumnNormal from "@root/layouts/ColumnNormal.astro";
 import Page from "@root/layouts/Page.astro";
 
-import { Content } from "@root/content/pages/resume.mdx";
+import { Content as ResumeContent } from "@root/content/pages/resume.mdx";
 ---
 
 <Page pageTitle={"Resume"}>
 <ColumnNormal>
 <main>
 <article>
-  <About />
-  <Content />
+  <div class="pdf-resume-callout">
+    <span class="pdf-resume-welcome">
+      Welcome!
+    </span>
+    
+    This web version of my resume <b>organizes experiences by skill</b>, rather than by employer.  You can view a more traditional resume by following the link below:
+    
+    <div class="pdf-resume-button">
+      <a href="/resume-pdf">
+        Download PDF Resume
+      </a>
+    </div>
+  </div>
+  <ResumeContent />
 </article>
 </main>
 </ColumnNormal>
 </Page>
+
+
+
+
+<style>
+.pdf-resume-callout {
+  margin-top: var(--gap-2);
+  padding: var(--gap-1);
+  border: 2px solid purple;
+}
+
+.pdf-resume-button {
+  margin: var(--gap-1) auto 0 auto;
+  text-align: center;
+  color: purple;
+  font-weight: 600;
+  font-size: 2em;
+}
+
+.pdf-resume-button a {
+  color: unset;
+}
+
+.pdf-resume-welcome {
+  color: purple;
+  font-weight: 600;
+}
+
+.pdf-resume-button a:hover {
+  background-color: rgb(255, 163, 255);
+}
+</style>
