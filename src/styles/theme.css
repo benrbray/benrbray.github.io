@@ -18,10 +18,10 @@
 
 :root {
   /* page dimensions */
-  --column-thin-max-width: 40rem;
+  --column-thin-max-width: 42rem;
 
   --column-thin-min-width: 25rem;
-  --column-normal-max-width: 46rem;
+  --column-normal-max-width: 48rem;
   --column-normal-min-width: 25rem;
   --column-large-max-width: 60rem;
   --column-large-min-width: 30rem;
@@ -96,7 +96,7 @@
 
 /* colors */
 :root {
-	--color-link: #2a7ae2;
+	--color-link: #0069c2;
 }
 
 /* theme colors */

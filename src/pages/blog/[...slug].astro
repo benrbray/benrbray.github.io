@@ -33,7 +33,9 @@ const series = await (async () => {
 		<div class="article">
 			<ArticleHeader post={post}/>
 			{ series && <SeriesContent series={series} activeSlug={post.slug} /> }
-			<PostContent post={post} />
+			<div class="article-body">
+				<PostContent post={post} />
+			</div>
 		</div>
 	</article>
 </ColumnThin>

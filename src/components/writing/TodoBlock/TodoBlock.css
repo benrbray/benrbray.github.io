@@ -1,0 +1,11 @@
+.todo-block {
+  padding: 1em;
+  background: repeating-linear-gradient(
+    45deg,
+    #f9f7ff,
+    #f9f7ff 10px,
+    #eee9ff 10px,
+    #eee9ff 20px
+  );
+  border: 2px solid #d8ccff;
+}

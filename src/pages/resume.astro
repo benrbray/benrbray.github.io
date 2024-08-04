@@ -2,13 +2,14 @@
 import ColumnNormal from "@root/layouts/ColumnNormal.astro";
 import Page from "@root/layouts/Page.astro";
 
+import * as Components from "@components/writing";
 import { Content as ResumeContent } from "@root/content/pages/resume.mdx";
+import About from '@components/home/About.astro';
 ---
 
 <Page pageTitle={"Resume"}>
 <ColumnNormal>
 <main>
-<article>
   <div class="pdf-resume-callout">
     <span class="pdf-resume-welcome">
       Welcome!
@@ -22,7 +23,10 @@ import { Content as ResumeContent } from "@root/content/pages/resume.mdx";
       </a>
     </div>
   </div>
-  <ResumeContent />
+
+<About />
+<article class="article-body">
+  <ResumeContent components={Components} />
 </article>
 </main>
 </ColumnNormal>

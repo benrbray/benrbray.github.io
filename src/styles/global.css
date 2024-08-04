@@ -24,9 +24,9 @@ body {
 
 /* ---- basic html elements ------------------------------------------------- */
 
-b {
+/* b, strong {
   font-weight: var(--font-bold-weight);
-}
+} */
 
 a {
   color: var(--color-link);
@@ -37,25 +37,53 @@ a:hover {
 	text-decoration: underline;
 }
 
-p {
+/* TODO (Ben @ 2024/08/04) decide whether to keep hyphens&pretty */
+article p, article li {
+  hyphens: auto;
+  /* text-align: justify; */
+  text-wrap: pretty;
+}
+
+li {
+  text-align: left;
+}
+
+p, li {
   line-height: var(--line-height);
 }
 
 p:first-child { margin-top: 0;    }
 p:last-child  { margin-bottom: 0; }
 
-code {
-  background-color: #e0e0e0;
+/* TODO: apply balance elsewhere? */
+h1,h2,h3,h4,h5 {
+  text-wrap: balance;
 }
 
-pre {
+.article-body h1 {
+  border-bottom: 1px solid gray;
+}
+
+article code {
+  background-color: #eee;
+  border-radius: 0.2em;
+  /* border: 1px solid #c0c0c0; */
+  /* padding: 0 0.1em; */
+  padding: 0.1em 0.2em;
+  font-size: 0.9em;
+}
+
+article pre {
   border: 1px dashed #ccc;
   padding: var(--gap-0);
 }
 
-pre code {
+article pre code {
   background-color: unset;
   font-size: var(--font-code-size);
+  border: none;
+  background: transparent;
+  padding: unset;
 }
 
 /* ---- column widths ------------------------------------------------------- */
@@ -190,11 +218,6 @@ article li {
 }
 
 /* ------------------------------------------------------ */
-
-.todo {
-  padding: 1em;
-  background-color: #ede4ff;
-}
 
 .exactquote {
   text-decoration: underline #ddd 2px;

@@ -1,0 +1,13 @@
+.admonition {
+  --admonition-color-bg: rgb(218, 248, 255);
+  --admonition-color-fg: rgb(35, 173, 204);
+  --admonition-color-text: var(--font-normal-color);
+}
+
+.admonition {
+  padding: var(--gap-0);
+  background-color: var(--admonition-color-bg);
+  border: 1px dotted var(--admonition-color-fg);
+  border-radius: 0.2em;
+  color: var(--admonition-color-text);
+}

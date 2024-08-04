@@ -1,4 +1,4 @@
-import { foo, initGame } from "game-of-life";
+import { foo, initGame } from "physics";
 import { onMount } from "solid-js";
 
 export const Demo = () => {

@@ -9,11 +9,11 @@ datePublished: June 14, 2020
 
 tags:  [math, frontend]
 tools: [typescript]
-url: https://benrbray.com/prosemirror-math/
+url: https://github.com/benrbray/prosemirror-math
 imageThumbnail: images/thumbnails/prosemirror-math-2.png
 # imageThumbnail: images/thumbnails/prosemirror-math.png
 github_url: https://github.com/benrbray/prosemirror-math
-summary: This project provides schema and plugins for writing mathematics using <a href="https://prosemirror.net/">prosemirror</a>. Written in TypeScript, with math rendering handled by <a href="https://katex.org/">KaTeX</a>).
+summary: Schema and plugins for writing mathematics in <a href="https://prosemirror.net/">prosemirror</a>, using <a href="https://katex.org/">KaTeX</a>.
 ---
 
 # In the Wild

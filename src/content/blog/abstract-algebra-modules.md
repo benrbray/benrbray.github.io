@@ -107,17 +107,19 @@ We conclude that $\ZZ$-modules and commutative groups are *one in the same.*
 ## Modules over a Polynomial Ring $\FF[x]$
 
 The polynomial ring $\FF[x]$ is the space of formal linear combinations of powers of an indeterminate $x$, with coefficients drawn from an underlying field $\FF$.
-    $$
-    p(x)
-    = p_0 + p_1 x + p_2 x^2 + \cdots + p_d x^m \quad (m \in \NN)
-    $$
+
+$$
+p(x)
+= p_0 + p_1 x + p_2 x^2 + \cdots + p_d x^m \quad (m \in \NN)
+$$
 
 Polynomials form a ring\footnote{the polynomial ring $\FF[x]$ actually has the additional property of being an algebra, since $\FF$ embeds into the center of $\FF[x]$ via the ring homomorphism $(\alpha \in \FF) \mapsto (\alpha \cdot 1 \in \FF[x])$.} under entrywise addition and discrete convolution of coefficient sequences.  The sum and product of $p, q \in \FF[x]$ have coefficients
-    $$
-    [p+q]_k = p_k + q_k
-    \qquad
-    [p\cdot q]_k = \sum_{j=0}^{\max(n,m)} p_j q_{k-j}
-    $$
+
+$$
+[p+q]_k = p_k + q_k
+\qquad
+[p\cdot q]_k = \sum_{j=0}^{\max(n,m)} p_j q_{k-j}
+$$
 
 Consider what it would mean for an $\FF$-vector space $V$ to be an $\FF[x]$-module.  We need a ring homomorphism $\varphi : \FF[x] \rightarrow \End(V)$ describing the action of polynomials on vectors.  Since $\varphi$ preserves sums and products between $\FF[x]$ and $(\End(V),+,\circ)$ as rings\footnote{We take some notational shortcuts.  For instance, $\phi(x)^k$ is $\phi(x)$ composed with itself $k$ times, and $p_k$ refers to both the element of $\FF$ and to the map $(v \mapsto p_k v) \in \End(V)$.}, we find that the choice of a single linear map $\varphi(x) \in \End(V)$ determines the value of $\varphi$ on arbitrary polynomials~$p \in \FF[x]$,
     $$

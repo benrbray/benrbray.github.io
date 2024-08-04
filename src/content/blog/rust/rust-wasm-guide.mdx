@@ -1,0 +1,294 @@
+---
+title: Guide to Rust & WebAssembly
+datePublished: 2024-08-03
+summary: Guide to Rust & WebAssembly
+---
+
+# Tools
+
+WebAssembly comes in two flavors:
+
+* WebAssembly (`*.wasm`) files store compact, machine-readable binary code
+* WebAssembly Text(`*.wat`) files contain human-readable code
+
+The [`wasm2wat`](https://webassembly.github.io/wabt/demo/wasm2wat/) and [`wat2wasm`](https://webassembly.github.io/wabt/demo/wat2wasm/) tools convert between these two formats.  There is also [`wasm-decompiler`](https://github.com/WebAssembly/wabt/blob/main/docs/decompiler.md), which converts `*.wat` into code resembling a C-style imperative language.
+
+* [wabt](https://www.npmjs.com/package/wabt) on NPM
+
+## WebAssembly Text Format
+
+This section paraphrases the ["Understanding WebAssembly text format"](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format) from MDN.
+
+### Function Signatures
+
+```wasm
+(func (param $p1 i32) (param $p2 f32) (local $loc f64) …)
+```
+
+### Values
+
+WebAssembly provides only four basic number types, integers `i32/i64` and floats `f32/f64` each in 32 and 64 bit width.
+
+* booleans are represented as `i32`
+* memory addresses are represented as `i32`
+* values can also consist of opaque *references* representing pointers
+
+### Traps
+
+Under some conditions, certain instructions may produce a **trap**, which immediately aborts execution.  Traps cannot be handled by WebAssembly code, but are instead reported to the outside environment.
+
+### Functions
+
+Code is organized into separate *functions*. Each function takes a sequence of values as parameters and returns a sequence of values as results. Functions can call each other, including recursively, resulting in an implicit call stack that cannot be accessed directly. Functions may also declare mutable local variables that are usable as virtual registers.
+
+### Tables
+
+A *table* is an array of opaque values of a particular *element type*. It allows programs to select such values indirectly through a dynamic index operand.
+
+* Currently, the only available element type is an untyped function reference or a reference to an external host value.
+
+Thereby, a program can call functions indirectly through a dynamic index into a table. For example, this allows emulating function pointers by way of table indices.
+
+### Modules
+
+A WebAssembly binary takes the form of a *module* that contains definitions for functions, tables, and linear memories, as well as mutable or immutable *global* variables. Definitions can also be *imported*, specifying a module/name pair and a suitable type. Each definition can optionally be *exported* under one or more names. In addition to definitions, modules can define initialization data for their memories or tables that takes the form of *segments* copied to given offsets. They can also define a *start* function that is automatically executed.
+
+### Stack Machines
+
+The computational model of WebAssembly is based on a *stack machine*. Code consists of sequences of *instructions* that are executed in order.  Instructions manipulate values on an implicit *operand stack* and fall into two main categories.
+
+* Simple instructions perform basic operations on data. They pop arguments from the operand stack and push results back to it. 
+* Control instructions alter control flow. Control flow is structured, meaning it is expressed with well-nested constructs such as blocks, loops, and conditionals. Branches can only target such constructs.
+
+Although the browser compiles it to something more efficient, Wasm execution is defined in terms of a stack machine where the basic idea is that every type of instruction pushes and or pops a stack full of `i32`, `i64`, `f32`, and `f64` values.  For example,
+
+* `local.get` pushes the value of a local variable to the stack
+* `i32.add` pops two values, computes their sum, and pushes the result
+
+When a function is called, it starts with an empty stack which is gradually filled up and emptied as the body's instructions are executed.  For example, after executing the following function, the stack contains exactly one `i32` value, the result of `$p + $p` computed by `i32.add`.
+
+The **return value** of a function is just the final value left on the stack.  The WebAssembly validation rules ensure the stack matches exactly: if you declare a `(result f32)`, then the stack must contain exactly one `f32` at the end. If there is no result type, the stack must be empty.
+
+## Building WASM
+
+* `wasm-pack`
+* `wasm-bindgen`
+
+# WebAssembly
+
+## Key Concepts
+
+Following MDN, ["WebAssembly Concepts"](https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts#webassembly_key_concepts), there are several key concepts needed to understand how WebAssembly runs in the browser:
+
+* **Module:** Represents a WebAssembly binary which has been compiled by the browser into executable machine code.  A _module_ is stateless, and thus, like a `Blob`, can be explicitly shared between windows and workers.  A _module_ declares imports and exports just like an ES module.
+
+* **Memory:**  A resizable `ArrayBuffer` containing a linear array of bytes read and written by WebAssembly's low-level memory access instructions.
+
+* **Table:** A resizable typed array of references (e.g. to functions) that could not otherwise be stored as raw bytes in the _memory_ (for safety and portability reasons).
+
+* **Instance:** A _module_, paired with all the state it uses at runtime, including its _memory_, _table_, and a set of imported values.  Analogous to an ES module that has been loaded into a particular global with a particular set of imports.
+
+The JavaScript API provides developers with the ability to create _modules_, _memories_, _tables_, and _instances_.
+
+* Given a WebAssembly _instance_, JavaScript code can synchronously call its exports, which are exposed as normal JavaScript functions.
+* Arbitrary JavaScript functions can also be synchronously called by WebAssembly code by passing in those JavaScript functions as the imports to a WebAssembly instance.
+
+## Memory Model
+
+WebAssembly has a simple **linear memory model**.  From the [WebAssembly Memory](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format#webassembly_memory) section of ["Understanding the WebAssembly Text Format"](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format),
+
+* `memory` is a large, contiguous, mutable array of raw bytes
+* The allocated `memory` can grow over time as a multiple of the page size.  See JavaScript's [`Memory.grow()`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Memory/grow) function or WebAssembly's `memory.grow` instruction.
+* WebAssembly contains [memory instructions](https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/Memory) like `i32.load` and `i32.store` for reading and writing bytes between the stack and any location in memory.
+* Any load or store can access any byte in the entire linear memory, which is necessary to faithfull represent C/C++ concepts like pointers.
+* Support was recently added for [multiple memories](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format#multiple_memories).
+
+As described [here](https://developer.mozilla.org/en-US/docs/WebAssembly/Using_the_JavaScript_API#memory), unlike a native C/C++ program, where the available memory range spans the entire process, the memory accessible by a particular WebAssembly instance is confined to one specific -- and potentially very small -- range contained by a WebAssembly `memory` object.
+
+* This allows a single web app to use multiple independent libraries -- each using WebAssembly internally -- to have separate memories that are fully isolated from each other.
+* In addition, newer implementations can also create [shared memories](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format#shared_memories), which can be transferred between `Window` and `Worker` contexts using `postMessage()`, and used in multiple places.
+
+### Memory from JavaScript's Perspective
+
+From JavaScript's point of view, it's as though memory is all inside one big growable `ArrayBuffer`, exposed by the [`Memory.buffer`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Memory/buffer) getter.
+
+* JavaScript can create WebAssembly linear memory instances via the `WebAssembly.Memory()` interface and export them to a memory instance.
+* JavaScript can also access a memory instance created and exported by the WebAssembly code itself.
+* Since `ArrayBuffer` objects can't change size, `grow`ing the memory causes the current `ArrayBuffer` to be detached and a new one created, pointing to the newer, larger memory.
+
+# Compiling Rust to WebAssembly
+
+### `#[wasm_bindgen]` Macro
+
+https://rustwasm.github.io/wasm-bindgen/reference/attributes/on-rust-exports/index.html
+
+### Passing Closures from Rust to Javascript
+
+See the [`Closure` documentation](https://rustwasm.github.io/wasm-bindgen/api/wasm_bindgen/closure/struct.Closure.html).
+
+> The `Closure` type provides a way to transfer Rust closures to JavaScript, the closures passed to JavaScript must have a `'static` lifetime for soundness reasons.
+>
+> This type is a "handle" in the sense that whenever it is dropped it will invalidate the JS closure that it refers to. Any usage of the closure in JS after the Closure has been dropped will raise an exception.
+> 
+> Closure is often used when you are working with a js-sys or web-sys API that accepts a type `&js_sys::Function`. An example of using a Closure in Yew can be found in the Using Closure section on the Events page.
+>
+> [(Yew documentation)](https://yew.rs/docs/concepts/basic-web-technologies/wasm-bindgen)
+
+### Using JavaScript Closures from Rust
+
+# WebAssembly Component Model
+
+<Admonition title="Note">
+The [`wasm-tools`](https://github.com/bytecodealliance/wasm-tools) project provides tools for working with WebAssembly Components.
+</Admonition>
+
+From the [documentation](https://component-model.bytecodealliance.org/design/why-component-model.html),
+
+> Core modules are limited in how they expose their functionality to the outside world to functions that take and return only a small number of core WebAssembly types (essentially only integers and floating-point numbers). Richer types, such as strings, lists, records (a.k.a. structs), etc. have to be represented in terms of integers and floating point numbers, for example by the use of pointers and offsets. Those representations are often times not interchangeable across languages. For example, a string in C might be represented entirely differently from a string in Rust or in JavaScript.
+>
+> For Wasm modules to interoperate, therefore, there needs to be an agreed-upon way for exposing those richer types across module boundaries.
+>
+> In the component model, these type definitions are written in a language called **WIT (Wasm Interface Type)**, and the way they translate into bits and bytes is called the Canonical ABI (Application Binary Interface). A Wasm component is thus a wrapper around a core module that specifies its imports and exports using such Interfaces.
+>
+> The agreement of an interface adds a new dimension to Wasm portability. Not only are components portable across architectures and operating systems, but they are now portable across languages. A Go component can communicate directly and safely with a C or Rust component. It need not even know which language another component was written in - it needs only the component interface, expressed in WIT. Additionally, components can be linked into larger graphs, with one component's exports satisfying another's imports.
+
+Components
+
+* Logically, components are containers for modules - or other components - which express their interfaces and dependencies via WIT.
+* Conceptually, components are self-describing units of code that interact only through interfaces instead of shared memory.
+
+# Structure of Rust-WebAssembly Applications
+
+## Transferring Ownership between JavaScript and Rust
+
+* https://github.com/rustwasm/wasm-bindgen/issues/1515#issuecomment-489442651
+
+## Managing State
+
+global variables with `static mut` ; works but results in unsafe code
+
+* this approach is taken by [WASM by Example](https://wasmbyexample.dev/home.en-us.html#)
+
+raw pointers, as [described here](https://stackoverflow.com/a/70913650/1444650).
+
+```rust
+pub fn child(&self) -> *const Child {
+  // as_ptr is the reference to the child
+  &self.child.as_ptr()
+} 
+```
+
+[serializing and deserializing arbitrary data into and from JsValue with Serde](https://rustwasm.github.io/wasm-bindgen/reference/arbitrary-data-with-serde.html)
+
+# Complete Examples
+
+[Gobblet](https://github.com/Fallenstedt/rust-goblet) a simple game built with Rust, WebAssembly, and Canvas
+
+[BuildWars](https://kulinda.github.io/blog/buildwars1-1/)
+
+[Wasm A*](https://github.com/jacobdeichert/wasm-astar)
+
+[Rocket](https://web.archive.org/web/20180122140330/https://aochagavia.github.io/blog/rocket---a-rust-game-running-on-wasm/)
+
+[Boytacean Gameboy Emulator](https://github.com/joamag/boytacean)
+
+[Raphamorim's Gameboy Emulator](https://github.com/raphamorim/gameboy)
+
+https://madewithwebassembly.com/
+
+https://madewithwebassembly.com/showcase/ruffle/
+
+CFN, ["WebGL + Rust: Basic Water Tutorial"](https://chinedufn.com/3d-webgl-basic-water-tutorial/)
+
+[Sandspiel](https://maxbittker.com/making-sandspiel) ([source](https://github.com/MaxBittker/sandspiel)) Rust, WebAssembly.
+
+* the actual [implementation](https://github.com/MaxBittker/sandspiel/blob/master/crate/src/lib.rs) is quite similar to the Rust-Wasm Book's [Game of Life](https://rustwasm.github.io/book/game-of-life/implementing.html) example.
+
+> In order to move the game state from Web Assembly to WebGL, we construct a Javascript typed array view over the game state array which lives in Web Assembly memory, and pass that view to our fragment shader (GPU code) as a texture.
+> 
+> ```typescript
+> // Typed Array is not a copy, it's a view of our web assembly array
+> const cellsData = new Uint8Array(
+>   memory.buffer,
+>   universe.cells(), <- // a pointer to the Cell array in WASM
+>   width * height * 4
+> );
+> 
+> gl.bindTexture(gl.TEXTURE_2D, cellTexture);
+> gl.texImage2D(
+>   gl.TEXTURE_2D, 0, gl.RGBA,
+>   width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE,
+>   cellsData
+> );
+> 
+> Because our game state data is arranged in such a way that it happens to be a valid image texture, we can ship the whole grid over to the GPU with minimal copying and allocation! This was a big deal for making Sandspiel’s rendering performant- the rendering code blocks the CPU for less than 1 millisecond, critical for meeting the strict 16ms budget needed to achieve 60FPS.
+> ```
+
+# Glossary
+
+* `WASI` is an extension of WASM torun not only on the web, but on any platform.
+
+[`wee-alloc`](https://github.com/rustwasm/wee_alloc) ???
+
+[`wasm-bindgen-rayon`](https://github.com/RReverser/wasm-bindgen-rayon)
+
+[`wasmtime`](https://github.com/bytecodealliance/wasmtime) is a standalone runtime for WebAssembly, implemented in Rust
+
+[AssemblyScript](https://www.assemblyscript.org/introduction.html) compiles a variant of TypeScript to WebAssembly using [`binaryen`](https://github.com/WebAssembly/binaryen).
+
+# Example:  Using `specs` with WASM
+
+references
+
+* https://github.com/amethyst/specs/issues/341
+* https://github.com/bgourlie/hexthing_wasm
+* https://github.com/rayon-rs/rayon/pull/636
+* https://github.com/rayon-rs/rayon/issues/93
+* https://github.com/rayon-rs/rayon/issues/910
+* https://rustwasm.github.io/docs/wasm-bindgen/examples/raytrace.html
+* https://github.com/RReverser/wasm-bindgen-rayon
+* https://stackoverflow.com/questions/53000413/how-can-i-work-around-not-being-able-to-export-functions-with-lifetimes-when-usi
+
+# References
+
+WebAssembly
+
+* WebAssembly [Overview](https://webassembly.github.io/spec/core/intro/overview.html?highlight=linear+memory)
+* WebAssembly [Semantics Reference](https://webassembly.github.io/spec/core/exec/index.html)
+
+WebAssembly Memory
+
+* Radu Matei, ["A practical guide to WebAssembly Memory"](https://radu-matei.com/blog/practical-guide-to-wasm-memory/)
+  * uses `Vec::from_raw_parts`
+  * AssemblyScript
+  * WasmTime
+  * https://github.com/rustwasm/wasm-bindgen/issues/1515#issuecomment-489442651
+
+WebAssembly from JavaScript
+
+* MDN, [Using the WebAssembly JavaScript API](https://developer.mozilla.org/en-US/docs/WebAssembly/Using_the_JavaScript_API)
+  * [Memory](https://developer.mozilla.org/en-US/docs/WebAssembly/Using_the_JavaScript_API#memory) section
+  * [More Involved Memory Example](https://developer.mozilla.org/en-US/docs/WebAssembly/Using_the_JavaScript_API#more_involved_memory_example) section
+* [@haas2017:up-to-speed-wasm]
+
+Debugging WebAssembly
+
+* https://developer.chrome.com/blog/wasm-debugging-2020/
+* Callahan 2019, ["Debugging WebAssembly Outside of the Browser"](https://hacks.mozilla.org/2019/09/debugging-webassembly-outside-of-the-browser/)
+
+Rust
+
+* The `yew` documentation contains a helpful [guide for `wasm-bindgen`](https://yew.rs/docs/concepts/basic-web-technologies/wasm-bindgen)
+* MDN, [Compiling from Rust to WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_Wasm)
+
+
+```bibtex
+@inproceedings{haas2017:up-to-speed-wasm,
+  title={Bringing the web up to speed with WebAssembly},
+  author={Haas, Andreas and Rossberg, Andreas and Schuff, Derek L and Titzer, Ben L and Holman, Michael and Gohman, Dan and Wagner, Luke and Zakai, Alon and Bastien, JF},
+  booktitle={Proceedings of the 38th ACM SIGPLAN Conference on Programming Language Design and Implementation},
+  pages={185--200},
+  year={2017},
+  url={https://dl.acm.org/doi/pdf/10.1145/3062341.3062363?theme=2019}
+}
+```

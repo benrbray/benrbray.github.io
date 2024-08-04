@@ -66,9 +66,9 @@ importers:
       '@benrbray/remark-extract-bibtex':
         specifier: link:~/projects/remark-cite/remark-extract-bibtex
         version: link:../../projects/remark-cite/remark-extract-bibtex
-      game-of-life:
-        specifier: link:~/projects/wasm-game-of-life/game-of-life
-        version: link:../../projects/wasm-game-of-life/game-of-life
+      physics:
+        specifier: link:~/projects/physics/physics-web
+        version: link:../../projects/physics/physics-web
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0

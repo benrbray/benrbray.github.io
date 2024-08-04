@@ -39,9 +39,14 @@ import { Content as AboutContent } from "@root/content/snippets/about-me.mdx";
 #about .about-description {
 	grid-area: intro;
 
-	display: flex;
-	flex-direction: column;
+	/* TODO: why was this flex??? */
+	/* display: flex;
+	flex-direction: column; */
 	justify-content: center;
+}
+
+#about .about-description p {
+	text-align: left;
 }
 
 #about .about-description p { margin: 0.6rem 0; }
