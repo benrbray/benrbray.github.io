@@ -5,7 +5,8 @@ export const Demo = () => {
   let demoElt!: HTMLCanvasElement;
 
   onMount(() => {
-    initGame(demoElt);
+    // initGame(demoElt);
+    initGame();
   });
 
   return <canvas ref={demoElt} />
