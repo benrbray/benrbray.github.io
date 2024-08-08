@@ -1,0 +1,74 @@
+---
+title: Rust Quick Reference
+datePublished: 2024/08/07
+summary: A quick reference of concepts to keep in mind when writing Rust.  I took these notes while reading the Rust Book.
+---
+
+## Ownership Rules
+
+See ["What is Ownership?"](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
+
+1. each value in Rust has an **owner**
+2. there can only be one owner at a time
+3. when the owner goes out of scope, the value is **dropped**
+
+### Scope and `Drop`
+
+We can freely create new scopes with curly braces `{ }`:
+
+```rust
+{                  // s is not valid here, it's not yet declared
+  let s = "hello"; // s is valid from this point forward
+  // [...]
+}                  // the scope ended, and s will be dropped
+```
+
+Data types like `String` which manage their own heap-allocated memory implement the `Drop` trait, whose `drop` method is called whenever they go out of scope:
+
+```rust
+impl Drop for String {
+  fn drop(&mut self) {
+    // [...]
+  }
+}
+```
+
+### Move and `Copy`
+
+Types that implement the `Copy` trait will be _copied_ under reassignment.  This includes simple stack-allocated types like integers and string literals:
+
+```
+let x = 5;
+let y = x; // y will hold a copy of x
+```
+
+For types which do not implement `Copy`, the situation is different.  Rust has no concept of "shallow copy", as it would lead to multiple ownership and therefore potential *double-free* errors.  Instead, reassignment _invalidates_ the original variable.  In other words, the value is _moved_ from `x` to `y`.
+
+```
+let x = String::from("hello");
+let y = x;
+```
+
+To instead make a deep copy of the data, one may use `clone`:
+
+```
+let x = String::from("hello");
+let y = x.clone();
+```
+
+Note that the `Drop` and `Copy` traits are **mutually exclusive**.  Rust will not allow both traits to be implemented for the same type.
+
+### Ownership and Functions
+
+* Passing a variable to a function will either move or copy, just as assignment does.
+* Returning values can also transfer ownership.
+
+### References
+
+* **References** (`&var`) allow referring to a value without taking ownership of it.
+* The action of creating a reference is called **borrowing**.
+* **Mutable references** (&mut var) allow modifying a borrowed value.
+* Mutable references must be exclusive:  If you have taken a mutable reference to a value, you may have no other references to that value (mutable or otherwise!).
+
+## `Box<T>`
+

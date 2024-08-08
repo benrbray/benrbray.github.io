@@ -4,13 +4,12 @@ import Page from "@root/layouts/Page.astro";
 
 import * as Components from "@components/writing";
 import { Content as ResumeContent } from "@root/content/pages/resume.mdx";
-import About from '@components/home/About.astro';
 ---
 
 <Page pageTitle={"Resume"}>
 <ColumnNormal>
 <main>
-  <div class="pdf-resume-callout">
+  <!-- <div class="pdf-resume-callout">
     <span class="pdf-resume-welcome">
       Welcome!
     </span>
@@ -22,9 +21,8 @@ import About from '@components/home/About.astro';
         Download PDF Resume
       </a>
     </div>
-  </div>
+  </div> -->
 
-<About />
 <article class="article-body">
   <ResumeContent components={Components} />
 </article>
@@ -35,9 +33,9 @@ import About from '@components/home/About.astro';
 
 
 
-<style>
+<!-- <style>
 .pdf-resume-callout {
-  margin-top: var(--gap-2);
+  margin: var(--gap-2) 0;
   padding: var(--gap-1);
   border: 2px solid purple;
 }
@@ -62,4 +60,4 @@ import About from '@components/home/About.astro';
 .pdf-resume-button a:hover {
   background-color: rgb(255, 163, 255);
 }
-</style>
+</style> -->

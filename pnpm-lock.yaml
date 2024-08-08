@@ -67,8 +67,8 @@ importers:
         specifier: link:~/projects/remark-cite/remark-extract-bibtex
         version: link:../../projects/remark-cite/remark-extract-bibtex
       physics:
-        specifier: link:~/projects/physics/physics-web
-        version: link:../../projects/physics/physics-web
+        specifier: link:~/projects/physics/web
+        version: link:../../projects/physics/web
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0

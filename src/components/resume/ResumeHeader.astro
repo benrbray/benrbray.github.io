@@ -1,0 +1,85 @@
+---
+import ProfileRound from "@components/resume/ProfileRound.astro";
+---
+
+<div class="resume-header"> 
+  <div class="resume-header-profile">
+  <ProfileRound />
+  </div>
+  <div class="resume-header-body">
+    <h1 class="name">Benjamin R. Bray</h1>
+    <div class="body">
+      <div class="pdf-resume-callout">
+    <span class="pdf-resume-welcome">
+      Welcome!
+    </span>
+    
+    This page organizes my experiences by skill, rather than by employer.  You can view a more traditional resume by following the link below:
+    
+    <div class="pdf-resume-button">
+      <a href="/resume-pdf">
+        Download PDF Resume
+      </a>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.resume-header {
+  display: flex;
+
+  align-items: center;
+  margin-top: 2em;
+}
+
+.resume-header .resume-header-profile {
+  flex-basis: 14em;
+}
+
+.resume-header .resume-header-body {
+  flex: 1;
+}
+
+.resume-header h1.name {
+  border: none;
+	font-size: 2em;
+	font-weight: var(--font-bold-weight);
+  margin: 0 0 0.5em 0;
+  text-align: center;
+}
+
+.resume-header .body {
+  text-wrap: pretty;
+}
+</style>
+
+<style>
+.pdf-resume-callout {
+  padding: 0 2em;
+}
+
+.pdf-resume-button {
+  margin: var(--gap-1) auto 0 auto;
+  text-align: center;
+  color: rgb(0, 128, 64);
+  font-weight: 600;
+  font-size: 1.6em;
+}
+
+.pdf-resume-button a {
+  padding: 0.1em 0.3em;
+  border: 2px solid rgb(0, 128, 64);
+  color: unset;
+}
+
+.pdf-resume-welcome {
+  color: rgb(0, 128, 64);
+  font-weight: 600;
+}
+
+.pdf-resume-button a:hover {
+  background-color: rgb(255, 163, 255);
+}
+</style>

@@ -58,6 +58,6 @@ export default defineConfig({
     }
   },
   vite: {
-    plugins: [vitePluginWasm()]
+    plugins: [vitePluginWasm()],
   }
 });

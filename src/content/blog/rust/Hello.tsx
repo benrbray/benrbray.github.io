@@ -1,4 +1,4 @@
-import { foo, initGame } from "physics";
+import { initGame } from "physics";
 import { onMount } from "solid-js";
 
 export const Demo = () => {
@@ -9,8 +9,4 @@ export const Demo = () => {
   });
 
   return <canvas ref={demoElt} />
-}
-
-export const Hello = () => {
-  return <button onClick={() => console.log(foo)}>Hello, client!</button>;
 }
