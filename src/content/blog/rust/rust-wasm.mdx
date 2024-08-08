@@ -1,16 +1,15 @@
 ---
-title: Rust-Wasm Demo
+title: Minimal Example of Rust-Wasm with WebGL and Specs
+titleDisplay: Minimal Example of Rust&#8209;Wasm with WebGL and <code>specs</code>
 datePublished: 2024/08/01
-summary: Demo page for Rust-Wasm
+summary: A minimal Demo page for Rust-Wasm
+published: true
 ---
 
-import { Hello, Demo } from "./Hello.tsx";
+import { Demo } from "./Hello.tsx";
 
-# Hi Curtis
+# Rust-Wasm Example
 
-$\int_a^b f(x)$
+The following demo is implemented in Rust and compiled to WASM using `wasm-bindgen`.  WebGL rendering is achieved with `glow`.  Uses the `specs` entity-component-system library for managing game state.  Longer writeup coming soon!
 
 <Demo client:only="solid" />
-
-this is text
-

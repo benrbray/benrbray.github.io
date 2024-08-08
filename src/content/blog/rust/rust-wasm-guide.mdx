@@ -162,11 +162,13 @@ Components
 ## Transferring Ownership between JavaScript and Rust
 
 * https://github.com/rustwasm/wasm-bindgen/issues/1515#issuecomment-489442651
+* https://stackoverflow.com/questions/53000413/how-can-i-work-around-not-being-able-to-export-functions-with-lifetimes-when-usi?rq=4
 
 ## Managing State
 
 global variables with `static mut` ; works but results in unsafe code
 
+* see [this Stackoverflow post](https://stackoverflow.com/questions/47722214/how-do-i-keep-internal-state-in-a-webassembly-module-written-in-rust)
 * this approach is taken by [WASM by Example](https://wasmbyexample.dev/home.en-us.html#)
 
 raw pointers, as [described here](https://stackoverflow.com/a/70913650/1444650).
@@ -180,6 +182,16 @@ pub fn child(&self) -> *const Child {
 
 [serializing and deserializing arbitrary data into and from JsValue with Serde](https://rustwasm.github.io/wasm-bindgen/reference/arbitrary-data-with-serde.html)
 
+### Managing State with `Rc<T>` and `RefCell<T>`
+
+this is the approach taken by the ["WebGL + Rust: Basic Water Tutorial"](https://chinedufn.com/3d-webgl-basic-water-tutorial/)
+
+* see `WebClient` in `lib.rs`
+
+### Dealing with Lifetime Parameters?
+
+???
+
 # Complete Examples
 
 [Gobblet](https://github.com/Fallenstedt/rust-goblet) a simple game built with Rust, WebAssembly, and Canvas
@@ -189,6 +201,10 @@ pub fn child(&self) -> *const Child {
 [Wasm A*](https://github.com/jacobdeichert/wasm-astar)
 
 [Rocket](https://web.archive.org/web/20180122140330/https://aochagavia.github.io/blog/rocket---a-rust-game-running-on-wasm/)
+
+[Hexthing-Wasm](https://github.com/bgourlie/hexthing_wasm/blob/master/crate/src/lib.rs)
+
+* uses `specs` and Rust+wasm
 
 [Boytacean Gameboy Emulator](https://github.com/joamag/boytacean)
 
@@ -264,6 +280,19 @@ WebAssembly Memory
   * WasmTime
   * https://github.com/rustwasm/wasm-bindgen/issues/1515#issuecomment-489442651
 
+* https://github.com/rustwasm/wasm-bindgen/issues/1515#issuecomment-489442651
+
+WASM, Rust, and Global State
+
+* Rust Discourse, ["What is the correct way to handle global state in a wasm project?"](https://users.rust-lang.org/t/what-is-the-correct-way-to-handle-global-state-in-a-wasm-project/59666)
+  > handlers need to reference your state object, and since there can be multiple handlers, you end up with shared mutable ownership.  The type for this is `Arc<Mutex<State>>`
+  
+  > If you are using wasm-bindgen then you should be able to pass ownership of your State object to the JavaScript that is calling it. [???]
+
+* r/rust, ["What is the idiomatic way to persist global state with WASM lib?"](https://old.reddit.com/r/rust/comments/13g0cso/what_is_the_idiomatic_way_to_persist_global_state/)
+  > Put it in a thread_local `RefCell` and you should be golden.
+
+
 WebAssembly from JavaScript
 
 * MDN, [Using the WebAssembly JavaScript API](https://developer.mozilla.org/en-US/docs/WebAssembly/Using_the_JavaScript_API)
@@ -280,6 +309,16 @@ Rust
 
 * The `yew` documentation contains a helpful [guide for `wasm-bindgen`](https://yew.rs/docs/concepts/basic-web-technologies/wasm-bindgen)
 * MDN, [Compiling from Rust to WebAssembly](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_Wasm)
+
+Rust WebGL
+
+* [`wrend`](https://github.com/austintheriot/wrend)
+* [`glow`] "gl on whatever"
+  > Wrend is a wrapper library around raw WebGL2 code and is written in Rust, which then gets compiled to WebAssembly for running in the browser. Its goal is to make working with WebGL more convenient when writing Rust and/or JavaScript/TypeScript code. Though most of the demo app examples are built using Yew, wrend itself is framework agnostic and is designed to be used in a variety of settings with diverse rendering pipelines. See the examples directory of the repo for examples.
+
+Misc
+
+* Robert Krahn, ["Hot Reloading Rust for Fun and Faster Feedback Cycles"](https://robert.kra.hn/posts/hot-reloading-rust/#where-this-idea-comes-from)
 
 
 ```bibtex
