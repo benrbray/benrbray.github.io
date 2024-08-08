@@ -1,6 +1,8 @@
 import { initGame } from "physics";
 import { onMount } from "solid-js";
 
+import "./Demo.css";
+
 export const Demo = () => {
   let demoElt!: HTMLCanvasElement;
 
@@ -8,5 +10,7 @@ export const Demo = () => {
     initGame(demoElt);
   });
 
-  return <canvas ref={demoElt} />
+  return (<div class="demo">
+    <canvas ref={demoElt} />
+  </div>);
 }
