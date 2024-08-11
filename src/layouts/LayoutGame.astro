@@ -1,0 +1,27 @@
+---
+import "@styles/layout-game.css";
+
+import BaseHead from "@root/components/structure/BaseHead.astro";
+import IncludeCss from "@root/components/structure/IncludeCss.astro";
+import { SITE_TITLE } from "@root/consts";
+
+interface Props {
+	pageTitle: string
+}
+
+const { pageTitle } = Astro.props;
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${pageTitle} / ${SITE_TITLE}`}  />
+		<IncludeCss />
+	</head>
+	<body>
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>

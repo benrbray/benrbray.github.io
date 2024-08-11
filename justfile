@@ -8,6 +8,9 @@ preview:
 dev:
   pnpm run dev
 
+host:
+  pnpm run host
+
 publish:
   pnpm run build
   rm -rf docs

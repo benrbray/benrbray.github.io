@@ -11,6 +11,6 @@ export const Demo = () => {
   });
 
   return (<div class="demo">
-    <canvas ref={demoElt} />
+    <canvas tabIndex={1} ref={demoElt} />
   </div>);
 }

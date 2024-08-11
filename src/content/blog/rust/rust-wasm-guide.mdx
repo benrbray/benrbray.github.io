@@ -182,6 +182,14 @@ pub fn child(&self) -> *const Child {
 
 [serializing and deserializing arbitrary data into and from JsValue with Serde](https://rustwasm.github.io/wasm-bindgen/reference/arbitrary-data-with-serde.html)
 
+### Event Handling
+
+https://users.rust-lang.org/t/can-someone-help-me-understand-whats-happening-here-and-why/82244/8
+
+https://rustwasm.github.io/docs/wasm-bindgen/reference/weak-references.html
+
+https://github.com/tc39/proposal-weakrefs
+
 ### Managing State with `Rc<T>` and `RefCell<T>`
 
 this is the approach taken by the ["WebGL + Rust: Basic Water Tutorial"](https://chinedufn.com/3d-webgl-basic-water-tutorial/)
@@ -239,6 +247,8 @@ CFN, ["WebGL + Rust: Basic Water Tutorial"](https://chinedufn.com/3d-webgl-basic
 > 
 > Because our game state data is arranged in such a way that it happens to be a valid image texture, we can ship the whole grid over to the GPU with minimal copying and allocation! This was a big deal for making Sandspiel’s rendering performant- the rendering code blocks the CPU for less than 1 millisecond, critical for meeting the strict 16ms budget needed to achieve 60FPS.
 > ```
+
+[abstreet](https://github.com/a-b-street/abstreet)
 
 # Glossary
 

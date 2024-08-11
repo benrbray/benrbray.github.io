@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  padding: 0;
+
+font-family: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+font-weight: normal;
+  
+  background-color: #55206c;
+  color: white;
+}
+
+.header {
+  margin-top: 3rem;
+}
+
+.content {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.0rem;
+  line-height: 1.4em;
+}
+
+kbd {
+  border: 1px solid white;
+  padding: 1px;
+  border-radius: 0.2em;
+}
+
+.date-published {
+  margin: 1.0rem 0;
+  font-style: italic;
+}
+
+b, strong {
+  color: #dfb1ff;
+}
+
+a {
+  color: #ffc0a9;
+}
+
+a:visited {
+  color: #ffc0a9;
+}
+
+.game-content {
+  margin-top: 2.0rem;
+}
+
+h1 {
+  margin: 1.0rem 0;
+}

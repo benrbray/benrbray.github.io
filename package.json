@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "host": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
@@ -15,6 +16,7 @@
     "@astrojs/rss": "^4.0.6",
     "@astrojs/sitemap": "^3.1.5",
     "@astrojs/solid-js": "^4.4.0",
+    "@ruffle-rs/ruffle": "0.1.0-nightly.2024.8.10",
     "astro": "^4.10.1",
     "katex": "^0.16.10",
     "rehype-autolink-headings": "^7.1.0",
@@ -31,9 +33,10 @@
     "@benrbray/rehype-cite": "link:~/projects/remark-cite/rehype-cite",
     "@benrbray/remark-cite": "link:~/projects/remark-cite/remark-cite",
     "@benrbray/remark-extract-bibtex": "link:~/projects/remark-cite/remark-extract-bibtex",
+    "physics": "link:~/projects/physics/web",
     "rehype-slug": "^6.0.0",
     "remark-directive": "^3.0.0",
-    "vite-plugin-wasm": "^3.3.0",
-    "physics": "link:~/projects/physics/web"
+    "tsx": "^4.17.0",
+    "vite-plugin-wasm": "^3.3.0"
   }
 }

@@ -1,12 +1,12 @@
 ---
 import ColumnNormal from "@root/layouts/ColumnNormal.astro";
-import Page from "@root/layouts/Page.astro";
+import LayoutDefault from "@root/layouts/LayoutDefault.astro";
 
 import { Content as FavoriteBlogContent } from "../content/favorites/favorite-blogs.mdx";
 
 ---
 
-<Page pageTitle={"Resources"}>
+<LayoutDefault pageTitle={"Resources"}>
 	<ColumnNormal>
 	<article>
 		<div class="prose">
@@ -14,4 +14,4 @@ import { Content as FavoriteBlogContent } from "../content/favorites/favorite-bl
 		</div>
 	</article>
 </ColumnNormal>
-</Page>
+</LayoutDefault>

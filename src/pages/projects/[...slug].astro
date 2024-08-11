@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry } from 'astro:content';
 
-import Page from '@layouts/Page.astro';
+import LayoutDefault from '@layouts/LayoutDefault.astro';
 import { getProjects, shortenProjectSlug } from '@root/util/query';
 
 import ColumnThin from '@layouts/ColumnThin.astro';
@@ -22,7 +22,7 @@ type Props = { project : CollectionEntry<'blog'> };
 const { project } = Astro.props;
 ---
 
-<Page pageTitle={project.data.title}>
+<LayoutDefault pageTitle={project.data.title}>
 	<ColumnThin>
 	<article>
 		<div class="article">
@@ -31,4 +31,4 @@ const { project } = Astro.props;
 		</div>
 	</article>
 	</ColumnThin>
-</Page>
+</LayoutDefault>

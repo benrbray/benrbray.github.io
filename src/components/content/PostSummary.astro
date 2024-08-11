@@ -56,6 +56,12 @@ const isProject = post.data.kind === "project";
   margin: 1.0rem 0;
 }
 
+@media (max-width: 52rem) {
+  .post-summary-box {
+    flex-direction: column;
+  }
+}
+
 .post-summary-box.kind-project {
   background-color: #ddf7ff;
   padding: var(--gap-1);

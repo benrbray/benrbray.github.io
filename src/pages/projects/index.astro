@@ -1,6 +1,6 @@
 ---
 import { getProjects } from '@root/util/query';
-import Page from '@root/layouts/Page.astro';
+import LayoutDefault from '@root/layouts/LayoutDefault.astro';
 import ColumnNormal from '@root/layouts/ColumnNormal.astro';
 import PostPreview from '@root/components/content/PostPreview.astro';
 
@@ -9,7 +9,7 @@ const projects = (await getProjects()).sort(
 );
 ---
 
-<Page pageTitle={"Projects"}>
+<LayoutDefault pageTitle={"Projects"}>
 <ColumnNormal>
 <main>
 	<h1>Projects</h1>
@@ -22,4 +22,4 @@ const projects = (await getProjects()).sort(
 	</section>
 </main>
 </ColumnNormal>
-</Page>
+</LayoutDefault>

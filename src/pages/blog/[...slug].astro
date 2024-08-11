@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getEntry } from 'astro:content';
 
-import Page from '@layouts/Page.astro';
+import LayoutDefault from '@layouts/LayoutDefault.astro';
 // import SeriesSummary from '@components/content/SeriesSummary.astro';
 import { getPosts } from '@root/util/query';
 import ColumnThin from '@layouts/ColumnThin.astro';
@@ -27,7 +27,7 @@ const series = await (async () => {
 })();
 ---
 
-<Page pageTitle={post.data.title}>
+<LayoutDefault pageTitle={post.data.title}>
 	<ColumnThin>
 	<article>
 		<div class="article">
@@ -39,4 +39,4 @@ const series = await (async () => {
 		</div>
 	</article>
 </ColumnThin>
-</Page>
+</LayoutDefault>

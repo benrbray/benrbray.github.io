@@ -1,0 +1,30 @@
+---
+interface Props {
+  swfPath: string,
+  width?: number,
+  height?: number
+}
+
+const { swfPath, width, height } = Astro.props;
+---
+
+<div class="ruffle-embed">
+  <embed src={swfPath} width={width} height={height} />
+  <noscript>If you had JavaScript enabled, you'd be able to play the game here!</noscript>
+</div>
+<!-- <script src="https://unpkg.com/@ruffle-rs/ruffle"></script> -->
+
+<style>
+.ruffle-embed {
+  margin: 2rem 0;
+
+  display: flex;
+  justify-content: center;
+}
+
+ruffle-embed {
+  flex-shrink: 0;
+  max-width: 100vw;
+  border: 2px solid white;
+}
+</style>

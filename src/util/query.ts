@@ -107,3 +107,18 @@ export const getProjects = async () => {
 }
 
 /* -------------------------------------------------------------------------- */
+
+export const getGames = (filter?: (entry: CollectionEntry<"game">) => boolean) => {
+  return getCollection("game", entry => {
+    return filter ? filter(entry) : true;
+  });
+}
+
+export const getGameUrl = (game: CollectionEntry<"game">) => {
+  // some posts explicitly provide a URL
+  if(game.data.url) {
+    return game.data.url;
+  }
+
+  return `/game/${game.slug}`;
+}

@@ -40,8 +40,21 @@ const series = defineCollection({
 	}),
 });
 
+const game = defineCollection({
+	type: 'content',
+	schema: z.object({
+		title: z.string(),
+		summary: z.string(),
+		datePublished: z.coerce.date(),
+		/** explicitly set post URL */
+		url: z.string().optional(),
+		newgroundsUrl: z.string().optional()
+	})
+});
+
 export const collections = {
 	blog,
 	series,
-	project
+	project,
+	game,
 };

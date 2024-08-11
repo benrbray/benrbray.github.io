@@ -1,0 +1,26 @@
+---
+import { getGameUrl } from '@root/util/query';
+import type { CollectionEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
+
+import Preview from "@components/content/Preview.astro";
+
+interface Props {
+  gameSlug: CollectionEntry<'game'>["slug"]
+}
+
+const { gameSlug } = Astro.props;
+
+const game = await getEntry({ collection: "game", slug: gameSlug });
+
+const gameUrl = getGameUrl(game);
+const gameDisplayTitle = game.data.title;
+---
+
+<Preview 
+  url={gameUrl}
+  titleHtml={gameDisplayTitle}
+  summaryHtml={game.data.summary}
+  date={game.data.datePublished}
+  unpublished={false}
+/>
