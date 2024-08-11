@@ -1,0 +1,12 @@
+{
+  "name": "Benjamin R. Bray",
+  "start_url": "/",
+  "display": "minimal-ui",
+  "icons": [
+    {
+      "src": "/icons/favicon-web.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
