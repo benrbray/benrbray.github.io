@@ -43,7 +43,7 @@
 
   /* font sizes */
   --font-size-small:  0.8rem;
-  --font-size-normal: 0.95rem;
+  --font-size-normal: 1.0rem;
   --font-size-large:  1.1rem;
   --font-size-larger: 1.3rem;
   --font-size-largest: 1.4rem;
@@ -52,7 +52,8 @@
   /* fonts */
 	--code-font: "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
 	--serif-font: "Lora", Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
-	--sans-font: "Roboto", system-ui, sans-serif;
+	/* --sans-font: "Roboto", system-ui, sans-serif; */
+  --sans-font: system-ui, sans-serif;
 
   /* font: normal */
   --font-normal-family: var(--serif-font);

@@ -19,16 +19,18 @@ const { tags, tools } = Astro.props;
 
 <style>
 .post-tags {
-
+  font-family: var(--sans-font);
 }
 
 .post-tags .tag,
 .post-tags .tool {
 	display: inline-block;
-	margin: 0 0.1em;
-	padding: 0 0.3em;
+	padding: 0.1em 0.4em;
   border-radius: 0.1em;
 	white-space: nowrap;
+  font-size: var(--font-size-small);
+  border: 1px solid;
+  border-radius: 0.2em;
 }
 
 .post-tags .tag {

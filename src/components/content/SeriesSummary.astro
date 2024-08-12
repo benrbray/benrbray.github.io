@@ -54,6 +54,12 @@ const posts = await getSeriesPosts(series);
 	border-radius: var(--gap-1);
 	padding: var(--gap-1);
 	margin: var(--gap-1) 0;
+
+	border: 1px solid rgb(92, 153, 92);
+  --shadow-distance: 0.2rem;
+  --shadow-color: rgba(92, 153, 92, 0.25);
+  box-shadow:
+    calc(-1 * var(--shadow-distance)) var(--shadow-distance) 0 var(--shadow-color);
 }
 
 .series {

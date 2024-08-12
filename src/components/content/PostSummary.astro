@@ -17,65 +17,123 @@ const isProject = post.data.kind === "project";
 
 
 <div class:list={[
-  "post-summary-box",
+  "post-summary",
   `priority-${post.data.priority}`,
   `kind-${post.data.kind === "project" ? "project" : "post"}`,
 ]}>
   <!-- summary -->
-  <div class="post-desc">
+  <div class="summary-header">
     <!-- title -->
-    <div class="post-title">
-      <a href={postUrl}
-         class:list={[{ unpublished: !postIsPublished(post) }]}
-         set:html={postDisplayTitle}
-      />
+    <div class="header-title">
+      <div class="title">
+        <a href={postUrl}
+          class:list={[{ unpublished: !postIsPublished(post) }]}
+          set:html={postDisplayTitle}
+        />
+      </div>
+      <div class="year"><FormattedDate date={post.data.datePublished} /></div>
     </div>
-    <div class="post-subtitle">
-      <span class="post-year"><FormattedDate date={post.data.datePublished} /></span>
+    <div class="header-subtitle">
       <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
     </div>
-    {!isLowPriority && isProject && <div class="post-summary" set:html={post.data.summary} />}
   </div>
+  <div class="summary-body">
+  <!-- summary -->
+  {
+    !isLowPriority && isProject &&
+    <div class="summary" set:html={post.data.summary} />
+  }
   <!-- thumbnail -->
   {
     !isLowPriority && post.data.imageThumbnail &&
-    (<div class="post-thumb">
+    (<div class="thumb">
       <img alt="" src={post.data.imageThumbnail} />
     </div>)
   }
+  </div>
 </div>
 
 <style>
-.post-summary-box {
+.post-summary {
+  margin: var(--gap-1) 0;
+}
+
+.post-summary {
+  padding: var(--gap-1);
+  border-radius: 0.2em;
+  border: .075rem solid #bfbfbf;
+
+  --shadow-distance: 0.2rem;
+  --shadow-color: #eaeaea;
+  box-shadow:
+    calc(-1 * var(--shadow-distance)) var(--shadow-distance) 0 0 var(--shadow-color);
+}
+
+.post-summary:hover {
+  /* --shadow-distance: 0.3rem;
+  --shadow-color: #e0e0e0;
+  border-width: 0.01rem;
+  border-color: #666; */
+
+  /* --shadow-distance-1: 0.2rem;
+  --shadow-distance-2: 0rem;
+  --shadow-color-1: rgba(0, 0, 0, 0.06);
+  --shadow-color-2: rgba(0, 0, 0, 0.05);
+  box-shadow:
+    calc(-0.5 * var(--shadow-distance-1)) var(--shadow-distance-1) 0 0 var(--shadow-color-1),
+    calc(-0.5 * var(--shadow-distance-2)) var(--shadow-distance-2) 0.4em 0em var(--shadow-color-2); */
+}
+
+.post-summary.kind-post { }
+.post-summary.kind-project {  }
+
+/* header */
+
+.summary-header {
+
+}
+
+
+.summary-header .header-title {
   display: flex;
-  flex-direction: row;
+  gap: var(--gap-1);
+  margin-bottom: var(--gap-0);
+  font-size: var(--font-size-larger);
+  font-weight: var(--font-title-weight);
+
+  text-wrap: pretty;
+}
+
+.header-title .title { flex: 1; }
+.header-title .year  { flex: 0; }
+
+.header-title .title a {
+  color: unset;
+}
+
+.header-title .year {
+  font-weight: var(--font-normal-weight);
+  font-size: var(--font-size-large);
+  color: gray;
+  white-space: nowrap;
+}
+
+/* body */
+
+.summary-body {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   gap: 1.0rem;
 
-  width: 100%;
-  margin: 1.0rem 0;
+  margin-top: var(--gap-0);
 }
 
-@media (max-width: 52rem) {
-  .post-summary-box {
-    flex-direction: column;
-  }
-}
-
-.post-summary-box.kind-project {
-  background-color: #ddf7ff;
-  padding: var(--gap-1);
-}
-
-.post-summary-box.kind-post {
-  padding: 0 var(--gap-1);
-}
-
-.post-summary-box .post-desc {
+.summary-body .summary {
   flex: 1;
 }
 
-.post-summary-box .post-thumb {
+.summary-body .thumb {
   flex-basis: 40%;
   max-height: 8em;
 
@@ -85,37 +143,9 @@ const isProject = post.data.kind === "project";
   overflow: hidden;
 }
 
-.post-summary-box .post-thumb img {
+.summary-body .thumb img {
   display: block;
   min-width: 100%;
 }
 
-.post-summary-box .post-title {
-  /* display: flex; */
-  justify-content: space-between;
-
-  margin-bottom: var(--gap-0);
-  font-size: var(--font-size-large);
-  font-weight: var(--font-title-weight);
-}
-
-.post-summary-box .post-subtitle,
-.post-summary-box .post-subtitle {
-  margin: var(--gap-0) 0;
-  text-overflow: hidden;
-  overflow: hidden;
-}
-
-.post-summary-box .post-summary p:first-child,
-.post-summary-box .post-summary p:first-child {
-  margin-top: 0;
-}
-
-.post-summary-box .post-year,
-.post-summary-box .post-year {
-  color: gray;
-  white-space: nowrap;
-}
-
-.post-summary-box .post-title a { color: unset; }
 </style>
