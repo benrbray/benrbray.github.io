@@ -2,7 +2,7 @@
 import { type CollectionEntry } from 'astro:content';
 
 import LayoutGame from '@root/layouts/LayoutGame.astro';
-import { getGames } from '@root/util/query';
+import { getGames, getPostUrlBySlug } from '@root/util/query';
 import FormattedDate from '@root/components/dates/FormattedDate.astro';
 
 export async function getStaticPaths() {
@@ -16,13 +16,14 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'game'>;
 
 const game = Astro.props;
+const moreGamesUrl = await getPostUrlBySlug("projects/flash-games");
 let { Content: GameContent } = await game.render();
 ---
 
 <LayoutGame pageTitle={game.data.title}>
 	<div class="content">
 		<div class="header">
-			<a href="/">« Benjamin R. Bray</a>
+			<a href={moreGamesUrl}>« Benjamin R. Bray</a>
 		</div>
 		<h1>{game.data.title}</h1>
 		<div class="date-published">

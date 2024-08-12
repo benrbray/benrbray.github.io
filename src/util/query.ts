@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry, getEntry } from "astro:content";
 import { asyncFilter } from "./async";
 
 export const IS_PROD = import.meta.env.PROD;
@@ -11,13 +11,13 @@ export const IS_DEV  = import.meta.env.DEV;
  * folder can be freely reorganized without breaking URLs.
  */
 export const shortenProjectSlug = (slug: string) => {
-    const prefix = "projects/";
-    if(slug.startsWith(prefix)) {
-      return slug.slice(prefix.length);
-    } else {
-      return slug;
-    }
+  const prefix = "projects/";
+  if(slug.startsWith(prefix)) {
+    return slug.slice(prefix.length);
+  } else {
+    return slug;
   }
+}
 
 /**
  * Computes the URL for a given post, so that the `content/`
@@ -35,6 +35,11 @@ export const getPostUrl = (post: CollectionEntry<"blog">) => {
   } else {
     return `/blog/${post.slug}`;
   }
+}
+
+export const getPostUrlBySlug = async (postSlug: CollectionEntry<"blog">["slug"]) => {
+  const post = await getEntry({ collection: "blog", slug: postSlug });
+  return getPostUrl(post);
 }
 
 export const postIsPublished = (post: CollectionEntry<"blog">) => {
