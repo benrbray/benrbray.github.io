@@ -37,20 +37,22 @@ const isProject = post.data.kind === "project";
       <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
     </div>
   </div>
-  <div class="summary-body">
-  <!-- summary -->
-  {
-    !isLowPriority && isProject &&
-    <div class="summary" set:html={post.data.summary} />
+  { !isLowPriority && 
+    <div class="summary-body">
+    {
+      // summary
+      isProject &&
+      <div class="summary" set:html={post.data.summary} />
+    }
+    {
+      // thumbnail
+      post.data.imageThumbnail &&
+      (<div class="thumb">
+        <img alt="" src={post.data.imageThumbnail} />
+      </div>)
+    }
+    </div>
   }
-  <!-- thumbnail -->
-  {
-    !isLowPriority && post.data.imageThumbnail &&
-    (<div class="thumb">
-      <img alt="" src={post.data.imageThumbnail} />
-    </div>)
-  }
-  </div>
 </div>
 
 <style>
@@ -89,11 +91,6 @@ const isProject = post.data.kind === "project";
 
 /* header */
 
-.summary-header {
-
-}
-
-
 .summary-header .header-title {
   display: flex;
   gap: var(--gap-1);
@@ -125,12 +122,14 @@ const isProject = post.data.kind === "project";
   flex-direction: column;
   justify-content: space-between;
   gap: 1.0rem;
+}
 
-  margin-top: var(--gap-0);
+.summary-body {
 }
 
 .summary-body .summary {
   flex: 1;
+  margin-top: var(--gap-0);
 }
 
 .summary-body .thumb {

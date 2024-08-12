@@ -1,6 +1,8 @@
 ---
 title: Setting up a Personal Blog with Astro
 datePublished: 2024/08/04
+tags: [website]
+tools: [typescript, astro]
 summary: TODO
 ---
 

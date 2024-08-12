@@ -5,7 +5,7 @@ title:  Unboggler
 published: false
 datePublished: January 18, 2020
 
-tags: [algorithms]
+tags: [formal-methods]
 tools: [javascript]
 imageThumbnail: images/thumbnails/unboggler.png
 priority: low

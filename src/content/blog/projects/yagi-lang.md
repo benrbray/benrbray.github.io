@@ -8,5 +8,5 @@ url: https://github.com/benrbray/yagi-lang
 tags: [plt]
 tools: [haskell]
 summary: 
-  Yagi is a toy dependently-typed language for understanding dependent type theory.
+  Yagi is a toy functional language for understanding dependent type theory.
 ---
