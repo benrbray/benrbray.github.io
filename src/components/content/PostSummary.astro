@@ -65,25 +65,12 @@ const isProject = post.data.kind === "project";
   border-radius: 0.2em;
   border: .075rem solid #bfbfbf;
 
+  background-color: #fff;
+
   --shadow-distance: 0.2rem;
   --shadow-color: #eaeaea;
   box-shadow:
     calc(-1 * var(--shadow-distance)) var(--shadow-distance) 0 0 var(--shadow-color);
-}
-
-.post-summary:hover {
-  /* --shadow-distance: 0.3rem;
-  --shadow-color: #e0e0e0;
-  border-width: 0.01rem;
-  border-color: #666; */
-
-  /* --shadow-distance-1: 0.2rem;
-  --shadow-distance-2: 0rem;
-  --shadow-color-1: rgba(0, 0, 0, 0.06);
-  --shadow-color-2: rgba(0, 0, 0, 0.05);
-  box-shadow:
-    calc(-0.5 * var(--shadow-distance-1)) var(--shadow-distance-1) 0 0 var(--shadow-color-1),
-    calc(-0.5 * var(--shadow-distance-2)) var(--shadow-distance-2) 0.4em 0em var(--shadow-color-2); */
 }
 
 .post-summary.kind-post { }
@@ -95,7 +82,7 @@ const isProject = post.data.kind === "project";
   display: flex;
   gap: var(--gap-1);
   margin-bottom: var(--gap-0);
-  font-size: var(--font-size-larger);
+  font-size: var(--font-size-large);
   font-weight: var(--font-title-weight);
 
   text-wrap: pretty;
@@ -110,7 +97,7 @@ const isProject = post.data.kind === "project";
 
 .header-title .year {
   font-weight: var(--font-normal-weight);
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-normal);
   color: gray;
   white-space: nowrap;
 }

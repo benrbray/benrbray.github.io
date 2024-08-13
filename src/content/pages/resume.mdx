@@ -8,17 +8,45 @@ import ResumeHeader from "@components/resume/ResumeHeader.astro";
 ## Main Interests
 
 * Building reliable, reusable, and maintainable software that is enjoyable to use.
-* Designing tools to improve the user experience of engineering workflows, including language servers, static analysis, and type inference.
+* Working on **language servers**, static analysis, and type inference in order to upgrade the user experience of software engineering workflows.
 * Tools for composing **rich text documents**.  I created the [Noteworthy](/projects/noteworthy) markdown editor, as well as the [`prosemirror-math`](/projects/prosemirror-math) and [`remark-cite`](/projects/remark-cite) packages.
-* Numerical methods for graphics and simulation.  I originally learned to code by [making games](/projects/flash-games), and fell in love with the unique confluence of art, math, and code it takes to ship a game.
+* Numerical methods for **graphics** and **simulation**.  I originally learned to code by [making games](/projects/flash-games), and fell in love with the unique confluence of art, math, and code involved.
 
 ## Narrative
 
+I thrive in interdisciplinary spaces.  I've never found it easy to categorize myself strictly as frontend/backend, engineer/researcher, high-level/low-level.  I love working on projects that cross traditional boundaries, and value every opportunity to learn something new.
+
 While I find my training in mathematics to be a source of both clarity & delight, math and theory are tools like any other.  Building software is all about choosing the right tools for the job, and I never let mathematical purity get in the way of delivering software that is _useful_ and _maintainable_.
 
-I thrive in interdisciplinary spaces.  I've never found it easy to categorize myself strictly as frontend/backend, researcher/engineer, high-level/low-level.  I love working on projects that cross traditional boundaries, and value every opportunity to learn from experts in other fields.
+I originally learned to code by making games and uploading them to the Newgrounds game portal.  There, I found a vibrant community of artists, musicians, and programmers with an infectious enthusiasm for game development.  I discovered early on that it's important to _love_ the work that I do.  I try to bring that same enthusiasm to every project I work on.  It's also why I [love teaching](#teaching) and writing.
 
-I originally learned to code by making Flash games and uploading them to Newgrounds.  There, I found a vibrant community of artists, musicians, and programmers with an infectious enthusiasm for game development.
+I believe that *model-building* is the hardest part of software engineering.  Code is *disposable*, in the sense that once everyone agrees on a *model* of the application domain, the *code* itself can be written or re-written rather quickly.
+
+* I believe that **static type systems** are an effective tool for building and communicating *models*.
+
+* I believe that **refactoring** is an essential part of the software engineering process that keeps the *code* up to date with an evolving *model*.  I favor languages which permit *fearless refactoring* through language features such as type systems, parametric polymorphism, referential transparency, and side-effect management.
+
+
+----
+
+For these reasons, I find that I'm most productive in languages like **TypeScript**, **Haskell**, and **Rust**, which offer strong compile-time guarantees through language features such as powerful type systems, referential transparency, and side-effect management.
+
+I believe that type systems are the most effective way (so far!) to effectively communicate these models among a team.  
+
+and I try to pay that same enthusiasm forward 
+
+Since then, I've always believed that _work can be fun_
+
+
+I try to bring that same enthusiasm to every project I work on.
+
+I'm always tinkering, both in and outside of my day job.
+
+I believe in open-source software.
+
+I believe *"good enough"* is the enemy of *good*.
+
+I believe that languages like **TypeScript**, **Rust** and **Haskell** help me get it right the _first time_, saving many headaches and much debugging in the future.
 
 
 
@@ -34,11 +62,21 @@ I originally learned to code by making Flash games and uploading them to Newgrou
 
 [@mcisaac2016:geospatial]
 
-## Skills
+# Skills
 
-### Frontend Engineering
+The skills below are listed in no particular order.  Use the links to jump between sections!
 
-I have 7 years of experience writing **TypeScript**, both professionally and for open-source projects.
+* [Frontend Engineering](#frontend-engineering)
+* [Backend Engineering](#backend-engineering)
+* [Functional Programming, Compilers, and Formal Methods](#functional-programming-compilers-and-formal-methods)
+* [Computer Graphics & Numerical Methods](#computer-graphics--numerical-methods)
+* [Machine Learning](#machine-learning)
+* [Teaching](#teaching)
+* [Open Source](#open-source)
+
+## Frontend Engineering
+
+I have 7 years of experience writing **TypeScript**, both professionally and for open source projects.
 
 * I'm proficient with both the **React** and **SolidJS** reactive UI frameworks.
 * I have a deep working knowledge of the [**ProseMirror**](https://prosemirror.net/) and [**CodeMirror**](https://codemirror.net/) editor toolkits.
@@ -52,20 +90,16 @@ I enjoy designing **rich document editors** for note-taking, documentation, and 
   <PostPreview postSlug="projects/prosemirror-math" />
   <PostPreview postSlug="projects/remark-cite" />
 
-<TodoBlock>
-MobX and Zustand for state management
-</TodoBlock>
-
 {/* <PostPreview postSlug="frontend/solidjs-vs-react" /> */}
 
-### Backend Engineering
+## Backend Engineering
 
 I worked for one year as a **backend engineer** at Smartpay KK, a Japanese fintech startup.
 
 * I led the design, implementation, testing, and release of a programmatic disbursements backend service which integrates with bank APIs to automatically issue merchant payouts and consumer refunds on a fixed schedule.
 * I participated in code review, API design, and sprint planning for a backend API powering the mobile & web apps for a pay-later service.
 * I collaborated with our frontend team to design a **GraphQL** API to power our mobile app.
-* <u>Technologies:</u> Scala (with [cats](https://typelevel.org/cats/)), Docker, Google Cloud Platform, Postgres, Terraform Cloud
+* <u>Technologies:</u> Scala (with [`cats-effect`](https://typelevel.org/cats-effect/)), Docker, GCP, Postgres, Terraform Cloud
 
 I also have experience with the following backend tech:
 
@@ -73,7 +107,7 @@ I also have experience with the following backend tech:
 * Containerizing networked applications with **Docker**.
 * Writing GitHub Actions for **continuous integration** and other automations.
 
-### Functional Programming, Compilers, and Formal Methods
+## Functional Programming, Compilers, and Formal Methods
 
 <TodoBlock>
 I work as a **research software engineer** for [Hasuo Lab](https://group-mmm.org/~ichiro/) at the <a href="https://www.nii.ac.jp/en/">National Institute of Informatics</a> in Tokyo, where I build software aimed at making formal methods more accessible to engineers working in industry.
@@ -111,45 +145,51 @@ Here are a few related personal projects:
 {/* * I’ve also read through the first 5 chapters of the Homotopy Type Theory:  Univalent Foundations of Mathematics book, to better understand the formal systems that powers proof assistants like Coq. */}
 {/* I enjoy reading papers about programming language theory, type systems, formal verification, and category theory in my free time. */}
 
+## Computer Graphics & Numerical Methods
 
-### Graphics & Numerical Simulation
-
-I worked for 2 years as a **Machine Learning & Graphics Engineer** at [EmbodyMe](https://embodyme.com/).
-
+* In my role as a **Computer Vision Engineer** at [EmbodyMe](https://embodyme.com/),
+  * spherical harmonics lighting
+  * postprocessing graphics pipeline
 * I wrote a C++/CUDA simulation of 2D incompressible fluid flow, based on the “Stable Fluids” paper by Jos Stam.  I compared a few different numerical methods, including parallel Jacobi on the GPU and preconditioned conjugate gradient on the CPU.
 * I completed graduate courses on computer architecture, compilers, and parallel computing.  My course projects were all written in C++.  Projects for the compilers course involved writing LLVM analysis / transformation passes on LLVM IR.
-* In my role as a **computer vision engineer** at EmbodyMe, I trained deep learning models to transfer facial expressions from one video to another.  I also contributed to graphics the post-processing pipeline; for example, by applying spherical harmonics lighting to the meshes output by our model.
-  - I maintained our Python/PyTorch codebase (which includes training and visualization code for face-reenactment and inpainting models).
-  - I led a biweekly deep learning & graphics reading group to follow recent developments (GANs / attention / transformers / distillation / NeRF) and distribute knowledge among the team.
-* As an undergraduate student, I spent three years as a research assistant using natural language processing to analyze a large corpus of 19th-century German periodicals.
+
+As a teenager I worked as an independent **game developer**, publishing Flash games to the Newgrounds game portal under the username [archawn](https://archawn.newgrounds.com/games).  My games earned a modest amount of money from ad revenue and sponsorships through the [Flash Games License](https://web.archive.org/web/20130216211457/https://www.fgl.com/) marketplace.  You can play a collection of my early games at the link below.
+
+<PostPreview postSlug="projects/flash-games" />
+
+## Machine Learning
+
+In my role as a **Computer Vision Engineer** at [EmbodyMe](https://embodyme.com/),
+
+* I trained deep learning models to transfer facial expressions from one video to another.  I also contributed to graphics the post-processing pipeline; for example, by applying spherical harmonics lighting to the meshes output by our model.
+* I maintained our Python/PyTorch codebase (which includes training and visualization code for face-reenactment and inpainting models).
+* I led a biweekly deep learning & graphics reading group to follow recent developments (GANs / attention / transformers / distillation / NeRF) and distribute knowledge among the team.
+
+I spent 3 years as an **Undergraduate Research Assistant** using **statistical topic models** to analyze a large corpus of 19th-century German periodicals.  During the course of the project:
   -  I implemented algorithms for topic modeling (LDA/HDP) from scratch in Python.
   - I designed a custom OCR error correction scheme for German blackletter fonts.
   - I trained a logistic regression classifier for place-name detection.
   - I built a web-app allowing humanities researchers to browse our dataset and visualize the results of our topic modeling analysis.
 
-Early in my career, I also worked as a freelance **game developer**.  Read more by following the link:
+I have also served as a **lecturer** and **teaching assistant** for a several courses in Machine Learning at the undergraduate & graduate levels.  See the [teaching](#teaching) section below for more details.
 
-<PostPreview postSlug="projects/flash-games" />
+## Teaching
 
-### Teaching
+Georgia Tech
 
-(Teaching Assistant) ISYE 6740, Computational Data Analysis, (Spring 2020, Georgia Tech)
+* (Teaching Assistant) ISYE 6740, Computational Data Analysis, (Spring 2020)
+* (**Lecturer/TA**) CS 4540, [Advanced Algorithms for Machine Learning](https://cs4540-f19.github.io/) (Fall 2019)
+* (**Lecturer/TA**) CS 4540, [Advanced Algorithms for Machine Learning](https://cs4540-f18.github.io/) (Fall 2018)
 
-(**Lecturer/TA**) CS 4540, [Advanced Algorithms for Machine Learning](https://cs4540-f19.github.io/) (Fall 2019, Georgia Tech)
+University of Michigan
 
-(**Lecturer/TA**) CS 4540, [Advanced Algorithms for Machine Learning](https://cs4540-f18.github.io/) (Fall 2018, Georgia Tech)
-
-(Instructional Aide) EECS 445, Machine Learning, (Winter 2017, University of Michigan)
-
-(Instructional Aide) EECS 445, [Machine Learning](https://eecs445-f16.github.io/) (Fall 2016, University of Michigan)
-
-(Instructional Aide) EECS 545, [Graduate Machine Learning](https://github.com/thejakeyboy/umich-eecs545-lectures) (Winter 2016, University 
-of Michigan)
-
-(Math Lab Tutor) MATH 425, Intro. Probability, (Fall 2015 - Winter 2016, University of Michigan)
+* (Instructional Aide) EECS 445, Machine Learning, (Winter 2017)
+* (Instructional Aide) EECS 445, [Machine Learning](https://eecs445-f16.github.io/) (Fall 2016)
+* (Instructional Aide) EECS 545, [Graduate Machine Learning](https://github.com/thejakeyboy/umich-eecs545-lectures) (Winter 2016)
+* (Math Lab Tutor) MATH 425, Introduction Probability, (Fall 2015 - Winter 2016)
 
 
-{/* These words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan Lee Mulligan capture my feelings well:
+These words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan Lee Mulligan really capture what teaching means to me:
 
 > When I am with someone who is looking for something that I have, and I can
 > give it to them -- the look on someone's face when they *get* it, and it
@@ -158,7 +198,7 @@ of Michigan)
 > The lighting of a second candle does not diminish the first.  Watching someone
 > learn is one of life's greatest joys.  When you're a teacher you have a front
 > row seat to learning, which is just -- the most beautiful thing to watch.
- */}
+
 
 {/* I also have a habit of starting reading groups wherever I work!
 
@@ -167,6 +207,8 @@ of Michigan)
 * At the University of Michigan, I co-founded [MSAIL](https://msail.github.io/), a student organization aimed at getting undergraduates involved with machine learning research. */}
 
 ## Open Source
+
+### Open Source Packages
 
 I maintain the following `npm` packages:
 
@@ -219,6 +261,14 @@ In collaboration with research teams at
 
 **Research Intern**, RIKEN AIP
 
-**Research Assistant**, University of Michigan
+* For the Approximate Bayesian Inference team, advised by Emtiyaz Khan
 
-**Software Engineer Intern**, Microsoft Corporation
+**Research Assistant**, University of Michigan, advised by Peter McIsaac
+
+* Build a **Python** / **flask** web app for humanities researchers to visualize topic models on 19th-century German periodicals.
+* Corrected noisy digital scans using a Hidden Markov Model over word fragments.  Trained on a synthetic dataset of eroded digital scans with known text.  Segmented words based on letter-successor-variety.
+* Implemented many **statistical inference** algorithms from scratch, including:  Online Variational Inference for LDA and HDP
+
+**Software Engineering Intern**, Microsoft Corporation (Redmond WA, May - Aug 2016)
+
+* Built a multiplatform mobile app with **C#** and **Xamarin** allowing engineers on my team to monitor Windows telemetry data and receive alerts.

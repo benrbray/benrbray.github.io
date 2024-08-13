@@ -16,16 +16,18 @@ const series = await getSeriesList();
 
 <LayoutDefault pageTitle="Home">
 	<ColumnNormal>
-		<About />
-		<!-- Series -->
-		{series.length > 0 && (<>
-			<h2>Tutorial Series</h2>
-			<SeriesList series={series} />
-		</>)}
-		<h2>Selected Projects</h2>
-		<PostList posts={projects} />
-		<!-- Posts -->
-		<h2>Selected Posts</h2>
-		<PostList posts={posts} />
+		<article>
+			<About />
+			<!-- Series -->
+			{series.length > 0 && (<>
+				<h2>Tutorial Series</h2>
+				<SeriesList series={series} />
+			</>)}
+			<h2>Selected Projects</h2>
+			<PostList posts={projects} />
+			<!-- Posts -->
+			<h2>Selected Posts</h2>
+			<PostList posts={posts} />
+		</article>
 	</ColumnNormal>
-</LayoutDefault
+</LayoutDefault>

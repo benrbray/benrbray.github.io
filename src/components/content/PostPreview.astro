@@ -1,9 +1,10 @@
 ---
-import { getPostUrl, postIsPublished } from '@root/util/query';
+// import { getPostUrl, postIsPublished } from '@root/util/query';
 import type { CollectionEntry } from 'astro:content';
 import { getEntry } from 'astro:content';
+import PostSummary from "@components/content/PostSummary.astro";
 
-import Preview from "./Preview.astro";
+// import Preview from "./Preview.astro";
 
 interface Props {
   postSlug: CollectionEntry<'blog'>["slug"]
@@ -13,14 +14,16 @@ const { postSlug } = Astro.props;
 
 const post = await getEntry({ collection: "blog", slug: postSlug });
 
-const postUrl = getPostUrl(post);
-const postDisplayTitle = post.data.titleDisplay || post.data.title;
+// const postUrl = getPostUrl(post);
+// const postDisplayTitle = post.data.titleDisplay || post.data.title;
 ---
 
-<Preview 
+<PostSummary post={post} />
+
+<!-- <Preview 
   url={postUrl}
   titleHtml={postDisplayTitle}
   summaryHtml={post.data.summary}
   date={post.data.datePublished}
   unpublished={!postIsPublished(post)}
-/>
+/> -->

@@ -18,23 +18,23 @@
 
 :root {
   /* font sizes */
-  --font-size-small:  0.8rem;
-  --font-size-normal: 1.1rem;
-  --font-size-large:  1.2rem;
-  --font-size-larger: 1.3rem;
-  --font-size-largest: 1.4rem;
-  --font-size-huge:   1.6rem;
+  --font-size-small:   0.8rem;
+  --font-size-normal:  1.06rem;
+  --font-size-large:   1.25rem;
+  --font-size-larger:  1.4rem;
+  --font-size-largest: 1.6rem;
+  --font-size-huge:    1.8rem;
 }
 
 @media(max-width: 42em) {
   :root {
     /* font sizes */
-    --font-size-small:  0.8rem;
-    --font-size-normal: 1.0rem;
-    --font-size-large:  1.1rem;
-    --font-size-larger: 1.2rem;
-    --font-size-largest: 1.3rem;
-    --font-size-huge:   1.4rem;
+    --font-size-small:   0.8rem;
+    --font-size-normal:  1.0rem;
+    --font-size-large:   1.1rem;
+    --font-size-larger:  1.2rem;
+    --font-size-largest: 1.6rem;
+    --font-size-huge:    1.8rem;
   }
 }
 
@@ -42,7 +42,7 @@
   /* page dimensions */
   --column-thin-max-width: 46rem;
   --column-thin-min-width: 25rem;
-  --column-normal-max-width: 53rem;
+  --column-normal-max-width: 52rem;
   --column-normal-min-width: 25rem;
   --column-large-max-width: 60rem;
   --column-large-min-width: 30rem;
@@ -60,7 +60,7 @@
   --gap-3: 2.0rem;
 
   /* colors */
-  --color-text: #303030;
+  --color-text: #000;
 
   /* fonts */
 	--code-font: "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
@@ -70,7 +70,7 @@
 
   /* font: normal */
   --font-normal-family: var(--serif-font);
-  --font-normal-color: #303030;
+  --font-normal-color: var(--color-text);
   --font-normal-size: var(--font-size-normal);
   --font-normal-weight: normal;
 
