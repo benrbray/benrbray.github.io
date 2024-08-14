@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getEntry } from 'astro:content';
 import FormattedDate from '@components/dates/FormattedDate.astro';
+import PostTags from "@components/content/PostTags.astro";
 import { postIsPublished } from "@root/util/query";
 
 type Props = { post : CollectionEntry<'blog'> }
@@ -53,6 +54,10 @@ const label = seriesData ? (seriesData.isAppendix ?
       )
     }
   </div>
+  <!-- Tags -->
+  <div class="article-tags">
+    <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
+  </div>
 </div>
 
 <style>
@@ -75,6 +80,10 @@ const label = seriesData ? (seriesData.isAppendix ?
 
 .article-header .article-subtitle a {
 	color: unset;
+}
+
+.article-header .article-tags {
+  text-align: center;
 }
 
 .article-header .article-date {

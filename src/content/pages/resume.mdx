@@ -85,10 +85,14 @@ I have 7 years of experience writing **TypeScript**, both professionally and for
 I enjoy designing **rich document editors** for note-taking, documentation, and academic writing.
 
 * I created the [Noteworthy](https://github.com/benrbray/noteworthy) WYSIWYG desktop markdown editor, tailored for personal research notes making extensive use of math and citations.  Built with TypeScript and [Electron](https://www.electronjs.org/).
-  <PostPreview postSlug="projects/noteworthy" />
-* I maintain the following open-source `npm` packages:
-  <PostPreview postSlug="projects/prosemirror-math" />
-  <PostPreview postSlug="projects/remark-cite" />
+* I maintain the [`prosemirror-math`](https://github.com/benrbray/prosemirror-math) and [`remark-cite`](https://github.com/benrbray/remark-cite) packages on NPM.
+
+
+<PreviewGrid columns={2} postSlugs={[
+  { slug: "projects/noteworthy", span: 2 },
+  { slug: "projects/prosemirror-math", span: 1 },
+  { slug: "projects/remark-cite", span: 1 },
+]} />
 
 {/* <PostPreview postSlug="frontend/solidjs-vs-react" /> */}
 
@@ -155,7 +159,7 @@ Here are a few related personal projects:
 
 As a teenager I worked as an independent **game developer**, publishing Flash games to the Newgrounds game portal under the username [archawn](https://archawn.newgrounds.com/games).  My games earned a modest amount of money from ad revenue and sponsorships through the [Flash Games License](https://web.archive.org/web/20130216211457/https://www.fgl.com/) marketplace.  You can play a collection of my early games at the link below.
 
-<PostPreview postSlug="projects/flash-games" />
+<PostSummaryFromSlug postSlug="projects/flash-games" show={{ summary: false }} />
 
 ## Machine Learning
 
@@ -170,6 +174,9 @@ I spent 3 years as an **Undergraduate Research Assistant** using **statistical t
   - I designed a custom OCR error correction scheme for German blackletter fonts.
   - I trained a logistic regression classifier for place-name detection.
   - I built a web-app allowing humanities researchers to browse our dataset and visualize the results of our topic modeling analysis.
+
+
+<PostSummaryFromSlug postSlug="projects/dhgp" show={{ summary: false }} />
 
 I have also served as a **lecturer** and **teaching assistant** for a several courses in Machine Learning at the undergraduate & graduate levels.  See the [teaching](#teaching) section below for more details.
 
@@ -212,11 +219,14 @@ These words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan
 
 I maintain the following `npm` packages:
 
-<PostPreview postSlug="projects/remark-cite" />
-
-<PostPreview postSlug="projects/prosemirror-math" />
+<PreviewGrid columns={2} postSlugs={[
+  { slug: "projects/prosemirror-math", span: 1, show: { image: false } },
+  { slug: "projects/remark-cite", span: 1, show: { image: false } },
+]} />
 
 ### Open Source Contributions
+
+I'm quick to `git clone` open source software that I rely on.  Here are a few of my contributions:
 
 <FancyBox>
 (jgm/citeproc#88) [Support hyperlinked titles according to draft of CSL v1.0.2 spec](https://github.com/jgm/citeproc/pull/88)

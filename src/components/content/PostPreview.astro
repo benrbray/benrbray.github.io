@@ -18,7 +18,9 @@ const post = await getEntry({ collection: "blog", slug: postSlug });
 // const postDisplayTitle = post.data.titleDisplay || post.data.title;
 ---
 
+<div class="post-preview">
 <PostSummary post={post} />
+</div>
 
 <!-- <Preview 
   url={postUrl}
@@ -27,3 +29,9 @@ const post = await getEntry({ collection: "blog", slug: postSlug });
   date={post.data.datePublished}
   unpublished={!postIsPublished(post)}
 /> -->
+
+<style>
+.post-preview {
+  margin: var(--gap-0) 0;
+}
+</style>

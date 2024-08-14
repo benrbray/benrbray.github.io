@@ -5,9 +5,12 @@ import FormattedDate from '../dates/FormattedDate.astro';
 import PostTags from './PostTags.astro';
 interface Props {
   post: CollectionEntry<'blog'>;
+  show?: { summary?: boolean, image?: boolean, tags?: boolean }
 }
 
-const { post } = Astro.props;
+const { post, show: showProps } = Astro.props;
+
+const show = Object.assign({ summary: true, image: true, tags: true }, showProps);
 
 const postUrl = getPostUrl(post);
 const postDisplayTitle = post.data.titleDisplay || post.data.title;
@@ -33,20 +36,23 @@ const isProject = post.data.kind === "project";
       </div>
       <div class="year"><FormattedDate date={post.data.datePublished} /></div>
     </div>
-    <div class="header-subtitle">
-      <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
-    </div>
+    {
+      show.tags &&
+      <div class="header-subtitle">
+        <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
+      </div>
+    }
   </div>
-  { !isLowPriority && 
+  { !isLowPriority && (show.summary || show.image) &&
     <div class="summary-body">
     {
       // summary
-      isProject &&
+      isProject && show.summary &&
       <div class="summary" set:html={post.data.summary} />
     }
     {
       // thumbnail
-      post.data.imageThumbnail &&
+      post.data.imageThumbnail && show.image &&
       (<div class="thumb">
         <img alt="" src={post.data.imageThumbnail} />
       </div>)
@@ -56,10 +62,6 @@ const isProject = post.data.kind === "project";
 </div>
 
 <style>
-.post-summary {
-  margin: var(--gap-1) 0;
-}
-
 .post-summary {
   padding: var(--gap-1);
   border-radius: 0.2em;
@@ -107,16 +109,14 @@ const isProject = post.data.kind === "project";
 .summary-body {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 1.0rem;
-}
 
-.summary-body {
+  margin-top: var(--gap-0);
+  justify-content: space-between;
 }
 
 .summary-body .summary {
   flex: 1;
-  margin-top: var(--gap-0);
 }
 
 .summary-body .thumb {
