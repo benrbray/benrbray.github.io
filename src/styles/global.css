@@ -69,8 +69,6 @@ h1,h2,h3,h4,h5 {
 article code {
   background-color: #eee;
   border-radius: 0.2em;
-  /* border: 1px solid #c0c0c0; */
-  /* padding: 0 0.1em; */
   padding: 0.1em 0.2em;
   font-size: 0.9em;
 }
@@ -164,8 +162,6 @@ article {
 }
 
 article blockquote {
-  /* padding: var(--gap-1); */
-  /* margin: 0 auto; */
   border-left: 0.2em solid rgb(169, 215, 89);
   margin-left: 0em;
   margin-right: 2em;

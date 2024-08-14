@@ -23,7 +23,7 @@ export const shortenProjectSlug = (slug: string) => {
  * Computes the URL for a given post, so that the `content/`
  * folder can be freely reorganized without breaking URLs.
  */
-export const getPostUrl = (post: CollectionEntry<"blog">) => {
+export const getPostUrl = (post: CollectionEntry<"blog">): string => {
   // some posts explicitly provide a URL, for
   // example when linking to a static PDF file
   if(post.data.url) {
@@ -37,7 +37,7 @@ export const getPostUrl = (post: CollectionEntry<"blog">) => {
   }
 }
 
-export const getPostUrlBySlug = async (postSlug: CollectionEntry<"blog">["slug"]) => {
+export const getPostUrlBySlug = async (postSlug: CollectionEntry<"blog">["slug"]): Promise<string> => {
   const post = await getEntry({ collection: "blog", slug: postSlug });
   return getPostUrl(post);
 }

@@ -1,5 +1,6 @@
 import PostPreview from "@components/content/PostPreview.astro";
 import ResumeHeader from "@components/resume/ResumeHeader.astro";
+import { getPostUrlBySlug } from "@root/util/query";
 
 <ResumeHeader />
 
@@ -48,6 +49,7 @@ I believe *"good enough"* is the enemy of *good*.
 
 I believe that languages like **TypeScript**, **Rust** and **Haskell** help me get it right the _first time_, saving many headaches and much debugging in the future.
 
+* Recently, there's a lot of talk about "fine-tuning" in the context of large language models, but I believe the term also applies naturally to open-source software.  
 
 
 ## Education
@@ -66,6 +68,7 @@ I believe that languages like **TypeScript**, **Rust** and **Haskell** help me g
 
 The skills below are listed in no particular order.  Use the links to jump between sections!
 
+* [Product Development](#product-development)
 * [Frontend Engineering](#frontend-engineering)
 * [Backend Engineering](#backend-engineering)
 * [Functional Programming, Compilers, and Formal Methods](#functional-programming-compilers-and-formal-methods)
@@ -73,6 +76,29 @@ The skills below are listed in no particular order.  Use the links to jump betwe
 * [Machine Learning](#machine-learning)
 * [Teaching](#teaching)
 * [Open Source](#open-source)
+
+## Product Development
+
+As a **Research & Development Engineer** for [Hasuo Lab](https://group-mmm.org/~ichiro/) at the National Institute of Informatics,
+
+* I worked closely with researchers to help translate their academic work into proof-of-concept software tools aimed at improving **formal verification** workflows in the automotive industry.
+* For each project, I considered carefully how best to leverage my team’s core competencies to solve problems brought to us by collaborators from Japanese automotive companies.
+* I contributed to the successful delivery of four prototypes:
+  * (*ongoing*) A **model checker** for a simple imperative probabilistic programming language. 
+  * A domain-specific language called `tempo-lang` which compiles to **signal temporal logic** expressions, along with a **language server** and web app for creating, documenting, and exemplifying specifications. (see [[Reimann 2024]](https://doi.org/10.48550/arXiv.2403.18764))
+  * A web app for demonstrating the behavior of RSS safety conditions (see [[Hasuo 2022]](https://arxiv.org/abs/2207.02387))
+  * (*joined midway*) A proof checker for Differential Floyd-Hoare Logic (see [[Hasuo 2022]](https://arxiv.org/abs/2207.02387))
+* I presented our work at the [IAA Mobility 2023](https://www.iaa-mobility.com/en/visitors/the-iaa-mobility-2023) trade show in Munich, DE.
+
+Many of my [open-source](#open-source) project are aimed at designing better software for students and researchers, whose needs are often underserved by commercial software:
+
+* I created [Noteworthy](https://github.com/benrbray/noteworthy) to experiment with new ways to support WYSIWYG editing of documents making extensive use of math, diagrams, links, and academic citations. 
+* I created [`prosemirror-math`](https://github.com/benrbray/prosemirror-math) in order to encourage more widespread adoption of user-friendly LaTeX math input on the web.  With <a href="https://www.npmjs.com/package/@benrbray/prosemirror-math"><img style="display:inline-block; margin: 0; vertical-align: middle; margin-top: -0.15em" src="https://img.shields.io/npm/dw/%40benrbray%2Fprosemirror-math?label=prosemirror-math&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40benrbray%2Fprosemirror-math" alt="~1.8k" /></a> weekly downloads and [adoption](https://forums.zotero.org/discussion/99411/available-for-beta-testing-math-support-in-notes) by the [Zotero](https://www.zotero.org/) reference manager, I like to think that I've already had an impact!
+* For the **DHGP Project**, I worked closely with humanities researchers to design software allowing them to integrate natural language processing tools into their academic workflow.
+
+I find it immensely satisfying to work on bespoke solutions tailored to meet the needs of a niche audience who will benefit directly from my improvements.  A good user experience is at the forefront of all the work that I do.
+
+ {/* and I've honed all the skills listed on this page in service of that goal. */}
 
 ## Frontend Engineering
 
@@ -165,6 +191,7 @@ As a teenager I worked as an independent **game developer**, publishing Flash ga
 
 In my role as a **Computer Vision Engineer** at [EmbodyMe](https://embodyme.com/),
 
+* I improved the quality and performance of our **mouth inpainting** model by 
 * I trained deep learning models to transfer facial expressions from one video to another.  I also contributed to graphics the post-processing pipeline; for example, by applying spherical harmonics lighting to the meshes output by our model.
 * I maintained our Python/PyTorch codebase (which includes training and visualization code for face-reenactment and inpainting models).
 * I led a biweekly deep learning & graphics reading group to follow recent developments (GANs / attention / transformers / distillation / NeRF) and distribute knowledge among the team.
