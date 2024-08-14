@@ -16,6 +16,10 @@ const postUrl = getPostUrl(post);
 const postDisplayTitle = post.data.titleDisplay || post.data.title;
 const isLowPriority = post.data.priority === "low";
 const isProject = post.data.kind === "project";
+
+const showSummary = isProject && show.summary;
+const showImage = post.data.imageThumbnail && show.image;
+const showSummaryBody = !isLowPriority && (showSummary || showImage);
 ---
 
 
@@ -43,16 +47,15 @@ const isProject = post.data.kind === "project";
       </div>
     }
   </div>
-  { !isLowPriority && (show.summary || show.image) &&
+  { showSummaryBody &&
     <div class="summary-body">
     {
       // summary
-      isProject && show.summary &&
+      showSummary &&
       <div class="summary" set:html={post.data.summary} />
-    }
-    {
+    }{
       // thumbnail
-      post.data.imageThumbnail && show.image &&
+      showImage &&
       (<div class="thumb">
         <img alt="" src={post.data.imageThumbnail} />
       </div>)
@@ -80,9 +83,26 @@ const isProject = post.data.kind === "project";
 
 /* header */
 
+@container(max-width: 24rem) {
+  .summary-header .header-title {
+    flex-direction: column;
+    gap: var(--gap-0);
+  }
+
+  .summary-header .title {
+    text-wrap: balance;
+  }
+}
+
+@container(min-width: 24rem) {
+  .summary-header .header-title {
+    flex-direction: row;
+    gap: var(--gap-0);
+  }
+}
+
 .summary-header .header-title {
   display: flex;
-  gap: var(--gap-1);
   margin-bottom: var(--gap-0);
   font-size: var(--font-size-large);
   font-weight: var(--font-title-weight);
@@ -105,6 +125,10 @@ const isProject = post.data.kind === "project";
 }
 
 /* body */
+
+.summary-body:empty {
+  display: none;
+}
 
 .summary-body {
   display: flex;

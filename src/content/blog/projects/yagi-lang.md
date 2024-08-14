@@ -4,6 +4,7 @@ titleDisplay: <code>yagi-lang</code>
 published: true
 datePublished:  2022-09-22
 kind: project
+priority: low
 url: https://github.com/benrbray/yagi-lang
 tags: [plt]
 tools: [haskell]

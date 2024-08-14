@@ -12,7 +12,9 @@ const { posts } = Astro.props;
 <div class="post-list">
 {
   posts.map((post) => (
-    <PostSummary post={post}/>
+    <div class="post-list-cell">
+      <PostSummary post={post}/>
+    </div>
   ))
 }
 </div>
@@ -22,6 +24,7 @@ const { posts } = Astro.props;
   --list-columns: 3;
 
   display: grid;
+
   grid-template-columns: repeat(var(--list-columns), minmax(0, 1fr));
 	grid-auto-flow: row dense;
   gap: var(--gap-1);
@@ -31,13 +34,9 @@ const { posts } = Astro.props;
   align-content: stretch;
 }
 
-.post-list .sentinel {
-  border-radius: 0.2em;
-  border: 1px solid black;
-  padding: var(--gap-1);
-  font-size: var(--font-size-larger);
-
-  grid-column-end: -1;
+.post-list-cell {
+  container: post-list / inline-size;
+  display: grid;
 }
 
 @media(max-width:42rem) {
@@ -48,16 +47,11 @@ const { posts } = Astro.props;
 </style>
 
 <style is:global>
-/* dates for smaller grid boxes should appear on own line */
-.post-list .post-summary.priority-low .header-title {
-  flex-direction: column;
-  gap: var(--gap-0) !important;
-}
-
 .post-list .post-summary.priority-low .title {
   text-wrap: balance;
 }
-.post-list .post-summary.priority-normal {
+
+.post-list-cell:has(.post-summary.priority-normal) {
   grid-column: span var(--list-columns);
 }
 </style>

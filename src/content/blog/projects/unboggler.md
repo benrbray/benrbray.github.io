@@ -1,11 +1,10 @@
 ---
 kind: project
 title:  Unboggler
-
-published: false
+published: true
 datePublished: January 18, 2020
 
-tags: [formal-methods]
+tags: [games, formal-methods]
 tools: [javascript]
 imageThumbnail: images/thumbnails/unboggler.png
 priority: low
@@ -35,7 +34,7 @@ summary: Generate a boggle board containing your custom list of words!
 			"input"
 			"solve"
 			"words";
-		grid-template-rows: 1fr auto auto auto 2fr;
+		grid-template-rows: 1fr auto auto auto 4fr;
 		grid-template-columns: 1fr;
 	}
 }

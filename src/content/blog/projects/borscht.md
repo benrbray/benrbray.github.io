@@ -3,6 +3,7 @@ title: Borscht Music Organizer
 published: true
 datePublished:  2021-11-01
 kind: project
+priority: low
 url: https://github.com/benrbray/borscht-hs
 tools: [haskell]
 summary: 

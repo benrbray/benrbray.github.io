@@ -94,6 +94,11 @@ article pre code {
   }
 }
 
+article .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 /* ---- column widths ------------------------------------------------------- */
 
 .column-normal {
