@@ -106,6 +106,8 @@ article .katex-display {
 .column-normal {
   margin: 0 auto;
   max-width: var(--column-normal-max-width);
+
+  /* TODO: min-width seems to cause layout issues */
   min-width: var(--column-normal-min-width);
 }
 
@@ -161,7 +163,7 @@ article .katex-display {
 
 /* -------------------------------------------------------------------------- */
 
-article {
+main {
   padding: 0 var(--gap-1);
 }
 

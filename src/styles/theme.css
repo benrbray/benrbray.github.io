@@ -41,11 +41,13 @@
 :root {
   /* page dimensions */
   --column-thin-max-width: 46rem;
-  --column-thin-min-width: 25rem;
   --column-normal-max-width: 52rem;
-  --column-normal-min-width: 25rem;
   --column-large-max-width: 60rem;
-  --column-large-min-width: 30rem;
+
+  /* TODO: min-width seems to cause layout issues */
+  --column-thin-min-width: 10rem;
+  --column-normal-min-width: 10rem;
+  --column-large-min-width: 10rem;
 
   --min-width: var(--column-normal-min-width);
   --max-width: var(--column-normal-max-width);
