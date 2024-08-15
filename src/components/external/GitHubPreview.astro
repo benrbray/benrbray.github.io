@@ -1,3 +1,32 @@
 ---
+interface Props {
+  /** (for display) something like `jgm/citeproc#88` **/
+  shortId: string
+  url: string,
+  /** (for display) **/
+  title?: string
+}
 
+const props = Astro.props;
 ---
+
+<span class="github-preview">
+  <a href={props.url}>
+    <span class="short-id">[{props.shortId}]</span>
+    {props.title && <span>{props.title}</span>}
+  </a>
+</span>
+
+<style>
+.github-preview {
+  font-family: var(--sans-font);
+  background-color: #dfeaf0;
+  padding: 0.1em 0.1em;
+  border-radius: 0.25em;
+  vertical-align: middle;
+}
+.short-id {
+  color: var(--font-normal-color);
+  font-family: var(--code-font);
+}
+</style>
