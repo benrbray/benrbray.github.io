@@ -8,7 +8,7 @@ url: https://github.com/benrbray/noteworthy
 
 tags: [frontend]
 tools: [typescript, electron]
-imageThumbnail: images/thumbnails/noteworthy-screenshot.png
+imageThumbnail: /images/thumbnails/noteworthy-screenshot.png
 github_url: https://github.com/benrbray/noteworthy
 demo_url: https://noteworthy.ink/
 summary: An open-source Markdown editor with bidirectional links and excellent math support!
