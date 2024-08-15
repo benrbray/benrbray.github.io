@@ -110,7 +110,9 @@
 
 /* colors */
 :root {
-	--color-link: #0069c2;
+	/* --color-link: #0069c2; */
+  /* --color-link: #026db5; */
+  --color-link: #0068ae;
 }
 
 /* theme colors */

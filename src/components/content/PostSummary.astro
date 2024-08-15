@@ -14,12 +14,11 @@ const show = Object.assign({ summary: true, image: true, tags: true }, showProps
 
 const postUrl = getPostUrl(post);
 const postDisplayTitle = post.data.titleDisplay || post.data.title;
-const isLowPriority = post.data.priority === "low";
 const isProject = post.data.kind === "project";
 
 const showSummary = isProject && show.summary;
 const showImage = post.data.imageThumbnail && show.image;
-const showSummaryBody = !isLowPriority && (showSummary || showImage);
+const showSummaryBody = (showSummary || showImage);
 ---
 
 

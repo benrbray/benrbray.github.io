@@ -15,11 +15,13 @@ import { getPostUrlBySlug } from "@root/util/query";
 
 ## Narrative
 
-I thrive in interdisciplinary spaces.  I've never found it easy to categorize myself strictly as frontend/backend, engineer/researcher, high-level/low-level.  I love working on projects that cross traditional boundaries, and value every opportunity to learn something new.
+I thrive in interdisciplinary spaces.  I've never found it easy to categorize myself strictly as frontend/backend, engineer/researcher, high-level/low-level.  I love working on projects that cross traditional boundaries, and value each opportunity to learn something new.
 
-While I find my training in mathematics to be a source of both clarity & delight, math and theory are tools like any other.  Building software is all about choosing the right tools for the job, and I never let mathematical purity get in the way of delivering software that is _useful_ and _maintainable_.
+I originally learned to code by making games and uploading them to the Newgrounds game portal.  There, I found a vibrant community of artists, musicians, and programmers with an infectious enthusiasm for game development.  I learned early on to _love_ the work that I do, and try to bring that same enthusiasm to every team I'm a part of.  It's also why I enjoy [teaching](#teaching) and writing.
 
-I originally learned to code by making games and uploading them to the Newgrounds game portal.  There, I found a vibrant community of artists, musicians, and programmers with an infectious enthusiasm for game development.  I discovered early on that it's important to _love_ the work that I do.  I try to bring that same enthusiasm to every project I work on.  It's also why I [love teaching](#teaching) and writing.
+I'm always tinkering, taking things apart, peeking inside to learn how they work.  To me, the allure of open-source software is that I can fine-tune it for my own personal use case.
+
+{/* While I find my training in mathematics to be a source of both clarity & delight, math and theory are tools like any other.  Building software is all about choosing the right tools for the job, and I never let mathematical purity get in the way of delivering software that is _useful_ and _maintainable_. */}
 
 I believe that *model-building* is the hardest part of software engineering.  Code is *disposable*, in the sense that once everyone agrees on a *model* of the application domain, the *code* itself can be written or re-written rather quickly.
 
@@ -82,23 +84,18 @@ The skills below are listed in no particular order.  Use the links to jump betwe
 As a **Research & Development Engineer** for [Hasuo Lab](https://group-mmm.org/~ichiro/) at the National Institute of Informatics,
 
 * I worked closely with researchers to help translate their academic work into proof-of-concept software tools aimed at improving **formal verification** workflows in the automotive industry.
-* For each project, I considered carefully how best to leverage my team’s core competencies to solve problems brought to us by collaborators from Japanese automotive companies.
+* When planning each project, I considered carefully  how best to leverage my team’s core competencies to solve problems brought to us by collaborators from Japanese automotive companies.
 * I contributed to the successful delivery of four prototypes:
   * (*ongoing*) A **model checker** for a simple imperative probabilistic programming language. 
   * A domain-specific language called `tempo-lang` which compiles to **signal temporal logic** expressions, along with a **language server** and web app for creating, documenting, and exemplifying specifications. (see [[Reimann 2024]](https://doi.org/10.48550/arXiv.2403.18764))
-  * A web app for demonstrating the behavior of RSS safety conditions (see [[Hasuo 2022]](https://arxiv.org/abs/2207.02387))
+  * A web app for demonstrating the behavior of [RSS](https://arxiv.org/abs/2206.03418) safety conditions (see [[Hasuo 2022]](https://arxiv.org/abs/2207.02387))
   * (*joined midway*) A proof checker for Differential Floyd-Hoare Logic (see [[Hasuo 2022]](https://arxiv.org/abs/2207.02387))
 * I presented our work at the [IAA Mobility 2023](https://www.iaa-mobility.com/en/visitors/the-iaa-mobility-2023) trade show in Munich, Germany.
+* You can learn more about our work by reading [paper1](https://doi.org/10.48550/arXiv.2403.18764), [paper2](https://arxiv.org/abs/2207.02387), [these slides](https://onedrive.live.com/?authkey=%21APC5eBa3EPJTN38&id=B1B4A7D40FA1BA3D%2165712&cid=B1B4A7D40FA1BA3D&parId=root&parQt=sharedby&o=OneUp), or this [brochure](/files/jst-news-2024-may-05.pdf).
 
-<TodoBlock>
-Curtis suggestion:  "developing / finding our team's differentiating features..."
+Many of my [open-source](#open-source) projects are aimed at designing better software for students and researchers, whose needs are often underserved by commercial software:
 
-core competencies ===? differentiating features?
-</TodoBlock>
-
-Many of my [open-source](#open-source) project are aimed at designing better software for students and researchers, whose needs are often underserved by commercial software:
-
-* I created [Noteworthy](https://github.com/benrbray/noteworthy) to experiment with new ways to support WYSIWYG editing of documents making extensive use of math, diagrams, links, and academic citations. 
+* I created [Noteworthy](https://github.com/benrbray/noteworthy) to experiment with new ways to support WYSIWYG editing of documents making extensive use of math, diagrams, links, and academic citations.
 * I created [`prosemirror-math`](https://github.com/benrbray/prosemirror-math) in order to encourage more widespread adoption of user-friendly LaTeX math input on the web.  With <a href="https://www.npmjs.com/package/@benrbray/prosemirror-math"><img style="display:inline-block; margin: 0; vertical-align: middle; margin-top: -0.15em" src="https://img.shields.io/npm/dw/%40benrbray%2Fprosemirror-math?label=prosemirror-math&labelColor=%23e3e3e3&color=%23b1da9c" alt="~1.8k" /></a> weekly downloads and [adoption](https://forums.zotero.org/discussion/99411/available-for-beta-testing-math-support-in-notes) by the [Zotero](https://www.zotero.org/) reference manager, I like to think that I've already had an impact!
 
 I find it immensely satisfying to work on projects tailored to meet the needs of a niche audience who will benefit directly from my improvements.  A good user experience is at the forefront of all the work that I do.
@@ -107,7 +104,7 @@ I find it immensely satisfying to work on projects tailored to meet the needs of
 
 ## Frontend Engineering
 
-I have 7 years of experience writing **TypeScript**, both professionally and for open source projects.
+I have 7 years of experience writing **TypeScript**, both at work and for open source projects.
 
 * I'm proficient with both the **React** and **SolidJS** reactive UI frameworks.
 * I have a deep working knowledge of the [**ProseMirror**](https://prosemirror.net/) and [**CodeMirror**](https://codemirror.net/) editor toolkits.
@@ -117,7 +114,6 @@ I enjoy designing **rich document editors** for note-taking, documentation, and 
 
 * I created the [Noteworthy](https://github.com/benrbray/noteworthy) WYSIWYG desktop markdown editor, tailored for personal research notes making extensive use of math and citations.  Built with TypeScript and [Electron](https://www.electronjs.org/).
 * I maintain the [`prosemirror-math`](https://github.com/benrbray/prosemirror-math) and [`remark-cite`](https://github.com/benrbray/remark-cite) packages on NPM.
-
 
 <PreviewGrid columns={2} postSlugs={[
   { slug: "projects/noteworthy", span: 2 },
@@ -134,7 +130,7 @@ I worked for one year as a **backend engineer** at Smartpay KK, a Japanese finte
 * I led the design, implementation, testing, and release of a programmatic disbursements backend service which integrates with bank APIs to automatically issue merchant payouts and consumer refunds on a fixed schedule.
 * I participated in code review, API design, and sprint planning for a backend API powering the mobile & web apps for a pay-later service.
 * I collaborated with our frontend team to design a **GraphQL** API to power our mobile app.
-* <u>Technologies:</u> Scala (with [`cats-effect`](https://typelevel.org/cats-effect/)), Docker, GCP, Postgres, Terraform Cloud
+* <u>Technologies:</u> Scala (with [`cats-effect`](https://typelevel.org/cats-effect/)), Docker, GCP, PubSub, Postgres, Terraform Cloud
 
 I also have experience with the following backend tech:
 
@@ -144,41 +140,28 @@ I also have experience with the following backend tech:
 
 ## Functional Programming, Compilers, and Formal Methods
 
-<TodoBlock>
-I work as a **research software engineer** for [Hasuo Lab](https://group-mmm.org/~ichiro/) at the <a href="https://www.nii.ac.jp/en/">National Institute of Informatics</a> in Tokyo, where I build software aimed at making formal methods more accessible to engineers working in industry.
-</TodoBlock>
+While working as a **Research Engineer** for Hasuo Lab at NII, **Haskell** was my daily driver for implementing parsers, interpreters, type inference algorithms, and a language server.
 
-{/* I value the expressiveness and safety that comes with pure, statically-typed functional programming.
-Functional programming is a valuable tool (but not the only one!) in my problem-solving toolkit.  
-I've been writing Haskell professionally for 2 years.
+* I added support for user-defined functions, enum types, and record types to a domain-specific language called `tempo-lang`, which evaluates to **[signal temporal logic](https://finkbeiner.groups.cispa.de/publications/FFKK22.pdf)** expressions.
+* We used [`sbv`](https://hackage.haskell.org/package/sbv) to support [`z3`](https://github.com/Z3Prover/z3) SAT/SMT formulas as a compile target for our `tempo-lang` DSL.
+* <u>Tools:</u> `servant`, `aeson`, `mtl`, `transformers`, `megaparsec`, `quickcheck`, and a dash of `lens`.
 
-I value the expressiveness and safety that comes with pure, statically-typed functional programming.  I'm especially interested in working on type systems and language servers.  */}
+As a **Backend Engineer** at Smartpay, I wrote purely-functional **Scala** in tagless-final style using the [`cats-effect`](https://typelevel.org/cats-effect/) ecosystem.  Compared to Haskell, Scala takes a more pragmatic approach to functional programming, allowing for _gradual adoption_ of functional patterns where they pay off the most.
 
-As a research engineer for Hasuo Lab at NII, I used **Haskell** to develop domain-specific programming languages for formal verification of cyberphysical systems, in collaboration with researchers from Japanese car manufacturers.
-  * I worked on a **language server** for `tempo-lang`, a specification language which compiles to [**signal temporal logic**](https://finkbeiner.groups.cispa.de/publications/FFKK22.pdf) expressions.  I also extended the parser and typechecker to support record types, enums, and user-defined functions.
-  * I also worked on an **exemplifier** which generates examples of signals which either satisfy or violate the temporal property described by a `tempo-lang` specification.  We achieved this by converting `tempo-lang` expressions into [satisfiability problems](https://en.wikipedia.org/wiki/Satisfiability_modulo_theories), and reconstructing a signal from satisfying assignments found by the [`z3` SMT solver](https://www.microsoft.com/en-us/research/project/z3-3/).
-  * You can learn more about our work by reading [this paper](https://doi.org/10.48550/arXiv.2403.18764) or [these slides](https://1drv.ms/b/s!Aj26oQ_Up7Sxg_lcdJOjgBjSL1EzDA?e=bfbg17).
+* A [functional core, imperative shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell/) architecture allowed my team to build new features quickly, with confidence that the underlying operations were sound.
+* [`cats-effect`](https://typelevel.org/cats-effect/) made it easy to mock side-effects in our [`hedgehog`](https://hedgehogqa.github.io/scala-hedgehog/) property-based tests.
 
-As a backend engineer at Smartpay, I wrote purely-functional **Scala** in tagless-final style using the [`cats-effect`](https://typelevel.org/cats-effect/) ecosystem.  Scala's 
+In my free time, I enjoy experimenting with **dependently-typed** languages like Coq and Lean.  I'd love to work on tools which make dependently-typed programming more user-friendly.  I created the toy language [`yagi-lang`](https://github.com/benrbray/yagi-lang) to learn more about dependent type theory and language implementation:
 
-* A [functional core, imperative shell](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell/) architecture enabled us to work quickly, with confidence.
+<PostPreview postSlug="projects/yagi-lang" />
 
-Here are a few related personal projects:
+Here are a few other related personal projects:
 
-* In my free time, I enjoy working with **dependently-typed** languages like Coq, Idris and Lean.  I created the toy language [`yagi-lang`](https://github.com/benrbray/yagi-lang) to learn more about dependent type theory.
-  <PostPreview postSlug="projects/yagi-lang" />
-
-<TodoBlock> 
-* Hindley Milner Implementation
-* Borscht Music Database
-* **TODO:** datalog tagging system
-* **TODO:** coalgebraic product construction
-* **TODO:** type safari
-</TodoBlock>
-
-{/* * I have basic familiarity with the **`coq` proof assistant**, having worked through all the exercises in Volumes 1-3 of the [Software Foundations](https://softwarefoundations.cis.upenn.edu/) book, as well as portions of [CPDT](http://adam.chlipala.net/cpdt/). */}
-{/* * I’ve also read through the first 5 chapters of the Homotopy Type Theory:  Univalent Foundations of Mathematics book, to better understand the formal systems that powers proof assistants like Coq. */}
-{/* I enjoy reading papers about programming language theory, type systems, formal verification, and category theory in my free time. */}
+<PreviewGrid columns={2} postSlugs={[
+  { slug: "projects/type-safari", span: 1 },
+  { slug: "projects/borscht", span: 1 },
+  { slug: "projects/datalog-query-engine", span: 1 },
+]} />
 
 ## Computer Graphics & Numerical Methods
 
@@ -263,8 +246,7 @@ University of Michigan
 * (Instructional Aide) EECS 545, [Graduate Machine Learning](https://github.com/thejakeyboy/umich-eecs545-lectures) (Winter 2016)
 * (Math Lab Tutor) MATH 425, Introduction Probability, (Fall 2015 - Winter 2016)
 
-
-These words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan Lee Mulligan really capture what teaching means to me:
+{/* These words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan Lee Mulligan really capture what teaching means to me:
 
 > When I am with someone who is looking for something that I have, and I can
 > give it to them -- the look on someone's face when they *get* it, and it
@@ -272,7 +254,7 @@ These words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan
 >
 > The lighting of a second candle does not diminish the first.  Watching someone
 > learn is one of life's greatest joys.  When you're a teacher you have a front
-> row seat to learning, which is just -- the most beautiful thing to watch.
+> row seat to learning, which is just -- the most beautiful thing to watch. */}
 
 
 {/* I also have a habit of starting reading groups wherever I work!
@@ -280,37 +262,3 @@ These words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan
 * At NII, I formed a weekly category theory reading group with each batch of summer interns.
 * At EmbodyMe, I led a biweekly deep learning & computer graphics reading group.
 * At the University of Michigan, I co-founded [MSAIL](https://msail.github.io/), a student organization aimed at getting undergraduates involved with machine learning research. */}
-
-# Work History
-
-**Research Software Engineer**, National Institute of Informatics
-
-* Used **Haskell** to develop domain-specific programming languages for formal verification of cyberphysical systems.
-* My group focused on translating formal methods research into 
-* Our work aimed at finding ways to improve the workflow 
-* In collaboration with research teams at major Japanese auto manufacturers, Delivered proof-of-concept software too
-
-In collaboration with research teams at 
-* Developed `tempo-lang`, a language that compiles to **signal temporal logic** expressions.
-  * implemented the parser and typechecker
-  * 
-* Developed a [model checker](https://en.wikipedia.org/wiki/Model_checking) for a simple imperative probabilistic programming language.
-  * 
-
-**Backend Software Engineer**, Smartpay K.K.
-
-**Machine Learning & Graphics Engineer**, EmbodyMe, Inc.
-
-**Research Intern**, RIKEN AIP
-
-* For the Approximate Bayesian Inference team, advised by Emtiyaz Khan
-
-**Research Assistant**, University of Michigan, advised by Peter McIsaac
-
-* Build a **Python** / **flask** web app for humanities researchers to visualize topic models on 19th-century German periodicals.
-* Corrected noisy digital scans using a Hidden Markov Model over word fragments.  Trained on a synthetic dataset of eroded digital scans with known text.  Segmented words based on letter-successor-variety.
-* Implemented many **statistical inference** algorithms from scratch, including:  Online Variational Inference for LDA and HDP
-
-**Software Engineering Intern**, Microsoft Corporation (Redmond WA, May - Aug 2016)
-
-* Built a multiplatform mobile app with **C#** and **Xamarin** allowing engineers on my team to monitor Windows telemetry data and receive alerts.

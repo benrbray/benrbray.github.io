@@ -46,6 +46,10 @@ article p, article li {
   text-wrap: pretty;
 }
 
+article strong, article b, article emph, article i, article a {
+  hyphens: manual;
+}
+
 li {
   text-align: left;
 }
