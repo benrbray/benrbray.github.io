@@ -1,19 +1,23 @@
 ---
 interface Props {
   tags: string[]
-  tools: string[]
+  tools: string[],
+  formats: string[]
 }
 
-const { tags, tools } = Astro.props;
+const { tags, tools, formats } = Astro.props;
 
 ---
 
 <span class="post-tags">
   {tags.map(tag => {
-    return <><span class="tag">{tag}</span> </>
+    return <><span class="tag category">{tag}</span> </>
   })}
   {tools.map(tool => {
-    return <><span class="tool">{tool}</span> </>;
+    return <><span class="tag tool">{tool}</span> </>;
+  })}
+  {formats.map(format => {
+    return <><span class="tag format">{format}</span> </>;
   })}
 </span>
 
@@ -22,8 +26,7 @@ const { tags, tools } = Astro.props;
   font-family: var(--sans-font);
 }
 
-.post-tags .tag,
-.post-tags .tool {
+.post-tags .tag {
 	display: inline-block;
 	padding: 0.1em 0.4em;
   border-radius: 0.1em;
@@ -34,7 +37,7 @@ const { tags, tools } = Astro.props;
   line-height: 1.2em;
 }
 
-.post-tags .tag {
+.post-tags .category {
 	background-color: #e3e9ef;
 	color: #254298;
 }
@@ -42,5 +45,10 @@ const { tags, tools } = Astro.props;
 .post-tags .tool {
 	background-color: #e3efe4;
 	color: darkgreen;
+}
+
+.post-tags .format {
+	background-color: #fff;
+	color: #666;
 }
 </style>

@@ -1,5 +1,6 @@
 ---
 tags: [math]
+format: pdf
 title: "Notes: Separating & Supporting Hyperplanes"
 
 published: true

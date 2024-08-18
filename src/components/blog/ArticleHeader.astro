@@ -56,7 +56,11 @@ const label = seriesData ? (seriesData.isAppendix ?
   </div>
   <!-- Tags -->
   <div class="article-tags">
-    <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
+    <PostTags
+      tags={post.data.tags || []}
+      tools={post.data.tools || []}
+      formats={ post.data.format? [post.data.format] : [] }
+    />
   </div>
 </div>
 

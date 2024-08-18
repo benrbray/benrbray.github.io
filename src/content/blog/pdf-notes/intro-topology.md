@@ -1,5 +1,6 @@
 ---
 tags: [math]
+format: pdf
 title: "Notes: Topology Basics"
 
 published: true

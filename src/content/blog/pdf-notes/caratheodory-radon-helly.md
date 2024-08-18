@@ -1,5 +1,6 @@
 ---
 tags: [math]
+format: pdf
 title: "Notes: Carathéodory, Radon, and Helly Theorems"
 
 published: true

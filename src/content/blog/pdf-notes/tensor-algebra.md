@@ -1,5 +1,6 @@
 ---
 tags: [math]
+format: pdf
 title: "Notes: Tensor Algebra"
 
 published: false

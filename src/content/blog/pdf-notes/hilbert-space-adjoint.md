@@ -1,5 +1,6 @@
 ---
 tags: [math]
+format: pdf
 title: "Notes: Hilbert Spaces & Adjoints"
 
 published: true

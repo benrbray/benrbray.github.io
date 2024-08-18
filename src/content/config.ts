@@ -14,6 +14,7 @@ const postSchema = z.object({
 	imageThumbnail: z.string().optional(),
 	tags: z.array(z.string()).optional(),
 	tools: z.array(z.string()).optional(),
+	format: z.enum(["pdf"]).optional(),
 	series: z.object({
 		seriesId: reference("series"),
 		seriesNumber: z.number().int().gte(1),

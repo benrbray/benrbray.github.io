@@ -42,7 +42,11 @@ const showSummaryBody = (showSummary || showImage);
     {
       show.tags &&
       <div class="header-subtitle">
-        <PostTags tags={post.data.tags || []} tools={post.data.tools || []} />
+        <PostTags
+          tags={post.data.tags || []}
+          tools={post.data.tools || []}
+          formats={ post.data.format? [post.data.format] : [] }
+        />
       </div>
     }
   </div>

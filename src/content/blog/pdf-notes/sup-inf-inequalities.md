@@ -1,5 +1,6 @@
 ---
 tags: [math]
+format: pdf
 title: "Notes: Sup-Inf Inequalities"
 
 published: true

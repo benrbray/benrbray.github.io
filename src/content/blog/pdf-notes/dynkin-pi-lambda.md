@@ -1,5 +1,6 @@
 ---
 tags: [math]
+format: pdf
 title: "Notes: Dynkin's Pi-Lambda Theorem"
 
 published: true
