@@ -73,3 +73,45 @@ Note that the `Drop` and `Copy` traits are **mutually exclusive**.  Rust will no
 
 ## `Box<T>`
 
+# Arenas
+
+## Manish Goregaokar 2021, ["Arenas in Rust"](https://manishearth.github.io/blog/2021/03/15/arenas-in-rust/)
+* an **arena** is a way to group up allocations that are expected to have the same lifetime
+* sometimes you need to allocate a bunch of objects for the lifetime of an event, after which they can all be thrown away
+* it's more efficient to reduce **allocator pressure** by _preallocating_ memory for these objects, rather than calling the system allocator once per object
+
+for example, in a game there may be a large mishmash of per-frame-tick objects to be allocated per frame, then immediately thrown away
+  * with arenas, we can allocate an arena beforehand, then cheaply fill it up and clear it each frame
+  * this has the additional benefit of **cache locality**
+
+arenas also help represent **self-referential** data
+
+* e.g. complex graph with cycles as needed when writing compilers & type systems
+
+other
+
+* `slotmap` is a map-like data structure useful for self-referential data, based on generational indexing
+* `bumpalo` is a "bump allocator" which allows heterogeneous contents, and permits cycles (with the caveat that destructors are not called)
+* `typed-arena` is an arena allocator that stores objects of a single type and allows for cyclic references.
+  * (always runs destructors on its contents when the arena itself goes out of scope)
+
+## Chris Wellons, ["Arena allocator tips and tricks"](https://nullprogram.com/blog/2023/09/27/)
+
+* an arena is a memory buffer and an offset into that buffer, initially zero
+* to allocate an object, grab a pointer at the offset, and advance the offset by the size of the object
+* objects are not freed individually; instead, groups of allocations are freed at once by restoring the offset to an earlier value
+* without individual lifetimes, you don't need to write destructors, nor do programs need to wlak data structures at runtime to take them apart
+
+## Arena-based Parsers ([book](https://iliabylich.github.io/arena-based-parsers/))
+
+
+## Implementing a Self-Referential Arena
+
+The key to implementing an arena `Arena` with entries typed as `Entry` is:
+
+* `Arena` and `Entry` both have a lifetime parameter `Arena<'arena>` and `Entry<'arena>`
+* `Arena` methods should all receive `Arena<'arena>` as `&'arena self`
+  * makes `'arena` an [invariant](https://doc.rust-lang.org/nomicon/subtyping.html#variance) lifetime
+* `Entry` should almost always be passed around as `&'arena Entry<'arena>`
+* use interior mutability
+  * if using `unsafe`, make sure you have a `PhantomData` for `RefCell<Entry<'arena>>` somewhere
