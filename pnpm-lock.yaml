@@ -44,9 +44,6 @@ importers:
       remark-math:
         specifier: ^6.0.0
         version: 6.0.0
-      ruffle-core:
-        specifier: https://gitpkg.now.sh/ruffle-rs/ruffle/web/packages/core?master&scripts.prepare=npm%20run%20prebuild%20%26%26%20npm%20run%20build%20%26%26
-        version: https://gitpkg.now.sh/ruffle-rs/ruffle/web/packages/core?master&scripts.prepare=npm%20run%20prebuild%20%26%26%20npm%20run%20build%20%26%26
       sharp:
         specifier: ^0.33.4
         version: 0.33.4
@@ -2069,10 +2066,6 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
-  ruffle-core@https://gitpkg.now.sh/ruffle-rs/ruffle/web/packages/core?master&scripts.prepare=npm%20run%20prebuild%20%26%26%20npm%20run%20build%20%26%26:
-    resolution: {tarball: https://gitpkg.now.sh/ruffle-rs/ruffle/web/packages/core?master&scripts.prepare=npm%20run%20prebuild%20%26%26%20npm%20run%20build%20%26%26}
-    version: 0.1.0
-
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
@@ -2486,9 +2479,6 @@ packages:
 
   vscode-uri@3.0.8:
     resolution: {integrity: sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==}
-
-  wasm-feature-detect@1.6.2:
-    resolution: {integrity: sha512-4dnaZ+Fq/q+BbMlTIfaNS851i+0zmHzui++NUZdskESRu3xwB6g6x2FnGvBdWtpijqO5yuj1l+EUTJGc4S4DKg==}
 
   web-namespaces@2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
@@ -5100,10 +5090,6 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.18.1
       fsevents: 2.3.3
 
-  ruffle-core@https://gitpkg.now.sh/ruffle-rs/ruffle/web/packages/core?master&scripts.prepare=npm%20run%20prebuild%20%26%26%20npm%20run%20build%20%26%26:
-    dependencies:
-      wasm-feature-detect: 1.6.2
-
   run-parallel@1.2.0:
     dependencies:
       queue-microtask: 1.2.3
@@ -5553,8 +5539,6 @@ snapshots:
   vscode-uri@2.1.2: {}
 
   vscode-uri@3.0.8: {}
-
-  wasm-feature-detect@1.6.2: {}
 
   web-namespaces@2.0.1: {}
 

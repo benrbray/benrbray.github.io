@@ -211,8 +211,10 @@ article img {
   display: block;
   max-width: 100%;
   height: auto;
+
+  border-radius: 3mm;
   
-  margin: var(--gap-0) auto;
+  margin: var(--gap-2) auto;
 }
 
 article li {
