@@ -1,50 +1,27 @@
 ---
 title: "\"Print and Play\" Condition Cards for D&D"
 datePublished: 2025-01-01
-summary: TODO
+published: True
+summary: In my weekly D&D group, I play a Paladin who often casts support spells to buff allies in combat.  It's not always easy to remember which effects are active at any given time, so I created a custom deck of _condition cards_ to help keep track!
 imageThumbnail: /images/thumbnails/dnd-condition-cards-3.jpg
 tags: [games, rpg, crafts]
 tools: [typst]
 ---
 
-In my weekly D&D group, I play a Paladin who often casts support spells like [Bless](https://roll20.net/compendium/dnd5e/Bless#content) and [Aid](https://roll20.net/compendium/dnd5e/Aid#content) to buff allies in combat.  It's not always easy to remember which effects are active at any given time, so I created a custom deck of _condition cards_ to help keep track.
+In my weekly D&D group, I play a Paladin who often casts support spells like [Bless](https://roll20.net/compendium/dnd5e/Bless#content) and [Aid](https://roll20.net/compendium/dnd5e/Aid#content) to buff allies in combat.  It's not always easy to remember which effects are active at any given time, so I created a custom deck of _condition cards_ to help keep track!
 
-I designed the cards with Inkscape and used Typst to create a print-and-cut template to aid with assembly.  Here is the final result:
+I designed the cards with Inkscape and used Typst to create a print-and-cut template to aid with assembly.  After several weeks of experimentation with different materials, I succeeded in creating a deck of cards flexible enough to riffle shuffle like real playing cards!
 
 ![](./dnd-condition-cards/cards-spread-5.JPG)
 
-
-# Goals
-
-* I kept the flavor text to a minimum, as the cards are meant to be a quick reference on the _mechanics_ of a condition during combat.
-* I wrote the card descriptions to be as concise as possible while still (hopefully) remaining comprehensible to new players.
-* Use color-coded icons when referring to mechanics like attack rolls, damage, defense, and advantage, so that players can easily scan for pertinent information mid-combat.
-* The cards should be as robust as possible to spilled drinks and greasy fingers.
-
-Nice-to-haves:
-
-* The cards are designed to be _given away_ to other players, but they also contain enough information to serve as _spell_ cards for myself.
-* They should feel good to hold!  In the end, I succeeded in creating cards which are flexible enough to riffle shuffle like real playing cards, thanks to the ["How to Make Game Cards that Shuffle"](https://www.youtube.com/watch?v=DgNJmAkO1_M) guide by Rachel Bruner.
-
-# Prototyping
-
-I tested many different materials to achieve the desired texture and flexibility.
-
-# Card Design
-
-I used Inkscape to design icons and sketch out the basic card layout before 
-
-  As The cards contain mostly text, 
-
-## Front Faces
-
-## Back Faces
-
 # Designing a Parametric Cutting Template with `Typst`
 
-After sketching out the basic card layout with Inkscape, I 
+After sketching the basic card layout in Inkscape, I reproduced the design in Typst and developed a parametric cutting template for assembling cards.
 
 ![](./dnd-condition-cards/condition-card-01.svg)
+
+The reverse side of the sheet is printed solid black, so that the cards are fully opaque.
+
 ![](./dnd-condition-cards/condition-card-02.svg)
 
 # Assembly Process
@@ -63,6 +40,25 @@ And special equipment:
 * Kadomaru PRO Corner Rounder
 * HFS(R) Guillotine Paper Cutter
 
+## Process
+
+This method is a variation of Rachel Bruner's ["How to Make Game Cards that Shuffle"](ttps://www.youtube.com/watch?v=DgNJmAkO1_M) technique, see the video for a step-by-step guide.  Rather than applying spray laquer to seal the cards, I protect the surface with matte laminate sheets thin enough to let the texture of the paper through, giving the cards a pleasant feel compared to standard 100μm laminate.
+
+1. Cut a 50μm A4 glossy laminate sleeve in half, yielding two 25μm A4-size halves.  One half-sleeve will become the plastic core of two sheets of cards.
+2. Crease two card sheets along their horizontal center lines.  Fold as precisely as possible to ensure good alignment between the fronts and backs of each card.
+3. Next, glue and fold two card sheets to one laminate half-sleeve:
+   * Unfold the creased sheet and apply spray glue to the back of the sheet.
+   * With the glued sheet folded open, carefully align one long edge of a laminate half-sleeve with the crease line and gently lower into place, avoiding wrinkles.
+   * Slide your finger across the glued area to press out air bubbles.
+   * Fold the sheet once again over the crease line, being mindful of card alignment.
+   * Repeat this process to glue a second card sheet to the remaining long edge of the laminate core.
+4. Trim off excess laminate before passing glued card sheets through the laminating machine to harden the core.
+   * The interior of a laminate sleeve is coated with heat-actived adhesive that can destroy your laminating machine if exposed directly to the rollers.  
+   * I recommend trimming roughly 1mm from each edge of the folded card sheets.
+5. Place the two resulting card sheets into a 50μm matte laminate sleeve and pass through the laminating machine again to protect the outer surface.  These sleeves are thin enough that the texture of the paper can be felt through the laminated surface.
+6. Cut out cards individually and carefully align their bottom-left corners.  Then, trim the entire deck to size using a heavy-duty guillotine cutter.
+7. Round the corners of each card using a corner punch.
+
 ## Preparing Printed Templates for Gluing
 
 ![](./dnd-condition-cards/assembly-crease-process.png)
@@ -70,15 +66,17 @@ And special equipment:
 
 ## Gluing Process
 
-> NEEDS IMAGE
+Here is the result of gluing two folded sheets to one laminate half-sheet which forms the core of each card.  (This photo was taken before finalizing the card designs, when I was still using the RuneScape world map for testing colors and paper texture!)
+
+![](./dnd-condition-cards/assembly-after-gluing-2.jpg)
 
 ## Laminating the Core
 
-> NEEDS IMAGE
+Once the folded, glued sheets have been cut out, pass them through the laminator once to harden the laminate core.  Unfortunately I took no photos of this stage!
 
-## Laminating the Card Surface
+## Laminating the Outer Surface
 
-![](./dnd-condition-cards/assembly-outer-laminate-sleeve.png)
+![](./dnd-condition-cards/assembly-outer-laminate-sheet.jpg)
 ![](./dnd-condition-cards/assembly-outer-laminate-inprogress.png)
 ![](./dnd-condition-cards/assembly-outer-laminate-fronts.png)
 ![](./dnd-condition-cards/assembly-outer-laminate-backs.png)
@@ -91,16 +89,13 @@ And special equipment:
 
 Next, I stack the individually-cut cards with their bottom-left corners aligned, and trim the entire deck to size using a heavy-duty guillotine paper cutter.
 
-> NEEDS IMAGE
+{/* > NEEDS IMAGE */}
 
 ## Rounding Corners
 
-I round the corners of each card using a cheap corner punch.  The punch I have struggles to cut cleanly through all 5 layers, sometimes leaving a few incomplete trimmings behind, but overall gets the job done.
+The punch I have struggles to cut cleanly through all 5 layers, sometimes leaving a few incomplete trimmings behind, but overall gets the job done.
 
 ![](./dnd-condition-cards/assembly-corners-1.png)
 
-# Prototyping with Inkscape
+## Done!
 
-# Creating a Cutting Template with Typst
-
-# Printing and Assembly
