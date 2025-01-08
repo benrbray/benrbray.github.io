@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry, getEntry, type CollectionKey } from "astro:content";
+import { getCollection, type CollectionEntry, getEntry } from "astro:content";
 import { asyncFilter } from "./async";
 
 export const IS_PROD = import.meta.env.PROD;
@@ -72,9 +72,7 @@ export const postIsPublished = (post: HasPublished) => {
   return post.data.published;
 }
 
-type HasTitle = { data : { title : string, titleDisplay?: string } };
-
-export const postDisplayTitle = (post: HasTitle) => {
+export const postDisplayTitle = (post: CollectionEntry<"post">) => {
   return post.data.titleDisplay || post.data.title;
 }
 
@@ -122,11 +120,13 @@ export const getPosts = (filter?: (entry: CollectionEntry<"post">) => boolean) =
 export const getBlogPosts = async (
   options: {
     includeSeries: boolean
-  }
+  },
+  filter?: (entry: CollectionEntry<"post">) => boolean
 ) => {
   return await getPosts((entry) => {
     if(!options.includeSeries && entry.data.series) { return false; }
-    return entry.data.kind === "post";
+    if (entry.data.kind !== "post") { return false; }
+    return filter ? filter(entry) : true;
   });
 }
 

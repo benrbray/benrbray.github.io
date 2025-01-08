@@ -7,7 +7,7 @@ import LayoutDefault from '@root/layouts/LayoutDefault.astro';
 import { getBlogPosts, getProjects, getSeriesList } from '@root/util/query';
 import type { CollectionEntry } from 'astro:content';
 
-const byDate = (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">): number => b.data.datePublished.valueOf() - a.data.datePublished.valueOf();
+const byDate = (a: CollectionEntry<"post">, b: CollectionEntry<"post">): number => b.data.datePublished.valueOf() - a.data.datePublished.valueOf();
 const posts = (await getBlogPosts({ includeSeries: false })).sort(byDate);
 const projects = (await getProjects()).sort(byDate);
 

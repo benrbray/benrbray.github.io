@@ -10,7 +10,12 @@ import SeriesContent from '@root/components/blog/SeriesContent.astro';
 import ArticleHeader from '@root/components/blog/ArticleHeader.astro';
 
 export async function getStaticPaths() {
-	const posts = await getBlogPosts({ includeSeries: true });
+	const posts = await getBlogPosts({ includeSeries: true }, entry => {
+		// since the result of this query is used to generate pages,
+		// we exclude any posts which explicitly declare a URL
+		return !entry.data.url;
+	});
+
 	return posts.map((post) => ({
 		params: { slug: getPostUrlSlug(post).urlSlug },
 		props: post,

@@ -2,7 +2,6 @@ build:
   pnpm run build
 
 preview:
-  pnpm run build
   pnpm run preview
 
 dev:
