@@ -4,11 +4,11 @@ import PostList from '@root/components/lists/PostList.astro';
 import SeriesList from '@root/components/lists/SeriesList.astro';
 import ColumnNormal from '@root/layouts/ColumnNormal.astro';
 import LayoutDefault from '@root/layouts/LayoutDefault.astro';
-import { getPosts, getProjects, getSeriesList } from '@root/util/query';
+import { getBlogPosts, getProjects, getSeriesList } from '@root/util/query';
 import type { CollectionEntry } from 'astro:content';
 
 const byDate = (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">): number => b.data.datePublished.valueOf() - a.data.datePublished.valueOf();
-const posts = (await getPosts({ includeSeries: false })).sort(byDate);
+const posts = (await getBlogPosts({ includeSeries: false })).sort(byDate);
 const projects = (await getProjects()).sort(byDate);
 
 const series = await getSeriesList();

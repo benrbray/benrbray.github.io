@@ -5,7 +5,7 @@ import { PostSummaryFromSlug } from '../writing';
 interface Props {
   columns: number,
   postSlugs: {
-    slug: CollectionEntry<'blog'>["slug"],
+    slug: CollectionEntry<'post'>["slug"],
     span: number,
     show?: { summary?: boolean, image?: boolean, tags?: boolean }
   }[]

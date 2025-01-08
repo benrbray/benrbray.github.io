@@ -4,7 +4,7 @@ import FormattedDate from '@components/dates/FormattedDate.astro';
 import PostTags from "@components/content/PostTags.astro";
 import { postIsPublished } from "@root/util/query";
 
-type Props = { post : CollectionEntry<'blog'> }
+type Props = { post : CollectionEntry<'post'> }
 
 const { post } = Astro.props;
 

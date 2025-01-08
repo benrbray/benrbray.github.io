@@ -3,22 +3,22 @@ import { type CollectionEntry, getEntry } from 'astro:content';
 
 import LayoutDefault from '@layouts/LayoutDefault.astro';
 // import SeriesSummary from '@components/content/SeriesSummary.astro';
-import { getPosts } from '@root/util/query';
+import { getBlogPosts, getPostUrlSlug } from '@root/util/query';
 import ColumnThin from '@layouts/ColumnThin.astro';
 import PostContent from '@root/components/blog/PostContent.astro';
 import SeriesContent from '@root/components/blog/SeriesContent.astro';
 import ArticleHeader from '@root/components/blog/ArticleHeader.astro';
 
 export async function getStaticPaths() {
-	const posts = await getPosts({ includeSeries: true });
+	const posts = await getBlogPosts({ includeSeries: true });
 	return posts.map((post) => ({
-		params: { slug: post.slug },
+		params: { slug: getPostUrlSlug(post).urlSlug },
 		props: post,
 	}));
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
+type Props = CollectionEntry<'post'>;
+const post: Props = Astro.props;
 
 const series = await (async () => {
 	if(!post.data.series) { return undefined; }

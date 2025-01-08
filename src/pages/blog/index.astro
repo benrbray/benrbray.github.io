@@ -1,10 +1,10 @@
 ---
-import { getPosts } from '@root/util/query';
+import { getBlogPosts } from '@root/util/query';
 import LayoutDefault from '@root/layouts/LayoutDefault.astro';
 import ColumnNormal from '@root/layouts/ColumnNormal.astro';
 import PostPreview from '@root/components/content/PostPreview.astro';
 
-const posts = (await getPosts({ includeSeries: false })).sort(
+const posts = (await getBlogPosts({ includeSeries: false })).sort(
 	(a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf()
 );
 ---

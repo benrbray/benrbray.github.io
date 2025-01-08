@@ -2,7 +2,7 @@
 import { type CollectionEntry } from 'astro:content';
 
 import LayoutDefault from '@layouts/LayoutDefault.astro';
-import { getProjects, shortenProjectSlug } from '@root/util/query';
+import { getProjects, shortenSlug } from '@root/util/query';
 
 import ColumnThin from '@layouts/ColumnThin.astro';
 import PostContent from '@root/components/blog/PostContent.astro';
@@ -12,12 +12,12 @@ export async function getStaticPaths() {
 	const projects = await getProjects();
   
 	return projects.map((project) => ({
-		params: { slug: shortenProjectSlug(project.slug) },
+		params: { slug: shortenSlug(project.slug) },
 		props: { project },
 	}));
 }
 
-type Props = { project : CollectionEntry<'blog'> };
+type Props = { project : CollectionEntry<'post'> };
 
 const { project } = Astro.props;
 ---

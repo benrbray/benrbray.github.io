@@ -4,7 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../dates/FormattedDate.astro';
 import PostTags from './PostTags.astro';
 interface Props {
-  post: CollectionEntry<'blog'>;
+  post: CollectionEntry<'post'>;
   show?: { summary?: boolean, image?: boolean, tags?: boolean }
 }
 

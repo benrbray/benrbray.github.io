@@ -23,12 +23,7 @@ const postSchema = z.object({
 	priority: z.enum(["normal", "low"]).default("normal")
 });
 
-const blog = defineCollection({
-	type: 'content',
-	schema: postSchema
-});
-
-const project = defineCollection({
+const post = defineCollection({
 	type: 'content',
 	schema: postSchema
 });
@@ -54,8 +49,7 @@ const game = defineCollection({
 });
 
 export const collections = {
-	blog,
+	post,
 	series,
-	project,
 	game,
 };

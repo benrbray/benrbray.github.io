@@ -8,49 +8,8 @@ import { getPostUrlBySlug } from "@root/util/query";
 
 * Building reliable, reusable, and maintainable software that is enjoyable to use.
 * Working on **language servers**, static analysis, and type inference in order to upgrade the user experience of software engineering workflows.
-* Tools for composing **rich text documents**.  I created the [Noteworthy](/projects/noteworthy) markdown editor, as well as the [`prosemirror-math`](/projects/prosemirror-math) and [`remark-cite`](/projects/remark-cite) packages.
+* Tools for composing **rich text documents**.  I created the [Noteworthy](https://github.com/benrbray/noteworthy) markdown editor, as well as the [`prosemirror-math`](/projects/prosemirror-math) and [`remark-cite`](/projects/remark-cite) packages.
 * Computer graphics, simulation, and numerical methods.  I originally learned to code by [making Flash games](/projects/flash-games), and fell in love with the unique confluence of art, math, and code involved.
-
-{/* ## Narrative
-
-I thrive in interdisciplinary spaces.  I've never found it easy to categorize myself strictly as frontend/backend, engineer/researcher, high-level/low-level.  I love working on projects that cross traditional boundaries, and value each opportunity to learn something new.
-
-I originally learned to code by making games and uploading them to the Newgrounds game portal.  There, I found a vibrant community of artists, musicians, and programmers with an infectious enthusiasm for game development.  I learned early on to _love_ the work that I do, and try to bring that same enthusiasm to every team I'm a part of.  It's also why I enjoy [teaching](#teaching) and writing.
-
-I'm always tinkering, taking things apart, peeking inside to learn how they work.  To me, the allure of open-source software is that I can fine-tune it for my own personal use case. */}
-
-{/* While I find my training in mathematics to be a source of both clarity & delight, math and theory are tools like any other.  Building software is all about choosing the right tools for the job, and I never let mathematical purity get in the way of delivering software that is _useful_ and _maintainable_. */}
-{/* 
-I believe that *model-building* is the hardest part of software engineering.  Code is *disposable*, in the sense that once everyone agrees on a *model* of the application domain, the *code* itself can be written or re-written rather quickly.
-
-* I believe that **static type systems** are an effective tool for building and communicating *models*.
-
-* I believe that **refactoring** is an essential part of the software engineering process that keeps the *code* up to date with an evolving *model*.  I favor languages which permit *fearless refactoring* through language features such as type systems, parametric polymorphism, referential transparency, and side-effect management.
-
-
-----
-
-For these reasons, I find that I'm most productive in languages like **TypeScript**, **Haskell**, and **Rust**, which offer strong compile-time guarantees through language features such as powerful type systems, referential transparency, and side-effect management.
-
-I believe that type systems are the most effective way (so far!) to effectively communicate these models among a team.  
-
-and I try to pay that same enthusiasm forward 
-
-Since then, I've always believed that _work can be fun_
-
-
-I try to bring that same enthusiasm to every project I work on.
-
-I'm always tinkering, both in and outside of my day job.
-
-I believe in open-source software.
-
-I believe *"good enough"* is the enemy of *good*.
-
-I believe that languages like **TypeScript**, **Rust** and **Haskell** help me get it right the _first time_, saving many headaches and much debugging in the future.
-
-* Recently, there's a lot of talk about "fine-tuning" in the context of large language models, but I believe the term also applies naturally to open-source software.   */}
-
 
 ## Education
 
@@ -114,12 +73,10 @@ I enjoy designing **rich document editors** for note-taking, documentation, and 
 * I maintain the [`prosemirror-math`](https://github.com/benrbray/prosemirror-math) and [`remark-cite`](https://github.com/benrbray/remark-cite) packages on NPM.
 
 <PreviewGrid columns={2} postSlugs={[
-  { slug: "projects/noteworthy", span: 2 },
-  { slug: "projects/prosemirror-math", span: 1 },
-  { slug: "projects/remark-cite", span: 1 },
+  { slug: "project/noteworthy", span: 2 },
+  { slug: "project/prosemirror-math", span: 1 },
+  { slug: "project/remark-cite", span: 1 },
 ]} />
-
-{/* <PostPreview postSlug="frontend/solidjs-vs-react" /> */}
 
 ## Backend Engineering
 
@@ -151,14 +108,13 @@ As a **Backend Engineer** at Smartpay, I wrote purely-functional **Scala** in ta
 
 In my free time, I enjoy experimenting with **dependently-typed** languages like Coq and Lean.  I'd love to work on tools which make dependently-typed programming more user-friendly.  I created the toy language [`yagi-lang`](https://github.com/benrbray/yagi-lang) to learn more about dependent type theory and language implementation:
 
-<PostPreview postSlug="projects/yagi-lang" />
+<PostPreview postSlug="project/yagi-lang" />
 
 Here are a few other related personal projects:
 
 <PreviewGrid columns={2} postSlugs={[
-  { slug: "projects/type-safari", span: 1 },
-  { slug: "projects/borscht", span: 1 },
-  // { slug: "projects/datalog-query-engine", span: 1 },
+  { slug: "project/type-safari", span: 1 },
+  { slug: "project/borscht", span: 1 },
 ]} />
 
 ## Computer Graphics & Numerical Methods
@@ -190,7 +146,7 @@ Here are a few notable projects I've worked on, either through coursework or out
 
 As a teenager I worked as an independent **game developer**, publishing Flash games to the Newgrounds game portal under the username [archawn](https://archawn.newgrounds.com/games).  My games earned a modest amount of money from ad revenue and sponsorships through the [Flash Games License](https://web.archive.org/web/20130216211457/https://www.fgl.com/) marketplace.  You can play a collection of my early games at the link below.
 
-<PostSummaryFromSlug postSlug="projects/flash-games" show={{ summary: false }} />
+<PostSummaryFromSlug postSlug="project/flash-games" show={{ summary: false }} />
 
 ## Machine Learning
 
@@ -205,7 +161,7 @@ I spent 3 years as an **Undergraduate Research Assistant** using **statistical t
   - I built a web-app allowing humanities researchers to browse our dataset and visualize the results of our topic modeling analysis.
 
 
-<PostSummaryFromSlug postSlug="projects/dhgp" show={{ summary: false }} />
+<PostSummaryFromSlug postSlug="project/dhgp/dhgp" show={{ summary: false }} />
 
 I have also served as a **lecturer** and **teaching assistant** for a several courses in Machine Learning at the undergraduate & graduate levels.  See the [teaching](#teaching) section below for more details.
 
@@ -216,8 +172,8 @@ I have also served as a **lecturer** and **teaching assistant** for a several co
 I maintain the following `npm` packages:
 
 <PreviewGrid columns={2} postSlugs={[
-  { slug: "projects/prosemirror-math", span: 1, show: { image: false } },
-  { slug: "projects/remark-cite", span: 1, show: { image: false } },
+  { slug: "project/prosemirror-math", span: 1, show: { image: false } },
+  { slug: "project/remark-cite", span: 1, show: { image: false } },
 ]} />
 
 ### Open Source Contributions
@@ -269,20 +225,3 @@ University of Michigan
 * (Instructional Aide) EECS 445, [Machine Learning](https://eecs445-f16.github.io/) (Fall 2016)
 * (Instructional Aide) EECS 545, [Graduate Machine Learning](https://github.com/thejakeyboy/umich-eecs545-lectures) (Winter 2016)
 * (Math Lab Tutor) MATH 425, Introduction Probability, (Fall 2015 - Winter 2016)
-
-{/* These words [from an interview](https://youtu.be/F572OcpTcKY?t=582) with Brennan Lee Mulligan really capture what teaching means to me:
-
-> When I am with someone who is looking for something that I have, and I can
-> give it to them -- the look on someone's face when they *get* it, and it
-> becomes *theirs* as well...  
->
-> The lighting of a second candle does not diminish the first.  Watching someone
-> learn is one of life's greatest joys.  When you're a teacher you have a front
-> row seat to learning, which is just -- the most beautiful thing to watch. */}
-
-
-{/* I also have a habit of starting reading groups wherever I work!
-
-* At NII, I formed a weekly category theory reading group with each batch of summer interns.
-* At EmbodyMe, I led a biweekly deep learning & computer graphics reading group.
-* At the University of Michigan, I co-founded [MSAIL](https://msail.github.io/), a student organization aimed at getting undergraduates involved with machine learning research. */}

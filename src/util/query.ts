@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry, getEntry } from "astro:content";
+import { getCollection, type CollectionEntry, getEntry, type CollectionKey } from "astro:content";
 import { asyncFilter } from "./async";
 
 export const IS_PROD = import.meta.env.PROD;
@@ -20,33 +20,61 @@ export const shortenProjectSlug = (slug: string) => {
 }
 
 /**
+ * Reduces a slug to its basename, ignoring the folder hierarchy.
+ *   shortenSlug("foo/bar/baz") = "baz"
+ */
+export const shortenSlug = (slug: string) => {
+  const basename = slug.split("/").pop();
+  return basename;
+}
+
+/**
+ * Computes the slug for a given post, so that the `content/`
+ * folder can be freely reorganized without breaking URLs.
+ */
+export const getPostUrlSlug = (post: CollectionEntry<"post">) => {
+  const shortened = shortenSlug(post.slug);
+
+  if(post.data.kind === "project") {
+    return { group: "projects", urlSlug: `${shortened}` }
+  }
+
+  if(post.data.series) {
+    return { group: "blog", urlSlug: `${post.data.series.seriesId.slug}/${shortened}` }
+  } else {
+    return { group: "blog", urlSlug: `${shortened}` }
+  }
+}
+
+/**
  * Computes the URL for a given post, so that the `content/`
  * folder can be freely reorganized without breaking URLs.
  */
-export const getPostUrl = (post: CollectionEntry<"blog">): string => {
+export const getPostUrl = (post: CollectionEntry<"post">): string => {
   // some posts explicitly provide a URL, for
   // example when linking to a static PDF file
   if(post.data.url) {
     return post.data.url;
   }
 
-  if(post.data.kind === "project") {
-    return `/projects/${shortenProjectSlug(post.slug)}`;
-  } else {
-    return `/blog/${post.slug}`;
-  }
+  const slug = getPostUrlSlug(post);
+  return `/${slug.group}/${slug.urlSlug}`;
 }
 
-export const getPostUrlBySlug = async (postSlug: CollectionEntry<"blog">["slug"]): Promise<string> => {
-  const post = await getEntry({ collection: "blog", slug: postSlug });
+export const getPostUrlBySlug = async (postSlug: CollectionEntry<"post">["slug"]): Promise<string> => {
+  const post = await getEntry({ collection: "post", slug: postSlug });
   return getPostUrl(post);
 }
 
-export const postIsPublished = (post: CollectionEntry<"blog">) => {
+type HasPublished = { data : { published : boolean } };
+
+export const postIsPublished = (post: HasPublished) => {
   return post.data.published;
 }
 
-export const postDisplayTitle = (post: CollectionEntry<"blog">) => {
+type HasTitle = { data : { title : string, titleDisplay?: string } };
+
+export const postDisplayTitle = (post: HasTitle) => {
   return post.data.titleDisplay || post.data.title;
 }
 
@@ -62,7 +90,7 @@ export const seriesIsPublished = async (series: CollectionEntry<"series">): Prom
  * @returns A list of all posts in the series.
  */
 export const getSeriesPosts = async (series: CollectionEntry<"series">) => {
-  return await getBlogEntries((entry) => {
+  return await getPosts(entry => {
     if(!entry.data.series) { return false; }
     return entry.data.series.seriesId.slug == series.slug;
   });
@@ -76,12 +104,12 @@ export const getSeriesList = async (): Promise<CollectionEntry<"series">[]> => {
 /* -------------------------------------------------------------------------- */
 
 /**
- * A wrapper around Astro's `getCollection("blog", _)` which excludes
+ * A wrapper around Astro's `getCollection(_, _)` which excludes
  * unpublished entries.  Other queries should use this one instead of
  * calling `getCollection` directly.
  */
-export const getBlogEntries = (filter?: (entry: CollectionEntry<"blog">) => boolean) => {
-  return getCollection("blog", entry => {
+export const getPosts = (filter?: (entry: CollectionEntry<"post">) => boolean) => {
+  return getCollection("post", entry => {
     if(IS_PROD && !postIsPublished(entry)) { return false; }
     return filter ? filter(entry) : true;
   });
@@ -91,22 +119,24 @@ export const getBlogEntries = (filter?: (entry: CollectionEntry<"blog">) => bool
  * @returns A list of all posts, optionally
  *   excluding posts belonging to a series.
  */
-export const getPosts = async (
+export const getBlogPosts = async (
   options: {
     includeSeries: boolean
   }
 ) => {
-  return await getBlogEntries((entry) => {
+  return await getPosts((entry) => {
     if(!options.includeSeries && entry.data.series) { return false; }
     return entry.data.kind === "post";
   });
 }
 
+/* -------------------------------------------------------------------------- */
+
 /**
  * @returns A list of all projects.
  */
 export const getProjects = async () => {
-  return await getBlogEntries((entry) => {
+  return await getPosts((entry) => {
     return entry.data.kind === "project";
   });
 }

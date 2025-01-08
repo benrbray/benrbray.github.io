@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'game'>;
 
 const game = Astro.props;
-const moreGamesUrl = await getPostUrlBySlug("projects/flash-games");
+const moreGamesUrl = await getPostUrlBySlug("project/flash-games");
 let { Content: GameContent } = await game.render();
 ---
 
