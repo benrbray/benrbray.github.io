@@ -1,0 +1,64 @@
+---
+import { type CollectionEntry } from 'astro:content';
+
+import LayoutDefault from '@layouts/LayoutDefault.astro';
+import { getBlogPosts, getProjects } from '@root/util/query';
+import ColumnNormal from '@root/layouts/ColumnNormal.astro';
+import PostPreview from '@root/components/content/PostPreview.astro';
+import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
+
+export const getStaticPaths = (async () => {
+	const blog = await getBlogPosts({ includeSeries: true })
+	const projects = await getProjects();
+	const posts = [...blog, ...projects];
+
+	// associate each tag with the list of posts it labels
+	const tags = new Map<string, CollectionEntry<"post">["slug"][]>();
+
+	const insertTag = (tag: string, slug: CollectionEntry<"post">["slug"]) => {
+		const entry = tags.get(tag);
+		if(entry) {
+			entry.push(slug)
+		} else {
+			tags.set(tag, [slug])
+		}
+	}
+
+	// collect all tags
+	posts.forEach(post => {
+		let postTags = [...post.data.tags||[], ...post.data.tools||[]];
+		postTags.forEach(t => {
+			insertTag(t, post.slug)
+		})
+	});
+
+	console.log(tags);
+
+	const entries = new Array(...tags.entries());
+	const paths: GetStaticPathsResult = entries.map(([tag, slugs]) => ({
+		params: { tag: tag }, // url is /tags/[tag]
+		props: { tag, slugs },
+	}));
+
+	return paths;
+}) satisfies GetStaticPaths;
+
+type Props = { tag: string, slugs: CollectionEntry<'post'>["slug"][] };
+console.log("----")
+console.log(Astro.props);
+console.log("----\n\n\n\n\n")
+const { tag, slugs } = Astro.props;
+---
+
+<LayoutDefault pageTitle={`${tag}`}>
+	<ColumnNormal>
+		<h1>Posts Tagged {`${tag}`}</h1>
+		<section>
+				{
+					slugs.map((slug) => (
+						<PostPreview postSlug={slug}/>
+					))
+				}
+		</section>
+	</ColumnNormal>
+	</LayoutDefault>

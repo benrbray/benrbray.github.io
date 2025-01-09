@@ -11,10 +11,10 @@ const { tags, tools, formats } = Astro.props;
 
 <span class="post-tags">
   {tags.map(tag => {
-    return <><span class="tag category">{tag}</span> </>
+    return <><span class="tag category"><a href={`/tags/${tag}`}>{tag}</a></span> </>
   })}
   {tools.map(tool => {
-    return <><span class="tag tool">{tool}</span> </>;
+    return <><span class="tag tool"><a href={`/tags/${tool}`}>{tool}</a></span> </>;
   })}
   {formats.map(format => {
     return <><span class="tag format">{format}</span> </>;
@@ -28,13 +28,17 @@ const { tags, tools, formats } = Astro.props;
 
 .post-tags .tag {
 	display: inline-block;
-	padding: 0.1em 0.4em;
+	padding: 0.2em 0.4em 0em 0.4em;
   border-radius: 0.1em;
 	white-space: nowrap;
   font-size: var(--font-size-small);
   border: 1px solid;
   border-radius: 0.2em;
   line-height: 1.2em;
+}
+
+.post-tags .tag a {
+  color: unset;
 }
 
 .post-tags .category {
