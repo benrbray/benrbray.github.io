@@ -34,7 +34,7 @@ const series = await (async () => {
 
 <LayoutDefault pageTitle={post.data.title}>
 	<ColumnThin>
-	<article>
+	<article data-pagefind-body>
 		<div class="article">
 			<ArticleHeader post={post}/>
 			{ series && <SeriesContent series={series} activeSlug={post.slug} /> }

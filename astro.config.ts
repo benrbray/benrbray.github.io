@@ -28,13 +28,25 @@ const bibFiles = [
   fs.readFileSync("./public/references/type-safari.bib").toString()
 ];
 
+// pagefind
+import pagefind from "astro-pagefind";
+
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://benrbray.com',
-  integrations: [mdx(), sitemap(), solid({
-    include: ["**/solid/*"]
-  }), solidJs()],
+  build: {
+    format: "file"
+  },
+  integrations: [
+    mdx(),
+    sitemap(),
+    solid({
+      include: ["**/solid/*"]
+    }),
+    solidJs(),
+    pagefind()
+  ],
   markdown: {
     remarkPlugins: [remarkMath, remarkCite, remarkExtractBibtex, remarkDirective],
     rehypePlugins: [

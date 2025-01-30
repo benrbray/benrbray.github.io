@@ -1,8 +1,205 @@
 ---
-title: "Bibliography Support for remark-cite"
-titleDisplay: "Bibliography Support for <code>remark-cite</code>"
+title: "A Bibliography Formatter for remark-cite"
+titleDisplay: "A Bibliography Formatter for <code>remark-cite</code>"
 summary: TODO
 datePublished: 2025-01-10
-tags: [functional]
-tools: [haskell]
+tags: [documents, citations]
+tools: [remark-cite, typescript]
 ---
+
+I recently updated `remark-cite` with support for simple bibliography rendering!  This post explains how it works.
+
+Terminology:
+
+* Citation:
+* Bibliography:
+* Reference:
+* 
+
+At the time of writing, here are all of the subpackages of `remark-cite`:
+
+* `micromark-extension-cite`
+* `mdast-util-cite`
+* `remark-cite` Parses citation syntax within a Markdown document and adds new CitationInline and CitationBlock nodes to the `remark` AST.
+* `rehype-cite` **(new!)** 
+* `remark-extract-bibtex` **(new!)** extracts citation data from `bibtex` code blocks
+
+
+## Goals & Scope
+
+Originally, `remark-cite` could _parse_ pandoc-style inline citations like `[@wadler1991]`, simply attaching them as metadata to the document AST.  Any further processing was left up to the user.  This met my needs well enough for the [Noteworthy]() editor, which creates ProseMirror documents from Markdown files rather than serializing to HTML.
+
+However, I recently [migrated my blog](/blog/astro-blog-setup) from [Hakyll](https://jaspervdj.be/hakyll/) to [Astro](https://astro.build).  While the switch came with many advantages, there were still a few features from my old Hakyll blog not easily reproducible by default with Astro.  One of these features was citations -- Hakyll uses `pandoc` for Markdown processing, so every Hakyll blog can enable bibliography rendering and inline citations [with minimal setup](https://tony-zorman.com/posts/hakyll-and-bibtex.html).  
+
+Astro instead uses `remark` for converting Markdown to HTML, allowing users to reconfigure the default Markdown processor with the many syntax extensions available through `remark`'s ecosystem.  As I wanted bibliography support for my blog, this was a great opportunity to add some new features to `remark-cite`!
+
+### Goals
+
+* Generate bibliographies suitable for blog posts and note-taking.
+* Decouple biliography data processing from the rendering itself.  We want to support common formats like `*.bib`, but  it should be straightforward to create plugins supporting other standard formats like `csl-json` or emerging formats like [`hayagriva`](https://typst.app/docs/reference/model/bibliography/).
+* Produce structured output with semantic labels.
+* Multiple output formats, including plain text and HTML.
+* Render inline citations `[@wadler1991]` either as author-year `(Wadler 1991)` or numerically `[1]` according to bibliography order.
+
+## Citation Tools for the Web
+
+The best tool for this is `pandoc`, which uses `citeproc`.
+
+### Ruling Out CSL
+
+The [Citation Style Language](https://citationstyles.org) (CSL) is an XML-based format capable of describing the sort of complex multi-lingual style guides used by large journals to typeset their bibliographies.  The CSL format is widely supported by software like Zotero, Pandoc, and most journals publish `*.csl` files encoding their style rules for citations.
+
+Here are a few example of the kind of complex formatting rules expressible with CSL.  See the [Style Behavior](https://docs.citationstyles.org/en/stable/specification.html#style-behavior) section of the CSL specification for a full list of possibilities.
+
+* **Name Disambiguation.**  CSL is capable of describing rules for automatically inserting given names or initials, when they would otherwise not be present, in order to distinguish between works whose authors have the same last name.  See the [Disambiguation](https://docs.citationstyles.org/en/stable/specification.html#disambiguation) options.
+* **Alignment.** Some styles display unique identifiers like `[27]` or `[GBKv2008]` for each bibliography entry.  Since these identifiers can vary in length, the [`second-field-align`](https://docs.citationstyles.org/en/stable/specification.html#whitespace) option inserts spaces into the plaintext output to give the appearance of a two-column layout:
+  ```
+  [9]  Adams, D. (2002). The Ultimate Hitchhiker's Guide
+       to the Galaxy (1st ed.).
+  [10] Asimov, I. (1951). Foundation.
+  ```
+* **Reference Grouping.** The [`subsequent-author-substitute`](https://docs.citationstyles.org/en/stable/specification.html#reference-grouping) option allows styles define rules for eliding duplicate author names when the same author is referenced multiple times.
+  ```
+  Doe. 1999.
+  ---. 2000.
+  Doe, Johnson & Williams. 2001.
+  Doe & Smith. 2002.
+  Doe, Stevens & Miller. 2003.
+  ---. 2004.
+  Doe, Williams et al. 2005.
+  ---. 2005.
+  ```
+* **Localization.**  CSL locale files can specify how terms, dates, and ordinals change under grammatical gender and number.  For example, the English `1st` / `first` translate in French to `1er` / `premier` or `1er / première` depending on whether the target noun is grammatically masculine or feminine.
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <locale xml:lang="fr-FR">
+    <terms>
+      <term name="edition" gender="feminine">
+        <single>édition</single>
+        <multiple>éditions</multiple>
+      </term>
+      <term name="edition" form="short">éd.</term>
+      <term name="month-01" gender="masculine">janvier</term>
+      <term name="ordinal">e</term>
+      <term name="ordinal-01" gender-form="feminine" match="whole-number">re</term>
+      <term name="ordinal-01" gender-form="masculine" match="whole-number">er</term>
+    </terms>
+  </locale>
+  ```
+
+This is all very impressive, but it is solving a different and much harder problem than I need for blogging purposes.  The majority of references in a blog post are likely to be other blog posts or webpages without complicated bibliographical information, anyway.  We are lucky to have even a title, author, and year.
+
+It would be great to have these features, but as `remark-cite` aims to support structured reference formatting -- I'm not aware of any way to get structured output from `citation-js` or any of the other standard CSL processors -- I don't see an easy path to supporting CSL output for `remark-cite`.
+
+This was all a rather long diversion just to say:  Supporting CSL citation styles is currently out of scope for `remark-cite`.
+
+### Keeping CSL-JSON
+
+Even though we are not making use of CSL styles, we will take advantage of the `csl-json` format for storing bibliographic data.
+
+> To render citations and bibliographies, CSL processors not only require CSL style and locale files, but also bibliographic metadata. The citeproc-js CSL processor introduced a JSON format to store such metadata, and this format has since been adopted by various other software products. The format, also known as "citeproc-JSON", has been codified in the CSL-JSON Schema. This same schema can be used to validate YAML.
+>
+> (from [`github/citation-style-language/schema`](https://github.com/citation-style-language/schema))
+
+### The Lesson:  Expose ASTs
+
+Working with rich text documents and compilers has taught me a few lessons:
+
+* **Avoid Flattening.**  
+* **Use Semantic Labels.**  
+* **Everything is a Compiler.** 
+
+Thankfully, this knowledge is becoming common:
+
+* Before `remark`, the de-facto markdown processor for JavaScript was `markdown-it`, which converts directly from Markdown to HTML without any intermediate syntax tree representation.  As a result, `markdown-it` was very difficult to use for purposes other than serializing to HTML.  I struggled a lot with `markdown-it` when building the Noteworthy editor, see for instance [`benrbray/noteworthy#2`](https://github.com/benrbray/noteworthy/issues/2).
+
+This foray into CSL 
+
+## `rehype-cite` 
+
+The `rehype-cite` plugin is responsible for:
+
+* Associating the citation IDs parsed by `remark-cite` with actual bibliography data contained in a `*.bib` file (or other data source) passed by the user.
+* Producing a formatted list of bibliography entries at the end of a Markdown document.
+* Serializing citation-related elements of the AST into HTML.
+
+`rehype-cite` defines a new metadata field that can be used by other plugins, such as `remark-extract-bibtex` to pass in bibliography data:
+
+```
+```
+
+## `remark-extract-bibtex`
+
+
+
+## A Custom Citation DSL
+
+Instead of relying on CSL, `rehype-cite` includes a custom DSL for describing how references should be rendered, and with some helper functions for massaging `*.bib` files into a standard format.  The default formatter for `rehype-cite` looks something like below.
+
+* `field`, `link`, etc. can all be reinterpreted by the user.  This vaguely resembles the free monad construct in Haskell.
+
+``` typescript
+const defaultTemplate = periods(
+  ...optional(
+    field("author"),
+    link(
+      field("url"),
+      oneof(
+        join(field("maintitle"), ": ", field("subtitle")),
+        join(field("title"), ": ", field("subtitle")),
+        field("title")
+      )
+    ),
+    oneof(
+      join(
+        "In ",
+        oneof(
+          join(field("journaltitle"), ": ", field("journalsubtitle")),
+          field("journaltitle"),
+          join(field("booktitle"), ": ", field("booksubtitle")),
+          field("booktitle"),
+          join(field("issuetitle"), ": ", field("issuesubtitle")),
+          field("issuetitle"),
+          field("maintitle")
+        ),
+        optional(oneof(
+          join(" (Vol. ", field("volume"), ", ", field("pages"), ")"),
+          join(" (Vol. ", field("volume"), ")"),
+          join(", ", field("pages"))
+        ))
+      ),
+      oneof(
+        join("(Vol. ", field("volume"), ", ", field("pages"), ")"),
+        join("(Vol. ", field("volume"), ")"),
+        field("pages")
+      )
+    ),
+    join("Edited by ", field("editor")),
+    join("Afterword by ", field("afterword")),
+    join("Annot. by ", field("afterword")),
+    join("Transl. by ", field("translator")),
+    oneof(
+      join(publisher(), optional(join(", ", field("location")))),
+      field("location")
+    ),
+    field("venue"),
+    join("Version ", field("version")),
+    join("Edition ", field("edition")),
+    oneof(
+      field("date"),
+      "(no date)"
+    ),
+    join("Accessed ", field("urldate"))
+  )
+);
+```
+
+It's easy to see how this could evolve into something as complciated as CSL, if we wanted to support complex features like localization.  For now, my aim is to provide a simple DSL for describing bibliographies and in-text citations.
+
+In theory, libraries like [`citation-js`](https://citation.js.org) would handle these concerns for me.  Unfortunately, 
+
+CSL's most severe limitation is that it specifies _raw text output_, rather than exposign any sort of semantic, structured syntax tree.
+
+* CSL st
+
+Initially, I hoped to 

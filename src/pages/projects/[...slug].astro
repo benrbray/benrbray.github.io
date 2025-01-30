@@ -24,7 +24,7 @@ const { project } = Astro.props;
 
 <LayoutDefault pageTitle={project.data.title}>
 	<ColumnThin>
-	<article>
+	<article data-pagefind-body>
 		<div class="article">
 			<ArticleHeader post={project}/>
 			<PostContent post={project} />

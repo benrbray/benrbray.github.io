@@ -1,0 +1,129 @@
+---
+title: Linear Programming & The Simplex Algorithm
+summary: An introduction to linear programming solvers.
+datePublished: 2025-01-14
+tags: [math, optimization, constraints]
+---
+
+import { Image } from 'astro:assets';
+
+<ExactQuote source="Wikipedia">A **linear program** is a mathematical model used to describe optimization problems whose constraints and objective are represented by linear relationships.</ExactQuote>
+
+Prerequisites:
+
+* Linear Algebra:  linear functions, hyperplanes, matrix multiplication
+
+## Geometric Intuition
+
+A typical linear program in two dimensions is depicted below.  The axes represent two decision variables $x_1$ and $x_2$, which are constrained to lie in the blue **feasible region**.  Solving the linear program means finding a point within the feasible region that is _farthest_ along the direction of the red **objective** vector.
+
+import LinearProgram1 from "./linear-program-1.svg"
+
+<Image src={LinearProgram1} alt="2D Linear Program" style={{ height: "20em" }} />
+
+## Linear Functionals
+
+Linear program maximize a **linear objective** function $\varphi : \R^n \rightarrow \R$ of the form below, where $c \in \R^n$ is the objective vector.
+
+$$
+\varphi(x) = c^T x
+$$
+
+The level sets $L_k \equiv \{ x \in \R^n \mid \varphi(x) = k \}$ of $\phi$ are $(n-1)$-dimensional hyperplanes in $\R^n$.  In two dimensions, these level sets are lines perpendicular to the objective vector.
+
+import LinearProgram2 from "./linear-program-2.svg"
+
+<Image src={LinearProgram2} alt="2D Linear Program" style={{ height: "20em" }} />
+
+## Standard Form
+
+When solving linear programs, we will require that
+
+A linear program has the following components:
+
+* A set of **decision variables** $x = (x_1, \dots, x_n) \in \R^n$.
+* A collection of **linear constraints**, of the form $a^T x \leq b$
+* A **linear objective** of the form $\max_x c^T x$ or $\min_x c^T x$
+
+<Definition>
+  (Standard Form) A linear program in **standard form** with linear objective $c \in \R^n$, constraint matrix $A \in \R^{m \times n}$, and constraint bounds $b \in \R^m$ has the form:
+  $$
+  \begin{array}{rrcl}
+  \text{maximize}   & c^T x &       \\
+  \text{subject to} & Ax &\leq& b \\
+                    & x  &\geq& 0
+
+  \end{array}
+  $$
+  A vector $x \in \R^n$ is called **feasible** if it satisfies the constraints $Ax \leq b$ and $x \geq 0$.
+</Definition>
+
+An assignment of values to the decision variables is called a **solution**, and a solution is **feasible** if it satisfies all the constraints.  A feasible solution is **optimal** if it attains the maximum possible objective value.
+
+(todo: explain about elementwise inequalities/partial orders?)
+
+## Conversion to Standard Form
+
+### Handling Greater-Than Constraints
+
+### Handling Strict Inequalities
+
+### Handling Equality Constraints
+
+### Handling Negative Decision Variables
+
+## Linear Programs Geometrically
+
+## Dual Form
+
+In two or three dimensions, it's straightforward to solve linear programs by visual inspection:  simply locate the vertex which lies farthest along the extent of the objective vector.
+
+In general, though, linear programs have not just two or three decision variables, but hundreds or thousands, with just as many constraints.  The number of vertices increases exponentially, $O(m^n)$ for $m$ constraints in $\R^n$, so we cannot possibly hope to derive an efficient algorithm by simple enumeration.
+
+Towards a solution, we will investigate the following question:
+
+> Given a candidate solution $x^*$ to a linear program, can we verify that it's optimal?
+
+If we can find an upper bound $B$ such that $\forall x\,, \varphi(x) \leq B$, and we also know $\phi(x^*) = B$, we may conclude that $x^*$ is optimal.
+
+Suppose for a moment that one of our constraints is $a^T x \leq b$, and that additionally the constraint coefficients satisfy $a \geq 0$.
+
+Then, for any feasible $x$,
+
+$$
+(c^T)
+$$
+
+
+
+Define the following terms:
+
+* $y \in \R^m$ is **dual-feasible** whenever $y \geq 0$ and $y^T A \geq c^T$
+* $x \in \R^n$ is **primal-feasible** whenever $x \geq 0$ and $Ax \leq b$
+
+<Observation>
+If we can find a linear combination $y^\top A$ of constraints which dominates the objective vector $c$, we can use it to derive an upper bound for the objective function $c^T x$ within the feasible region.  Mathematically,
+
+Suppose we have $y \in \R^m$ such that $y^T A \geq c^T$.  Then, for any feasible $x \in \R^n$, 
+
+$$
+\begin{aligned}
+  c^T x &\leq y^T A x  & \text{(dual feasible, $y^T A \geq c^T$)}  \\
+        &\leq    y^T b & \text{(primal feasible, $A x \leq b$)}  \\
+\end{aligned}
+$$
+</Observation>
+
+
+
+Geometrically,
+
+* Linear constraints correspond to half-spaces, whose intersection is a polytope forming the feasible region
+* Level sets of teh objective are parallel hyperplanes, all orthogonal to the coefficient vector $c$
+* The optimum is the farthest vector in the feasible region along direction $c$
+* For bounded feasible regions, a solution always exists at some vertex.
+
+Our linear programming solver will make use of the following facts, which we will prove:
+
+1. The feasible region of a linear program is always convex.
+2. For bounded feasible regions, a solution always can be found at a vertex.

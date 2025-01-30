@@ -1,0 +1,14 @@
+---
+import ColumnNormal from "@root/layouts/ColumnNormal.astro";
+import LayoutDefault from "@root/layouts/LayoutDefault.astro";
+
+import { default as SearchBox } from "astro-pagefind/components/Search";
+---
+
+
+<LayoutDefault pageTitle={"Search"}>
+	<ColumnNormal>
+    <h1>Search</h1>
+    <SearchBox id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
+</ColumnNormal>
+</LayoutDefault>

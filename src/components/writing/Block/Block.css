@@ -1,0 +1,17 @@
+.block {
+  border: 1px solid #ccc;
+  border-radius: 0.4em;
+  padding: var(--gap-1);
+  background-color: white;
+}
+
+.block .block-body p:first-child:before {
+  content: var(--block-label);
+  font-weight: var(--font-bold-weight);
+  padding-right: 0.5em;
+  display: inline-block;
+}
+
+.block .block-title {
+  display: inline-block;
+}

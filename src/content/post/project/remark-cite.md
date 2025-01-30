@@ -7,7 +7,7 @@ published: true
 datePublished: May 19, 2021
 
 tags:  [frontend]
-tools: [typescript]
+tools: [remark-cite, typescript]
 url: https://github.com/benrbray/remark-cite
 imageThumbnail: /images/thumbnails/remark-cite.png
 github_url: https://github.com/benrbray/remark-cite
