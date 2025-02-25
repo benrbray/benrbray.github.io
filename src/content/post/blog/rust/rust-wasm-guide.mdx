@@ -137,6 +137,16 @@ See the [`Closure` documentation](https://rustwasm.github.io/wasm-bindgen/api/wa
 
 ### Using JavaScript Closures from Rust
 
+# WebAssembly Interface Types
+
+> But how do we share data from our module? You have to pass it in or out as the values of a function call.
+>
+> There’s a problem here, though. By default, WebAssembly only has a handful of numeric types, which means you can only pass single digits across.
+> 
+> Here’s where the third feature comes in—the [interface type proposal](https://hacks.mozilla.org/2019/08/webassembly-interface-types/) which we demoed in August. With interface types, modules can communicate using more complex values—things like strings, sequences, records, variants, and nested combinations of these.
+>
+> That makes it easy for two modules to exchange data, but in a way that’s secure and fast. The WebAssembly engine can do direct copies between the caller and the callee’s memories, without having to serialize and deserialize the data. And this works even if the two modules aren’t compiled from the same language.
+
 # WebAssembly Component Model
 
 <Admonition title="Note">
@@ -251,9 +261,14 @@ CFN, ["WebGL + Rust: Basic Water Tutorial"](https://chinedufn.com/3d-webgl-basic
 
 [abstreet](https://github.com/a-b-street/abstreet)
 
+# Haskell `ghc-wasm-meta`
+
+## WASI Reactor Modules
+
+
+
 # Glossary
 
-* `WASI` is an extension of WASM torun not only on the web, but on any platform.
 
 [`wee-alloc`](https://github.com/rustwasm/wee_alloc) ???
 
@@ -262,6 +277,83 @@ CFN, ["WebGL + Rust: Basic Water Tutorial"](https://chinedufn.com/3d-webgl-basic
 [`wasmtime`](https://github.com/bytecodealliance/wasmtime) is a standalone runtime for WebAssembly, implemented in Rust
 
 [AssemblyScript](https://www.assemblyscript.org/introduction.html) compiles a variant of TypeScript to WebAssembly using [`binaryen`](https://github.com/WebAssembly/binaryen).
+
+### `wasi`
+
+WebAssembly defines a size-efficient bytecode format and execution model, designed to serve as a compilation target for the web.  Many runtimes now exist for executing WebAssembly programs:
+
+* modern web browsers like Chrome and Firefox ship with WebAssembly runtimes
+* todo...
+
+WebAssembly modules have a number of advantages, making them attractive even beyond browsers:
+
+* **Sandboxing.** WebAssembly programs are _sandboxed_.
+* **Memory Isolation.** 
+* **Small binary sizes.**
+* **Fast initialization.** 
+* **Cross-platform.**
+
+defines a portable size- and loadtime-efficient format and execution model specifically designed to serve as a compilation target for the web.
+
+<ExactQuote source="https://radu-matei.com/blog/intro-wasm-components/">`WASI` (WebAssembly System Interface) aims to standardize the execution of `wasm` outside the browser and provide a common, platform-agnostic interface that programs can use to interact with the host system</ExactQuote>, while <ExactQuote source="https://github.com/WebAssembly/WASI/tree/main?tab=readme-ov-file#wasi-high-level-goals">preserving the essential sandboxed nature of WebAssembly through a [capability-based](https://en.wikipedia.org/wiki/Capability-based_security) API design</ExactQuote>.
+
+As stated in the [`WebAssembly/WASI`](https://github.com/WebAssembly/WASI/) repository, several preview versions of WASI have been published.  Expect new versions with breaking changes in the future.
+
+* `Preview 1` is the initial version, whose design was influenced by POSIX and CloudABI.  See the [list of syscalls](https://github.com/WebAssembly/WASI/blob/main/legacy/preview1/docs.md) defined by Preview1.
+* `Preview 2` is a modular collection of APIs defined with the Wit interface description language.  This version offers support for a wider range of source languages, improved modularity, a more expressive type system, and more.
+
+There is also [component model proposal](https://github.com/WebAssembly/component-model) which seeks to standardize _cross-language composition_ of executables.
+
+#### Command and Reactor Modules
+
+The unstable [WASI Application ABI](https://github.com/WebAssembly/WASI/blob/main/legacy/application-abi.md) defines how a <ExactQuote source="https://github.com/WebAssembly/WASI/blob/main/legacy/application-abi.md">conforming wasi application is expected to behave in terms of lifecycle (startup, shutdown, etc.) and exports it is expected to include</ExactQuote>.  There are two kinds of modules:
+
+* **Command Modules** are conceptually similar to command-line programs.  They contain a single entry point `_start` which typically reads from `stdin` and writes to `stdout` before finally terminating.
+  * `_start_` takes no arguments and produces no output.
+  * Instead, data is passed in either through `stdin` or `argv`.
+  * Command instances may assume they will be called from the environment at most once, and that none of their exports are accessed outside the call to `_start`.
+  * (therefore, reusing a command requires re-initialization)
+* **Reactor Modules** are like long-running processes which respond to external input.  They expose a library of functions which may be called by the host.  A reactor module may optionally define an `_initialize` function, which is guaranteed to be executed exactly once and before any other exports.
+
+Regardless of the kind, all modules accessing WASI APIs must also export:
+
+* a linear memory with the name `memory`.  Data pointers in WASI API calls are relative to this memory's index space.
+* a table with the name `__indirect_function_table`.  Function pointers in WASI API calls are relative to this table's index space.
+
+> When `_start` or `_initialize` is called, environments shall provide file descriptors with indices `0`, `1`, and `2` representing stream resources for standard input, standard output, and standard error.
+> Environments may provide additional "preopen" file descriptors that can be inspected with `fd_prestat_get` and `fd_prestat_dir_name`.  These resources may be closed at any time.
+
+> A WASI command module is what you get by default when using
+wasm32-wasi-ghc to compile & link a Haskell program. It's called
+"command" as in a conventional command-line program, with similar
+usage and lifecycle: run it with something like wasmtime, optionally
+passing some arguments and environment variables, it'll run to
+completion and probably causing some side effects using whatever
+capabilities granted. After it runs to completion, the program state
+is finalized.
+>
+> A WASI reactor module is produced by special link-time flags. It's
+called "reactor" since it reacts to external calls of its exported
+functions. Once a reactor module is initialized, the program state is
+persisted, so if calling an export changes internal state (e.g. sets a
+global variable), subsequent calls will observe that change.
+> 
+> https://gitlab.haskell.org/haskell-wasm/ghc-wasm-meta#compiling-to-wasi-reactor-module-with-user-specified-exports
+
+### `wit`, WebAssembly Interfaces
+
+### `wasmtime`
+
+### `wizer`
+
+`wizer` is a WebAssembly _pre-initializer_ that instantiates your `wasm` module, executes its initialization function, then snapshots the initialized state out into a new `wasm` module.
+
+This decrease in startup latency may come at an increased size of the module's `Data` section.  you can likely see further improvements by running wasm-opt on the pre-initialized module. Beyond the usual benefits that wasm-opt brings, the module likely has a bunch of initialization-only code that is no longer needed now that the module is already initialized, and which wasm-opt can remove.
+
+
+### `binaryen`
+
+### `wasi-sdk`
 
 # Example:  Using `specs` with WASM
 
@@ -302,6 +394,10 @@ WASM, Rust, and Global State
 
 * r/rust, ["What is the idiomatic way to persist global state with WASM lib?"](https://old.reddit.com/r/rust/comments/13g0cso/what_is_the_idiomatic_way_to_persist_global_state/)
   > Put it in a thread_local `RefCell` and you should be golden.
+
+WebAssembly Components
+
+* Radu Matei 2021, [Introduction to WebAssembly Components](https://radu-matei.com/blog/intro-wasm-components/)
 
 
 WebAssembly from JavaScript
