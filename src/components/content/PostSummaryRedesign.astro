@@ -1,0 +1,193 @@
+---
+import { getPostUrl, postIsPublished } from '@root/util/query';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '../dates/FormattedDate.astro';
+// import PostTags from './PostTags.astro';
+interface Props {
+  post: CollectionEntry<'post'>;
+  show?: { summary?: boolean, image?: boolean, tags?: boolean }
+}
+
+const { post, show: showProps } = Astro.props;
+
+const show = Object.assign({ summary: true, image: true, tags: true }, showProps);
+
+const postUrl = getPostUrl(post);
+const postDisplayTitle = post.data.titleDisplay || post.data.title;
+// const isProject = post.data.kind === "project";
+
+const showSummary = false; //isProject && show.summary;
+const showImage = false; //post.data.imageThumbnail && show.image;
+const showSummaryBody = (showSummary || showImage);
+---
+
+
+<div class:list={[
+  "post-summary",
+  `priority-${post.data.priority}`,
+  `kind-${post.data.kind === "project" ? "project" : "post"}`,
+]}>
+  <!-- summary -->
+  <div class="summary-header">
+    <!-- title -->
+    <div class="header-title">
+      <div class="title">
+        <a href={postUrl}
+          class:list={[{ unpublished: !postIsPublished(post) }]}
+          set:html={postDisplayTitle}
+        />
+      </div>
+      <div class="year"><FormattedDate date={post.data.datePublished} /></div>
+    </div>
+    <!-- {
+      show.tags &&
+      <div class="header-subtitle">
+        <PostTags
+          tags={post.data.tags || []}
+          tools={post.data.tools || []}
+          formats={ post.data.format? [post.data.format] : [] }
+        />
+      </div>
+    } -->
+  </div>
+  { showSummaryBody &&
+    <div class="summary-body">
+    {
+      // summary
+      showSummary &&
+      <div class="summary" set:html={post.data.summary} />
+    }{
+      // thumbnail
+      showImage &&
+      (<div class="thumb">
+        <img alt="" src={post.data.imageThumbnail} />
+      </div>)
+    }
+    </div>
+  }
+</div>
+
+<style>
+.post-summary {
+
+}
+
+.header-title .title {
+  font-size: 1.1em;
+}
+
+.summary-header .header-title {
+  display: flex;
+  flex-direction: row;
+  /* margin-bottom: var(--gap-0); */
+  /* font-size: var(--font-size-large); */
+  /* font-weight: var(--font-title-weight); */
+
+  text-wrap: pretty;
+}
+
+.header-title .title { flex: 1; }
+.header-title .year  { flex: 0; }
+
+.header-title .year {
+  /* font-weight: var(--font-normal-weight); */
+  /* font-size: var(--font-size-normal); */
+  color: gray;
+  white-space: nowrap;
+}
+
+/* .post-summary {
+  padding: var(--gap-1);
+  border-radius: 0.2em;
+  border: .075rem solid #bfbfbf;
+
+  background-color: #fff;
+
+  --shadow-distance: 0.2rem;
+  --shadow-color: #eaeaea;
+  box-shadow:
+    calc(-1 * var(--shadow-distance)) var(--shadow-distance) 0 0 var(--shadow-color);
+}
+
+.post-summary.kind-post { }
+.post-summary.kind-project {  } */
+
+/* header */
+
+/* @container(max-width: 24rem) {
+  .summary-header .header-title {
+    flex-direction: column;
+    gap: var(--gap-0);
+  }
+
+  .summary-header .title {
+    text-wrap: balance;
+  }
+}
+
+@container(min-width: 24rem) {
+  .summary-header .header-title {
+    flex-direction: row;
+    gap: var(--gap-0);
+  }
+}
+
+.summary-header .header-title {
+  display: flex;
+  margin-bottom: var(--gap-0);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-title-weight);
+
+  text-wrap: pretty;
+}
+
+.header-title .title { flex: 1; }
+.header-title .year  { flex: 0; }
+
+.header-title .title a {
+  color: unset;
+}
+
+.header-title .year {
+  font-weight: var(--font-normal-weight);
+  font-size: var(--font-size-normal);
+  color: gray;
+  white-space: nowrap;
+}
+
+/* body */
+
+.summary-body:empty {
+  display: none;
+}
+
+.summary-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.0rem;
+
+  margin-top: var(--gap-1);
+  justify-content: space-between;
+}
+
+.summary-body .summary {
+  flex: 1;
+}
+
+.summary-body .thumb {
+  flex-basis: 40%;
+  max-height: 8em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 3mm;
+}
+
+.summary-body .thumb img {
+  display: block;
+  min-width: 100%;
+} */
+
+</style>

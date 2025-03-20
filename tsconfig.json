@@ -14,7 +14,8 @@
       "@components/*" : ["src/components/*"],
       "@styles/*" : ["src/styles/*"],
       "@layouts/*" : ["src/layouts/*"],
-    }
+    },
+    "plugins": [{"name": "ts-css-modules-vite-plugin", "root": "./"}]
   },
   "mdx" : {
     "plugins": [

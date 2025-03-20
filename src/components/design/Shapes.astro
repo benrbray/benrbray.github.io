@@ -1,0 +1,50 @@
+---
+interface Props {
+  uniqueId: string,
+  tx: string,
+  ty: string,
+  fill: string
+}
+
+const { tx, ty, fill, uniqueId } = Astro.props;
+
+const uniqueIdPath = `${uniqueId}-path`;
+const uniqueIdClip = `${uniqueId}-clip`;
+---
+
+<div
+  class="shape"
+  style={{ transform: `translate(${tx}, ${ty})` }}
+>
+  <div class="frosted" style={{ "clip-path": `url(#${uniqueIdClip})` }} />
+  <svg width="200" height="200">
+    <defs>
+      <circle id={uniqueIdPath} cx="100" cy="100" r="100" />
+    </defs>
+    <clipPath id={uniqueIdClip}>
+      <use href={`#${uniqueIdPath}`} />
+    </clipPath>
+    <g>
+      <!-- <use href={`#${uniqueIdPath}`} fill={fill} /> -->
+    </g>
+  </svg>
+</div>
+
+<style>
+.shape {
+  position: absolute;
+}
+
+.frosted {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+  clip-path: url(`${uniqueId}`);
+  /* background: rgba(255, 27, 27, 0.25); */
+  backdrop-filter: blur(18px);
+}
+</style>

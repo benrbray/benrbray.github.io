@@ -1,0 +1,151 @@
+---
+import Shape from "./Shapes.astro";
+---
+
+<div class="header-shapes">
+  <div class="container">
+    <div class="origin" />
+    <Shape client:load uniqueId="testshape" tx="-1em" ty="-5em" fill="rgba(169, 255, 198, 0.54)"/>
+    <Shape client:load uniqueId="testshape2" tx="5em" ty="-1em" fill="#00f6"/>
+  <svg
+    viewBox="0 0 100 100"
+    preserveAspectRatio="xMinYMin"
+    class="pink-oval"
+    aria-hidden="true"
+  >
+    <defs>
+      <filter id="pink-oval-shadow">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+        <feOffset dy="-10" dx="-10" />
+        <feComposite
+          in2="SourceGraphic"
+          operator="arithmetic"
+          k2="-1"
+          k3="1"
+          result="firstShadow"
+        />
+        <!-- <feFlood flood-color="#F2958E" /> -->
+        <feFlood flood-color="#73c892" />
+        <feComposite in2="firstShadow" operator="in"></feComposite>
+        <feComposite
+          in2="SourceGraphic"
+          operator="over"
+          result="firstShadow"></feComposite></filter
+        >
+      </defs>
+    <circle
+      cx="50"
+      cy="50"
+      r="50"
+      filter="url(#pink-oval-shadow)"
+      fill= "rgba(169, 255, 198, 0.54)"
+    />
+    </svg>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="magenta-rectangle animate-in" aria-hidden="true">
+      <defs>
+        <filter id="magenta-rectangle-shadow">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="23" />
+          <feOffset dy="5" dx="5" result="firstOffsetBlur" />
+          <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff" />
+          <feFlood flood-color="#ff0" />
+          <feComposite in2="shadowDiff" operator="in" />
+          <feComposite in2="SourceGraphic" operator="over" result="firstShadow" />
+          <feGaussianBlur in="firstShadow" stdDeviation="23" />
+          <feOffset dy="-5" dx="-5" />
+          <feComposite in2="firstShadow" operator="arithmetic" k2="-1" k3="1" result="shadowDiff" />
+          <feFlood flood-color="#D067B5"/>
+          <feComposite in2="shadowDiff" operator="in" />
+          <feComposite in2="firstShadow" operator="over">
+        </filter>
+      </defs>
+      <rect width="100%" height="100%" filter="url(#magenta-rectangle-shadow)" fill="#E7C3F2" />
+    </svg>
+    <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="cyan-triangle animate-in" aria-hidden="true">
+      <defs>
+        <filter id="cyan-triangle-shadow">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="30" result="blur"></feGaussianBlur>
+          <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+          <feFlood flood-color="#68C6CC"></feFlood>
+          <feComposite in2="shadowDiff" operator="in"></feComposite>
+          <feComposite in2="SourceGraphic" operator="over" result="firstShadow"></feComposite>
+          <feGaussianBlur in="firstShadow" stdDeviation="15"></feGaussianBlur>
+          <feOffset dy="-7" dx="-12"></feOffset>
+          <feComposite in2="firstShadow" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+          <feFlood flood-color="#68C6CC"></feFlood>
+          <feComposite in2="shadowDiff" operator="in"></feComposite>
+          <feComposite in2="firstShadow" operator="over"></feComposite>
+        </filter>
+      </defs>
+      <polygon id="cyan-triangle" points="50 20, 100 100, 0 100" filter="url(#cyan-triangle-shadow)" fill="#C8F1F3"></polygon>
+    </svg>
+  </div>
+</div>
+
+<style>
+.pink-oval {
+  position: absolute;
+  max-width: 30rem;
+  transform: translate(0, 0);
+  opacity: 0.8;
+  z-index: -1;
+}
+.magenta-rectangle {
+  position: absolute;
+  max-width: 25rem;
+  /* transform: translate(180%, -100%) rotate(-12deg); */
+  transform: translate(30em, -100%) rotate(-12deg);
+  opacity: 0.9;
+  z-index: -1;
+}
+.cyan-triangle {
+  position: absolute;
+  max-width: 18rem;
+  transform: translate(14.5em, -70%) rotate(134deg);
+  opacity: 0.7;
+  z-index: -1;
+  /* clip-path: url(#cyanTriangle);
+  backdrop-filter: blur(20px); */
+}
+
+.origin {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  top: 0;
+  left: 0;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+}
+
+/* ---- flexbox solution ---- */
+
+.header-shapes {
+  position: relative;
+  margin: 0 auto;
+  max-width: var(--max-width);
+  border: 1px solid red;
+}
+
+.header-shapes .container {
+  /* all children will be absolutely positioned, so .container will have no width
+   * or height.  We just want to set its "origin" to be the center of its parent. */
+  position: absolute;
+  left: 50%;
+}
+
+/* .header-shapes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+
+.header-shapes .container {
+  flex: 1 0 var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  margin: 0 auto;
+} */
+</style>

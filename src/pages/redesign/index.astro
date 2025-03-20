@@ -1,0 +1,52 @@
+---
+import About from '@components/home/About.astro';
+import PostSummaryRedesign from '@root/components/content/PostSummaryRedesign.astro';
+import PostList from '@root/components/lists/PostList.astro';
+import SeriesList from '@root/components/lists/SeriesList.astro';
+import ColumnNormal from '@root/layouts/ColumnNormal.astro';
+import LayoutRedesign from '@root/layouts/LayoutRedesign.astro';
+import { getBlogPosts, getProjects, getSeriesList } from '@root/util/query';
+import type { CollectionEntry } from 'astro:content';
+
+const byDate = (a: CollectionEntry<"post">, b: CollectionEntry<"post">): number => b.data.datePublished.valueOf() - a.data.datePublished.valueOf();
+const posts = (await getBlogPosts({ includeSeries: false })).sort(byDate);
+const projects = (await getProjects()).sort(byDate);
+
+// const [craftPosts,]
+
+const series = await getSeriesList();
+
+---
+
+<LayoutRedesign pageTitle="Home">
+	<ColumnNormal>
+		<article>
+			<About />
+			<hr style="border: none; border-top: 1px solid #ccc;"/>
+			
+			<h2>Articles</h2>
+			{
+				posts.map((post) => {
+					const isLowPriority = post.data.priority === "low";
+					return (<div class="post-list-cell" style="margin: var(--gap-1) 0;">
+						<PostSummaryRedesign post={post} show={{ summary: !isLowPriority, image: !isLowPriority }} />
+					</div>);
+				})
+			}
+
+			<div style="height: 100em">
+
+			</div>
+			<!-- Series -->
+			{series.length > 0 && (<>
+				<h2>Tutorial Series</h2>
+				<SeriesList series={series} />
+			</>)}
+			<h2>Selected Projects</h2>
+			<PostList posts={projects} />
+			<!-- Posts -->
+			<h2>Selected Posts</h2>
+			<PostList posts={posts} />
+		</article>
+	</ColumnNormal>
+</LayoutDefault>

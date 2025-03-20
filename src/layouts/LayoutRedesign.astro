@@ -1,0 +1,35 @@
+---
+import BaseHead from "@root/components/structure/BaseHead.astro";
+// import BaseTheme from "@root/components/structure/BaseTheme.astro";
+import IncludeCss from "@root/components/structure/IncludeCss.astro";
+import Footer from "@root/components/structure/Footer.astro";
+// import Header from "@root/components/structure/Header.astro";
+import RedesignHeader from "@root/components/structure/RedesignHeader.astro";
+import { SITE_TITLE } from "@root/consts";
+
+import '@styles/redesign-theme.css';
+import '@styles/redesign-global.css';
+
+interface Props {
+	pageTitle: string
+}
+
+const { pageTitle } = Astro.props;
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${pageTitle} / ${SITE_TITLE}`}  />
+		<IncludeCss />
+		<!-- <BaseTheme /> -->
+	</head>
+	<body>
+		<RedesignHeader />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>

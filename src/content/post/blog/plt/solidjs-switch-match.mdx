@@ -1,0 +1,237 @@
+---
+title: SolidJS Switch/Match with Discriminated Unions
+datePublished: 2025-03-12
+summary: TODO
+---
+
+```tsx
+import { createResource, For, Show, Switch } from "solid-js";
+import * as S from "solid-js";
+import { Api } from "../../api";
+import "./ManageFeeds.css";
+
+
+type ResultOk<T,E>  = Extract<Api.Result<T,E>, { status: "ok" }>;
+type ResultErr<T,E> = Extract<Api.Result<T,E>, { status: "error" }>;
+
+const isOk = <T,E>(result: Api.Result<T, E>): result is ResultOk<T,E> => {
+  return result.status === "ok";
+}
+const isErr = <T,E>(result: Api.Result<T, E>): result is ResultErr<T,E> => {
+  return result.status === "ok";
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+type Predicate<S extends T, T=unknown> = (e:T) => e is S;
+
+// type PredMatcher<S extends T, T=unknown> = (pred: Predicate<S,T>) => (value: S) => S.JSX.Element;
+type PredMatcher<S extends T, T=unknown> = {
+  pred: Predicate<S,T>,
+  component: (value: S) => S.JSX.Element;
+}
+
+function matches<S extends T, T=unknown>(e:T, predicate: Predicate<S,T>): S|false {
+  return predicate(e) ? e : false;
+}
+
+// type S = forall R. (cont: (val: S) => R) => R
+
+// type Matcher<T> = ∃S, PredMatcher<S,T>
+// type Matcher<T> = <R>(cont: <S>(m: PredMatcher<S,T>) => R) => R
+
+type Matcher<T> = <R>(cont: <S extends T>(m: PredMatcher<S,T>) => R) => R
+
+// resolver :: <S extends T>(m: PredMatcher<S, T>) => S.JSX.Element
+// const resolver = <S extends T, T>(m: PredMatcher<S, T>): S.JSX.Element => {
+//   return matches()
+// }
+
+// t ==== forall r. (t -> r) -> r
+
+// type ArrayE = ∃T.Array<T>
+// type ArrayE = <R>(cont: <T>(ts: Array<T>) => R) => R
+
+// type Extender<T> = ∃S. S extends T
+// type Extender<T> = <R>(cont: <S extends T>(ts: S) => R) => R
+
+/* ---- Curtis Example 2 ---------------------------------------------------- */
+
+const ExampleCurtis2 = () => {
+  const x: Api.Result<number, string> = { status: "ok", data: 5 };
+
+  return fluentSwitch(x)
+    .branch(isOk<number,string>, (ok) => <div>{ok().data}</div>)
+    .branch(isErr<number,string>, (err) => <div>{err().error}</div>)
+    .jsx();
+
+  return <RSwitchClass
+    on={x}
+    matchers={[
+      new PredMatchBranch(isOk<number,string>, (ok) => <div>{ok().data}</div>),
+      new PredMatchBranch(isErr<number,string>, (err) => <div>{err().error}</div>)
+    ]}
+  />;
+}
+
+
+/* ---- Curtis Example 1 ---------------------------------------------------- */
+
+interface MatchBranch<T> {
+  getMatch(t: T): S.JSX.Element;
+}
+
+class PredMatchBranch<S extends T, T> implements MatchBranch<T> {
+  constructor(
+    private test: Predicate<S,T>,
+    private body: (s: S.Accessor<NonNullable<S>>) => S.JSX.Element,
+  ) {
+
+  }
+  getMatch(t: T) {
+    return <S.Match when={matches(t, this.test)}>{this.body}</S.Match>
+    // TODO
+  }
+}
+
+
+const RSwitchClass = <T,>(props: {
+  on: T,
+  matchers: MatchBranch<T>[]
+}) => {
+  return <div>TODO</div>
+}
+
+const Example2 = () => {
+  const x: Api.Result<number, string> = { status: "ok", data: 5 };
+  return <RSwitchClass
+    on={x}
+    matchers={[
+      new PredMatchBranch(isOk<number,string>, (ok) => <div>{ok().data}</div>),
+      new PredMatchBranch(isErr<number,string>, (err) => <div>{err().error}</div>)
+    ]}
+  />
+}
+
+/* -------------------------------------------------------------------------- */
+
+const RSwitch = <T,>(props: {
+  on: T,
+  matchers: Matcher<T>[]
+}) => {
+
+  // STARTING POINT -------------------------
+  return <S.Switch>
+    <S.For each={props.matchers}>
+      {(matcher) => {
+        return <S.Match when={/*??? :: S|false  where S extends T*/}>
+          {(s: unknown /* S */) => { return <div></div> }}
+        </S.Match>
+      }}
+    </S.For>
+  </S.Switch>
+
+  // STARTING POINT -------------------------
+  // return <S.Switch>
+  //   <S.For each={props.matchers}>
+  //     {(matcher) => {
+  //       return <S.Match when={/*???*/}>
+  //         {(s: unknown) => { return <div></div> }}
+  //       </S.Match>
+  //     }}
+  //   </S.For>
+  // </S.Switch>
+
+
+
+  // DRAFT #1 ---------------------------
+  // return <S.Switch>
+  //   <S.For each={props.matchers}>
+  //     {(matcher) => {
+  //       return <S.Match when={matches(props.on, matcher(m => m.pred))}>
+  //         {(s) => {
+  //           matcher(m => m.component);
+
+  //           return <div></div>
+  //         }
+  //       </S.Match>
+  //     }}
+  //   </S.For>
+  // </S.Switch>
+}
+
+// Attempt #1
+// we'd like to do it this way,
+// but there's no way to pass the `result` value to the child <Match> blocks
+{/* <Switch on={result}>
+  <Match when={isOk}>
+    {(result) => <div></div>}
+  </Match>
+  <Match when={isErr}>
+    {(result) => <div></div>}
+  </Match>
+</Switch> */}
+
+// Attempt #2
+// instead, we have to pass the values as props
+{/* <Switch on={result} 
+  matchers={[{
+    pred: isOk,
+    component: (result) => {
+      return <div></div>
+    }
+  }, {
+    pred: isErr,
+    component: (err) => {
+      return <div></div>
+    }
+  }]} /> */}
+
+const Example = () => {
+  const x: Api.Result<number, string> = { status: "ok", data: 5 };
+  return <RSwitch
+    on={x}
+    matchers={[
+      fn => fn({
+        pred: isOk,
+        component: (value) => <div>{value.data}</div>
+      })
+    ]}
+  />
+}
+
+// const RMatch = <T,S>(props: {
+//   when: T | undefined | null | false;
+//   keyed?: false;
+//   children: S.JSX.Element | ((item: S.Accessor<NonNullable<T>>) => S.JSX.Element);
+// }) => {
+//   return <S.Switch>
+//     <S.Match when={matches()}></S.Match>
+//   </S.Switch>
+// }
+
+export const ManageFeeds = () => {
+  let [feeds, setFeeds] = createResource(async () => {
+    let result = await Api.commands.readAllFeeds();
+    return result;
+  });
+  
+  return <div>
+    <h1>Manage Feeds</h1>
+    <Show when={feeds()}>
+      <Switch fallback={<div></div>}>
+        <S.Match when={feeds()!.status === "error"}>
+        {(abc) => {
+          return <div>{abc()}</div>
+        }}
+        </S.Match>
+        <S.Match when={feeds()!.status === "ok"}>
+        {(abc) => {
+          return <div>error</div>
+        }}
+        </S.Match>
+      </Switch>
+    </Show>
+  </div>;
+}
+```
