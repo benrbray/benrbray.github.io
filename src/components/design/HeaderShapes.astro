@@ -5,11 +5,35 @@ import Shape from "./Shapes.astro";
 <div class="header-shapes">
   <div class="container">
     <div class="origin" />
-    <Shape client:load uniqueId="circle1" width="13em" tx="-1em" ty="-5em" fill="rgba(169, 255, 198, 0.5)">
-      <circle id="circle1-path" cx="50" cy="50" r="50" />
+    <Shape
+      client:load uniqueId="circle1"
+      width="13em" tx="-1em" ty="-5em"
+      theta="0deg"
+      fill="rgba(169, 255, 198, 0.5)"
+      colorHalo1="#68C6CC"
+      colorHalo2="#68C6CC"
+    >
+      <circle id="circle1-path" cx="0.5" cy="0.5" r="0.5" />
     </Shape>
-    <Shape client:load uniqueId="triangle1" width="20em" tx="-10em" ty="10em" fill="#C8F1F399">
-      <polygon id="triangle1-path" points="50 20, 100 100, 0 100"></polygon>
+    <Shape
+      client:load uniqueId="triangle1"
+      width="20em" tx="-10em" ty="10em"
+      theta="100deg"
+      fill="#C8F1F399"
+      colorHalo1="#68C6CC"
+      colorHalo2="#68C6CC"
+    >
+      <polygon id="triangle1-path" points="0.5 0.2, 1 1, 0 1"></polygon>
+    </Shape>
+    <Shape
+      client:load uniqueId="rect1"
+      width="10em" tx="-13em" ty="16em"
+      theta="0deg"
+      fill="#E7C3F2aa"
+      colorHalo1="#ff0"
+      colorHalo2="#D067B5"
+    >
+      <rect id="rect1-path" width="100%" height="100%" />
     </Shape>
     <!-- <Shape client:load uniqueId="testshape2" tx="5em" ty="-1em" fill="#00f6"/> -->
   <svg

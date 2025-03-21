@@ -3,8 +3,11 @@ interface Props {
   uniqueId: string,
   tx: string,
   ty: string,
+  theta: string,
   width: string,
-  fill: string
+  fill: string,
+  colorHalo1: string,
+  colorHalo2: string
 }
 
 const props = Astro.props;
@@ -12,25 +15,25 @@ const props = Astro.props;
 const uniqueIdPath = `${props.uniqueId}-path`;
 const uniqueIdClip = `${props.uniqueId}-clip`;
 const uniqueIdFilter = `${props.uniqueId}-filter`;
-
-const colorHalo1 = "#68C6CC";
-// const colorHalo1 = "#ff0000";
-const colorHalo2 = "#68C6CC";
-// const colorHalo2 = "#ff0000";
 ---
 
 <div
   class="shape"
-  style={{ transform: `translate(${props.tx}, ${props.ty})` }}
+  style={{
+    "--tx"          : `${props.tx}`,
+    "--ty"          : `${props.ty}`,
+    "--theta"       : `${props.theta}`,
+    "--shape-width" : `${props.width}`
+  }}
 >
   <div class="frosted" style={{ "clip-path": `url(#${uniqueIdClip})` }} />
-  <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" aria-hidden="true" style={{ width: props.width }}>
+  <svg class="shape-svg" viewBox="0 0 1 1" preserveAspectRatio="xMinYMin" aria-hidden="true">
     <defs>
       <filter id={`${uniqueIdFilter}`}>
         <!-- SourceAlpha is black with the same opacity as the target shape. -->
         <!-- For a solid shape, the alpha channel will be opaque black.      -->
         <!-- Blurring the alpha channel softens the edges of the input shape.-->
-        <feGaussianBlur in="SourceAlpha" stdDeviation="23" result="alphaBlur"></feGaussianBlur>
+        <feGaussianBlur in="SourceAlpha" stdDeviation=".23" result="alphaBlur"></feGaussianBlur>
         
         <!-- The next filter creates a black "inner shadow" by subtracting   -->
         <!-- the blurred alpha channel from the original.  Each channel of   -->
@@ -47,7 +50,7 @@ const colorHalo2 = "#68C6CC";
         <!--   using the shadowDiff as its alpha channel, with the "in"      -->
         <!--   compositing operation. -->
         <!-- <feFlood flood-color="#68C6CC" result="colorRect" /> -->
-        <feFlood flood-color={colorHalo1} result="colorRect" />
+        <feFlood flood-color={props.colorHalo1} result="colorRect" />
         <feComposite in="colorRect" in2="shadowDiff" operator="in" result="colorHalo"></feComposite>
         
         <!-- Place the colored halo on top of the original input image.      -->
@@ -56,16 +59,16 @@ const colorHalo2 = "#68C6CC";
         <!-- Now we have the original image, with a colored halo emanating   -->
         <!-- from the edges.  The remaining steps repeat the same technique  -->
         <!-- to add a second colored halo with a different offset.           -->
-        <feGaussianBlur in="firstShadow" stdDeviation="15"></feGaussianBlur>
-        <feOffset dy="-7" dx="-12" result="firstShadowBlurOffset" />
+        <feGaussianBlur in="firstShadow" stdDeviation=".15"></feGaussianBlur>
+        <feOffset dy="-0.07" dx="-0.12" result="firstShadowBlurOffset" />
         <feComposite in="firstShadowBlurOffset" in2="firstShadow" operator="arithmetic" k2="-1" k3="1" result="shadowDiff2"></feComposite>
-        <feFlood flood-color={colorHalo2}></feFlood>
+        <feFlood flood-color={props.colorHalo2}></feFlood>
         <feComposite in2="shadowDiff2" operator="in"></feComposite>
         <feComposite in2="firstShadow" operator="over"></feComposite>
       </filter>
       <slot />
     </defs>
-    <clipPath id={uniqueIdClip}>
+    <clipPath id={uniqueIdClip} clipPathUnits="objectBoundingBox">
       <use href={`#${uniqueIdPath}`} />
     </clipPath>
     <g>
@@ -81,26 +84,27 @@ const colorHalo2 = "#68C6CC";
 <style>
 .shape {
   position: absolute;
+  
+  /* explicit width/height is used to keep the shape's
+    center locked at the origin, for more intuitive */
+  width: var(--shape-width);
+  height: var(--shape-width);
+  
+  transform: translate(var(--tx), var(--ty)) rotate(var(--theta));
+}
 
+.shape-svg {
+  position: absolute;
+  width: var(--shape-width);
 }
 
 .frosted {
   position: absolute;
-  /* position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0; */
-  width: 100px;
-  height: 100px;
-  z-index: -1;
-
-  border: 2px solid red;
-
-  transform: scale(100%) translate(5em, 5em);
+  width: var(--shape-width);
+  height: var(--shape-width);
 
   clip-path: url(`${uniqueId}`);
   /* background: rgba(255, 27, 27, 0.25); */
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(4px);
 }
 </style>
