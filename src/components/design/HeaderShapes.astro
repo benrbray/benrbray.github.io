@@ -5,8 +5,13 @@ import Shape from "./Shapes.astro";
 <div class="header-shapes">
   <div class="container">
     <div class="origin" />
-    <Shape client:load uniqueId="testshape" tx="-1em" ty="-5em" fill="rgba(169, 255, 198, 0.54)"/>
-    <Shape client:load uniqueId="testshape2" tx="5em" ty="-1em" fill="#00f6"/>
+    <Shape client:load uniqueId="circle1" tx="-1em" ty="-5em" fill="rgba(169, 255, 198, 0.5)">
+      <circle id="circle1-path" cx="50" cy="50" r="50" />
+    </Shape>
+    <Shape client:load uniqueId="triangle1" tx="-10em" ty="10em" fill="#C8F1F399">
+      <polygon id="triangle1-path" points="50 20, 100 100, 0 100"></polygon>
+    </Shape>
+    <!-- <Shape client:load uniqueId="testshape2" tx="5em" ty="-1em" fill="#00f6"/> -->
   <svg
     viewBox="0 0 100 100"
     preserveAspectRatio="xMinYMin"
@@ -41,7 +46,7 @@ import Shape from "./Shapes.astro";
       fill= "rgba(169, 255, 198, 0.54)"
     />
     </svg>
-    <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="magenta-rectangle animate-in" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="magenta-rectangle" aria-hidden="true">
       <defs>
         <filter id="magenta-rectangle-shadow">
           <feGaussianBlur in="SourceAlpha" stdDeviation="23" />
@@ -60,7 +65,7 @@ import Shape from "./Shapes.astro";
       </defs>
       <rect width="100%" height="100%" filter="url(#magenta-rectangle-shadow)" fill="#E7C3F2" />
     </svg>
-    <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="cyan-triangle animate-in" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="cyan-triangle" aria-hidden="true">
       <defs>
         <filter id="cyan-triangle-shadow">
           <feGaussianBlur in="SourceAlpha" stdDeviation="30" result="blur"></feGaussianBlur>
@@ -82,30 +87,49 @@ import Shape from "./Shapes.astro";
 </div>
 
 <style>
+/* ---- center horizontally ---- */
+
+.header-shapes {
+  position: relative;
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+
+.header-shapes .container {
+  /* all children will be absolutely positioned, so .container will have no width
+   * or height.  We just want to set its "origin" to be the center of its parent. */
+  position: absolute;
+  left: 50%;
+}
+
+/* ---- individual shape styles ---- */
+
 .pink-oval {
   position: absolute;
-  max-width: 30rem;
-  transform: translate(0, 0);
+  width: 30rem;
+  transform: translate(-31.5em, -23.5em);
   opacity: 0.8;
   z-index: -1;
 }
 .magenta-rectangle {
   position: absolute;
-  max-width: 25rem;
+  width: 25rem;
   /* transform: translate(180%, -100%) rotate(-12deg); */
-  transform: translate(30em, -100%) rotate(-12deg);
+  transform: translate(8em, -20em) rotate(-12deg);
   opacity: 0.9;
   z-index: -1;
 }
 .cyan-triangle {
   position: absolute;
-  max-width: 18rem;
-  transform: translate(14.5em, -70%) rotate(134deg);
+  width: 18rem;
+  transform: translate(-9em, -7em) rotate(134deg);
   opacity: 0.7;
   z-index: -1;
   /* clip-path: url(#cyanTriangle);
   backdrop-filter: blur(20px); */
 }
+
+/* ---- origin point for debug ---- */
 
 .origin {
   position: absolute;
@@ -118,20 +142,6 @@ import Shape from "./Shapes.astro";
 }
 
 /* ---- flexbox solution ---- */
-
-.header-shapes {
-  position: relative;
-  margin: 0 auto;
-  max-width: var(--max-width);
-  border: 1px solid red;
-}
-
-.header-shapes .container {
-  /* all children will be absolutely positioned, so .container will have no width
-   * or height.  We just want to set its "origin" to be the center of its parent. */
-  position: absolute;
-  left: 50%;
-}
 
 /* .header-shapes {
   display: flex;

@@ -119,12 +119,14 @@ export const getPosts = (filter?: (entry: CollectionEntry<"post">) => boolean) =
  */
 export const getBlogPosts = async (
   options: {
-    includeSeries: boolean
+    includeSeries: boolean,
+    includeUnpublished?: boolean,
   },
   filter?: (entry: CollectionEntry<"post">) => boolean
 ) => {
   return await getPosts((entry) => {
     if(!options.includeSeries && entry.data.series) { return false; }
+    if(!options.includeUnpublished && !postIsPublished(entry)) { return false; }
     if (entry.data.kind !== "post") { return false; }
     return filter ? filter(entry) : true;
   });

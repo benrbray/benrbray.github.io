@@ -10,6 +10,12 @@ const { tx, ty, fill, uniqueId } = Astro.props;
 
 const uniqueIdPath = `${uniqueId}-path`;
 const uniqueIdClip = `${uniqueId}-clip`;
+const uniqueIdFilter = `${uniqueId}-filter`;
+
+const colorHalo1 = "#68C6CC";
+// const colorHalo1 = "#ff0000";
+const colorHalo2 = "#68C6CC";
+// const colorHalo2 = "#ff0000";
 ---
 
 <div
@@ -17,15 +23,52 @@ const uniqueIdClip = `${uniqueId}-clip`;
   style={{ transform: `translate(${tx}, ${ty})` }}
 >
   <div class="frosted" style={{ "clip-path": `url(#${uniqueIdClip})` }} />
-  <svg width="200" height="200">
+  <svg width="200" height="200" preserveAspectRatio="xMinYMin" aria-hidden="true">
     <defs>
-      <circle id={uniqueIdPath} cx="100" cy="100" r="100" />
+      <filter id={`${uniqueIdFilter}`}>
+        <!-- SourceAlpha is black with the same opacity as the target shape. -->
+        <!-- For a solid shape, the alpha channel will be opaque black.      -->
+        <!-- Blurring the alpha channel softens the edges of the input shape.-->
+        <feGaussianBlur in="SourceAlpha" stdDeviation="23" result="alphaBlur"></feGaussianBlur>
+        
+        <!-- The next filter creates a black "inner shadow" by subtracting   -->
+        <!-- the blurred alpha channel from the original.  Each channel of   -->
+        <!-- the composite is computed by the following equation:            -->
+        <!--     result = k1*i1*i2 + k2*i1 + k3*i2 + k4                      -->
+        <!--            = i2 - i1  (for k1=0,k2=-1,k3=1)                     -->
+        <!-- Observe that:                                                   -->
+        <!--     Since RGB=0 for both inputs, only the alpha is nonzero.     -->
+        <!--     Since (result < i2), the result is masked by the alpha      -->
+        <!--       of the original.  Transparent regions remain transprent.  -->
+        <feComposite in="alphaBlur" in2="SourceAlpha" operator="arithmetic" k1="0" k2="-1" k3="1" result="shadowDiff"></feComposite>
+        
+        <!-- Create a colored halo by creating a solid colored rectangle and -->
+        <!--   using the shadowDiff as its alpha channel, with the "in"      -->
+        <!--   compositing operation. -->
+        <!-- <feFlood flood-color="#68C6CC" result="colorRect" /> -->
+        <feFlood flood-color={colorHalo1} result="colorRect" />
+        <feComposite in="colorRect" in2="shadowDiff" operator="in" result="colorHalo"></feComposite>
+        
+        <!-- Place the colored halo on top of the original input image.      -->
+        <feComposite in="colorHalo" in2="SourceGraphic" operator="over" result="firstShadow"></feComposite>
+
+        <!-- Now we have the original image, with a colored halo emanating   -->
+        <!-- from the edges.  The remaining steps repeat the same technique  -->
+        <!-- to add a second colored halo with a different offset.           -->
+        <feGaussianBlur in="firstShadow" stdDeviation="15"></feGaussianBlur>
+        <feOffset dy="-7" dx="-12" result="firstShadowBlurOffset" />
+        <feComposite in="firstShadowBlurOffset" in2="firstShadow" operator="arithmetic" k2="-1" k3="1" result="shadowDiff2"></feComposite>
+        <feFlood flood-color={colorHalo2}></feFlood>
+        <feComposite in2="shadowDiff2" operator="in"></feComposite>
+        <feComposite in2="firstShadow" operator="over"></feComposite>
+      </filter>
+      <slot />
     </defs>
     <clipPath id={uniqueIdClip}>
       <use href={`#${uniqueIdPath}`} />
     </clipPath>
     <g>
-      <!-- <use href={`#${uniqueIdPath}`} fill={fill} /> -->
+      <use href={`#${uniqueIdPath}`} fill={fill} filter={`url(#${uniqueIdFilter})`} />
     </g>
   </svg>
 </div>
@@ -36,6 +79,7 @@ const uniqueIdClip = `${uniqueId}-clip`;
 }
 
 .frosted {
+  display: none;
   position: absolute;
   left: 0;
   top: 0;
@@ -45,6 +89,6 @@ const uniqueIdClip = `${uniqueId}-clip`;
 
   clip-path: url(`${uniqueId}`);
   /* background: rgba(255, 27, 27, 0.25); */
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(6px);
 }
 </style>
