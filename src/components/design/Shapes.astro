@@ -3,14 +3,15 @@ interface Props {
   uniqueId: string,
   tx: string,
   ty: string,
+  width: string,
   fill: string
 }
 
-const { tx, ty, fill, uniqueId } = Astro.props;
+const props = Astro.props;
 
-const uniqueIdPath = `${uniqueId}-path`;
-const uniqueIdClip = `${uniqueId}-clip`;
-const uniqueIdFilter = `${uniqueId}-filter`;
+const uniqueIdPath = `${props.uniqueId}-path`;
+const uniqueIdClip = `${props.uniqueId}-clip`;
+const uniqueIdFilter = `${props.uniqueId}-filter`;
 
 const colorHalo1 = "#68C6CC";
 // const colorHalo1 = "#ff0000";
@@ -20,10 +21,10 @@ const colorHalo2 = "#68C6CC";
 
 <div
   class="shape"
-  style={{ transform: `translate(${tx}, ${ty})` }}
+  style={{ transform: `translate(${props.tx}, ${props.ty})` }}
 >
   <div class="frosted" style={{ "clip-path": `url(#${uniqueIdClip})` }} />
-  <svg width="200" height="200" preserveAspectRatio="xMinYMin" aria-hidden="true">
+  <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" aria-hidden="true" style={{ width: props.width }}>
     <defs>
       <filter id={`${uniqueIdFilter}`}>
         <!-- SourceAlpha is black with the same opacity as the target shape. -->
@@ -68,7 +69,11 @@ const colorHalo2 = "#68C6CC";
       <use href={`#${uniqueIdPath}`} />
     </clipPath>
     <g>
-      <use href={`#${uniqueIdPath}`} fill={fill} filter={`url(#${uniqueIdFilter})`} />
+      <use
+        href={`#${uniqueIdPath}`}
+        fill={props.fill}
+        filter={`url(#${uniqueIdFilter})`}
+      />
     </g>
   </svg>
 </div>
@@ -76,16 +81,23 @@ const colorHalo2 = "#68C6CC";
 <style>
 .shape {
   position: absolute;
+
 }
 
 .frosted {
-  display: none;
   position: absolute;
+  /* position: absolute;
   left: 0;
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0; */
+  width: 100px;
+  height: 100px;
   z-index: -1;
+
+  border: 2px solid red;
+
+  transform: scale(100%) translate(5em, 5em);
 
   clip-path: url(`${uniqueId}`);
   /* background: rgba(255, 27, 27, 0.25); */
