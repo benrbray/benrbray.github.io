@@ -124,6 +124,11 @@ export const getBlogPosts = async (
   },
   filter?: (entry: CollectionEntry<"post">) => boolean
 ) => {
+  // set default values
+  options = Object.assign({
+    includeUnpublished: true
+  }, options);
+  
   return await getPosts((entry) => {
     if(!options.includeSeries && entry.data.series) { return false; }
     if(!options.includeUnpublished && !postIsPublished(entry)) { return false; }

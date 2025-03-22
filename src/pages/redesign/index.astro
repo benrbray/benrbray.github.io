@@ -11,10 +11,10 @@ import type { CollectionEntry } from 'astro:content';
 const byDate = (a: CollectionEntry<"post">, b: CollectionEntry<"post">): number => b.data.datePublished.valueOf() - a.data.datePublished.valueOf();
 
 const projects = (await getProjects()).sort(byDate);
-const posts = (await getBlogPosts({ includeSeries: false })).sort(byDate);
+const posts = (await getBlogPosts({ includeSeries: false, includeUnpublished: false })).sort(byDate);
 
-const craftPosts = (await getBlogPosts({ includeSeries: false }, entry => !!entry.data.tags?.includes("crafts"))).sort(byDate);
-const mathPosts = (await getBlogPosts({ includeSeries: false }, entry => !!entry.data.tags?.includes("math"))).sort(byDate);
+const craftPosts = (await getBlogPosts({ includeSeries: false, includeUnpublished: false }, entry => !!entry.data.tags?.includes("crafts"))).sort(byDate);
+const mathPosts = (await getBlogPosts({ includeSeries: false, includeUnpublished: false }, entry => !!entry.data.tags?.includes("math"))).sort(byDate);
 const unpublishedPosts = (await getBlogPosts({ includeSeries: false, includeUnpublished: true }, entry => !postIsPublished(entry))).sort(byDate);
 
 

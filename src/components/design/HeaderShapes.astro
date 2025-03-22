@@ -5,38 +5,61 @@ import Shape from "./Shapes.astro";
 <div class="header-shapes">
   <div class="container">
     <div class="origin" />
+    <!-- green circle -->
     <Shape
       client:load uniqueId="circle1"
-      width="13em" tx="-1em" ty="-5em"
+      width="30rem" tx="-31.5em" ty="-23.5em"
       theta="0deg"
-      fill="rgba(169, 255, 198, 0.5)"
-      colorHalo1="#68C6CC"
-      colorHalo2="#68C6CC"
+      fill="rgba(169, 255, 198, 0.35)"
+      halo1={{
+        color: "#73c89288"
+      }}
+      halo2={{
+        color: "#73c892"
+      }}
     >
       <circle id="circle1-path" cx="0.5" cy="0.5" r="0.5" />
     </Shape>
+    <!-- blue triangle -->
     <Shape
       client:load uniqueId="triangle1"
-      width="20em" tx="-10em" ty="10em"
-      theta="100deg"
-      fill="#C8F1F399"
-      colorHalo1="#68C6CC"
-      colorHalo2="#68C6CC"
+      width="18rem" tx="-9em" ty="-8em"
+      theta="134deg"
+      fill="#C8F1F3aa"
+      halo1={{
+        color: "#68C6CC"
+      }}
+      halo2={{
+        color: "#68C6CC66"
+      }}
     >
       <polygon id="triangle1-path" points="0.5 0.2, 1 1, 0 1"></polygon>
     </Shape>
+    <!-- red square -->
     <Shape
       client:load uniqueId="rect1"
-      width="10em" tx="-13em" ty="16em"
-      theta="0deg"
-      fill="#E7C3F2aa"
-      colorHalo1="#ff0"
-      colorHalo2="#D067B5"
+      width="25rem" tx="7em" ty="-20em"
+      theta="-12deg"
+      fill="#E7C3F2e8"
+      halo1={{
+        color: "#ff0",
+        blurStdDev: "0.23",
+        offsetX: "0.05",
+        offsetY: "0.05"
+      }}
+      halo2={{
+        color: "#D067B5",
+        blurStdDev: "0.23",
+        offsetX: "-0.05",
+        offsetY: "-0.05"
+      }}
     >
       <rect id="rect1-path" width="100%" height="100%" />
     </Shape>
     <!-- <Shape client:load uniqueId="testshape2" tx="5em" ty="-1em" fill="#00f6"/> -->
-  <svg
+  
+  <!-- CIRCLE -->
+  <!-- <svg
     viewBox="0 0 100 100"
     preserveAspectRatio="xMinYMin"
     class="pink-oval"
@@ -53,8 +76,7 @@ import Shape from "./Shapes.astro";
           k3="1"
           result="firstShadow"
         />
-        <!-- <feFlood flood-color="#F2958E" /> -->
-        <feFlood flood-color="#73c892" />
+        <feFlood flood-color={"#73c892" /* was #F2958E */} />
         <feComposite in2="firstShadow" operator="in"></feComposite>
         <feComposite
           in2="SourceGraphic"
@@ -69,8 +91,9 @@ import Shape from "./Shapes.astro";
       filter="url(#pink-oval-shadow)"
       fill= "rgba(169, 255, 198, 0.54)"
     />
-    </svg>
-    <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="magenta-rectangle" aria-hidden="true">
+    </svg> -->
+    <!-- RECTANGLE -->
+    <!-- <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="magenta-rectangle" aria-hidden="true">
       <defs>
         <filter id="magenta-rectangle-shadow">
           <feGaussianBlur in="SourceAlpha" stdDeviation="23" />
@@ -88,8 +111,9 @@ import Shape from "./Shapes.astro";
         </filter>
       </defs>
       <rect width="100%" height="100%" filter="url(#magenta-rectangle-shadow)" fill="#E7C3F2" />
-    </svg>
-    <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="cyan-triangle" aria-hidden="true">
+    </svg> -->
+    <!-- TRIANGLE -->
+    <!-- <svg viewBox="0 0 100 100" preserveAspectRatio="xMinYMin" class="cyan-triangle" aria-hidden="true">
       <defs>
         <filter id="cyan-triangle-shadow">
           <feGaussianBlur in="SourceAlpha" stdDeviation="30" result="blur"></feGaussianBlur>
@@ -106,7 +130,7 @@ import Shape from "./Shapes.astro";
         </filter>
       </defs>
       <polygon id="cyan-triangle" points="50 20, 100 100, 0 100" filter="url(#cyan-triangle-shadow)" fill="#C8F1F3"></polygon>
-    </svg>
+    </svg> -->
   </div>
 </div>
 
@@ -138,8 +162,7 @@ import Shape from "./Shapes.astro";
 .magenta-rectangle {
   position: absolute;
   width: 25rem;
-  /* transform: translate(180%, -100%) rotate(-12deg); */
-  transform: translate(8em, -20em) rotate(-12deg);
+  transform: translate(8em, 20em) rotate(-12deg);
   opacity: 0.9;
   z-index: -1;
 }
@@ -149,37 +172,5 @@ import Shape from "./Shapes.astro";
   transform: translate(-9em, -7em) rotate(134deg);
   opacity: 0.7;
   z-index: -1;
-  /* clip-path: url(#cyanTriangle);
-  backdrop-filter: blur(20px); */
 }
-
-/* ---- origin point for debug ---- */
-
-.origin {
-  position: absolute;
-  width: 1em;
-  height: 1em;
-  top: 0;
-  left: 0;
-  border-top: 2px solid black;
-  border-left: 2px solid black;
-}
-
-/* ---- flexbox solution ---- */
-
-/* .header-shapes {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  
-  margin: 0 auto;
-  max-width: var(--max-width);
-}
-
-.header-shapes .container {
-  flex: 1 0 var(--max-width);
-  margin: 0 auto;
-  position: relative;
-  margin: 0 auto;
-} */
 </style>
