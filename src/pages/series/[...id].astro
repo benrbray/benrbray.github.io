@@ -2,19 +2,19 @@
 import ColumnNormal from '@root/layouts/ColumnNormal.astro';
 import LayoutDefault from '@root/layouts/LayoutDefault.astro';
 import { getSeriesList, seriesIsPublished } from '@root/util/query';
-import { type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, render } from 'astro:content';
 
 export async function getStaticPaths() {
 	const posts = await getSeriesList();
 	return posts.map((post) => ({
-		params: { slug: post.slug },
+		params: { id: post.id },
 		props: post,
 	}));
 }
 type Props = CollectionEntry<'series'>;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <LayoutDefault pageTitle={post.data.title}>

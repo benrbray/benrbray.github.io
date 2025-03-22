@@ -13,9 +13,9 @@ export const getStaticPaths = (async () => {
 	const posts = [...blog, ...projects];
 
 	// associate each tag with the list of posts it labels
-	const tags = new Map<string, CollectionEntry<"post">["slug"][]>();
+	const tags = new Map<string, CollectionEntry<"post">["id"][]>();
 
-	const insertTag = (tag: string, slug: CollectionEntry<"post">["slug"]) => {
+	const insertTag = (tag: string, slug: CollectionEntry<"post">["id"]) => {
 		const entry = tags.get(tag);
 		if(entry) {
 			entry.push(slug)
@@ -28,7 +28,7 @@ export const getStaticPaths = (async () => {
 	posts.forEach(post => {
 		let postTags = [...post.data.tags||[], ...post.data.tools||[]];
 		postTags.forEach(t => {
-			insertTag(t, post.slug)
+			insertTag(t, post.id)
 		})
 	});
 
@@ -43,7 +43,7 @@ export const getStaticPaths = (async () => {
 	return paths;
 }) satisfies GetStaticPaths;
 
-type Props = { tag: string, slugs: CollectionEntry<'post'>["slug"][] };
+type Props = { tag: string, slugs: CollectionEntry<'post'>["id"][] };
 console.log("----")
 console.log(Astro.props);
 console.log("----\n\n\n\n\n")

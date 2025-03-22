@@ -5,7 +5,7 @@ import { PostSummaryFromSlug } from '../writing';
 interface Props {
   columns: number,
   postSlugs: {
-    slug: CollectionEntry<'post'>["slug"],
+    id: CollectionEntry<'post'>["id"],
     span: number,
     show?: { summary?: boolean, image?: boolean, tags?: boolean }
   }[]
@@ -18,7 +18,7 @@ const { columns, postSlugs } = Astro.props;
 {
   postSlugs.map(post => {
     return <div class="preview-grid-cell" style={`--span: ${post.span}`}>
-      <PostSummaryFromSlug postSlug={post.slug} {...(post.show ? { show: post.show } :{})} />
+      <PostSummaryFromSlug postSlug={post.id} {...(post.show ? { show: post.show } :{})} />
     </div>
   })
 }

@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 	});
 
 	return posts.map((post) => ({
-		params: { slug: getPostUrlSlug(post).urlSlug },
+		params: { id: getPostUrlSlug(post).urlSlug },
 		props: post,
 	}));
 }
@@ -27,7 +27,7 @@ const post: Props = Astro.props;
 
 const series = await (async () => {
 	if(!post.data.series) { return undefined; }
-	const s = await getEntry("series", post.data.series.seriesId.slug);
+	const s = await getEntry("series", post.data.series.seriesId.id);
 	return s;
 })();
 ---
@@ -37,7 +37,7 @@ const series = await (async () => {
 	<article data-pagefind-body>
 		<div class="article">
 			<ArticleHeader post={post}/>
-			{ series && <SeriesContent series={series} activeSlug={post.slug} /> }
+			{ series && <SeriesContent series={series} activeSlug={post.id} /> }
 			<div class="article-body">
 				<PostContent post={post} />
 			</div>

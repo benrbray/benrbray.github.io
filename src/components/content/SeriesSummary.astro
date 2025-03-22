@@ -25,7 +25,7 @@ const posts = await getSeriesPosts(series);
 <div class="series" style={`--series-bg-image: url(${series.data.imageSummary})`}>
 	<div class="series-header">
 		<div class="series-title">
-			<a href={`/series/${series.slug}/`}
+			<a href={`/series/${series.id}/`}
 				 class:list={[{ unpublished : seriesIsPublished(series) }]}
 			>
 				{series.data.title}
@@ -38,7 +38,7 @@ const posts = await getSeriesPosts(series);
 	</div>
 	<div class="series-posts">
     {posts.map(p => {
-      const isActivePost = (!!seriesData.activeSlug) && p.slug === seriesData.activeSlug;
+      const isActivePost = (!!seriesData.activeSlug) && p.id === seriesData.activeSlug;
       return <SeriesSummaryEntry
 				showHeadings={isActivePost}
 				isActivePost={isActivePost}

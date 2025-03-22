@@ -1,4 +1,5 @@
 import { defineCollection, reference, z } from 'astro:content';
+import { glob } from "astro/loaders";
 
 const postSchema = z.object({
 	title: z.string(),
@@ -24,12 +25,12 @@ const postSchema = z.object({
 });
 
 const post = defineCollection({
-	type: 'content',
+	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/post" }),
 	schema: postSchema
 });
 
 const series = defineCollection({
-	type: 'content',
+	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/series" }),
 	schema: z.object({
 		title: z.string(),
 		imageSummary: z.string()
@@ -37,7 +38,7 @@ const series = defineCollection({
 });
 
 const game = defineCollection({
-	type: 'content',
+	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/game" }),
 	schema: z.object({
 		title: z.string(),
 		summary: z.string(),

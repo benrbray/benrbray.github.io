@@ -4,12 +4,12 @@ import PostSummary from './PostSummary.astro';
 
 
 interface Props {
-  postSlug: CollectionEntry<'post'>["slug"];
+  postSlug: CollectionEntry<'post'>["id"];
   show?: { summary?: boolean, image?: boolean, tags?: boolean };
 }
 
 const { postSlug, show } = Astro.props;
-const post = await getEntry({ collection: "post", slug: postSlug });
+const post = await getEntry({ collection: "post", id: postSlug });
 ---
 
 <PostSummary post={post} {...(show ? { show } :{})} />

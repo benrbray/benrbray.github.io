@@ -1,6 +1,6 @@
 ---
 import { getPostUrl, postDisplayTitle, postIsPublished } from '@root/util/query';
-import type { CollectionEntry } from 'astro:content';
+import { type CollectionEntry, render } from 'astro:content';
 import FormattedDate from '../dates/FormattedDate.astro';
 
 interface Props {
@@ -15,7 +15,7 @@ const {
   showHeadings = false
 } = Astro.props;
 
-const { headings } = await post.render();
+const { headings } = await render(post);
 
 const appendixLabels = "ABCDEFGHIJKLMNOPQRSTUV".split("")
 

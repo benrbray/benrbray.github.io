@@ -6,12 +6,12 @@ import { getEntry } from 'astro:content';
 import Preview from "@components/content/Preview.astro";
 
 interface Props {
-  gameSlug: CollectionEntry<'game'>["slug"]
+  gameSlug: CollectionEntry<'game'>["id"]
 }
 
 const { gameSlug } = Astro.props;
 
-const game = await getEntry({ collection: "game", slug: gameSlug });
+const game = await getEntry({ collection: "game", id: gameSlug })!;
 
 const gameUrl = getGameUrl(game);
 const gameDisplayTitle = game.data.title;

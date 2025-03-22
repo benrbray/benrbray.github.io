@@ -15,7 +15,7 @@ const posts = (await getBlogPosts({ includeSeries: false })).sort(
 	<section>
 			{
 				posts.map((post) => (
-					<PostPreview postSlug={post.slug}/>
+					<PostPreview postSlug={post.id}/>
 				))
 			}
 	</section>

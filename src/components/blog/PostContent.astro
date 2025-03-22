@@ -1,5 +1,5 @@
 ---
-import type {CollectionEntry} from 'astro:content';
+import {type CollectionEntry, render} from 'astro:content';
 import * as Components from "@components/default";
 import PostPreview from '../content/PostPreview.astro';
 import GamePreview from '../content/GamePreview.astro';
@@ -10,8 +10,7 @@ export type Props = {
 
 const { post } = Astro.props;
 Astro.locals.currentEntry ??= post || null;
-const { Content } = (await post?.render()) || {};
-
+const { Content } = post ? await render(post) : {};
 ---
 
 {!!post && Content && <Content components={{...Components, PostPreview, GamePreview}} />}

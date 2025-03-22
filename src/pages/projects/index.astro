@@ -15,7 +15,7 @@ const projects = (await getProjects()).sort(
 	<section>
 			{
 				projects.map((project) => (
-					<PostPreview postSlug={project.slug}/>
+					<PostPreview postSlug={project.id}/>
 				))
 			}
 	</section>

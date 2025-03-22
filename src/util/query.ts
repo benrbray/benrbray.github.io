@@ -33,14 +33,14 @@ export const shortenSlug = (slug: string) => {
  * folder can be freely reorganized without breaking URLs.
  */
 export const getPostUrlSlug = (post: CollectionEntry<"post">) => {
-  const shortened = shortenSlug(post.slug);
+  const shortened = shortenSlug(post.id);
 
   if(post.data.kind === "project") {
     return { group: "projects", urlSlug: `${shortened}` }
   }
 
   if(post.data.series) {
-    return { group: "blog", urlSlug: `${post.data.series.seriesId.slug}/${shortened}` }
+    return { group: "blog", urlSlug: `${post.data.series.seriesId.id}/${shortened}` }
   } else {
     return { group: "blog", urlSlug: `${shortened}` }
   }
@@ -61,8 +61,8 @@ export const getPostUrl = (post: CollectionEntry<"post">): string => {
   return `/${slug.group}/${slug.urlSlug}`;
 }
 
-export const getPostUrlBySlug = async (postSlug: CollectionEntry<"post">["slug"]): Promise<string> => {
-  const post = await getEntry({ collection: "post", slug: postSlug });
+export const getPostUrlBySlug = async (postSlug: CollectionEntry<"post">["id"]): Promise<string> => {
+  const post = await getEntry({ collection: "post", id: postSlug });
   return getPostUrl(post);
 }
 
@@ -90,7 +90,7 @@ export const seriesIsPublished = async (series: CollectionEntry<"series">): Prom
 export const getSeriesPosts = async (series: CollectionEntry<"series">) => {
   return await getPosts(entry => {
     if(!entry.data.series) { return false; }
-    return entry.data.series.seriesId.slug == series.slug;
+    return entry.data.series.seriesId.id == series.id;
   });
 }
 
@@ -162,5 +162,5 @@ export const getGameUrl = (game: CollectionEntry<"game">) => {
     return game.data.url;
   }
 
-  return `/game/${game.slug}`;
+  return `/game/${game.id}`;
 }

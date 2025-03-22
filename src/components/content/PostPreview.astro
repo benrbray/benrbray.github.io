@@ -7,12 +7,12 @@ import PostSummary from "@components/content/PostSummary.astro";
 // import Preview from "./Preview.astro";
 
 interface Props {
-  postSlug: CollectionEntry<'post'>["slug"]
+  postSlug: CollectionEntry<'post'>["id"]
 }
 
 const { postSlug } = Astro.props;
 
-const post = await getEntry({ collection: "post", slug: postSlug });
+const post = await getEntry({ collection: "post", id: postSlug });
 
 // const postUrl = getPostUrl(post);
 // const postDisplayTitle = post.data.titleDisplay || post.data.title;

@@ -10,7 +10,7 @@ const { post } = Astro.props;
 
 const series = await (async () => {
 	if(!post.data.series) { return undefined; }
-	const s = await getEntry("series", post.data.series.seriesId.slug);
+	const s = await getEntry("series", post.data.series.seriesId.id);
 	return s;
 })();
 
@@ -41,7 +41,7 @@ const label = seriesData ? (seriesData.isAppendix ?
   }
   <!-- subtitle -->
   <div class="article-subtitle">
-    {series && <><a href={`/series/${series.slug}`}>{series.data.title}</a>{`, ${label}`}</>}
+    {series && <><a href={`/series/${series.id}`}>{series.data.title}</a>{`, ${label}`}</>}
   </div>
   <!-- date -->
   <div class="article-date">
