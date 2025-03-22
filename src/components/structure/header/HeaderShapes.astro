@@ -8,13 +8,15 @@ import Shape from "../../design/Shapes.astro";
     <!-- green circle -->
     <Shape
       client:load uniqueId="circle1"
-      width="30rem" tx="-31.5em" ty="-23.5em"
+      width="30rem" tx="-31.5em" ty="-24em"
       theta="0deg"
-      fill="rgba(169, 255, 198, 0.35)"
+      fill="rgba(169, 255, 198, 0.40)"
       halo1={{
-        color: "#73c89288"
+        blurStdDev: "0.1",
+        color: "#73c892"
       }}
       halo2={{
+        blurStdDev: "0",
         color: "#73c892"
       }}
     >
@@ -38,7 +40,7 @@ import Shape from "../../design/Shapes.astro";
     <!-- red square -->
     <Shape
       client:load uniqueId="rect1"
-      width="25rem" tx="7em" ty="-20em"
+      width="25rem" tx="7em" ty="-20.5em"
       theta="-12deg"
       fill="#E7C3F2e8"
       halo1={{
@@ -138,6 +140,7 @@ import Shape from "../../design/Shapes.astro";
 /* ---- center horizontally ---- */
 
 .header-shapes {
+  z-index: -1;
   position: relative;
   margin: 0 auto;
   max-width: var(--max-width);

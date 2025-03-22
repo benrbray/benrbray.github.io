@@ -1,9 +1,13 @@
 ---
 import HeaderButton from './HeaderButton.astro';
 import HeaderIcon from './HeaderIcon.astro';
+import HeaderShapes from './HeaderShapes.astro';
 ---
 
 <header>
+	<div class="header-background">
+		<HeaderShapes />
+	</div>
 	<nav class="header-nav">
 		<!-- name -->
 		<div class="header-name">
@@ -39,6 +43,10 @@ import HeaderIcon from './HeaderIcon.astro';
 	font-weight: bold;
 
 	justify-content: space-between;
+}
+
+.header-background {
+	z-index: -100;
 }
 
 .header-name {
