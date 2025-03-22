@@ -12,7 +12,6 @@ const posts = (await getBlogPosts({ includeSeries: false })).sort(byDate);
 const projects = (await getProjects()).sort(byDate);
 
 const series = await getSeriesList();
-
 ---
 
 <LayoutDefault pageTitle="Home">

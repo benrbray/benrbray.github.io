@@ -1,0 +1,13 @@
+---
+import HeaderLink from './HeaderLink.astro';
+
+type Props = {
+  href: string
+};
+
+const props = Astro.props;
+---
+
+<div class="header-button">
+  <HeaderLink href={props.href}><slot /></HeaderLink>
+</div>

@@ -1,0 +1,22 @@
+---
+import HeaderLink from './HeaderLink.astro';
+
+type Props = {
+  iconSrc: string,
+  href: string
+};
+
+const props = Astro.props;
+---
+
+<div class="header-icon-button">
+  <HeaderLink href={props.href}><img class="header-icon" src={props.iconSrc} /></HeaderLink>
+</div>
+
+<style>
+.header-icon {
+  display: inline-block;
+  height: 1.2em;
+  vertical-align: baseline;
+}
+</style>
