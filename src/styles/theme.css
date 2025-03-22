@@ -71,12 +71,14 @@
   --sans-font: system-ui, sans-serif;
 
   /* font: normal */
-  --font-normal-family: var(--serif-font);
+  /* --font-normal-family: var(--serif-font); */
+  --font-normal-family: var(--sans-font);
   --font-normal-color: var(--color-text);
   --font-normal-size: var(--font-size-normal);
   --font-normal-weight: normal;
 
   /* font: heading */
+  --font-heading-family: var(--serif-font);
   --font-heading-weight: 600;
   --font-heading-color: var(--font-normal-color);
   --font-heading-color-lighter: #606060;

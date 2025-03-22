@@ -127,6 +127,7 @@ article .katex-display {
 
 .heading {
   position: relative;
+  font-family: var(--font-heading-family);
   font-weight: var(--font-heading-weight);
 }
 

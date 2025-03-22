@@ -2,7 +2,7 @@
   "extends": "astro/tsconfigs/strictest",
   // https://github.com/withastro/astro/issues/10174
   // "exclude": ["public", "dist", "docs", "node_modules"],
-  "include": ["src"],
+  "include": ["src", ".astro/types.d.ts"],
   "compilerOptions": {
     "strictNullChecks": true,
     "jsx": "preserve",
