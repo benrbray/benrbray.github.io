@@ -33,3 +33,11 @@ const { title } = Astro.props;
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
+
+<!-- Feeds -->
+<link
+	rel="alternate"
+	type="application/rss+xml"
+	title="Benjamin R. Bray (RSS)"
+	href={new URL("rss.xml", Astro.site)}
+/>
