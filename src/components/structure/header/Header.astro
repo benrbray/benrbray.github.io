@@ -43,14 +43,61 @@ import HeaderShapes from './HeaderShapes.astro';
 	font-weight: bold;
 
 	justify-content: space-between;
+	align-items: stretch;
+}
+
+@media (max-width: 640px) {
+	.header-nav {
+		display: grid;
+		grid-template-areas:
+			"name icons"
+			"buttons buttons";
+		
+		flex-direction: column;
+		gap: 1.0em;
+	}
+
+	.header-name {
+		grid-area: name;
+	}
+
+	.header-buttons {
+		grid-area: buttons;
+		justify-content: space-between;
+	}
+
+	.header-icons {
+		grid-area: icons;
+	}
+
+	.header-icons {
+		font-size: 1.2em;
+	}
+}
+
+@media (min-width: 641px) {
+	.header-buttons {
+		justify-content: space-around;
+	}
 }
 
 .header-background {
-	z-index: -100;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	/* width: 100%; */
+	/* max-width: 100vw; */
+	height: 8em;
+	margin: 0 auto;
+	overflow: hidden;
 }
 
 .header-name {
 	margin-right: 1em;
+	text-align: center;
+	text-wrap: nowrap;
 }
 
 .header-name a {
@@ -60,7 +107,6 @@ import HeaderShapes from './HeaderShapes.astro';
 .header-buttons {
 	flex: 1;
 	display: flex;
-	justify-content: space-around;
 }
 
 .header-icons {
@@ -68,6 +114,7 @@ import HeaderShapes from './HeaderShapes.astro';
 	gap: 0.5em;
 
 	margin-left: 0.5em;
+	justify-content: center;
 }
 </style>
 
