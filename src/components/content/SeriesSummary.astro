@@ -3,13 +3,17 @@ import { getSeriesPosts, seriesIsPublished } from '@root/util/query';
 import SeriesSummaryEntry from './SeriesSummaryEntry.astro';
 import type { SeriesData } from '@root/model';
 
-type Props = SeriesData | undefined;
+type Props = SeriesData | {};
 
 const props = Astro.props
 
 let seriesData: SeriesData;
 
-if(props && Object.keys(props).length !== 0) {
+const isSeriesData = (x: Props): x is SeriesData => {
+	return Object.keys(props).length !== 0;
+}
+
+if(isSeriesData(props)) {
 	seriesData = props;
 } else if(Astro.locals.currentSeries) {
 	seriesData = Astro.locals.currentSeries;
@@ -19,7 +23,13 @@ if(props && Object.keys(props).length !== 0) {
 
 const series = seriesData.series;
 
-const posts = await getSeriesPosts(series);
+const posts = (await getSeriesPosts(series)).sort((a,b) => {
+	let seriesA = a.data.series!;
+	let seriesB = b.data.series!;
+	if(!seriesA.isAppendix && seriesB.isAppendix) { return -1; }
+	if(seriesA.isAppendix && !seriesB.isAppendix) { return  1; }
+	return (seriesA.seriesNumber) - (seriesB.seriesNumber);
+});
 ---
 
 <div class="series" style={`--series-bg-image: url(${series.data.imageSummary})`}>

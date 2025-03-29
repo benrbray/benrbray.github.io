@@ -1,0 +1,26 @@
+.figure {
+
+}
+
+.figcontent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: stretch;
+  align-items: center;
+}
+
+.figcaption {
+  color: gray;
+  margin: 16px;
+
+  text-wrap: balance;
+  text-align: center;
+}
+
+.subfigure {
+
+}
+
+.subfigure img {
+  margin: 0;
+}

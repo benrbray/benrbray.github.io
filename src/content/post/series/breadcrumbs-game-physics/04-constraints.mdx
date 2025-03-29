@@ -31,6 +31,64 @@ The information in this post is largely adapted from [@catto2009:modeling-solvin
   <SeriesSummary />
 </PostContent>
 
+<TodoBlock>
+Goals:
+* Introduce the concept of Lagrange multipliers
+* Understand the meaning of "constraint forces do no work"
+</TodoBlock>
+
+# Quoted from [@andrews2022:siggraph-contact-friction] SIGGRAPH
+
+<ExactQuote>The Newton-Euler equations of motion that govern the dynamics of a physical system form a second-order ODE that can be written as</ExactQuote>
+
+$$
+M(t) \dot{u}(t) = f(q(t), u(t), t)
+$$
+
+where $M(t)$ are the masses, $q(t)$ are the generalized positions, $u(t)$ are the generalized velocities, and $f(t, q(t), u(t))$ are the generalized forces acting on a system.
+
+# Modeling and Solving Constraints
+
+In these notes, 
+
+
+Consider a bead moving freely along a thin, rigid, two-dimensional wire.
+
+* Use $t \in \R$ to denote time.
+* Let $p(t) \in \R^2$ denote the position of the bead at time $t$.
+
+We can describe the wire as a *level curve* of a three-dimensional surface $f : \R^2 \rightarrow \R$.  When $f(x,y) = x^2 + y^2 - r$, curve $C$ is a circle of radius $r$.  More complex shapes are also possible:
+
+<Figure>
+  <FigContent ncols={"foo"}>
+    <SubFigure>
+    ![](./diagrams/implicit-cassini-oval.png)
+    </SubFigure>
+    <SubFigure>
+    $$
+    \begin{align*}
+    f &: \R^2 \rightarrow \R \\
+    C &= \{ (x,y) \in \R^2 \mid f(x,y) = 0 \}
+    \end{align*}
+    $$
+    </SubFigure>
+  </FigContent>
+  <FigCaption>
+    asdf
+  </FigCaption>
+</Figure>
+
+It is helpful to imagine level curves $C$ as paths of equal elevation on a topographic map:
+
+![](./images/topographic-map.jpg)
+
+Our goal iw 
+
+Consider a bead with position $p = \begin{bmatrix} p_1 \, p_2 \end{bmatrix}^T$ moving along a two-dimensional rigid wire defined by the implicit curve equation $\phi(p) = 0$.
+
+
+Imagine a bead on a rigid wire defined 
+
 # Equality Constraints
 
 Consider two physics objects $A$ and $B$ parameterized by the **generalized positions** $x_A, x_B \in \R^d$.  We may sometimes use $x \in \R^{2d}$ to refer to the collection $x = \begin{bmatrix} x_A \; x_B \end{bmatrix}$ of all positions.
@@ -46,6 +104,8 @@ $$
 \end{bmatrix}
 \in \R^c
 $$
+
+### The Jacobian
 
 The derivative $d_x \Phi \in \R^{c \times 2d}$ of the constraint vector is called the **Jacobian matrix**, which we will refer to simply as $J$.  Its rows are deriviatives of the individual constraint functions:
 

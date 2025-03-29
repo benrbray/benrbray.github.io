@@ -6,6 +6,7 @@ import GamePreview from '../content/GamePreview.astro';
 
 export type Props = {
   post?: CollectionEntry<"post">,
+  children?: astroHTML.JSX.Children
 };
 
 const { post } = Astro.props;

@@ -1,3 +1,10 @@
+# `benrbray.github.io`
+
+Local Setup
+
+* Astro VSCode extension
+* Make sure `vscode` is configured to use the workspace version of TypeScript.  Compiler plugins like `typescript-plugin-css-modules` depend on it.
+
 # Astro Starter Kit: Blog
 
 ```sh

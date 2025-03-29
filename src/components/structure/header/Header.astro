@@ -24,9 +24,10 @@ import HeaderShapes from './HeaderShapes.astro';
 		</div>
 		<!-- icons -->
 		<div class="header-icons">
-			<HeaderIcon href="/rss.xml" iconSrc="/public/icons/rss.svg" />
-			<HeaderIcon href="https://github.com/benrbray" iconSrc="/public/icons/github.svg" />
-			<HeaderIcon href="/search" iconSrc="/public/icons/search.svg" /></div>
+			<!-- <HeaderIcon href="#" iconSrc="/public/icons/hamburger.svg" /> -->
+			<HeaderIcon href="/rss.xml" iconSrc="/icons/rss.svg" />
+			<HeaderIcon href="https://github.com/benrbray" iconSrc="/icons/github.svg" />
+			<HeaderIcon href="/search" iconSrc="/icons/search.svg" /></div>
 		</div>
 	</nav>
 </header>
@@ -43,7 +44,6 @@ import HeaderShapes from './HeaderShapes.astro';
 	font-weight: bold;
 
 	justify-content: space-between;
-	align-items: stretch;
 }
 
 @media (max-width: 640px) {
@@ -54,7 +54,8 @@ import HeaderShapes from './HeaderShapes.astro';
 			"buttons buttons";
 		
 		flex-direction: column;
-		gap: 1.0em;
+		align-items: center;
+		row-gap: 8px;
 	}
 
 	.header-name {
@@ -62,8 +63,15 @@ import HeaderShapes from './HeaderShapes.astro';
 	}
 
 	.header-buttons {
+		position: relative;
 		grid-area: buttons;
-		justify-content: space-between;
+		justify-content: space-around;
+
+		background-color: #e8e8e8;
+		border-radius: 16px;
+		padding: 8px;
+
+		flex-wrap: wrap;
 	}
 
 	.header-icons {
@@ -76,7 +84,11 @@ import HeaderShapes from './HeaderShapes.astro';
 }
 
 @media (min-width: 641px) {
+	.header-nav {
+		align-items: stretch;
+	}
 	.header-buttons {
+		padding-left: 1em;
 		justify-content: space-around;
 	}
 }
@@ -95,7 +107,6 @@ import HeaderShapes from './HeaderShapes.astro';
 }
 
 .header-name {
-	margin-right: 1em;
 	text-align: center;
 	text-wrap: nowrap;
 }
@@ -107,6 +118,7 @@ import HeaderShapes from './HeaderShapes.astro';
 .header-buttons {
 	flex: 1;
 	display: flex;
+	column-gap: 0.4em;
 }
 
 .header-icons {

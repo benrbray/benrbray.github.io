@@ -15,6 +15,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCite from "@benrbray/rehype-cite";
+import rehypeTypst from "./src/plugins/rehype-typst"
 
 // vite
 import vitePluginWasm from "vite-plugin-wasm";
@@ -50,6 +51,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkMath, remarkCite, remarkExtractBibtex, remarkDirective],
     rehypePlugins: [
+      [rehypeTypst, { }],
       [rehypeCite, { bibFiles }],
       [rehypeKatex, { macros: { "\\R": "\\mathbb{R}" }, globalGroup: true}],
       [rehypeSlug, {}], [rehypeAutolinkHeadings, {
@@ -71,5 +73,10 @@ export default defineConfig({
   },
   vite: {
     plugins: [vitePluginWasm()],
+    css: {
+      modules: {
+        localsConvention: "camelCase"
+      }
+    },
   }
 });

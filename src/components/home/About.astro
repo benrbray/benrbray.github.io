@@ -8,24 +8,66 @@ import { Content as AboutContent } from "@root/content/snippets/about-me.mdx";
 		<img alt="Photo of me in Wakayama, Japan in May 2024" src="/images/profile/ben-wakayama-2024.png" />
 	</div>
 	<!-- ontro -->
+	<div class="about-title">Benjamin R. Bray</div>
 	<div class="about-description">
-		<div class="about-title">Benjamin R. Bray</div>
 		<AboutContent />
 	</div>
 </div>
 
 <style is:inline>
+/* ---- grid layout ----------------------------------------------------------*/
+
 #about {
 	display: grid;
-
-  margin-top: 1.5rem;
-	margin-bottom: 1.5rem;
-
-	gap: 2em;
 }
 
+#about .about-portrait    { grid-area: photo; }
+#about .about-title       { grid-area: name;  }
+#about .about-description { grid-area: intro; }
+
+/* grid layout (mobile / narrow screen) */
+
+@media (min-width: 52rem) {
+	#about {
+		column-gap: 2em;
+		grid-template-columns: 1fr 2.8fr;
+		grid-template-areas:
+			"photo name"
+			"photo intro";
+	}
+}
+
+/* grid layout (desktop / wide screen) */
+
+@media (max-width: 52rem) {
+	#about {
+		grid-template-columns: 1fr 2fr;
+		grid-template-areas:
+		"photo name"
+		"intro intro";
+	}
+}
+
+/* ---- title --------------------------------------------------------------- */
+
+#about .about-title {
+	font-size: 2em;
+	font-weight: var(--font-bold-weight);
+	/* grid */
+	align-self: center;
+}
+
+@media (max-width: 52rem) {
+	#about .about-title {
+		padding-left: 16px;
+	}
+}
+
+/* ---- portrait ------------------------------------------------------------ */
+
 #about .about-portrait {
-	min-width: 12rem;
+	/* min-width: 12rem; */
+	min-width: 80px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -36,43 +78,12 @@ import { Content as AboutContent } from "@root/content/snippets/about-me.mdx";
 	display: block;
 }
 
-#about .about-description {
-	grid-area: intro;
-
-	/* TODO: why was this flex??? */
-	/* display: flex;
-	flex-direction: column; */
-	justify-content: center;
-}
-
-#about .about-description p {
-	text-align: left;
-}
-
-#about .about-description ul { margin: 0.8rem 0; }
-#about .about-description p  { margin: 0.6rem 0; }
-#about .about-title          { margin: 0.6rem 0; }
-
-#about .about-title {
-	font-size: 2em;
-	font-weight: var(--font-bold-weight);
-}
-
-#about .about-subtitle {
-	color: var(--color-text-fainter);
-}
-
 @media (min-width: 52rem) {
-	#about {
-		grid-template-columns: 1fr 2.8fr;
-		grid-template-areas: "photo intro";
-	}
-
 	#about .about-portrait {
 		justify-self: stretch;
 		min-height: 100%;
 	}
-
+	
 	#about .about-portrait img {
 		max-width: 100%;
 		max-height: 100%;
@@ -81,21 +92,11 @@ import { Content as AboutContent } from "@root/content/snippets/about-me.mdx";
 
 @media (max-width: 52rem) {
 
-	h2 { text-align: center; }
-	#about .about-title { text-align: center; }
-	#about .about-subtitle { text-align: center; }
-
-	#about {
-		grid-template-areas:
-			"photo"
-			"intro";
-	}
-
-
 	#about .about-portrait {
 		position: relative;
-		max-height: min(50vh, 30em);
-		justify-self: center;
+		/* max-height: min(50vh, 30em); */
+		max-width: 5em;
+		justify-self: right;
 		border-radius: 50%;
 		overflow: hidden;
 	}
@@ -113,4 +114,19 @@ import { Content as AboutContent } from "@root/content/snippets/about-me.mdx";
 		top: -2em;
 	}
 }
+
+/* description */
+
+#about .about-description {
+	justify-content: center;
+}
+
+#about .about-description p {
+	text-align: left;
+}
+
+#about .about-description ul { margin: 0.8rem 0; }
+#about .about-description p  { margin: 0.6rem 0; }
+#about .about-title          { margin: 0.6rem 0; }
+
 </style>

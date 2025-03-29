@@ -3,6 +3,7 @@
   // https://github.com/withastro/astro/issues/10174
   // "exclude": ["public", "dist", "docs", "node_modules"],
   "include": ["src", ".astro/types.d.ts"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "strictNullChecks": true,
     "jsx": "preserve",
@@ -15,9 +16,19 @@
       "@styles/*" : ["src/styles/*"],
       "@layouts/*" : ["src/layouts/*"],
     },
-    "plugins": [{"name": "ts-css-modules-vite-plugin", "root": "./"}]
+    "plugins": [
+      // {"name": "ts-css-modules-vite-plugin", "root": "./"},
+      { "name": "@astrojs/ts-plugin"},
+      { 
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "classnameTransform": "camelCase"
+        }
+      }
+    ]
   },
   "mdx" : {
+    "checkMdx": true,
     "plugins": [
       // [
       //   "remark-frontmatter",
