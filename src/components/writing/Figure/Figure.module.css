@@ -22,5 +22,8 @@
 }
 
 .subfigure img {
-  margin: 0;
+  display: block;
+  margin: 0 auto;
+  width: auto;
+  max-height: 256px;
 }

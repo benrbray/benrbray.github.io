@@ -99,6 +99,9 @@ article pre code {
 article .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
+
+  /* extra padding is required when overflow-x is auto */
+  padding: 0.1em 0;
 }
 
 /* ---- column widths ------------------------------------------------------- */
@@ -233,11 +236,12 @@ article li {
 /* ------------------------------------------------------ */
 
 .exactquote {
-  text-decoration: underline #ddd 2px;
+  text-decoration: underline dotted #49a8b1 2px;
+  background-color: #eeeeee;
 }
 
 .exactquote:hover {
-  text-decoration: underline #4c4 2px;
+  /* text-decoration: underline #4c4 2px; */
 }
 
 .fancy-box {

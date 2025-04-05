@@ -1,0 +1,28 @@
+.long-quote {
+  background-color: #eee;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.long-quote h1, .long-quote h2, .long-quote h3, .long-quote h4, .long-quote h5 {
+  font-family: var(--sans-font);
+  margin: 0;
+}
+
+.long-quote h1 {
+  border: none;
+  font-size: 1.2em;
+}
+
+.long-quote h2 {
+  font-size: 1.1em;
+}
+
+.long-quote h3, h4, h5 {
+  font-size: 1em;
+}
+
+.long-quote li {
+  margin: 0;
+}
