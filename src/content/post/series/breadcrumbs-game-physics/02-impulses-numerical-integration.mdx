@@ -461,10 +461,144 @@ Using the Time-Corrected form of the Verlet integration method with the proper e
 </LongQuote>
 
 
-{/* ---- baraff physically based modeling:  diffeqns ----------------------- */}
+{/* ---- catto numerical methods ------------------------------------------- */}
 
 <LongQuote>
-  # [@baraff1997:physically-based-modeling] Witkin 1997, [Physically Based Modeling:  Constrained Dynamics](https://www.cs.cmu.edu/~baraff/sigcourse/notesf.pdf)
+  # [@catto2009:numerical-integration] Catto 2009, "Numerical Integration"
+  * mass-spring system
+  * forward difference leads to explicit Euler
+  * implicit Euler usually impractical for games, but more stable
+  * explicit/implicit Euler are built for general ODEs, don't know anything about velocity/position
+  * **we can build special-purpose solvers tuned for the case of position-velocity systems!**
+  * the position ODE $\frac{dx}{dt} = v$ is trivially linear in velocity
+    * we can exploit this!
+  
+  symplectic euler
+  * improved stability over explicit euler, without added cost
+  * (but still not as stable as implicit euler)
+  $$
+  \begin{aligned}
+  v(t+h) &= v(t) + h \cdot f(t, x(t), v(t)) \\
+  x(t+h) &= x(t) + h \cdot v(t+h)
+  \end{aligned}
+  $$
+
+  verlet
+  * assume forces $f(t, x(t), v(t)) = f(t, x(t))$ only depend on position and time, not velocity
+  * used to eliminate velocity term from symplectic euler
+  $$
+  \begin{aligned}
+  v(t+h) &= v(t) + h \cdot f(t, x(t)) \\
+  x(t+h) &= x(t) + h \cdot v(t+h) \\
+  x_2 &= 2x_1 - x_0 + h^2 f_1
+  \end{aligned}
+  $$
+
+  performance metrics
+  * number of derivative evaluations
+  * matrix inversion
+  * nonlinear equations
+  * step-size limitation
+
+  recommends [@hairer1999:numerical-geometric-integration] for further reading
+</LongQuote>
+
+<LongQuote>
+  # [@catto2015:numerical-methods] Catto 2015, "Numerical Methods"
+
+  derivative of the function $f$ at position $x$ is the slope at $x$
+  * derivative of a line is its slope, which is constant
+  * derivative of parabola is a line
+  * derivative of exponential is exponential
+  * derivative of sin is cos
+  * for functions of time, derivative is rate of change
+
+  differential equations
+  * I have the slope, give me the original function!
+  * a diffeq is a formula for the slope, and we want to recover the original
+  * examples
+    * constant $\dot{x} = 0 \rightarrow x = x_0$
+    * line $\dot{x} = c \rightarrow x = ct + x_0$
+    * exponential $\dot{x} = cx \rightarrow x = x_0 e^{at}$
+  
+  Newton's second law is a differential equation relating acceleration with total force
+  * it involves a second derivative, so it is a second-order diffeq
+  * gravity is constant acceleration, $\ddot{y} = -g$ which leads to **parabolic** motion $y = y_0 + v_0 t + \tfrac{1}{2} g t^2$
+  
+  The mass-spring system has a force that depends on position.
+  * $m \ddot{x} + k x = 0$
+  * the more the string is stretched, the harder it pulls
+  * solution is a sine wave with angular frequency $\omega = \sqrt{k/m}$
+    (need to combine sine and cosine waves to account for initial conditions)
+    $$
+    x = \frac{v_0}{\omega} \sin(\omega t) + x_0 \cos(\omega t)
+    $$
+  * a **phase portrait** plots velocity against position
+    * parametric curve over time
+
+  systems of differential equations
+  * with many bodies interacting, we cannot possibly hope for an exact solution
+  * we must turn to _numerical methods_ for finding approximate solutions
+  * for games, we care more about stability and efficiency than about physical accuracy
+  * numerical methods can solve differential equations in a _generic_ manner
+
+  a generic first-order system looks like
+  $$
+  \x = \begin{bmatrix} x_1 & \cdots & x_n \end{bmatrix}^T
+  \qquad
+  \dot{x} = \f(t, \x)
+  $$
+
+  second order equations can be converted to first-order system
+  * the second-order equation $m \ddot{x} = F$ with one variable
+  * can be converted to a first-order system with two variables
+  $$
+  \begin{bmatrix}
+  \dot{v} \\ \dot{x}
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+  \frac{1}{m} F \\ v
+  \end{bmatrix}
+  $$
+
+  finite difference
+  * forward difference leads to explicit euler
+    * for Newton's law
+    * for mass-spring
+    * in the phase portrait, the solution for mass-spring should be a circle 
+       * explicit Euler always drives the motion away from circle, adding energy!
+       * explicit euler is extrapolation
+       * for mass-spring, explicit Euler is matrix multiplication $x_{k+1} = A x_k$
+       * only stable if $||A|| = \lambda_{max} \leq 1$
+       * eigenvalues are roots of characteristic polynomial $\det(\lambda I - A) = 0$
+  * backward difference leads to implicit euler
+    * need to solve potentially nonlinear algebraic equation with root-finding
+      * possibly expensive!
+    * for mass-spring system,
+      * implicit euler is stable
+      * implicit euler has a damping effect (energy loss)
+      * implicit euler is like running explicit euler in reverse
+      * implicit euler is **always stable** for any positive value of omega!
+  * semi-implicit euler
+    * use the current velocity in the position update
+    * conditionally stable, $|\lambda| = 1$ if $h \omega \leq 2$
+    * conserves energy on average!
+    * shows phase portraits for increasing $\omega$ -- strange behavior but still conserves energy!
+    * _recommendation_:  at least four time steps per spring oscillation
+
+  <div style={{ border: "1px solid black", padding: "4px", "text-align": "center" }}>
+  **semi-implicit Euler should be your first choice!**
+  </div>
+
+  ## Gyroscopic Rigid Body Motion
+
+  * shows that semi-implicit Euler is unstable for gyroscopic motion
+  * unstability is due to the fact that semi-implicit euler extrapolates velocity
+    - gyroscopic torque is quadratic in angular velocity, the extrapolation easily diverges!
+  * most physics engines simply _omit_ the gyroscopic term
+  * others replace angular velocity with angular momentum
+  * Catto next shows how to use a Newton-Raphson solver to handle the gyroscopic term correctly
 </LongQuote>
 
 
@@ -473,7 +607,7 @@ https://web.archive.org/web/20241119084456/https://services.math.duke.edu/~jtwon
 https://library.fiveable.me/computational-mathematics/unit-6/eulers-method/study-guide/gGpvPhXSRNJ2SpDY
 
 <LongQuote>
-[Doing Game Gravity Right](https://news.ycombinator.com/item?id=4934855)
+# [Doing Game Gravity Right](https://news.ycombinator.com/item?id=4934855)
 
 Most game programmers write gravity like this:
 
