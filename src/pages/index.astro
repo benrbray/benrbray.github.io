@@ -1,30 +1,130 @@
 ---
-import About from '@components/home/About.astro';
-import PostList from '@root/components/lists/PostList.astro';
-import SeriesList from '@root/components/lists/SeriesList.astro';
-import ColumnNormal from '@root/layouts/ColumnNormal.astro';
-import LayoutDefault from '@root/layouts/LayoutDefault.astro';
-import { getBlogPosts, getProjects, getSeriesList } from '@root/util/query';
-import type { CollectionEntry } from 'astro:content';
+import About from "@components/home/About.astro";
+import PostSummaryRedesign from "@root/components/content/PostSummaryRedesign.astro";
+import PostList from "@root/components/lists/PostList.astro";
+import SeriesList from "@root/components/lists/SeriesList.astro";
+import ColumnNormal from "@root/layouts/ColumnNormal.astro";
+import LayoutDefault from "@root/layouts/LayoutDefault.astro";
+import { getBlogPosts, getProjects, getSeriesList, postIsPublished } from "@root/util/query";
+import type { CollectionEntry } from "astro:content";
 
-const byDate = (a: CollectionEntry<"post">, b: CollectionEntry<"post">): number => b.data.datePublished.valueOf() - a.data.datePublished.valueOf();
-const posts = (await getBlogPosts({ includeSeries: false })).sort(byDate);
+const byDate = (
+	a: CollectionEntry<"post">,
+	b: CollectionEntry<"post">,
+): number => b.data.datePublished.valueOf() - a.data.datePublished.valueOf();
+const posts = (await getBlogPosts({ includeSeries: false, includeUnpublished: false })).sort(byDate);
 const projects = (await getProjects()).sort(byDate);
+
+const craftPosts = (await getBlogPosts({ includeSeries: false, includeUnpublished: false }, entry => !!entry.data.tags?.includes("crafts"))).sort(byDate);
+const mathPosts = (await getBlogPosts({ includeSeries: false, includeUnpublished: false }, entry => !!entry.data.tags?.includes("math"))).sort(byDate);
+const unpublishedPosts = (await getBlogPosts({ includeSeries: false, includeUnpublished: true }, entry => !postIsPublished(entry))).sort(byDate);
 
 const series = await getSeriesList();
 ---
 
 <LayoutDefault pageTitle="Home">
 	<ColumnNormal>
-		
 		<article>
 			<About />
-			<hr style="border: none; border-bottom: 1px solid #bbb"/>
+			<hr style="border: none; border-bottom: 1px solid #bbb" />
+
+			<h2>Recent Articles</h2>
+
+			{
+				posts.slice(0, 5).map((post) => {
+					const isLowPriority = post.data.priority === "low";
+
+					return (
+						<div class="post-list-cell" style="margin: var(--gap-1) 0;">
+							<PostSummaryRedesign
+								post={post}
+								show={{ summary: !isLowPriority, image: !isLowPriority }}
+							/>
+						</div>
+					);
+				})
+			}
+
+			<h2>Recent Projects</h2>
+
+			{
+				projects.slice(0, 5).map((post) => {
+					const isLowPriority = post.data.priority === "low";
+
+					return (
+						<div class="post-list-cell" style="margin: var(--gap-1) 0;">
+							<PostSummaryRedesign
+								post={post}
+								show={{ summary: !isLowPriority, image: !isLowPriority }}
+							/>
+						</div>
+					);
+				})
+			}
+
+			<h2>Crafts</h2>
+
+			{
+				craftPosts.map((post) => {
+					const isLowPriority = post.data.priority === "low";
+
+					return (
+						<div class="post-list-cell" style="margin: var(--gap-1) 0;">
+							<PostSummaryRedesign
+								post={post}
+								show={{ summary: !isLowPriority, image: !isLowPriority }}
+							/>
+						</div>
+					);
+				})
+			}
+
+			<h2>Math</h2>
+
+			{
+				mathPosts.map((post) => {
+					const isLowPriority = post.data.priority === "low";
+
+					return (
+						<div class="post-list-cell" style="margin: var(--gap-1) 0;">
+							<PostSummaryRedesign
+								post={post}
+								show={{ summary: !isLowPriority, image: !isLowPriority }}
+							/>
+						</div>
+					);
+				})
+			}
+
+			<h2>Unpublished</h2>
+
+			{
+				unpublishedPosts.map((post) => {
+					const isLowPriority = post.data.priority === "low";
+
+					return (
+						<div class="post-list-cell" style="margin: var(--gap-1) 0;">
+							<PostSummaryRedesign
+								post={post}
+								show={{ summary: !isLowPriority, image: !isLowPriority }}
+							/>
+						</div>
+					);
+				})
+			}
+
+			<div style="height: 100em"></div>
+
+			<hr style="border: none; border-bottom: 1px solid #bbb" />
 			<!-- Series -->
-			{series.length > 0 && (<>
-				<h2>Tutorial Series</h2>
-				<SeriesList series={series} />
-			</>)}
+			{
+				series.length > 0 && (
+					<>
+						<h2>Tutorial Series</h2>
+						<SeriesList series={series} />
+					</>
+				)
+			}
 			<h2>Selected Projects</h2>
 			<PostList posts={projects} />
 			<!-- Posts -->
