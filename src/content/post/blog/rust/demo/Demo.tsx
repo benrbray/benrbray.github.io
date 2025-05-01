@@ -1,4 +1,4 @@
-import { initGame } from "physics";
+// import { initGame } from "physics";
 import { onMount } from "solid-js";
 
 import "./Demo.css";
@@ -7,7 +7,7 @@ export const Demo = () => {
   let demoElt!: HTMLCanvasElement;
 
   onMount(() => {
-    initGame(demoElt);
+    // initGame(demoElt);
   });
 
   return (<div class="demo">
