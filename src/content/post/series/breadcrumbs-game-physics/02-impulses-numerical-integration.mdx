@@ -601,6 +601,77 @@ Using the Time-Corrected form of the Verlet integration method with the proper e
   * Catto next shows how to use a Newton-Raphson solver to handle the gyroscopic term correctly
 </LongQuote>
 
+def my_function():
+  launch_missiles();
+  return "hello!"
+
+# Student's Logic:
+since we are not assigning the return value of the function to
+any variable, or consuming its output in any other way (like printing),
+then Python should be smart enough _not_ to run the function, therefore
+launch_missiles() will never run
+my_function()
+
+
+<LongQuote>
+  # [@palais2009:differential-mechanics] Palais 2009, "Differential Equations, Mechanics, and Computation"
+  > (Chapter 5: Numerical Methods)
+
+  We will analyze numerical methods for solving **Initial Value Problems** of the form:
+  $$
+  \y' = f(t,\y) \qquad \y(t_0) = \y_0 \qquad (\y \in \R^d)
+  $$
+  Assumptions:
+  * **Locally Well-Posed.** There exists a unique solution $\y(t; t_0, \y_0)$ satisfying the IVP on a maximal interval of existence $[t_0, t_0 + T]$ that depends continuously on the initial conditions.
+  * **Continuity.** The function $\f(t,\y)$ should be:
+    * Continuous in its first argument, $t$
+    * Locally uniformly Lipschitz continuous in its second argument $\y$,
+      $$
+      || \f(t,\y_1) - \f(t, \y_2) || \leq L ||\y_1 - \y_2||
+      \qquad
+      \exists\, L > 0, \forall \y_1, \y_2 \in U_{\y_0}
+      $$
+  Discretization methods employ approximations of $f$ to construct a discrete sequence $\{ y_0, y_1, y_2, \dots \}$ of $\y$-values, such that $\y_n$ should approximate $\y(t_n)$ at a corresponding set of $t$-values, $t_n$, called _time steps_, as the separation of the time steps, $h_n = t_{n+1} - t_n$ tends uniformly to zero.
+
+  * When the time step separation $h = h_n \forall n$ is constant, we call it the _step size_ or _discretization parameter_.
+  * Variable step-size methods can be useful, but they will not be our focus.
+
+  Discretization methods are broadly categorized as **explicit** or **implicit**.
+  * Explicit methods obtain successive values of $y_{n+1}$ parametrically in terms of given or previously computed quantities,
+    $$
+    \y_{n+1} = \Phi(\f, t_n, \dots, t_{n+1-m}, y_n, \dots, y_{n+1-m})
+    $$
+  * Implicit methods define $y_{n+1}$ as the solution to an equation:
+    $$
+    \Phi(\f, t_n, \dots, t_{n+1-m}, {\changed{\y_{n+1}}}, y_n, \dots, y_{n+1-m})
+    $$
+  
+  Discretization methods are characterized by:
+  * the number $m$ of previously computed quantities used
+  * the number of _derivative evaluations_ or _stages_, that is, evaluations of the vector field $\f$, used per time step
+  * single vs. multistep, one- or multistage, implicit vs explicit
+
+  Families of Methods
+  * All of the **$r$-stage, one-step** methods form the **Runge-Kutta$ family of methods.
+    * <ExactQuote>The strategy behind these methods is to obtain better approximations of $\y(t_{n+1})$ by sampling the vector field $\f$ at $r$ points near the solution curve emanating from $(t_n, \y_n)$.</ExactQuote>
+    * <ExactQuote>Each additional sample provides cumulatively better estimates of the solution curve, and thus subsequent samples can also be chosen more usefully.</ExactQuote>
+    <ExactQuote>The analytical initial value is sufficient to initialize a one-step method, and no storage of previously computed values is required.</ExactQuote>
+  * All of the **$m$-step, one-stage** methods form the family of **linear multistep** methods.
+    * <ExactQuote>The stragtegy is to obtain a better approximations of $\y(t_{n+1})$ by using information from $m$ prior approximations and vector field evaluations $\{ (t_j, \y_j, f(t_j, \y_j)) \mid j = n, \dots, n-(m-1) \}$</ExactQuote> that have been stored or generated for initialization.
+    * <ExactQuote>In contrast to multistage methods, only one evaluation of the vector field defining the ODE is required per time step.</ExactQuote>
+
+  Analysis of Numerical Methods
+  * A numerical method is **convergent** if and only if for all IVPs satisfying the well-posedness condition, and any $T>0$ such that $t_0 + T \in [t_0, t_0 + T*]$, the values $\y_{n,h}$ obtained from the method satisfy
+    $$
+    || \y(t_0 + T) - y_{n,h} || \rightarrow 0
+    $$
+    as $n \rightarrow \infty$ and $h = T\n$.  Existence of $\y_{n,h}$ is not always guaranteed for implicit methods with sufficiently large $n$.
+
+  Use Model Problems to Study Properties of Numerical Methods
+  * Accuracy model problem
+  * Stability Model Problem
+</LongQuote>
+
 
 https://web.archive.org/web/20241119084456/https://services.math.duke.edu/~jtwong/math361-2019/lectures/Lec9ODEs2.pdf
 
