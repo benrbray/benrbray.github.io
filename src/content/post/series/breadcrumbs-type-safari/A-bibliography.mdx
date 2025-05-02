@@ -9,9 +9,61 @@ series:
   isAppendix: true
 ---
 
+import PostContent from "@components/blog/PostContent.astro";
+import SeriesSummary from "@components/content/SeriesSummary.astro";
+
+<SeriesSummary />
+
+## Error Messages
+
+<LongQuote>
+# Considerations on Codecrafting, ["Designing Type Inference for High Quality Type Errors"](https://blog.polybdenum.com/2025/02/14/designing-type-inference-for-high-quality-type-errors.html)
+
+Written by the author of PolySubML,
+
+* a programming language combining global type inference with subtyping and advanced polymorphism
+* supporting good type error messages as a primary consideration
+
+**Rule 1: Never Guess or Backtrack**
+
+* The job of a compiler is to prove to the user that their code is invalid, ideally in a way that guides the user to a solution.
+* The process of typechecking is _deriving a set of facts_ about the program.
+  * checking is straightforward if facts are of the form `if A and B and C, then D` ✔
+  * however, facts of the form `if A and B and C, then D or E` ✖ cause branching, and require the compiler to _guess_!
+* Languages with **ad-hoc overloading** are often guilty of this mistake.  When the same function name is assigned multiple type signatures, the compiler needs to try _all_ of them before it can return a type error!
+  ```
+  void foo(A x) {}
+  void foo(B x) {}
+  void foo(C x) {}
+  //...
+  foo(v);
+  ```
+* This branching can cause _exponential-time typechecking_ bugs.
+  * In Swift 3.1, `let a: Double = -(1 + 2) + -(3 + 4) + -(5)` took [20 seconds](https://www.cocoawithlove.com/blog/2016/07/12/type-checker-issues.html) to compile!
+  * Exponential typechecking [example](https://stackoverflow.com/questions/30707387/troubleshoot-slow-compilation) in Java.
+
+**Rule 2: Don't Jump to Conclusions**
+
+* If two values are expected to have the same type, don't automatically assume the first one is the "gold standard"!
+  - With code like `let _ = [1; ""]` in a lanaguage with homogeneous lists, most typecheckers will constrain the type to be `Int[]` after seeing the first element, and report `""` as the error, without considering that the user intended to actually create a list of strings!
+
+**Rule 3: Ask user to clarify intent**
+
+**Rule 4: Allow explicit type annotations**
+
+* Some languages (Rust) have type which exist in the type system, but for which there is _no syntax to actually write the type_!  Your code works as long as the types are inferred, but they cannot actually be specified explicitly.
+* **Any type that can be inferred must also be possible to write explicitly.**
+
+**Rule 5: Do not include static type inference in your runtime execution model.**
+
+* Haskell's typeclass systems mean that type annotations can change _runtime_ behavior by changing which typeclass implementation is used.
+</LongQuote>
+
 https://github.com/sweirich/pi-forall
 
 Jake Donham 2021, ["Reconstructing TypeScript"](https://jaked.org/blog/2021-09-07-Reconstructing-TypeScript-part-0)
+
+## Hindley Milner
 
 https://boxbase.org/entries/2018/mar/5/hindley-milner/
 

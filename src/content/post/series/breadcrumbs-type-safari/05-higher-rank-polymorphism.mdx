@@ -1,0 +1,121 @@
+---
+title: Higher-Rank Polymorphism
+summary: 'DESCRIPTION'
+datePublished: '4 May 2024'
+
+series:
+  seriesId: breadcrumbs-type-safari
+  seriesNumber: 5
+---
+
+import { InlineType } from "@components/type-safari";
+
+
+import PostContent from "@components/blog/PostContent.astro";
+import SeriesSummary from "@components/content/SeriesSummary.astro";
+
+<SeriesSummary />
+
+<LongQuote>
+# [@jones2007:practical-arbitrary-rank] [Peyton-Jones] Practical Type Inference for Arbitrary-Rank Types
+
+Introduction
+
+* This paper extends the Hindley-Milner type inference algorithm, allowing for functions with **higher-rank types**.  That is, functions that can accept other polymorphic functions as arguments.
+* This extension has the following properties:
+  * Any program typeable with Damas-Milner remains typeable.
+  * Accommodates types of arbitrary finite rank.
+  * Some manual type annotations may be required, but the type system specifies precisely which annotations are required and which are optional.
+  * These new features come with minimal added complexity.
+  * Existing Damas-Milner implementations can be easily modified to support the extended system.
+
+Connections to Other Work
+
+* [Odersky & Laufer] propose a $\lambda$-calculus which supports arbitrary-rank polymorphism through type annotations on lambda-bound subterms.  We extend this using [Pierce & Turner]'s **local type inference**.
+
+Examples where Higher-Rank Types Arise
+
+* The need for higher-rank types arises when a polymorphic function must be instantiated to two different concrete types in the same scope.  For instance,
+  ```haskell
+  example :: ([Bool], [Char])
+  example = let f x = (x [True, False], x ['a', 'b'])
+             in f reverse
+  -- the type of x is polymorphic,
+  --     x :: forall c. [c] -> [c]
+
+  ```
+* If we desugar the `Monad` typeclass into an ADT, its two members `return` and `(>>=)` have polymorphic types.  Implementing a function such as `mapM` involves instantiating `(>>=)` to more than one concrete type in the same function body.
+* More examples:  Data structure fusion `build`, state monad `runST`, nested data types, 
+
+## Higher-Ranked Types
+
+The **rank** of a type describes the depth at which universal quantifiers appear _contravariantly_.
+
+$$
+\begin{aligned}
+\text{Monotypes} && \tau, \sigma^0 &::= a \mid \tau_1 \rightarrow \tau_2 \\
+\text{Polytypes} && \sigma^{n+1} &::= \sigma^n \mid \sigma^n \rightarrow \sigma^{n+1} \mid \forall a. \sigma^{n+1} \\
+\end{aligned}
+$$
+
+A rank-0 type, having no universal quantifiers, is called a **monotype**, and types of higher rank are called **polytypes**.  For example,
+
+```haskell
+Int -> Int                -- rank 0
+forall a. a -> a          -- rank 1
+Int -> (forall a. a -> a) -- rank 1
+(forall a. a -> a) -> Int -- rank 2
+```
+
+## Subsumption
+
+Suppose that we have variables bound with the following types:
+
+```haskell
+k :: forall a b. a -> b -> b
+f1 :: (Int -> Int -> Int) -> Int
+f2 :: (forall x. x -> x -> x) -> Int
+```
+
+* Is the application `(f1 k)` well-typed?  **Yes!**  Instantiate $a = b = \texttt{Int}$.
+* Is the applicatoin `(f2 k)` well-typed?  **Yes!**  The function `k` is more polymorphic than `f2` requires.
+
+[Odersky & Laufer] use the term **subsumption** for the "more polymorphic than" relation.  When extended to arbitrary rank, the usual co/contra-variance phenomenon occurs:
+  * $\sigma_1 \rightarrow \texttt{Int}$ is more polymorphic than $\sigma_2 \rightarrow \texttt{Int}$ if $\sigma_1$ is _less_ polymorphic than $\sigma_2$.
+
+## Predicative vs. Impredicative Type Systems
+
+Once one allows polytypes nested inside function types, it is natural to ask whether one can also call a polymorphic function at a polytype. For example,
+
+```haskell
+revapp :: a -> (a->b) -> b
+revapp x f = f x
+
+poly :: (forall v. v -> v) -> (Int, Bool)
+poly f = (f 3, f True)
+```
+
+Is the application `(revapp (\x->x) poly)` legal? The type variable a would need to be instantiated with `forall v. v -> v`.
+
+* A type system which allows polymorphic functions to be instantiated with a polytype is called **impredicative**.
+* A **predicative** type system only allows a polymorphic function to be instantiated with a monotype.
+
+The type system presented by [@peyton-jones2007:inference-arbitrary-rank] is predicative. An inference algorithm for an impredicative type system was presented by [@serrano2020:quick-look-impredicativity] and introduced into GHC.
+
+## Higher-Kinded Types
+
+Higher-rank and higher-kinded types play well together, and are almost orthogonal to each other in terms of implementation.  So, the paper leaves HKTs only as a side note!
+
+# Type Systems for Higher Rank Types
+
+* We prefer to write type system rules in **syntax-directed** style, which means 
+* Why write typing judgements in a _non_-syntax-directed style?  For ease of proving mathematical properties.
+
+
+this is <InlineType>forall x. x -> x</InlineType> asdf
+
+## Supporting Type Annotations:  Open vs. Closed
+
+* **open** type annotations have _free_ type variables, like `forall a. a -> b` ($b$ is free)
+
+</LongQuote>
