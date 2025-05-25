@@ -66,8 +66,17 @@ h1,h2,h3,h4,h5 {
   text-wrap: balance;
 }
 
-.article-body h1 {
-  border-bottom: 1px solid gray;
+.article-body {
+  counter-reset: heading;
+}
+
+.article-body > h1 {
+  /* border-bottom: 1px solid gray; */
+  counter-increment: heading;
+}
+
+.article-body > h1:before {
+  content: counter(heading) ". ";
 }
 
 article code {

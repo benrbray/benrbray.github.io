@@ -20,6 +20,13 @@ $$
 \renewcommand{\r}{\vec{r}}
 \providecommand{\a}{\vec{a}}
 \providecommand{\changed}{\color{00588c}}
+\renewcommand{\diff}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+
+\providecommand{\forceF}{\vec{F}}
+\providecommand{\momentum}{\vec{p}}
+\providecommand{\posx}{\vec{x}}
+\providecommand{\posq}{\vec{q}}
+\providecommand{\accel}{\vec{a}}
 $$
 
 introasdfalkjsdf
@@ -28,7 +35,19 @@ introasdfalkjsdf
   <SeriesSummary />
 </PostContent>
 
-# Numerical Integration
+# Solving Newton's Equations of Motion
+
+For a particle with mass $m$, **Newton's Second Law** $(\forceF = m \accel)$ describes the relationship between the applied force $\forceF$ and the acceleration $\accel$.  Since acceleration is the second derivative of position, we can describe the relationship betweeen force and position $\posx$ with the following _second-order ordinary differential equation_:
+
+$$
+\forceF(t) = m \ddot{\posx}(t)
+$$
+
+This differential equation is called _ordinary_ because it has only a single dependent variable (time $t$), and _second-order_ because it includes a second derivative.
+
+# Systems of Differential Equations
+
+
 
 
 
@@ -600,18 +619,6 @@ Using the Time-Corrected form of the Verlet integration method with the proper e
   * others replace angular velocity with angular momentum
   * Catto next shows how to use a Newton-Raphson solver to handle the gyroscopic term correctly
 </LongQuote>
-
-def my_function():
-  launch_missiles();
-  return "hello!"
-
-# Student's Logic:
-since we are not assigning the return value of the function to
-any variable, or consuming its output in any other way (like printing),
-then Python should be smart enough _not_ to run the function, therefore
-launch_missiles() will never run
-my_function()
-
 
 <LongQuote>
   # [@palais2009:differential-mechanics] Palais 2009, "Differential Equations, Mechanics, and Computation"

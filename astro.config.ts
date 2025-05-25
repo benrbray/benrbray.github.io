@@ -21,7 +21,6 @@ import rehypeTypst from "./src/plugins/rehype-typst"
 import vitePluginWasm from "vite-plugin-wasm";
 
 // bibliography file
-import solidJs from "@astrojs/solid-js";
 const bibFiles = [
   fs.readFileSync("./public/references/category-theory.bib").toString(),
   fs.readFileSync("./public/references/game-physics.bib").toString(), fs.readFileSync("./public/references/datalog.bib").toString(), fs.readFileSync("./public/references/dhgp.bib").toString(), fs.readFileSync("./public/references/publications.bib").toString(),
@@ -42,10 +41,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap(),
-    solid({
-      include: ["**/solid/*"]
-    }),
-    solidJs(),
+    solid(),
     pagefind()
   ],
   markdown: {
