@@ -1,8 +1,10 @@
+import fs from "node:fs";
+
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import solid from "@astrojs/solid-js";
-import fs from "node:fs";
+import react from "@astrojs/react";
 
 // remark
 import remarkMath from "remark-math";
@@ -38,12 +40,7 @@ export default defineConfig({
   build: {
     format: "file"
   },
-  integrations: [
-    mdx(),
-    sitemap(),
-    solid(),
-    pagefind()
-  ],
+  integrations: [mdx(), sitemap(), pagefind(), solid(), react({ include: ["**/react/**"] })],
   markdown: {
     remarkPlugins: [remarkMath, remarkCite, remarkExtractBibtex, remarkDirective],
     rehypePlugins: [
