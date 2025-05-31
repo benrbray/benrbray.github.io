@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# npmrc must be private because it contains authorization tokens
+# ideally these would be variables stored in a .env file, but this is not supported by npm
+.npmrc

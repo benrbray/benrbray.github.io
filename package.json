@@ -17,7 +17,7 @@
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.0",
     "@astrojs/solid-js": "^5.0.5",
-    "@benrbray/mathviz": "https://github.com/benrbray/mathviz/releases/download/v0.7.0/mathviz.tgz",
+    "@benrbray/mathviz": "^0.10.0",
     "@ruffle-rs/ruffle": "0.1.0-nightly.2024.8.10",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
