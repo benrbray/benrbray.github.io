@@ -108,6 +108,9 @@ importers:
       '@benrbray/micromark-extension-cite':
         specifier: link:~/projects/remark-cite/micromark-extension-cite
         version: link:../../projects/remark-cite/micromark-extension-cite
+      '@benrbray/physics':
+        specifier: 0.18.0
+        version: 0.18.0(solid-js@1.9.7)
       '@benrbray/rehype-cite':
         specifier: link:~/projects/remark-cite/rehype-cite
         version: link:../../projects/remark-cite/rehype-cite
@@ -120,9 +123,6 @@ importers:
       astro:
         specifier: ^5.5.3
         version: 5.8.1(@types/node@22.15.29)(less@4.3.0)(rollup@4.41.1)(sass@1.89.1)(stylus@0.62.0)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.8.0)
-      physics:
-        specifier: link:~/projects/physics/web
-        version: link:../../projects/physics/web
       rehype-slug:
         specifier: ^6.0.0
         version: 6.0.0
@@ -323,6 +323,11 @@ packages:
       '@react-three/fiber': ^9.1.2
       react: ^19.1.0
       react-dom: ^19.1.0
+
+  '@benrbray/physics@0.18.0':
+    resolution: {integrity: sha512-vlKDcUsl8MDEh2WOMdcpJfuX19OWzNFr2zsEGAZRi+dwWtzhsWNg9BYhWfSyiEj9KC20wGoyzCFA13xvnleldQ==, tarball: https://npm.pkg.github.com/download/@benrbray/physics/0.18.0/3a081259574e6df930cc808c36a7a0dfea396a07}
+    peerDependencies:
+      solid-js: ^1.8.18
 
   '@capsizecss/unpack@2.4.0':
     resolution: {integrity: sha512-GrSU71meACqcmIUxPYOJvGKF0yryjN/L1aCuE9DViCTJI7bfkjgYDPD1zbNDcINJwSSP6UaBZY9GAbYDO7re0Q==}
@@ -3519,6 +3524,11 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       three: 0.176.0
       three-stdlib: 2.36.0(three@0.176.0)
+
+  '@benrbray/physics@0.18.0(solid-js@1.9.7)':
+    dependencies:
+      solid-js: 1.9.7
+      wasm-physics: link:../crate/pkg
 
   '@capsizecss/unpack@2.4.0':
     dependencies:
