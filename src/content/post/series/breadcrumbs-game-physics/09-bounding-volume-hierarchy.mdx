@@ -27,7 +27,28 @@ In this section, we see how the **Bounding Volume Hierarchy** data structure can
 
 [@bittner2015:incremental-bvh-ray]
 
-[@larsson2006:dynamic-bvh-collision]
+<LongQuote>
+# [@larsson2006:dynamic-bvh-collision] Larsson 2006, "Dynamic BVH for Generalized Collision Detection"
+
+Contributions
+* An **object-space** method which incrementally updates the BHV by exploiting **temporal coherence** and **lazy evaluation**.
+  - no restrictions placed on the relative motion of geometric primitives
+* Supports **deformable** and **breakable objects**, which pose a challenge for ordinary BVH algorithms.
+  - deformable meshes usually require preprocessed hierarchies which are expensive to update in real-time
+  - object deformation significantly increases overlap among children BVs
+  - methods are based on specific knowledge of the kind of deformation, which limits their applicability
+- A method for efficient balancing of lower level update work that amortizes the structural changes of DBVHs over time
+
+Two Phases:
+
+* **Update Phase:** Each partly-constructed hierarchy from the previous frame is updated and reused, if possible.
+  - (_Refitting_) refit currently active boxes
+  - (_Node Invalidation_) deleting older or degenerate subtrees.  A non-leaf node is called **invalid** if it has a set of geometry associated with it, but no appropriate subtree yet.
+* **Collision Detection Query Phase:**  Pairs of BVHs are traversed in parallel to sort out potentially colliding primitives.
+  - (_Node Splitting_) Lazily rebuild invalidated nodes in top-down fashion.
+
+</LongQuote>
+
 
 [@wald2007:deformable-dynamic-bvh-ray]
 
