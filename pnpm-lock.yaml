@@ -104,7 +104,7 @@ importers:
         version: 1.10.4
       '@benrbray/mdast-util-cite':
         specifier: link:~/projects/remark-cite/mdast-util-cite
-        version: link:../../projects/remark-cite/mdast-util-cite
+        version: link:../projects/remark-cite/mdast-util-cite
       '@benrbray/micromark-extension-cite':
         specifier: link:~/projects/remark-cite/micromark-extension-cite
         version: link:../../projects/remark-cite/micromark-extension-cite
