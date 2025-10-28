@@ -1,0 +1,51 @@
+---
+title: Bidirectional Type Inference
+summary: 'DESCRIPTION'
+datePublished: '27 August 2025'
+
+series:
+  seriesId: breadcrumbs-type-safari
+  seriesNumber: 7
+---
+
+<LongQuote>
+# [@gonzalez2022:appeal-bidirectional], "The Appeal of Bidirectional Type Checking"
+
+The fundamental problem that bidirectional type-checking solves uniquely well is **subtyping**.
+
+> `A` is a subtype of `B` if any expression of type `A` is also a valid expression of type `B`.
+
+* Object-oriented subtyping is just one example!
+* Universal quantification (polymorphism, generics) also gives rise to subtyping.
+* Support for subtyping is necessary to implement a language with implicit type abstraction / application.
+
+```haskell
+(forall a. a -> a) is a subtype of...
+(Text -> Text)
+(List Nat) -> (List Nat)
+-- etc...
+```
+
+### Bidirectional Type-Checking vs Unification
+
+* Hindley-Milner is based on unification
+* HM exploits a narrow set of requirements that do not generalize well
+  - only permits "top-level polymorphism"
+  - does not support **any** other form of subtyping
+* This poses a challenge for more sophisticated language features
+  - existential quantification
+  - implicit numeric conversions
+  - object-oriented inheritnace
+  - records
+
+> Note:  Work by Stephen Dolan shows that HM might be compatible with subtyping after all...
+> * https://dl.acm.org/doi/10.1145/3093333.3009882 (biunification)
+> * https://dl.acm.org/doi/10.1145/3409006
+
+**Bidirectional Type-Checking is a framework for introducing **any** form of subtyping, of which implicit type abstraction / applicatoin is just a special case.**
+
+> It's funny, I just gave a talk on combining Hindley-Milner with subtyping today! The prevailing view for many years was indeed that this is difficult to do, but I think these days that is changing. In particular the work of Stephen Dolan (https://dl.acm.org/doi/10.1145/3093333.3009882) put to rest some of the concerns that people had about subtyping. I'm not sure what the 'cute hack' referred to in this post is, but if it refers to unification then Dolan describes a very similar biunification procedure that handles subtyping just fine. Parreaux (https://dl.acm.org/doi/10.1145/3409006) provides another perspective on Dolan's approach.
+>
+> One of the often-cited early papers on bidirectional typing is Pierce & Turner (https://www.cis.upenn.edu/~bcpierce/papers/lti-toplas.pdf). Benjamin Pierce often emphasizes the distinction between the two different ideas used in that paper: (1) local type inference and (2) bidirectional type inference. Local type inference refers to avoiding the use of 'global' constraint solving techniques like unification. Bidirectional typing, to him, is a particular way of dividing a type inference procedure up into a synthesizing part and a checking part. It works with both local and global approaches. I could be wrong about this, but I have heard GHC actually structures type inference in a bidirectional way while also using global HM-style equality constraints. Anyway, I think it has become fairly common to conflate (1) and (2) in casual conversation these days, so maybe the difference is seen by some as a technicality.
+
+</LongQuote>
