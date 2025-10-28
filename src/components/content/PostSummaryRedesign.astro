@@ -14,6 +14,8 @@ const show = Object.assign({ summary: true, image: true, tags: true }, showProps
 
 const postUrl = getPostUrl(post);
 const postDisplayTitle = post.data.titleDisplay || post.data.title;
+
+const postCategory = post.data.tags?.at(0) || null;
 // const isProject = post.data.kind === "project";
 
 const showSummary = false; //isProject && show.summary;
@@ -28,17 +30,22 @@ const showSummaryBody = (showSummary || showImage);
   `kind-${post.data.kind === "project" ? "project" : "post"}`,
 ]}>
   <!-- summary -->
+  <div class="category" data-category={postCategory}>
+    <div class="label">{postCategory}</div>
+  </div>
   <div class="summary-header">
     <!-- title -->
-    <div class="header-title">
-      <div class="title">
-        <a href={postUrl}
-          class:list={[{ unpublished: !postIsPublished(post) }]}
-          set:html={postDisplayTitle}
-        />
-      </div>
-      <div class="year"><FormattedDate date={post.data.datePublished} /></div>
+    <div class="title">
+      <a href={postUrl}
+        class:list={[{ unpublished: !postIsPublished(post) }]}
+        set:html={postDisplayTitle}
+      />
     </div>
+    <!-- summary -->
+    <div class="description" set:html={post.data.summary}>
+    </div>
+    <!-- year -->
+    <div class="year"><FormattedDate date={post.data.datePublished} /></div>
     <!-- {
       show.tags &&
       <div class="header-subtitle">
@@ -50,6 +57,9 @@ const showSummaryBody = (showSummary || showImage);
       </div>
     } -->
   </div>
+  <!-- <div class="summary-thumbnail">
+    <img src={post.data.imageThumbnail}/>
+  </div> -->
   { showSummaryBody &&
     <div class="summary-body">
     {
@@ -69,31 +79,106 @@ const showSummaryBody = (showSummary || showImage);
 
 <style>
 .post-summary {
+  padding: 8px;
+  border-radius: 8px;
 
-}
-
-.header-title .title {
-  font-size: 1.1em;
-}
-
-.summary-header .header-title {
   display: flex;
-  flex-direction: row;
-  /* margin-bottom: var(--gap-0); */
-  /* font-size: var(--font-size-large); */
-  /* font-weight: var(--font-title-weight); */
-
-  text-wrap: pretty;
+  gap: 10px;
+  align-items: stretch;
 }
 
-.header-title .title { flex: 1; }
-.header-title .year  { flex: 0; }
+.post-summary .category       { flex: 0 1 2em; }
+.post-summary .summary-header { flex: 5; }
+.post-summary .summary-thumbnail { flex: 0 1 8em; }
 
-.header-title .year {
+.post-summary .summary-thumbnail {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+.post-summary .summary-thumbnail img {
+  display: block;
+  margin: 0;
+  object-fit: cover;
+}
+
+.post-summary:has(.title a:hover) {
+  transition: background-color 20ms ease-in;
+  background-color: #eee;
+}
+.post-summary {
+  transition: background-color 60ms ease-out;
+}
+
+.post-summary .summary-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.post-summary .summary-header .title {
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.post-summary .summary-header .description {
+  text-wrap: pretty;
+  line-height: var(--line-height);
+}
+
+/* .header-title .title    { flex: 1; }
+.header-title .category { flex: 0 0 2em; border: 1px solid red; }
+.header-title .year     { flex: 0; } */
+
+.post-summary .year {
   /* font-weight: var(--font-normal-weight); */
   /* font-size: var(--font-size-normal); */
   color: gray;
   white-space: nowrap;
+}
+
+.post-summary .category {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  --category-color-bg: white;
+  --category-color-fg: #888;
+  
+  background-color: var(--category-color-bg);
+  border: 1px solid var(--category-color-fg);
+  color: var(--category-color-fg);
+  
+  font-size: 0.8em;
+  border-radius: 4px;
+
+}
+
+.post-summary .category .label {
+  position: absolute;
+  display: inline-block;
+  transform: rotate(-90deg);
+}
+
+.post-summary .category[data-category="math"] {
+  --category-color-bg: #99c6d3;
+  --category-color-fg: #003e4f;
+}
+
+.post-summary .category[data-category="plt"] {
+  --category-color-bg: #a8c7ab;
+  --category-color-fg: #004115;
+}
+
+.post-summary .category[data-category="crafts"] {
+  --category-color-bg: #c8b5d6;
+  --category-color-fg: #442458;
+}
+
+.post-summary .category[data-category="code"] {
+  --category-color-bg: #cdbb99;
+  --category-color-fg: #4a2f00;
 }
 
 /* .post-summary {

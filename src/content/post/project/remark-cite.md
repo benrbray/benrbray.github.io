@@ -6,7 +6,7 @@ titleDisplay: <code>remark-cite</code>
 published: true
 datePublished: May 19, 2021
 
-tags:  [frontend]
+tags:  [code, frontend]
 tools: [remark-cite, typescript]
 url: https://github.com/benrbray/remark-cite
 imageThumbnail: /images/thumbnails/remark-cite.png
