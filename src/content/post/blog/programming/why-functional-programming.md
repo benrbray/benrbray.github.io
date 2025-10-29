@@ -2,7 +2,7 @@
 title: Why Learn Functional Programming?
 summary: In this post, I reflect on how learning Haskell has influenced the way I solve problems, even when programming with traditional imperative languages.
 datePublished: 2024-07-23
-tags: [functional-programming]
+tags: [plt, functional-programming]
 ---
 
 * JavaScript's non-monadic Promise

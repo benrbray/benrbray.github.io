@@ -1,7 +1,7 @@
 ---
 title: Universal Properties and Universal Elements
 datePublished: 2024-04-21
-tags: [category-theory]
+tags: [math, category-theory]
 summary: SUMMARY
 ---
 

@@ -8,7 +8,8 @@ urlPDF: /notes/abstract-algebra_modules_13may2020.pdf
 
 katex_macros: abstract-algebra.katex
 tags: [math]
-summary:  Vector spaces over a field are a special case of the more general notion of modules over a ring.  Rather than the long list of axioms normally presented in textbooks, we see how an algebraic view of vector spaces helps to motivate the definition of modules.
+summary: >
+    A <dfn>module</dfn> over the ring $R$ is a commutative group $(M,+)$ together with a ring homomorphism $\varphi : R \rightarrow \End(M)$ defining an action of $R$ on $M$, where $\End(M)$ is the set of group homomorphisms $M \rightarrow M$.
 ---
 
 $$

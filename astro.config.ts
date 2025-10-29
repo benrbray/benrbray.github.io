@@ -33,6 +33,11 @@ const bibFiles = [
 // pagefind
 import pagefind from "astro-pagefind";
 
+// TODO: astro-expressive-code alternative?
+// unfortunately this plugin embeds css and js into the body,
+// so there is ugly style pop-in when the (static!!!) page loads
+// import expressiveCode from "astro-expressive-code";
+
 
 // https://astro.build/config
 export default defineConfig({

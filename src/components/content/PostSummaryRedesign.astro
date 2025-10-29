@@ -2,6 +2,7 @@
 import { getPostUrl, postIsPublished } from '@root/util/query';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../dates/FormattedDate.astro';
+import type { RenderedContent } from 'node_modules/astro/dist/content/data-store';
 // import PostTags from './PostTags.astro';
 interface Props {
   post: CollectionEntry<'post'>;
@@ -16,11 +17,13 @@ const postUrl = getPostUrl(post);
 const postDisplayTitle = post.data.titleDisplay || post.data.title;
 
 const postCategory = post.data.tags?.at(0) || null;
-// const isProject = post.data.kind === "project";
+const isProject = post.data.kind === "project";
 
-const showSummary = false; //isProject && show.summary;
+const showSummary = post.data.priority == "normal" && show.summary; //isProject && show.summary;
 const showImage = false; //post.data.imageThumbnail && show.image;
 const showSummaryBody = (showSummary || showImage);
+
+const summaryDisplay = (post.data as any)["summaryDisplay"] as RenderedContent
 ---
 
 
@@ -42,8 +45,14 @@ const showSummaryBody = (showSummary || showImage);
       />
     </div>
     <!-- summary -->
-    <div class="description" set:html={post.data.summary}>
-    </div>
+    {
+      showSummaryBody && <>
+        {(post.data as any)["summaryDisplay"]
+          ? <div set:html={summaryDisplay.html} />
+          : <div class="description" set:html={post.data.summary} />
+        }
+      </>
+    }
     <!-- year -->
     <div class="year"><FormattedDate date={post.data.datePublished} /></div>
     <!-- {
@@ -60,7 +69,7 @@ const showSummaryBody = (showSummary || showImage);
   <!-- <div class="summary-thumbnail">
     <img src={post.data.imageThumbnail}/>
   </div> -->
-  { showSummaryBody &&
+  <!-- { showSummaryBody &&
     <div class="summary-body">
     {
       // summary
@@ -74,7 +83,7 @@ const showSummaryBody = (showSummary || showImage);
       </div>)
     }
     </div>
-  }
+  } -->
 </div>
 
 <style>
@@ -181,6 +190,11 @@ const showSummaryBody = (showSummary || showImage);
   --category-color-fg: #4a2f00;
 }
 
+.post-summary .category[data-category="ml"] {
+  --category-color-bg: #dab0bc;
+  --category-color-fg: #512434;
+}
+
 /* .post-summary {
   padding: var(--gap-1);
   border-radius: 0.2em;
@@ -273,6 +287,6 @@ const showSummaryBody = (showSummary || showImage);
 .summary-body .thumb img {
   display: block;
   min-width: 100%;
-} */
+}
 
 </style>

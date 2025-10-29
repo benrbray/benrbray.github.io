@@ -1,5 +1,6 @@
 import { defineCollection, reference, z } from 'astro:content';
 import { glob } from "astro/loaders";
+import { postLoader } from './loaders/post-loader';
 
 const postSchema = z.object({
 	title: z.string(),
@@ -24,8 +25,10 @@ const postSchema = z.object({
 	priority: z.enum(["normal", "low"]).default("normal")
 });
 
+
 const post = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/post" }),
+	// loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/post" }),
+	loader: postLoader({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/post" }),
 	schema: postSchema
 });
 
