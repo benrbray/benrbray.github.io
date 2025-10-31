@@ -31,7 +31,7 @@ const series = await getSeriesList();
 			<h2>Recent Articles</h2>
 
 			{
-				posts.slice(0, 5).map((post) => {
+				posts.map((post) => {
 					const isLowPriority = post.data.priority === "low";
 
 					return (
@@ -62,7 +62,7 @@ const series = await getSeriesList();
 				})
 			}
 
-			<h2>Crafts</h2>
+			<!-- <h2>Crafts</h2>
 
 			{
 				craftPosts.map((post) => {
@@ -94,7 +94,7 @@ const series = await getSeriesList();
 						</div>
 					);
 				})
-			}
+			} -->
 
 			<h2>Unpublished</h2>
 

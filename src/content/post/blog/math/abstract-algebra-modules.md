@@ -8,8 +8,8 @@ urlPDF: /notes/abstract-algebra_modules_13may2020.pdf
 
 katex_macros: abstract-algebra.katex
 tags: [math]
-summary: >
-    A <dfn>module</dfn> over the ring $R$ is a commutative group $(M,+)$ together with a ring homomorphism $\varphi : R \rightarrow \End(M)$ defining an action of $R$ on $M$, where $\End(M)$ is the set of group homomorphisms $M \rightarrow M$.
+summary: |
+  Vector spaces over a field are a special case of the more general notion of **modules over a ring**.  Rather than the long list of axioms normally presented in textbooks, we see how an algebraic view of vector spaces helps to motivate the definition of modules.
 ---
 
 $$
@@ -93,15 +93,17 @@ Several important examples of modules are listed below.
 
 :::div{.container data-name=example}
 ($\ZZ$-modules)  By definition, every $\ZZ$-module is a commutative group.  Likewise, every commutative group $(G,+)$ becomes a $\ZZ$-module under the ring action defined for $n \in \ZZ$, $g \in G$ by
-    $$
-    n \cdot g = \begin{cases}
-        \hphantom{-}a + a + \cdots + a \quad \hphantom{-}\text{(} n \text{ times)}
-            & \text{if } n > 0 \\
-        \hphantom{-}0   & \text{if } n = 0 \\
-        -a - a - \cdots - a \quad \text{(} {-}n \text{ times)}
-            & \text{if } n < 0
-    \end{cases}
-    $$
+
+$$
+n \cdot g = \begin{cases}
+    \hphantom{-}a + a + \cdots + a \quad \hphantom{-}\text{(} n \text{ times)}
+        & \text{if } n > 0 \\
+    \hphantom{-}0   & \text{if } n = 0 \\
+    -a - a - \cdots - a \quad \text{(} {-}n \text{ times)}
+        & \text{if } n < 0
+\end{cases}
+$$
+
 We conclude that $\ZZ$-modules and commutative groups are *one in the same.*
 :::
 
@@ -123,19 +125,23 @@ $$
 $$
 
 Consider what it would mean for an $\FF$-vector space $V$ to be an $\FF[x]$-module.  We need a ring homomorphism $\varphi : \FF[x] \rightarrow \End(V)$ describing the action of polynomials on vectors.  Since $\varphi$ preserves sums and products between $\FF[x]$ and $(\End(V),+,\circ)$ as rings\footnote{We take some notational shortcuts.  For instance, $\phi(x)^k$ is $\phi(x)$ composed with itself $k$ times, and $p_k$ refers to both the element of $\FF$ and to the map $(v \mapsto p_k v) \in \End(V)$.}, we find that the choice of a single linear map $\varphi(x) \in \End(V)$ determines the value of $\varphi$ on arbitrary polynomials~$p \in \FF[x]$,
-    $$
-    \begin{aligned}
-    \varphi(p) v 
-    = \varphi\left( \sum_{k=1}^m p_k x^k \right) v
-    = \sum_{k=1}^m p_k \varphi(x)^k v
-    \end{aligned}
-    $$
+
+$$
+\begin{aligned}
+\varphi(p) v 
+= \varphi\left( \sum_{k=1}^m p_k x^k \right) v
+= \sum_{k=1}^m p_k \varphi(x)^k v
+\end{aligned}
+$$
+
 Similarly, any choice of $\phi(x) \in \End(V)$ yields a valid ring homomorphism, exposing a bijection between $\FF[x]$-modules and pairs $(V, T \in \End(V))$.
-    $$
-    \bigg\{ \;\mathbb{F}[x]\text{-modules } V\; \bigg\}
-    \longleftrightarrow
-    \bigg\{ \substack{\small\text{$\mathbb{F}$-vector spaces $V$ with a}\\\small \text{linear map $T : V \rightarrow V$}} \bigg\}
-    $$
+
+$$
+\bigg\{ \;\mathbb{F}[x]\text{-modules } V\; \bigg\}
+\longleftrightarrow
+\bigg\{ \substack{\small\text{$\mathbb{F}$-vector spaces $V$ with a}\\\small \text{linear map $T : V \rightarrow V$}} \bigg\}
+$$
+
 In general, there are many different $\FF[x]$-module structures a given $\FF$-vector space $V$, each corresponding to a choice of linear $T : V \rightarrow V$.
 
 :::div{.container data-name=proposition}
@@ -150,51 +156,57 @@ Each $\FF[x]$-submodule of $V$ is closed under actions by ring elements, includi
 
 :::div{.container data-name=definition}
 An <dfn>$R$-module homomorphism</dfn> is a map $\phi : M \rightarrow N$ between modules which respects the $R$-module structure, by preserving addition and commuting with the ring action on $M$,
-    $$
-    \begin{aligned}
-    \phi(x + y) &= \phi(x) + \phi(y) & \forall\, x,y \in M \\
-    \phi(r \cdot x) &= r \cdot \phi(x) & \forall\, x \in M, r \in R
-    \end{aligned}
-    $$
+
+$$
+\begin{aligned}
+\phi(x + y) &= \phi(x) + \phi(y) & \forall\, x,y \in M \\
+\phi(r \cdot x) &= r \cdot \phi(x) & \forall\, x \in M, r \in R
+\end{aligned}
+$$
 :::
 
 The <dfn>kernel</dfn> of a module homomorphism is its kernel $\ker \phi = \phi^{-1}\{0_S\}$ as an additive group homomorphism.  A bijective $R$-module homomorphism is an <dfn>isomorphism</dfn>.  For any ring $R$, the set $\Hom_R(M,N)$ of homomorphisms between two $R$-modules forms a commutative group under pointwise addition, $(\phi + \psi)(m) = \phi(m) + \psi(m)$ for $\phi, \psi \in \Hom_R(M,N)$.  Moreover,
 
 :::div{.container data-name=proposition}
 For a commutative ring $R$, the group $\Hom_R(M,N)$ forms an $R$-module under the ring action $R \rightarrow \End(\Hom_R(M,N))$ given by
-    $$
-    \begin{aligned}
-    (r \cdot \phi)(m)
-    &\equiv r \cdot \phi(m)
-    &\forall\, r \in R, m \in M, \phi \in \Hom_R(M,N)
-    \end{aligned}
-    $$
+
+$$
+\begin{aligned}
+(r \cdot \phi)(m)
+&\equiv r \cdot \phi(m)
+&\forall\, r \in R, m \in M, \phi \in \Hom_R(M,N)
+\end{aligned}
+$$
+
 :::
 
 :::div{.container data-name=proof}
 Commutativity of $R$ guarantees that $(r\cdot \phi) \in \Hom_R(M,N)$, since
-    $$
-    \begin{aligned}
-    (r \cdot \phi)(s \cdot m)
-    &= r \cdot \phi(s \cdot m) & \text{(by definition)} \\
-    &= rs \cdot \phi(m) & \text{(} \phi \text{ is a homomorphism)} \\
-    &= sr \cdot \phi(m) & \text{(commutativity)} \\
-    &= s \cdot (r \cdot \phi(m)) & \text{(by definition)}
-    \end{aligned}
-    $$
+
+$$
+\begin{aligned}
+(r \cdot \phi)(s \cdot m)
+&= r \cdot \phi(s \cdot m) & \text{(by definition)} \\
+&= rs \cdot \phi(m) & \text{(} \phi \text{ is a homomorphism)} \\
+&= sr \cdot \phi(m) & \text{(commutativity)} \\
+&= s \cdot (r \cdot \phi(m)) & \text{(by definition)}
+\end{aligned}
+$$
 :::
 
 ## Ring of Module Endomorphisms
 
 :::div{.container data-name=proposition}
 Endomorphisms $\Hom_R(M,M)$ form a unital ring, where
-    $$
-    \begin{aligned}
-    (\phi + \psi)(m) &= \phi(m) + \psi(m) & \text{(pointwise addition)} \\
-    (\phi \psi)(m) &= (\phi \circ \psi)(m) & \text{(composition)} \\
-    1_{\Hom_R(M,M)} &= \mathrm{Id}_M & \text{(multiplicative identity)}
-    \end{aligned}
-    $$
+
+$$
+\begin{aligned}
+(\phi + \psi)(m) &= \phi(m) + \psi(m) & \text{(pointwise addition)} \\
+(\phi \psi)(m) &= (\phi \circ \psi)(m) & \text{(composition)} \\
+1_{\Hom_R(M,M)} &= \mathrm{Id}_M & \text{(multiplicative identity)}
+\end{aligned}
+$$
+
 We write $\End_R(M) = \Hom_R(M,M)$ for the <dfn>endomorphism ring</dfn> of $M$.
 :::
 
@@ -206,38 +218,43 @@ This property is normally stated without reference to ring homomorphisms, but in
 
 :::div{.container data-name=proof}
 First, the additive group homomorphism $\varphi_r \in \End(M,+)$ is also a module homomorphism, since for $r,s \in R$ and $m \in M$,
-    $$
-    \begin{aligned}
-    \varphi_r(s \cdot m)
-    &= r \cdot (s \cdot m) &\text{(by definition)} \\
-    &= (rs) \cdot m_1 &\hspace{4em}\text{(associativity of scalars)}\\
-    &= s \cdot (r \cdot m) &\text{(associativity of scalars)}\\
-    &= s \cdot \varphi_r(m) &\text{(by definition)}
-    \end{aligned}
-    $$
+
+$$
+\begin{aligned}
+\varphi_r(s \cdot m)
+&= r \cdot (s \cdot m) &\text{(by definition)} \\
+&= (rs) \cdot m_1 &\hspace{4em}\text{(associativity of scalars)}\\
+&= s \cdot (r \cdot m) &\text{(associativity of scalars)}\\
+&= s \cdot \varphi_r(m) &\text{(by definition)}
+\end{aligned}
+$$
+
 Futher, $\varphi_\boxdot : R \mapsto \End_R(M)$ sending $r \mapsto \varphi_r$ is a ring homomorphism.
-    $$
-    \begin{aligned}
-    \varphi_{r_1 + r_2}(m)
-    &= (r_1 + r_2) \cdot m &\text{(by definition)} \\
-    &= r_1 \cdot m + r_2 \cdot m &\text{(distributivity of scalars)} \\
-    &= \varphi_{r_1}(m) + \varphi_{r_2}(m) &\text{(by definition)} \\
-    \varphi_{r_1 r_2}(m)
-    &= (r_1 r_2) \cdot m & \text{(by definition)} \\
-    &= r_2 \cdot (r_1 \cdot m) &\text{($R$ commutative)} \\
-    &= (\varphi_{r_2} \circ \varphi_{r_1})(m) &\text{(by definition)}
-    \end{aligned}
-    $$
+
+$$
+\begin{aligned}
+\varphi_{r_1 + r_2}(m)
+&= (r_1 + r_2) \cdot m &\text{(by definition)} \\
+&= r_1 \cdot m + r_2 \cdot m &\text{(distributivity of scalars)} \\
+&= \varphi_{r_1}(m) + \varphi_{r_2}(m) &\text{(by definition)} \\
+\varphi_{r_1 r_2}(m)
+&= (r_1 r_2) \cdot m & \text{(by definition)} \\
+&= r_2 \cdot (r_1 \cdot m) &\text{($R$ commutative)} \\
+&= (\varphi_{r_2} \circ \varphi_{r_1})(m) &\text{(by definition)}
+\end{aligned}
+$$
+
 Finally, each $\varphi_r$ commutes with every element $\phi \in \End_R(M)$,
-    $$
-    \begin{aligned}
-    (\varphi_r \circ \phi)(m)
-    &= \varphi_r (\phi(m)) &\text{(composition)} \\
-    &= r \cdot \phi(m) &\text{(by definition)}\\
-    &= \phi(r \cdot m) &\text{(module homomorphism)}\\
-    &= \phi( \varphi_r(m)) &\text{(by definition)}
-    \end{aligned}
-    $$
+
+$$
+\begin{aligned}
+(\varphi_r \circ \phi)(m)
+&= \varphi_r (\phi(m)) &\text{(composition)} \\
+&= r \cdot \phi(m) &\text{(by definition)}\\
+&= \phi(r \cdot m) &\text{(module homomorphism)}\\
+&= \phi( \varphi_r(m)) &\text{(by definition)}
+\end{aligned}
+$$
 :::
 
 :::div{.container data-name=corollary}
