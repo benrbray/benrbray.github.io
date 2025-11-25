@@ -3,11 +3,47 @@ title: "A Bibliography Formatter for remark-cite"
 titleDisplay: "A Bibliography Formatter for <code>remark-cite</code>"
 summary: TODO
 datePublished: 2025-01-10
-tags: [layout, citations]
+published: true
+tags: [code, layout, citations]
 tools: [remark-cite, typescript]
+t: true
 ---
 
-I recently updated `remark-cite` with support for simple bibliography rendering!  This post explains how it works.
+## Introduction to `remark-cite`
+
+
+`remark-cite` adds support for inline citations and bibliographies to the `remark` markdown processing framework.  The `remark-cite` package contains several subpackages:
+
+
+* `micromark-extension-cite` 
+* `mdast-util-cite` 
+* `remark-cite` Parses citation syntax within a Markdown document and adds new `CitationInline` and `CitationBlock` nodes to the `remark` AST.
+* `rehype-cite` **(new!)** Renders HTML for inline citations and the bibliography!
+* `remark-extract-bibtex` **(new!)** extracts citation data from `bibtex` code blocks
+
+```md title="article.md"
+# Article
+According to [@meijer1991:functional], a **banana** is a tropical yellow fruit.
+```
+
+```text title="references.bib"
+@inproceedings{meijer1991:functional,
+  title={Functional programming with bananas, lenses, envelopes and barbed wire},
+  author={Meijer, Erik and Fokkinga, Maarten and Paterson, Ross},
+  booktitle={Conference on Functional Programming Languages and Computer Architecture},
+  pages={124--144},
+  year={1991},
+  organization={Springer},
+  url={https://www.google.com}
+}
+```
+
+## Anatomy of a `remark` Plugin
+
+
+
+
+## Glossary
 
 Terminology:
 
@@ -16,13 +52,11 @@ Terminology:
 * Reference:
 * 
 
-At the time of writing, here are all of the subpackages of `remark-cite`:
+## Bibliography DSL
 
-* `micromark-extension-cite`
-* `mdast-util-cite`
-* `remark-cite` Parses citation syntax within a Markdown document and adds new CitationInline and CitationBlock nodes to the `remark` AST.
-* `rehype-cite` **(new!)** 
-* `remark-extract-bibtex` **(new!)** extracts citation data from `bibtex` code blocks
+I recently updated `remark-cite` with support for simple bibliography rendering!  This post explains how it works.
+
+
 
 
 ## Goals & Scope
@@ -135,7 +169,7 @@ Instead of relying on CSL, `rehype-cite` includes a custom DSL for describing ho
 
 * `field`, `link`, etc. can all be reinterpreted by the user.  This vaguely resembles the free monad construct in Haskell.
 
-``` typescript
+```typescript title="template.ts" del={"a":1} ins={"b":4} {"c":7-9}
 const defaultTemplate = periods(
   ...optional(
     field("author"),

@@ -10,13 +10,13 @@ $$
 \newcommand{\grad}{\nabla}
 $$
 
-In this post, we will explore the following question:
+<!-- In this post, we will explore the following question:
 
 > Should the gradient of a function $F: \R^n \rightarrow \R$ be a row or column vector?
 
 The answer is quite controversial depending on who you ask!  Mathematicians tend to agree that gradient sshould be row vectors, but for some reason computer scientists can't get on board with the idea.  
 
-The [matrix calculus entry](https://en.wikipedia.org/wiki/Matrix_calculus) on Wikipedia [endeavors](https://en.wikipedia.org/wiki/Talk:Matrix_calculus) to remain neutral, suggesting that perhaps the choice is inconsequental and both conventions have their merits.  **Wrong!**  I claim that the gradient-as-column-vector dogma prevalent in computer science is actively holding us back from a deeper understanding of derivatives!
+The [matrix calculus entry](https://en.wikipedia.org/wiki/Matrix_calculus) on Wikipedia [endeavors](https://en.wikipedia.org/wiki/Talk:Matrix_calculus) to remain neutral, suggesting that perhaps the choice is inconsequental and both conventions have their merits.  **Wrong!**  I claim that the gradient-as-column-vector dogma prevalent in computer science is actively holding us back from a deeper understanding of derivatives! -->
 
 # Derivatives and Linear Maps
 

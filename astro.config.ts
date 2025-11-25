@@ -33,6 +33,8 @@ const bibFiles = [
 // pagefind
 import pagefind from "astro-pagefind";
 
+import expressiveCode from "astro-expressive-code";
+
 // TODO: astro-expressive-code alternative?
 // unfortunately this plugin embeds css and js into the body,
 // so there is ugly style pop-in when the (static!!!) page loads
@@ -45,7 +47,14 @@ export default defineConfig({
   build: {
     format: "file"
   },
-  integrations: [mdx(), sitemap(), pagefind(), solid(), react({ include: ["**/react/**"] })],
+  integrations: [
+    expressiveCode({
+      frames: { showCopyToClipboardButton: false },
+      shiki: {
+        // injectLangsIntoNestedCodeBlocks: true,
+        bundledLangs: ["css", "html", "ts", "js", "json", "tsx", "jsx", "bash", "typst", "wasm", "wit", "toml", "markdown", "python", "rust", "haskell", "lean", "coq", "bibtex", "docker"],
+      }
+    }), mdx(), sitemap(), pagefind(), solid(), react({ include: ["**/react/**"] })],
   markdown: {
     remarkPlugins: [remarkMath, remarkCite, remarkExtractBibtex, remarkDirective],
     rehypePlugins: [
