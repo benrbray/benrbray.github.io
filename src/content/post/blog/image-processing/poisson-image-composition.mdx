@@ -1,0 +1,41 @@
+---
+title:  "Poisson Image Composition"
+
+datePublished: 2025-11-28
+published: false
+
+tags: [graphics]
+summary: Learn how the Poisson Equation can be used for image compositing!
+---
+
+This post explores **Poisson Image Editing**, introduced by [@perez2003:poisson].
+
+# Overview
+
+Laplacian Operator
+
+* suppresses slow gradients
+* extracts most perceptually significant intensity variations
+* a scalar function on a bounded domain is uniquely determined by its values on the boundary and its Laplacian in the interior
+
+Solving the Poisson equation computes the function whose gradient is closest in L2 norm to some prescribed vector field (the **guidance** vector field) under the specified boundary conditions.
+
+* In that way, the reconstructed function _interpolates_ the boundary conditions inwards, while following the spatial variations of the guidance field as closely as possible.
+
+This paper explores several applications of this idea.
+
+* By suitably mixing the gradient of the source image with that of the destination image, transparent objects can be added convincingly.
+* Objects with complex outlines including holes can be added automatically without the need for painstaking cutting out.
+* Can also be used to modify the appearance (color, texture, illumination) of an object without any need for precise delineation of object boundaries
+
+# References
+
+```bibtex
+@incollection{perez2003:poisson,
+  title={Poisson image editing},
+  author={P{\'e}rez, Patrick and Gangnet, Michel and Blake, Andrew},
+  booktitle={Seminal Graphics Papers: Pushing the Boundaries, Volume 2},
+  pages={577--582},
+  year={2023}
+}
+```

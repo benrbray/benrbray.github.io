@@ -8,6 +8,7 @@ export { TodoBlock } from "./TodoBlock";
 export { MarkdownLink as a } from "./MarkdownLink";
 export { Figure, FigContent, FigCaption, SubFigure } from "./Figure/Figure";
 export { CitationInline } from "./CitationInline/CitationInline";
+export { Bibliography } from "./Bibliography/Bibliography";
 
 export { default as PreviewGrid } from "@components/preview/PreviewGrid.astro";
 export { default as PostSummary } from "@components/content/PostSummary.astro";
