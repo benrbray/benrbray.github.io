@@ -1,0 +1,40 @@
+---
+title: "Fluid Solver"
+titleDisplay: "Fluid Solver"
+summary: An implementation of Jos Stam's "Stable Fluids" paper.
+datePublished: 2025-12-01
+published: false
+tags: [graphics, numerical, physics]
+tools: [rust, wasm]
+---
+
+# Modeling Fluids
+
+Assuming the field has constant pressure and temperature, it suffices to model only the following physical quantities:
+
+* The velocity $\mathbb{u} \in \R^2$ at each point
+* The **pressure** $p \in \R$ at each point
+
+
+# Navier-Stokes Equation
+
+The first equation states that the velocity field is **divergence-free**.  Physically, this means that the fluid is **incompressible**.
+
+$$
+\begin{aligned}
+\nabla \cdot \mathbb{u} = 0
+&& \text{(divergence-free)}
+\end{aligned}
+$$
+
+The second equation describes how velocity changes with time, according to pressure $p$, uniform density $\rho$, kinematic viscosity $\nu$, and external forces $\mathbb{f}$.
+
+$$
+\frac{\partial \mathbb{u}}{\partial t}
+= -(\mathbb{u} \cdot \nabla) \mathbb{u}
+- \frac{1}{\rho} \nabla p
++ \nu \nabla^2 \mathbb{u}
++ \mathbb{f}
+$$
+
+Physically, 
