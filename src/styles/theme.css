@@ -69,6 +69,8 @@
 	--serif-font: "Lora", Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
 	/* --sans-font: "Roboto", system-ui, sans-serif; */
   --sans-font: system-ui, sans-serif;
+  --decorative-font: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
+  --slab-font: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
 
   /* font: normal */
   /* --font-normal-family: var(--serif-font); */
@@ -78,7 +80,7 @@
   --font-normal-weight: normal;
 
   /* font: heading */
-  --font-heading-family: var(--serif-font);
+  --font-heading-family: var(--decorative-font); /*var(--serif-font);*/
   --font-heading-weight: 600;
   --font-heading-color: var(--font-normal-color);
   --font-heading-color-lighter: #606060;

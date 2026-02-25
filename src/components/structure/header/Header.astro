@@ -5,10 +5,7 @@ import HeaderShapes from './HeaderShapes.astro';
 ---
 
 <header>
-	<div class="header-background">
-		<!-- <HeaderShapes /> -->
-	</div>
-	<nav class="header-nav">
+	<nav class="header-nav layout-block">
 		<!-- name -->
 		<div class="header-name">
 			<a href="/">Benjamin R. Bray</a>
@@ -42,9 +39,6 @@ import HeaderShapes from './HeaderShapes.astro';
 	max-width: var(--max-width);
 	font-size: 1.125em;
 	font-weight: bold;
-
-	border: 1px solid black;
-	background-color: white;
 	
 	align-items: center;
 	justify-content: space-between;

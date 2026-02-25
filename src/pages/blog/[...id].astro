@@ -4,10 +4,11 @@ import { type CollectionEntry, getEntry } from 'astro:content';
 import LayoutDefault from '@layouts/LayoutDefault.astro';
 // import SeriesSummary from '@components/content/SeriesSummary.astro';
 import { getBlogPosts, getPostUrlSlug } from '@root/util/query';
-import ColumnThin from '@layouts/ColumnThin.astro';
+// import ColumnThin from '@layouts/ColumnThin.astro';
 import PostContent from '@root/components/blog/PostContent.astro';
 import SeriesContent from '@root/components/blog/SeriesContent.astro';
 import ArticleHeader from '@root/components/blog/ArticleHeader.astro';
+import ColumnNormal from '@root/layouts/ColumnNormal.astro';
 
 export async function getStaticPaths() {
 	const posts = await getBlogPosts({ includeSeries: true }, entry => {
@@ -33,15 +34,15 @@ const series = await (async () => {
 ---
 
 <LayoutDefault pageTitle={post.data.title}>
-	<ColumnThin>
-	<article data-pagefind-body>
-		<div class="article">
-			<ArticleHeader post={post}/>
-			{ series && <SeriesContent series={series} activeSlug={post.id} /> }
-			<div class="article-body">
-				<PostContent post={post} />
+	<ColumnNormal>
+		<article data-pagefind-body>
+			<div class="article layout-block">
+				<ArticleHeader post={post}/>
+				{ series && <SeriesContent series={series} activeSlug={post.id} /> }
+				<div class="article-body">
+					<PostContent post={post} />
+				</div>
 			</div>
-		</div>
-	</article>
-</ColumnThin>
+		</article>
+	</ColumnNormal>
 </LayoutDefault>

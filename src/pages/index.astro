@@ -26,110 +26,112 @@ const series = await getSeriesList();
 	<ColumnNormal>
 		<article>
 			<About />
-			<hr style="border: none; border-bottom: 1px solid #bbb" />
+			<!-- <hr style="border: none; border-bottom: 1px solid #bbb" /> -->
+			
+			<div class="layout-block">
+				<h2>Recent Articles</h2>
 
-			<h2>Recent Articles</h2>
+				{
+					posts.map((post) => {
+						const isLowPriority = post.data.priority === "low";
 
-			{
-				posts.map((post) => {
-					const isLowPriority = post.data.priority === "low";
+						return (
+							<div class="post-list-cell">
+								<PostSummaryRedesign
+									post={post}
+									show={{ summary: !isLowPriority, image: !isLowPriority }}
+								/>
+							</div>
+						);
+					})
+				}
 
-					return (
-						<div class="post-list-cell">
-							<PostSummaryRedesign
-								post={post}
-								show={{ summary: !isLowPriority, image: !isLowPriority }}
-							/>
-						</div>
-					);
-				})
-			}
+				<h2>Recent Projects</h2>
 
-			<h2>Recent Projects</h2>
+				{
+					projects.slice(0, 5).map((post) => {
+						const isLowPriority = post.data.priority === "low";
 
-			{
-				projects.slice(0, 5).map((post) => {
-					const isLowPriority = post.data.priority === "low";
+						return (
+							<div class="post-list-cell">
+								<PostSummaryRedesign
+									post={post}
+									show={{ summary: !isLowPriority, image: !isLowPriority }}
+								/>
+							</div>
+						);
+					})
+				}
 
-					return (
-						<div class="post-list-cell">
-							<PostSummaryRedesign
-								post={post}
-								show={{ summary: !isLowPriority, image: !isLowPriority }}
-							/>
-						</div>
-					);
-				})
-			}
+				<!-- <h2>Crafts</h2>
 
-			<!-- <h2>Crafts</h2>
+				{
+					craftPosts.map((post) => {
+						const isLowPriority = post.data.priority === "low";
 
-			{
-				craftPosts.map((post) => {
-					const isLowPriority = post.data.priority === "low";
+						return (
+							<div class="post-list-cell">
+								<PostSummaryRedesign
+									post={post}
+									show={{ summary: !isLowPriority, image: !isLowPriority }}
+								/>
+							</div>
+						);
+					})
+				}
 
-					return (
-						<div class="post-list-cell">
-							<PostSummaryRedesign
-								post={post}
-								show={{ summary: !isLowPriority, image: !isLowPriority }}
-							/>
-						</div>
-					);
-				})
-			}
+				<h2>Math</h2>
 
-			<h2>Math</h2>
+				{
+					mathPosts.map((post) => {
+						const isLowPriority = post.data.priority === "low";
 
-			{
-				mathPosts.map((post) => {
-					const isLowPriority = post.data.priority === "low";
+						return (
+							<div class="post-list-cell">
+								<PostSummaryRedesign
+									post={post}
+									show={{ summary: !isLowPriority, image: !isLowPriority }}
+								/>
+							</div>
+						);
+					})
+				} -->
 
-					return (
-						<div class="post-list-cell">
-							<PostSummaryRedesign
-								post={post}
-								show={{ summary: !isLowPriority, image: !isLowPriority }}
-							/>
-						</div>
-					);
-				})
-			} -->
+				<h2>Unpublished</h2>
 
-			<h2>Unpublished</h2>
+				{
+					unpublishedPosts.map((post) => {
+						const isLowPriority = post.data.priority === "low";
 
-			{
-				unpublishedPosts.map((post) => {
-					const isLowPriority = post.data.priority === "low";
+						return (
+							<div class="post-list-cell">
+								<PostSummaryRedesign
+									post={post}
+									show={{ summary: !isLowPriority, image: !isLowPriority }}
+								/>
+							</div>
+						);
+					})
+				}
 
-					return (
-						<div class="post-list-cell">
-							<PostSummaryRedesign
-								post={post}
-								show={{ summary: !isLowPriority, image: !isLowPriority }}
-							/>
-						</div>
-					);
-				})
-			}
+				<div style="height: 100em"></div>
 
-			<div style="height: 100em"></div>
-
-			<hr style="border: none; border-bottom: 1px solid #bbb" />
-			<!-- Series -->
-			{
-				series.length > 0 && (
-					<>
-						<h2>Tutorial Series</h2>
-						<SeriesList series={series} />
-					</>
-				)
-			}
-			<h2>Selected Projects</h2>
-			<PostList posts={projects} />
-			<!-- Posts -->
-			<h2>Selected Posts</h2>
-			<PostList posts={posts} />
+				<hr style="border: none; border-bottom: 1px solid #bbb" />
+				<!-- Series -->
+				{
+					series.length > 0 && (
+						<>
+							<h2>Tutorial Series</h2>
+							<SeriesList series={series} />
+						</>
+					)
+				}
+				<h2>Selected Projects</h2>
+				<PostList posts={projects} />
+				<!-- Posts -->
+				<h2>Selected Posts</h2>
+				<PostList posts={posts} />
+			</div>
 		</article>
 	</ColumnNormal>
 </LayoutDefault>

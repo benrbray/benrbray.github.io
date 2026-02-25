@@ -59,6 +59,9 @@ importers:
       katex:
         specifier: ^0.16.21
         version: 0.16.22
+      micromark-extension-cite:
+        specifier: link:ink:~/projects/remark-cite/micromark-extension-cite
+        version: link:ink:~/projects/remark-cite/micromark-extension-cite
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -107,7 +110,7 @@ importers:
         version: 1.10.4
       '@benrbray/mdast-util-cite':
         specifier: link:~/projects/remark-cite/mdast-util-cite
-        version: link:../../projects/remark-cite/mdast-util-cite
+        version: link:../projects/remark-cite/mdast-util-cite
       '@benrbray/micromark-extension-cite':
         specifier: link:~/projects/remark-cite/micromark-extension-cite
         version: link:../../projects/remark-cite/micromark-extension-cite
@@ -116,13 +119,13 @@ importers:
         version: 0.19.0(solid-js@1.9.7)
       '@benrbray/rehype-cite':
         specifier: link:~/projects/remark-cite/rehype-cite
-        version: link:../../projects/remark-cite/rehype-cite
+        version: link:../projects/remark-cite/rehype-cite
       '@benrbray/remark-cite':
         specifier: link:~/projects/remark-cite/remark-cite
-        version: link:../../projects/remark-cite/remark-cite
+        version: link:../projects/remark-cite/remark-cite
       '@benrbray/remark-extract-bibtex':
         specifier: link:~/projects/remark-cite/remark-extract-bibtex
-        version: link:../../projects/remark-cite/remark-extract-bibtex
+        version: link:../projects/remark-cite/remark-extract-bibtex
       astro:
         specifier: ^5.15.2
         version: 5.15.2(@types/node@22.15.29)(less@4.3.0)(rollup@4.41.1)(sass@1.89.1)(stylus@0.62.0)(tsx@4.19.4)(typescript@5.8.3)(yaml@2.8.0)
