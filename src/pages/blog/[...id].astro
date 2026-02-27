@@ -33,11 +33,13 @@ const series = await (async () => {
 })();
 ---
 
-<LayoutDefault pageTitle={post.data.title}>
+<LayoutDefault pageTitle={post.data.title} theme={post.data.theme}>
 	<ColumnNormal>
 		<article data-pagefind-body>
-			<div class="article layout-block">
-				<ArticleHeader post={post}/>
+			<div class="article">
+				<div class="layout-block">
+					<ArticleHeader post={post}/>
+				</div>
 				{ series && <SeriesContent series={series} activeSlug={post.id} /> }
 				<div class="article-body">
 					<PostContent post={post} />

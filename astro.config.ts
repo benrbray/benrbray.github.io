@@ -18,6 +18,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeCite from "@benrbray/rehype-cite";
 import rehypeTypst from "./src/plugins/rehype-typst"
+import rehypeWrapSections from "./src/plugins/rehype-wrap-sections"
 
 // vite
 import vitePluginWasm from "vite-plugin-wasm";
@@ -60,6 +61,7 @@ export default defineConfig({
     rehypePlugins: [
       [rehypeTypst, { }],
       [rehypeCite, { bibFiles }],
+      [rehypeWrapSections, { }],
       [rehypeKatex, { macros: { "\\R": "\\mathbb{R}" }, globalGroup: true}],
       [rehypeSlug, {}], [rehypeAutolinkHeadings, {
         behavior: "wrap",

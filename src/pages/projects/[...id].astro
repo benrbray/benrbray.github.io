@@ -4,7 +4,7 @@ import { type CollectionEntry } from 'astro:content';
 import LayoutDefault from '@layouts/LayoutDefault.astro';
 import { getProjects, shortenSlug } from '@root/util/query';
 
-import ColumnThin from '@layouts/ColumnThin.astro';
+import ColumnNormal from '@layouts/ColumnNormal.astro';
 import PostContent from '@root/components/blog/PostContent.astro';
 import ArticleHeader from '@root/components/blog/ArticleHeader.astro';
 
@@ -23,12 +23,16 @@ const { project } = Astro.props;
 ---
 
 <LayoutDefault pageTitle={project.data.title}>
-	<ColumnThin>
+	<ColumnNormal>
 	<article data-pagefind-body>
 		<div class="article">
-			<ArticleHeader post={project}/>
-			<PostContent post={project} />
+			<div class="layout-block">
+				<ArticleHeader post={project}/>
+			</div>
+			<div class="article-body">
+				<PostContent post={project} />
+			</div>
 		</div>
 	</article>
-	</ColumnThin>
+	</ColumnNormal>
 </LayoutDefault>

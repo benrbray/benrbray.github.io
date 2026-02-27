@@ -7,11 +7,11 @@ import Header from "@root/components/structure/header/Header.astro";
 import { SITE_TITLE } from "@root/consts";
 
 interface Props {
-	pageTitle: string
+	pageTitle: string,
+	theme?: string|undefined,
 }
 
-const { pageTitle } = Astro.props;
-
+const { pageTitle, theme } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,7 +21,7 @@ const { pageTitle } = Astro.props;
 		<IncludeCss />
 		<BaseTheme />
 	</head>
-	<body>
+	<body class={theme ? `theme-${theme}` : "theme-default"}>
 		<Header />
 		<main>
 			<slot />

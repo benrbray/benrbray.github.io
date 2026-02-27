@@ -8,6 +8,7 @@ const postSchema = z.object({
 	summary: z.string(),
 	kind: z.enum(["post", "project"]).default("post"),
 	published: z.boolean().default(false),
+	theme: z.string().optional(),
 	/** explicitly set post URL, for instance to link to a static PDF */
 	url: z.string().optional(),
 	// Transform string to Date object
