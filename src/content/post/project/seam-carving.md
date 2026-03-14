@@ -12,7 +12,7 @@ tools: [javascript]
 imageThumbnail: images/thumbnails/seam-carve_thumb.png
 demo_url: /static/seam-carving/index.html
 github_url: https://github.com/benrbray/benrbray.github.io-source/tree/master/content/static/seam-carving
-summary: "Rather than scaling or cropping, the <i>seam carving</i> algorithm resizes images by removing horizontal and vertical seams, which must cross the entire image, but are allowed to zig and zag around salient regions in order to avoid too much deformation.  "
+summary: "Seam carving is an algorithm designed to rescale images of hot air balloons passing over mountains.  Just kidding, it works for any image, especially if that image has hot air balloons in it.\n\nRather than scaling or cropping, the <i>seam carving</i> algorithm resizes images by removing horizontal and vertical seams, which must cross the entire image, but are allowed to zig and zag around salient regions in order to avoid too much deformation.  "
 ---
 
 <style>

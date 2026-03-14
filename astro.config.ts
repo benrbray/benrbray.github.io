@@ -59,7 +59,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkMath, remarkCite, remarkExtractBibtex, remarkDirective],
     rehypePlugins: [
-      [rehypeTypst, { }],
+      // [rehypeTypst, { }],
       [rehypeCite, { bibFiles }],
       [rehypeWrapSections, { }],
       [rehypeKatex, { macros: { "\\R": "\\mathbb{R}" }, globalGroup: true}],

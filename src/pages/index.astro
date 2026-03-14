@@ -1,6 +1,7 @@
 ---
 import About from "@components/home/About.astro";
 import PostSummaryRedesign from "@root/components/content/PostSummaryRedesign.astro";
+import LayoutBlock from "@root/components/layout/LayoutBlock.astro";
 import PostList from "@root/components/lists/PostList.astro";
 import SeriesList from "@root/components/lists/SeriesList.astro";
 import ColumnNormal from "@root/layouts/ColumnNormal.astro";
@@ -22,14 +23,89 @@ const unpublishedPosts = (await getBlogPosts({ includeSeries: false, includeUnpu
 const series = await getSeriesList();
 ---
 
+<style>
+.highlights {
+	display: grid;
+	gap: 1.0em;
+	grid-template-columns: repeat(4, 1fr);
+	justify-items: stretch;
+	align-items: center;
+}
+
+@media (max-width: 40em) {
+	.highlights {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+.highlights > div {
+	display: flex;
+	min-height: 6rem;
+	
+	border: 1px solid black;
+	color: white;
+	
+}
+
+.highlights > div > a {
+	flex: 1;
+	
+	/* flexbox for centering text label */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	color: unset;
+
+	padding: 1.0em;
+
+	font-family: var(--font-heading-family);
+	font-size: 1.1em;
+	font-weight: 600;
+	user-select: none;
+	
+	border: 3px solid white;
+	background-color: black;
+	
+	text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+
+	background-image: url("/images/thumbnails/blacksmith_thumb.png"); /* The image used */
+	background-position: center; /* Center the image */
+	background-repeat: no-repeat; /* Do not repeat the image */
+	background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.highlights > div > a:hover {
+	border: 5px solid white;
+	transition: border 40ms;
+	transition: filter 40ms;
+
+	filter: contrast(1.2);
+
+	text-decoration: unset;
+}
+</style>
+
 <LayoutDefault pageTitle="Home">
 	<ColumnNormal>
 		<article>
 			<About />
+
+
+			<div class="highlights">
+				<div><a href="#" style="background-image: url('/images/thumbnails/bookbinding_thumb_8.png');">Bookbinding</a></div>
+				<div><a href="#" style="background-image: url('/images/thumbnails/bookbinding_thumb_5.png');">Paper Marbling</a></div>
+				<div><a href="#" style="background-image: url('/images/thumbnails/tiles_thumb.png');">Games</a></div>
+				<div><a href="#" style="background-image: url('/images/thumbnails/blacksmith_thumb.png');">Photos</a></div>
+			</div>
 			<!-- <hr style="border: none; border-bottom: 1px solid #bbb" /> -->
 			
-			<div class="layout-block">
-				<h2>📚 Recent Articles</h2>
+			<LayoutBlock>
+				<h2 class="heading" style="text-align: center;">📚 Recent Articles</h2>
 
 				{
 					posts.map((post) => {
@@ -45,9 +121,9 @@ const series = await getSeriesList();
 						);
 					})
 				}
-
-				<h2>🛠️ Recent Projects</h2>
-
+			</LayoutBlock>
+			<LayoutBlock>
+				<h2 style="text-align: center;">🛠️ Recent Projects</h2>
 				{
 					projects.slice(0, 5).map((post) => {
 						const isLowPriority = post.data.priority === "low";
@@ -62,7 +138,7 @@ const series = await getSeriesList();
 						);
 					})
 				}
-
+			</LayoutBlock>
 				<!-- <h2>Crafts</h2>
 
 				{
@@ -97,7 +173,8 @@ const series = await getSeriesList();
 					})
 				} -->
 
-				<h2>Unpublished</h2>
+			<LayoutBlock>
+				<h2 style="text-align: center;">📜 Unpublished</h2>
 
 				{
 					unpublishedPosts.map((post) => {
@@ -113,6 +190,7 @@ const series = await getSeriesList();
 						);
 					})
 				}
+			</LayoutBlock>
 
 				<div style="height: 100em"></div>
 
